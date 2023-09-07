@@ -1,0 +1,60 @@
+\documentclass[nobib]{tufte-handout}
+
+\title{Exercise Session 1: Introduction -- what is graph theory? $\cdot$ 1MA020}
+
+\author[Vilhelm Agdur]{Vilhelm Agdur\thanks{\href{mailto:vilhelm.agdur@math.uu.se}{\nolinkurl{vilhelm.agdur@math.uu.se}}}}
+
+\date{7 September 2023}
+
+
+%\geometry{showframe} % display margins for debugging page layout
+
+\usepackage{graphicx} % allow embedded images
+  \setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+  \graphicspath{{graphics/}} % set of paths to search for images
+\usepackage{amsmath}  % extended mathematics
+\usepackage{booktabs} % book-quality tables
+\usepackage{units}    % non-stacked fractions and better unit spacing
+\usepackage{multicol} % multiple column layout facilities
+\usepackage{lipsum}   % filler text
+\usepackage{fancyvrb} % extended verbatim environments
+  \fvset{fontsize=\normalsize}% default font size for fancy-verbatim environments
+
+\usepackage{color,soul} % Highlights for text
+
+% Standardize command font styles and environments
+\newcommand{\doccmd}[1]{\texttt{\textbackslash#1}}% command name -- adds backslash automatically
+\newcommand{\docopt}[1]{\ensuremath{\langle}\textrm{\textit{#1}}\ensuremath{\rangle}}% optional command argument
+\newcommand{\docarg}[1]{\textrm{\textit{#1}}}% (required) command argument
+\newcommand{\docenv}[1]{\textsf{#1}}% environment name
+\newcommand{\docpkg}[1]{\texttt{#1}}% package name
+\newcommand{\doccls}[1]{\texttt{#1}}% document class name
+\newcommand{\docclsopt}[1]{\texttt{#1}}% document class option name
+\newenvironment{docspec}{\begin{quote}\noindent}{\end{quote}}% command specification environment
+
+\include{mathcommands.extratex}
+
+\begin{document}
+
+\maketitle% this prints the handout title, author, and date
+
+\begin{abstract}
+\noindent
+We begin the course by motivating in general what graph theory is, and the different kinds of thing it can be used to study. We also use these examples in our exercises to start to build up our graph-theoretical vocabulary.
+\end{abstract}
+
+What is graph theory? It is, unsurprisingly, the study of graphs. Not graphs as in ``we plot the function $x^2+3x+2$'', but graphs as in things that look like this:
+
+\hl{simple graph that can be drawn on the blackboard}
+
+A graph consists, as indicated in the figure, of \emph{vertices} connected by \emph{edges}.
+
+
+\begin{xca}
+    \hl{a figure of two isomorphic graphs with different labels -- exercise: ``figure out a way to describe why these are really the same''}
+\end{xca}
+
+%\bibliography{references}
+%\bibliographystyle{plainnat}
+
+\end{document}
