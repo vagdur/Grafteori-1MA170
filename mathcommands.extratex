@@ -8,7 +8,7 @@
 
 \usepackage{dsfont}
 
-\usepackage[swedish]{babel}
+\usepackage[english]{babel}
 
 \usepackage{tabularx}
 
@@ -28,21 +28,21 @@
 }
 \makeatother
 
-\newtheorem{theorem}{Teorem}%[subsection]
+\newtheorem{theorem}{Theorem}%[subsection]
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{cor}[theorem]{Korollarium}
-\newtheorem{conjecture}[theorem]{Hypotes}
-\newtheorem{claim}[theorem]{Påstående}
+\newtheorem{cor}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{claim}[theorem]{Claim}
 \newtheorem{axiom}[theorem]{Axiom}
 
 \theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}
-\newtheorem{example}[theorem]{Exempel}
-\newtheorem{xca}{Övning}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{xca}{Exercise}
 
 \theoremstyle{remark}
-\newtheorem{remark}[theorem]{Kommentar}
+\newtheorem{remark}[theorem]{Remark}
 
 % Absolutbelopp
 \newcommand{\abs}[1]{{\left\lvert#1\right\rvert}}
