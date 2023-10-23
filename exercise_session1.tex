@@ -4,7 +4,7 @@
 
 \author[Vilhelm Agdur]{Vilhelm Agdur\thanks{\href{mailto:vilhelm.agdur@math.uu.se}{\nolinkurl{vilhelm.agdur@math.uu.se}}}}
 
-\date{7 September 2023}
+\date{23 October 2023}
 
 
 %\geometry{showframe} % display margins for debugging page layout
@@ -45,10 +45,63 @@ We begin the course by motivating in general what graph theory is, and the diffe
 
 What is graph theory? It is, unsurprisingly, the study of graphs. Not graphs as in ``we plot the function $x^2+3x+2$'', but graphs as in things that look like this:
 
-\hl{simple graph that can be drawn on the blackboard}
+\begin{figure}
+  \centering
+  \includegraphics[width=0.3\textwidth]{graphics/L1_exc/unlabeled_simple_graph.png}
+  \caption{A simple graph.}
+  \label{fig:simple_graph}
+\end{figure}
 
-A graph consists, as indicated in the figure, of \emph{vertices} connected by \emph{edges}.
+A graph consists, as indicated in Figure \ref{fig:simple_graph}, of \emph{vertices} connected by \emph{edges}. This is the most basic situation we can have, where there are finitely many vertices and each pair of vertices either have an edge between them or not. We will fairly regularly be considering various extensions of this notion, to contain more information. For example, we can add labels to the vertices,\sidenote[][-1cm]{In fact, we will see when we get to the formal definitions that this is probably the most basic notion -- the unlabelled version turns out to be subtler to define.} as in Figure \ref{fig:labelled_simple_graph}.
 
+\begin{figure}
+  \centering
+  \includegraphics[width=0.3\textwidth]{graphics/L1_exc/labeled_simple_graph.png}
+  \caption{A labelled simple graph.}
+  \label{fig:labelled_simple_graph}
+\end{figure}
+
+The labels we added also start to make clear what kind of real-world thing a graph might model -- if we interpret an edge as saying ``these people are friends'', we have a tiny example of a social network represented as a graph.\sidenote[][]{Now imagine in your head what it would look like if vertices were Facebook accounts and edges were ``are friends'' -- a much larger graph, but an example of the same thing. What might be interesting questions to ask about this graph?
+
+This interpretation of vertices as people and edges as friendships will be common throughout the course, because it is natural given my research interests, and it is an easy down-to-earth example.}
+
+It's not only the vertices we can write things on -- often it is interesting to give each edge a number, called its \emph{weight}, like in Figure \ref{fig:weighted_graph}. Maybe the numbers represent how many hours per day they spend together.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.3\textwidth]{graphics/L1_exc/weighted_graph.png}
+  \caption{A weighted graph.}
+  \label{fig:weighted_graph}
+\end{figure}
+
+Another common version is to permit multiple edges between vertices, as in Figure \ref{fig:labelled_multigraph}. Perhaps each edge represents a class the two people have in common, so it makes sense to have more than one edge?\sidenote[][-1.5cm]{If you think about it, this is similar to just labelling a single edge with an integer saying how many classes they have in common. However, it has a very different feeling, and the maths we do on multigraphs will be quite different from what we do on weighted graphs.}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.3\textwidth]{graphics/L1_exc/multigraph.png}
+  \caption[][1cm]{A labelled multigraph.}
+  \label{fig:labelled_multigraph}
+\end{figure}
+
+Or perhaps the edges have a direction, as in Figure \ref{fig:labelled_digraph}? Now the interpretation might be that an edge means ``is in love with''.\sidenote[][-0.5cm]{So in our figure there is quite a bit of unrequited love and confused emotions -- though perhaps Edith and Francis will find happiness?}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.3\textwidth]{graphics/L1_exc/digraph.png}
+  \caption[][0.8cm]{A directed graph.}
+  \label{fig:labelled_digraph}
+\end{figure}
+
+The final version that we will actually see used in the course is to give the vertices (or the edges) colours, as in Figure \ref{fig:vertex_coloured_graph}. Now the colour might represent the gender of a person, or some other classification of vertices into various types.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.3\textwidth]{graphics/L1_exc/vertex_coloured_digraph.png}
+  \caption{A directed graph with a vertex colouring.}
+  \label{fig:vertex_coloured_graph}
+\end{figure}
+
+As we proceed in the course, we will of course give precise mathematical definitions of what exactly each of these types of graph is. For today, however, we don't really need those definitions -- the intuitive descriptions will be enough.
 
 \begin{xca}
     \hl{a figure of two isomorphic graphs with different labels -- exercise: ``figure out a way to describe why these are really the same''}
