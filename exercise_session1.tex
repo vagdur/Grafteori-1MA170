@@ -157,11 +157,39 @@ You are allowed to move the top brick on one peg to a different one, as long as 
   Do you see the pattern of what it will look like for larger $n$? Can you write down a formula in terms of $n$ for the minimal number of moves needed to win the game in the general case?
 \end{xca}
 
-\section{Exercise topic 2: Same same, but different}
+\section{Exercise topic 3: Same same, but different}
+
+So far we have considered a few different graphs, and answered some questions about them. However, especially to the more algebraically minded, the really interesting thing to study in mathematics is not objects but functions between objects. In this exercise, we will think about functions from one graph to another, and what it means for one graph to be the same as another, or a part of another.
 
 \begin{xca}
-    \hl{a figure of two isomorphic graphs with different labels -- exercise: ``figure out a way to describe why these are really the same''}
+  We limit ourselves to considering the case of the labelled simple graphs, like in Figure \ref{fig:labelled_simple_graph}. What might it mean to have a function from one of these graphs to another? Try to think about what might be reasonable, and write down candidate definitions.\sidenote[][-1cm]{The most obvious example of a function you've seen before would probably be one from $\R$ to $\R$ -- but if you've taken a course on algebra before, try to think also of the case of a homomorphism from a group to a group or a ring to a ring.}
 \end{xca}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth]{graphics/L1_exc/subgraph.png}
+  \caption[][1cm]{A black subgraph of a larger graph in blue.}
+  \label{fig:subgraph}
+\end{figure}
+
+\begin{xca}
+  Consider Figure \ref{fig:subgraph} -- it should be intuitively clear that what has happened here is that we took the graph from Figure \ref{fig:labelled_simple_graph} and we added some more vertices and more edges. In formal mathematical language, we say that the graph in Figure \ref{fig:labelled_simple_graph} is a \emph{subgraph} of the graph in Figure \ref{fig:subgraph}.
+
+  Can you write a formal definition of what it means for one graph to be a subgraph of another? Perhaps one of your notions of function from one graph to another, or a variation of one, could be useful for this.
+\end{xca}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.4\textwidth]{graphics/L1_exc/isomorph.png}
+  \caption[][0cm]{A graph that is suspiciously similar to one we've already seen.}
+  \label{fig:isomorph}
+\end{figure}
+
+\begin{xca}
+    Consider the graph in Figure \ref{fig:isomorph}, and compare it to the one in Figure \ref{fig:labelled_simple_graph}. At first glance, they look quite different -- but if you squint at them the right way, they are the same graph. Can you articulate the sense in which this is true? The formal name for it is that they are \emph{isomorphic}. Again, what you did in the previous parts of the exercise might be helpful.
+\end{xca}
+
+If you want to continue thinking about these things, consider the very first graph we saw without any labels, in Figure \ref{fig:simple_graph}. Can we perhaps define what is meant by such an object using what we've seen in this exercise?\sidenote[][]{If you've seen the term ``equivalence class'' before, you can probably make sense of this. If you haven't, you probably need to look that up first.}
 
 %\bibliography{references}
 %\bibliographystyle{plainnat}
