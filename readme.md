@@ -5,6 +5,7 @@ Welcome to the course in graph theory at the bachelor's level at Uppsala Univers
 # Lecture notes and exercise session notes
 
 1. [Exercise session 1: Introduction - what is graph theory?](https://vagdur.github.io/Grafteori-1MA170/exercise_session1.pdf)
+2. [Lecture 2: Eulerianity, simple graphs, and subgraphs](https://vagdur.github.io/Grafteori-1MA170/lecture1.pdf)
 
 # Other course material
 
