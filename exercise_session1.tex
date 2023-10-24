@@ -130,34 +130,7 @@ The person who originally solved this problem was the great Leonhard Euler -- in
 
 If you want to continue on with this exercise and try to prove that the pattern you found always holds, do try and please ask for hints if you need one. It might be rather difficult for you to find the right technique, but it could be a productive sort of difficulty. Or move on to the next exercise.
 
-\section{Exercise topic 2: More examples of graphs}
-
-So far our examples of a graph have been tiny, with six people as the vertices and various relationships between them as edges. We have mentioned that this can generalize to much larger collections of people -- but of course the notion of graph is much much broader than just social relations.
-
-\begin{xca}
-  Try to think of more things that can be modelled as graphs, of any of the types we have seen.\sidenote[][]{Or perhaps you can think of something to model as another variant of a graph? We gave five examples of extra structure to give to a graph, but that list was by no means exclusive -- you can come up with new things if you find something new to model.} Try to make your examples as different from each other as possible -- can you think of an example from biology? From finance? From something else you've studied or from one of your hobbies?
-\end{xca}
-
-Let us now have a look at a thing we can model using graphs that is of a very different nature from most of the examples we've thought of so far. They've probably all, or nearly all, been of the type ``we go out into the world and measure it'', whether the thing we measure is friendships or debts -- this example is instead a case of a graph arising from some simple rules of a game.
-
-In particular, the game we want to study is the Towers of Hanoi, as illustrated in Figure \ref{fig:towers_of_hanoi}. We have three pegs, labelled $a$, $b$, and $c$, and we have $n$ bricks of increasing size. The bricks must always be in ascending order on every peg, so we can never have a wider brick on top of a narrower brick in the figure. They start in order on peg $a$.
-
-\begin{figure}
-  \centering
-  \includegraphics[width=0.6\textwidth]{graphics/L1_exc/towers_of_hanoi.png}
-  \caption[][0cm]{The starting state of the Towers of Hanoi, in the $n=3$ case.}
-  \label{fig:towers_of_hanoi}
-\end{figure}
-
-You are allowed to move the top brick on one peg to a different one, as long as you don't put it on top of a brick with a lower number than itself, i.e. as long as you follow the rule about being narrower than the brick below. The goal of the game is to have all the bricks sitting on peg $c$.\sidenote[][]{In the same order as they were at the beginning on peg $a$, since that is the only order they are allowed to be in by the rules of the game.}
-
-\begin{xca}
-  Consider the graph whose vertices are \emph{states} of this game -- so Figure \ref{fig:towers_of_hanoi} represents one vertex, and the state where brick $1$ is on peg $a$ and bricks $2$ and $3$ are on peg $b$ is another vertex. There is an edge between two vertices if you can get between them in a single move. Draw this graph for the small cases of $n=1, 2, 3$.\sidenote[][]{It may be helpful to actually ``make'' this game out of some pieces of paper, drawing the pegs on one and making bricks out of pieces of paper of various size. Getting to play around with it really builds intuition sometimes.}
-
-  Do you see the pattern of what it will look like for larger $n$? Can you write down a formula in terms of $n$ for the minimal number of moves needed to win the game in the general case?
-\end{xca}
-
-\section{Exercise topic 3: Same same, but different}
+\section{Exercise topic 2: Same same, but different}
 
 So far we have considered a few different graphs, and answered some questions about them. However, especially to the more algebraically minded, the really interesting thing to study in mathematics is not objects but functions between objects. In this exercise, we will think about functions from one graph to another, and what it means for one graph to be the same as another, or a part of another.
 
@@ -190,6 +163,33 @@ So far we have considered a few different graphs, and answered some questions ab
 \end{xca}
 
 If you want to continue thinking about these things, consider the very first graph we saw without any labels, in Figure \ref{fig:simple_graph}. Can we perhaps define what is meant by such an object using what we've seen in this exercise?\sidenote[][]{If you've seen the term ``equivalence class'' before, you can probably make sense of this. If you haven't, you probably need to look that up first.}
+
+\section{Exercise topic 3: More examples of graphs}
+
+So far our examples of a graph have been tiny, with six people as the vertices and various relationships between them as edges. We have mentioned that this can generalize to much larger collections of people -- but of course the notion of graph is much much broader than just social relations.
+
+\begin{xca}
+  Try to think of more things that can be modelled as graphs, of any of the types we have seen.\sidenote[][]{Or perhaps you can think of something to model as another variant of a graph? We gave five examples of extra structure to give to a graph, but that list was by no means exclusive -- you can come up with new things if you find something new to model.} Try to make your examples as different from each other as possible -- can you think of an example from biology? From finance? From something else you've studied or from one of your hobbies?
+\end{xca}
+
+Let us now have a look at a thing we can model using graphs that is of a very different nature from most of the examples we've thought of so far. They've probably all, or nearly all, been of the type ``we go out into the world and measure it'', whether the thing we measure is friendships or debts -- this example is instead a case of a graph arising from some simple rules of a game.
+
+In particular, the game we want to study is the Towers of Hanoi, as illustrated in Figure \ref{fig:towers_of_hanoi}. We have three pegs, labelled $a$, $b$, and $c$, and we have $n$ bricks of increasing size. The bricks must always be in ascending order on every peg, so we can never have a wider brick on top of a narrower brick in the figure. They start in order on peg $a$.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.6\textwidth]{graphics/L1_exc/towers_of_hanoi.png}
+  \caption[][0cm]{The starting state of the Towers of Hanoi, in the $n=3$ case.}
+  \label{fig:towers_of_hanoi}
+\end{figure}
+
+You are allowed to move the top brick on one peg to a different one, as long as you don't put it on top of a brick with a lower number than itself, i.e. as long as you follow the rule about being narrower than the brick below. The goal of the game is to have all the bricks sitting on peg $c$.\sidenote[][]{In the same order as they were at the beginning on peg $a$, since that is the only order they are allowed to be in by the rules of the game.}
+
+\begin{xca}
+  Consider the graph whose vertices are \emph{states} of this game -- so Figure \ref{fig:towers_of_hanoi} represents one vertex, and the state where brick $1$ is on peg $a$ and bricks $2$ and $3$ are on peg $b$ is another vertex. There is an edge between two vertices if you can get between them in a single move. Draw this graph for the small cases of $n=1, 2, 3$.\sidenote[][]{It may be helpful to actually ``make'' this game out of some pieces of paper, drawing the pegs on one and making bricks out of pieces of paper of various size. Getting to play around with it really builds intuition sometimes.}
+
+  Do you see the pattern of what it will look like for larger $n$? Can you write down a formula in terms of $n$ for the minimal number of moves needed to win the game in the general case?
+\end{xca}
 
 %\bibliography{references}
 %\bibliographystyle{plainnat}
