@@ -56,7 +56,7 @@ The very first definition we give in this course will actually be of a \emph{mul
 Next, continuing to formalize the things we learned thinking about the bridges of Königsberg, let us define what a walk is.
 
 \begin{definition}
-    Let $G = (V, E)$ be a multigraph. A \emph{walk} of length $k$ is a sequence of $k+1$ vertices $v_0 v_1 v_2\ldots v_k$ and a sequence of $k$ edges\sidenote[][]{So the length of a walk is the number of edges, not the number of vertices. \hl{Can I change this definition to fix this?}} $e_1e_2\ldots e_k$ such that $e_i = \{v_{i-1}, v_i\}$ for all $i$. A \emph{trail} is a walk that uses no edge twice, and a \emph{path} is a walk that uses no vertex twice.
+    Let $G = (V, E)$ be a multigraph. A \emph{walk} of length $k$ is a sequence of $k+1$ vertices $v_0 v_1 v_2\ldots v_k$ and a sequence of $k$ edges\sidenote[][]{So the length of a walk is the number of edges, not the number of vertices.} $e_1e_2\ldots e_k$ such that $e_i = \{v_{i-1}, v_i\}$ for all $i$. A \emph{trail} is a walk that uses no edge twice, and a \emph{path} is a walk that uses no vertex twice. A \emph{circuit} is a trail where the first and last vertices coincide, and a \emph{cycle} is a circuit where these are the only vertices that coincide.
 \end{definition}
 
 \begin{figure}
@@ -67,6 +67,32 @@ Next, continuing to formalize the things we learned thinking about the bridges o
 \end{figure}
 
 We have one example of a walk in Figure \ref{fig:walk_in_graph} -- it does not repeat any of the edges, so it is a trail, but it repeats the central vertex we have labelled with both $v_2$ and $v_6$, so it is not a path.
+
+Having introduced walks, we can give a definition of another very natural property, namely connectedness.\sidenote[][]{You've probably already seen the notion of connectedness of a subset of $\R^2$ in a calculus course, and if you've looked at other geometry it appears there as well. This is the same notion, just discretized.}
+
+\begin{definition}
+  We say that a graph $G$ is \emph{connected} if there is, for any two vertices $u, v \in G$, a walk from $u$ to $v$. We say that two vertices in a graph are connected to each other if there is a walk between them.
+
+  Notice that there is a trivial ``lazy'' walk connecting every vertex to itself, so the relation of connectedness is an equivalence relation. The equivalence classes of this equivalence relation are called the \emph{connected components} of the graph.\sidenote[][]{We could equivalently have defined the connected components as the maximal connected subgraphs of the graph -- when we get to a formal definition of subgraph, think about why this is true.}
+\end{definition}
+
+Let us now define the thing we were studying when we thought about the bridges of Königsberg.
+
+\begin{definition}
+  An \emph{Eulerian trail} is a trail that uses every edge in the graph exactly once -- if additionally it has the same starting and ending vertex, we call it an \emph{Eulerian circuit}. If there is an Eulerian circuit in a graph, we call the graph \emph{Eulerian}.
+\end{definition}
+
+The problem we were studying was thus to find a simple condition for when a graph is Eulerian. The condition we found\sidenote[][]{Hopefully.} involved the number of edges incident to a vertex, so let us also give this notion a name.
+
+\begin{definition}
+  The \emph{degree} of a vertex $v$, denoted $d_v$, is the number of edges a vertex is incident to, with loops counted twice.
+\end{definition}
+
+We now have all the language we need to formally state and prove the theorem that started graph theory all those nearly three hundred years ago.
+
+\begin{theorem}[Euler (1736)]
+  A finite connected graph is Eulerian if and only if all its vertices have even degree.
+\end{theorem}
 
 %\bibliography{references}
 %\bibliographystyle{plainnat}
