@@ -1,6 +1,6 @@
 # ![UUs logotyp](./graphics/UU_logo_color.png "UU logotype") Graph Theory (1MA170), Fall 2023
 
-Welcome to the course in graph theory at the bachelor's level at Uppsala University. For general information about the course - the exam, the handin, and lecture plan, [see this document](https://vagdur.github.io/Grafteori-1MA170/kursinformation.pdf).
+Welcome to the course in graph theory at the bachelor's level at Uppsala University. For general information about the course - the exam, the handin, and lecture plan, [see this document](https://vagdur.github.io/Grafteori-1MA170/course-information.pdf).
 
 # Lecture notes and exercise session notes
 
