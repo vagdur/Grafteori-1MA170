@@ -43,7 +43,7 @@
 We formalize the ideas we started with in the first exercise session, giving a proof of Euler's result on Eulerian circuits. We then make some more definitions about simple graphs and subgraphs, and we state some elementary results about these notions.
 \end{abstract}
 
-The very first definition we give in this course will actually be of a \emph{multigraph}, not of a graph.
+The very first definition we give in this course will actually be of a \emph{multigraph}, not the simple graphs that were our first example.\sidenote[][-0.7cm]{These are of course a type of graph, so we will often just write or say ``graph'' when it is clear from context what type of graph we are referring to, or what we are saying applies to any type of graph.}
 
 \begin{definition}
     A \emph{multigraph} $G$ is a tuple $(V, E)$, consisting of a set $V$ of \emph{vertices}, and a multiset\sidenote[][]{A multiset is just like a set, except an element may occur more than once.} $E$ of \emph{edges}. Each edge is a multiset containing two vertices from $V$, called its \emph{endpoints}. We say two vertices are \emph{adjacent} if there is an edge between them, and a vertex $v$ is \emph{incident} to an edge $e$ if $v \in e$.
@@ -82,7 +82,7 @@ Let us now define the thing we were studying when we thought about the bridges o
   An \emph{Eulerian trail} is a trail that uses every edge in the graph exactly once -- if additionally it has the same starting and ending vertex, we call it an \emph{Eulerian circuit}. If there is an Eulerian circuit in a graph, we call the graph \emph{Eulerian}.
 \end{definition}
 
-The problem we were studying was thus to find a simple condition for when a graph is Eulerian. The condition we found\sidenote[][]{Hopefully.} involved the number of edges incident to a vertex, so let us also give this notion a name.
+The problem we were studying was thus to find a simple condition for when a multigraph is Eulerian. The condition we found\sidenote[][]{Hopefully.} involved the number of edges incident to a vertex, so let us also give this notion a name.
 
 \begin{definition}
   The \emph{degree} of a vertex $v$, denoted $d_v$, is the number of edges a vertex is incident to, with loops counted twice.
@@ -91,7 +91,7 @@ The problem we were studying was thus to find a simple condition for when a grap
 We now have all the language we need to formally state and prove the theorem that started graph theory all those nearly three hundred years ago.
 
 \begin{theorem}[Euler (1736)]
-  A finite connected graph is Eulerian if and only if all its vertices have even degree.
+  A finite connected multigraph is Eulerian if and only if all its vertices have even degree.
 \end{theorem}
 
 %\bibliography{references}
