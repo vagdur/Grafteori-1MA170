@@ -244,7 +244,21 @@ One particular type of subgraph that is often used is the \emph{induced} subgrap
   For any graph $G = (V, E)$ and any subset $W \subseteq V$, the \emph{induced subgraph} $G[W] = (W, E')$ has as its vertices $W$, and as its edges all the edges of $G$ with both endpoints in $W$, that is,
   $$E' = \left\{\{v, w\} \in E \given v, w \in W\right\}.$$
 
-  So we pick all the edges we are allowed to pick given the vertices we chose.
+  So we pick every edge we are allowed to pick given the vertices we chose.
+\end{definition}
+
+There is also the analogous notion of an edge-induced subgraph, which is just the same thing except determined by a set of edges.
+
+\begin{definition}
+  Given a graph $G = (V, E)$ and a subset $E' \subseteq E$ of its edges, the \emph{edge-induced subgraph} $G\langle E' \rangle$ has $E'$ as its edges and the set of vertices incident to an edge in $E'$, i.e.
+  $$W = \left\{v \in V \given \exists w \in V: \{v, w\} \in E'\right\},$$
+  as its vertices.
+\end{definition}
+
+We close out this lecture with one final piece of terminology:
+
+\begin{definition}
+  A subgraph which contains all of the vertices of its supergraph is called a \emph{spanning} subgraph. That is, for $H = (V',E')$ to be a spanning subgraph of $G = (V,E)$, we require $V = V'$.
 \end{definition}
 
 \section{Exercises}
