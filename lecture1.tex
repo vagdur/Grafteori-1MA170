@@ -92,6 +92,38 @@ We now have all the language we need to formally state and prove the theorem tha
 
 \begin{theorem}[Euler (1736)]
   A finite connected multigraph is Eulerian if and only if all its vertices have even degree.
+
+  \begin{proof}
+    Let us begin with the easy direction of this statement: That a graph which is Eulerian will have only even-degree vertices. To see this, note that the Eulerian circuit gives us a way to pair up the edges incident to any vertex -- the path enters through one edge and leaves through another, so we pair those up. Since the circuit uses every edge, there can't be any odd edge left over in this pairing, and so the degree of the vertex can't be odd.
+
+    So, for the harder direction, we will prove the result by induction on the number of edges.\sidenote[][]{This is a different proof than the one given in the lecture notes from last year. The reason for changing the proof is that I couldn't understand what was going on in the previous proof. Feel free to look at the other proof if this one doesn't make sense to you -- maybe it will.} The base case is $n=0$, where the graph must just be a single vertex. That this is Eulerian is trivial -- the lazy path that does nothing uses every edge in the graph, since the graph has no edges.
+
+    Now, let $G = (V,E)$ be a finite connected multigraph with only even vertex degrees, with $n \geq 1$ edges. Pick an arbitrary vertex $v$, then pick an arbitrary edge $e = \{v, w\}$ going out from $v$.\sidenote[][]{This edge is allowed to be a loop -- think about what happens in that case.} Then pick another edge going out from $w$, making sure it hasn't already been used in our path, and so on, until you have returned to $v$. Let $W$ be the set of edges we used in this walk.
+
+    That we will always be able to pick an unused edge to continue walking along follows from our assumption that the degrees of vertices are even -- if we were able to use an edge to get to a vertex we must also be able to pick one to leave it, since we always use up edges in pairs.
+    
+    \begin{figure}
+      \centering
+      \includegraphics[width=0.7\textwidth]{graphics/L2_eulerianity_subgraphs/eulerianity_connected_components.png}
+      \caption[][0cm]{A graph $G = (V,E)$ with the path $W$ highlighted in red, and the two connected components $C_1$ and $C_2$ of $H = (V, E \setminus W)$ indicated.}
+      \label{fig:euler_proof_connected_components}
+    \end{figure}
+
+    Now consider the graph $H = (V, E \setminus W)$, that is, $G$ with all the edges we used in our walk removed. Let $C_1, C_2, \ldots, C_k$ be its connected components, as is illustrated in Figure \ref{fig:euler_proof_connected_components}. Now, each of these components necessarily has fewer than $n$ edges, and is of course trivially connected, so by our induction hypothesis each contains an Eulerian circuit.
+
+    The idea now is to glue together our circuit $W$ with the circuits on the $C_i$ to get an Eulerian circuit on the entire graph. To do this, what we need is that each $C_i$ contains at least one vertex that is incident to an edge in $W$.
+
+    To see this,\sidenote[][]{This is the hardest piece of the proof -- at least in the sense that it is hard to write in a way that is both rigorous and understandable. Once it ``clicks'' why this should be true, it is hopefully less hard. The figure, and the lecture, might help.} pick a connected component $C_i$. If $v \in C_i$, we are done, so assume it is not. We now pick some arbitrary vertex $w$ in $C_i$ -- since $G$ is by assumption connected, there exists a walk connecting $w$ to $v$. Since $v$ is not in $C_i$, this walk must at some point leave $C_i$ -- so consider the edge it leaves $C_i$ by, say, $e = \{a,b\}$, walking from $a \in C_i$ to $b \not\in C_i$. This edge must in fact be in $W$, because if it weren't, it'd be an edge of $H$, and $a$ is in $C_i$ -- and thus $b$ would also be in $C_i$, by definition of connected component, and this edge wouldn't be leaving $C_i$ at all. So the vertex $a$ must both be in $C_i$ and be incident to an edge of $W$.
+
+    \begin{figure}
+      \centering
+      \includegraphics[width=0.7\textwidth]{graphics/L2_eulerianity_subgraphs/eulerianity_gluing_circuits.png}
+      \caption[][0cm]{A graph $G = (V,E)$ with the path $W$ highlighted in red, and the two connected components $C_1$ and $C_2$ of $H = (V, E \setminus W)$ indicated. Additionally, the Eulerian circuits on the connected components and $W$ are drawn in blue, and their gluing together in dashed blue lines.}
+      \label{fig:gluing_eulerian_circuits}
+    \end{figure}
+
+    So, for each $C_i$, let $a_i$ be a vertex in $C_i$ incident to an edge in $W$. We construct our Eulerian circuit on $G$ as follows: Start at $v$ and walk along $W$. Whenever you encounter an $a_i$, instead follow the Eulerian circuit in $C_i$ all the way around until you return to this $a_i$, and then proceed along $W$. That this will produce an Eulerian circuit on the entire graph should be clear, as is illustrated in Figure \ref{fig:gluing_eulerian_circuits}.
+  \end{proof}
 \end{theorem}
 
 %\bibliography{references}
