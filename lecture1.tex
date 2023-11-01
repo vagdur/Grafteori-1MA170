@@ -160,6 +160,45 @@ It is perhaps a bit misleading to attribute the entire theorem to Euler -- he st
   \end{proof}
 \end{corollary}
 
+\section{Simple graphs, basic definitions}
+
+\begin{definition}
+  A simple graph $G$ consists of a set of vertices $V$ and a set of edges $E \subseteq \binom{V}{2}$.\sidenote[][]{When $X$ is a set and $k$ is a number, the notation $\binom{X}{k}$ means the set of subsets of $X$ of size $k$. } Equivalently, it is a multigraph with no loops or parallel edges.
+
+  So the definition we give here is actually exactly the same as what we gave for a multigraph, except wherever we said ``multiset'' there, we say ``set'' here.
+\end{definition}
+
+Since we, for a simple graph, require that there either be an edge or not, instead of having potentially many edges between two vertices, we can now actually count the number of simple graphs we can have on any given finite set.\sidenote[][]{While there are infinitely many different multigraphs even on a single vertex, of course.}
+
+\begin{lemma}
+  For any set $V$ with $n$ elements, there are $2^{\binom{n}{2}}$ different simple graphs on this set, and they all have at most $\binom{n}{2}$ edges.
+
+  \begin{proof}
+    To begin, note that
+      $$\abs{\binom{V}{2}} = \binom{\abs{V}}{2} = \binom{n}{2}$$
+    and so the number of subsets of $\binom{V}{2}$ is precisely $2^{\binom{n}{2}}$. Now, the edges are by definition a subset of this set, and a simple graph is determined by its vertex set and edge set, so the statement follows.
+
+    That all the graphs have at most $\binom{n}{2}$ edges is immediate -- they are a subset of $\binom{V}{2}$, so of course a subset can't be bigger than the set it's a subset of.
+  \end{proof}
+\end{lemma}
+
+Now, as we saw in the exercises in the previous session, this notion of graphs being different \emph{cares about the labels}, that is, about the underlying sets. Two graphs with different vertex sets are never equal, and even two graphs with the same vertex set that ``look equal'' can still be non-equal if we label them differently.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.7\textwidth]{graphics/L2_eulerianity_subgraphs/isomorphic_but_not_equal.png}
+  \caption[][0cm]{Three non-equal but isomorphic graphs. The first two have the same underlying set but different edge-sets, the third has a different underlying set entirely.}
+  \label{fig:isomorphic_but_not_equal}
+\end{figure}
+
+In some sense all three graphs in Figure \ref{fig:isomorphic_but_not_equal} are ``the same graph'' -- they are all just a line of three vertices -- but they are not the same graph in the sense of being literally equal. So we need to find a good notion of equivalence that captures this.
+
+To do so, we start by finding what notion of functions between simple graphs is the ``right'' or ``interesting'' one.\sidenote[][]{If you want to think about morphisms between \emph{multigraphs} you have to do something slightly different.}
+
+\begin{definition}
+  Suppose $G = (V, E)$ and $H = (V', E')$ are two simple graphs. A function $f: V \to V'$ is called a \emph{graph morphism} if, whenever $\{v, w\} \in E$, we also have either $\{f(v), f(w)\} \in E'$ or $f(v) = f(w)$.\sidenote[][]{Whether we also allow $f(v) = f(w)$ for a graph morphism will vary a bit between texts -- I prefer this definition, but the previous year's lecture notes preferred not allowing this. So be a bit careful on the occasions where this difference actually matters!} 
+\end{definition}
+
 \section{Exercises}
 
 \begin{xca}
