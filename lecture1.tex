@@ -43,6 +43,8 @@
 We formalize the ideas we started with in the first exercise session, giving a proof of Euler's result on Eulerian circuits. We then make some more definitions about simple graphs and subgraphs, and we state some elementary results about these notions.
 \end{abstract}
 
+\section{Basic definitions, multigraphs}
+
 The very first definition we give in this course will actually be of a \emph{multigraph}, not the simple graphs that were our first example.\sidenote[][-0.7cm]{These are of course a type of graph, so we will often just write or say ``graph'' when it is clear from context what type of graph we are referring to, or what we are saying applies to any type of graph.}
 
 \begin{definition}
@@ -75,6 +77,8 @@ Having introduced walks, we can give a definition of another very natural proper
 
   Notice that there is a trivial ``lazy'' walk connecting every vertex to itself, so the relation of connectedness is an equivalence relation. The equivalence classes of this equivalence relation are called the \emph{connected components} of the graph.\sidenote[][]{We could equivalently have defined the connected components as the maximal connected subgraphs of the graph -- when we get to a formal definition of subgraph, think about why this is true.}
 \end{definition}
+
+\section{Eulerian circuits, the Bridges of Königsberg}
 
 Let us now define the thing we were studying when we thought about the bridges of Königsberg.
 
