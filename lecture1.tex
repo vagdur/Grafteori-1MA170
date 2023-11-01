@@ -126,6 +126,36 @@ We now have all the language we need to formally state and prove the theorem tha
   \end{proof}
 \end{theorem}
 
+If we didn't require the trail to start and end at the same vertex, we could get away with having the start- and endpoint have odd degree. Let us state this as a corollary:
+
+\begin{corollary}
+  A finite connected graph admits an Eulerian trail if and only if either $0$ or $2$ of its vertices have odd degree.
+
+  \begin{proof}
+    If all vertices have even degree, this is just the theorem we just proved. If there are two vertices of odd degree, connect them with a new edge, so they both have even degree, and apply the theorem.
+  \end{proof}
+\end{corollary}
+
+It is perhaps a bit misleading to attribute the entire theorem to Euler -- he stated it, but he only proved the easy direction. One thing he reportedly \emph{did} write a proof of is the so-called ``handshake lemma'', which also lets us settle the question of what happens if there is exactly one vertex of odd degree.
+
+\begin{lemma}[Handshake lemma]
+  Let $G = (V,E)$ be a finite graph. Then
+    $$2\abs{E} = \sum_{v \in V} d_v.$$
+
+  \begin{proof}
+    To see this, we use the method of \emph{double counting} -- that is, we count one thing in two different ways. The thing we are going to count is \emph{half-edges}, that is, edges going out of vertices.\sidenote[][]{Imagine taking a pair of scissors to each edge, cutting them in half, to motivate the term. You can then recover a graph by pairing up half-edges into edges.}
+
+    On the one hand, each edge obviously contributes two half-edges, so there are $2\abs{E}$ in the entire graph. On the other hand, each vertex contributes precisely its degree to the count of half-edges, so there are $\sum_{v\in V} d_v$ of them, proving the lemma.
+  \end{proof}
+\end{lemma}
+
+\begin{corollary}
+  Any graph must have an even number of odd-degree vertices.
+  \begin{proof}
+    The sum of the degrees must, by the handshake lemma, be even, and the sum of an odd number of odd numbers is odd.
+  \end{proof}
+\end{corollary}
+
 %\bibliography{references}
 %\bibliographystyle{plainnat}
 

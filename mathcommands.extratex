@@ -33,7 +33,7 @@
 \newtheorem{theorem}{Theorem}%[subsection]
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{cor}[theorem]{Corollary}
+\newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{conjecture}[theorem]{Conjecture}
 \newtheorem{claim}[theorem]{Claim}
 \newtheorem{axiom}[theorem]{Axiom}
