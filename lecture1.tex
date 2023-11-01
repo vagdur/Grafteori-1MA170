@@ -196,7 +196,22 @@ In some sense all three graphs in Figure \ref{fig:isomorphic_but_not_equal} are 
 To do so, we start by finding what notion of functions between simple graphs is the ``right'' or ``interesting'' one.\sidenote[][]{If you want to think about morphisms between \emph{multigraphs} you have to do something slightly different.}
 
 \begin{definition}
-  Suppose $G = (V, E)$ and $H = (V', E')$ are two simple graphs. A function $f: V \to V'$ is called a \emph{graph morphism} if, whenever $\{v, w\} \in E$, we also have either $\{f(v), f(w)\} \in E'$ or $f(v) = f(w)$.\sidenote[][]{Whether we also allow $f(v) = f(w)$ for a graph morphism will vary a bit between texts -- I prefer this definition, but the previous year's lecture notes preferred not allowing this. So be a bit careful on the occasions where this difference actually matters!} 
+  Suppose $G = (V, E)$ and $H = (V', E')$ are two simple graphs. A function $f: V \to V'$ is called a \emph{graph morphism} if, whenever $\{v, w\} \in E$, we also have either $\{f(v), f(w)\} \in E'$ or $f(v) = f(w)$.\sidenote[][-0.5cm]{Whether we also allow $f(v) = f(w)$ for a graph morphism will vary a bit between texts -- I prefer this definition, but the previous year's lecture notes preferred not allowing this. So be a bit careful on the occasions where this difference actually matters!} One example of a graph morphism is given in Figure \ref{fig:graph_morphism}. 
+\end{definition}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.7\textwidth]{graphics/L2_eulerianity_subgraphs/graph_morphism.png}
+  \caption[][0.5cm]{A morphism between two graphs, one with vertices $a$ through $f$ and one with vertices $\alpha$ through $\varepsilon$. Which vertex is sent to which is illustrated with the red arrows.}
+  \label{fig:graph_morphism}
+\end{figure}
+
+Note that we don't, in this definition, require that the morphism be injective -- so we are allowed to identify vertices, and since we allow $f(v) = f(w)$ we can also contract edges. Sometimes we will instead want to discuss \emph{injective} morphisms, which don't allow this. Notice that the graph in Figure \ref{fig:graph_morphism} is neither injective nor surjective.
+
+Now that we have the notion of morphism, we can define the notion of equivalence we were looking for -- the notion of \emph{isomorphism}. As you may have seen in other courses, an isomorphism is just a bijective morphism.\sidenote[][]{The truly general definition is actually that it is a morphism that has an inverse -- so $f: G \to G'$ is an isomorphism if there exists a morphism $h: G' \to G$ such that $f \circ h$ and $h \circ f$ are the identity morphisms on the two graphs. But for graphs this is equivalent to just requiring $f$ to be bijective, and bijectivitiy is easier to think about, so we give that as our definition.}
+
+\begin{definition}
+  Two simple graphs $G$ and $H$ are isomorphic if there exists a bijective graph morphism from $G$ to $H$.
 \end{definition}
 
 \section{Exercises}
