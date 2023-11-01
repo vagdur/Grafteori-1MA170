@@ -208,10 +208,43 @@ To do so, we start by finding what notion of functions between simple graphs is 
 
 Note that we don't, in this definition, require that the morphism be injective -- so we are allowed to identify vertices, and since we allow $f(v) = f(w)$ we can also contract edges. Sometimes we will instead want to discuss \emph{injective} morphisms, which don't allow this. Notice that the graph in Figure \ref{fig:graph_morphism} is neither injective nor surjective.
 
-Now that we have the notion of morphism, we can define the notion of equivalence we were looking for -- the notion of \emph{isomorphism}. As you may have seen in other courses, an isomorphism is just a bijective morphism.\sidenote[][]{The truly general definition is actually that it is a morphism that has an inverse -- so $f: G \to G'$ is an isomorphism if there exists a morphism $h: G' \to G$ such that $f \circ h$ and $h \circ f$ are the identity morphisms on the two graphs. But for graphs this is equivalent to just requiring $f$ to be bijective, and bijectivitiy is easier to think about, so we give that as our definition.}
+Now that we have the notion of morphism, we can define the notion of equivalence we were looking for -- the notion of \emph{isomorphism}. As you may have seen in other courses, an isomorphism is just a bijective morphism.\sidenote[][-2cm]{The truly general definition is actually that it is a morphism that has an inverse -- so $f: G \to G'$ is an isomorphism if there exists a morphism $h: G' \to G$ such that $f \circ h$ and $h \circ f$ are the identity morphisms on the two graphs. But for graphs this is equivalent to just requiring $f$ to be bijective, and bijectivitiy is easier to think about, so we give that as our definition.}
 
 \begin{definition}
   Two simple graphs $G$ and $H$ are isomorphic if there exists a bijective graph morphism from $G$ to $H$.
+\end{definition}
+
+The notion of isomorphism is an equivalence relation, and for each $n$ there are finitely many equivalence classes of $n$-vertex graphs.\sidenote[][]{\begin{xca}
+  Prove this.
+\end{xca}} This means we can finally give a definition of what we meant by the very first figure we drew in the course, the graph with no labels:
+
+\begin{definition}
+  An unlabelled simple graph is an equivalence class of simple graphs.
+\end{definition}
+
+While this definition is perhaps a bit abstract, what it means is actually rather intuitive: It means we don't care about how exactly we attach the labels or what they are, but when we actually reason about the graph we will usually have to pick a representative of the equivalence class, that is, pick one way of labelling it.
+
+We will sometimes, in the future, be a little bit sloppy about the difference between being equal and just being isomorphic -- so for example we might say that $G$ contains $H$ when what we really mean is that $G$ has a subgraph isomorphic to $H$.
+
+Having said this, we are of course immediately led to our last definition of this lecture, namely of what we mean by subgraph.
+
+\begin{definition}
+  A \emph{subgraph} of a graph $G = (V,E)$ is a graph $H = (V', E')$ such that $V' \subseteq V$ and $E' \subseteq E$. By how we have defined graphs, this means we also require that whenever $\{v,w\} \in E'$ we also have $v, w \in V'$.
+
+  We will often say that a graph $H$ is a subgraph of $G$ if there exists an injective morphism from $H$ into $G$. Whenever such an injective morphism exists, there is a subgraph of $G$ that is \emph{isomorphic} to $H$,\sidenote[][]{
+    \begin{xca}
+      Prove this.
+    \end{xca}
+  } but it doesn't have to be literally equal to $H$ -- so this is an instance of us ignoring the difference between isomorphism and equality. On the few occasions the difference matters, we will be careful about it.
+\end{definition}
+
+One particular type of subgraph that is often used is the \emph{induced} subgraph.
+
+\begin{definition}
+  For any graph $G = (V, E)$ and any subset $W \subseteq V$, the \emph{induced subgraph} $G[W] = (W, E')$ has as its vertices $W$, and as its edges all the edges of $G$ with both endpoints in $W$, that is,
+  $$E' = \left\{\{v, w\} \in E \given v, w \in W\right\}.$$
+
+  So we pick all the edges we are allowed to pick given the vertices we chose.
 \end{definition}
 
 \section{Exercises}
