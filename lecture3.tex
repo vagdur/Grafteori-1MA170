@@ -199,8 +199,62 @@ Having seen all these results about trees, let us give a result giving a few equ
   \end{proof}
 \end{theorem}
 
+\section{Spanning trees}
+
+Recall from last lecture that a subgraph is said to be spanning if it contains all vertices of $G$. This notion is particularly interesting if the subgraph is a tree.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.5\textwidth]{graphics/L3_trees/spanning_tree.png}
+  \caption[][0cm]{A graph $G$, with a spanning tree highlighted in red.}
+  \label{fig:spanning_tree}
+\end{figure}
+
+\begin{definition}
+  Let $G$ be a graph, simple or multi. A \emph{spanning tree} of $G$ is a spanning subgraph that is a tree. One example is given in Figure \ref{fig:spanning_tree}.
+\end{definition}
+
+Obviously, a graph that is disconnected cannot have any spanning trees -- and for finite graphs, this condition is also sufficient.\sidenote[][-0.8cm]{
+  \begin{xca}
+    Give a proof of this that does not rely on the axiom of choice.
+  \end{xca}
+} For infinite graphs, the situation is somewhat hairier -- the statement that \emph{all} graphs have spanning trees is in fact equivalent to the axiom of choice!
+
+Before proving this statement under the assumption of choice, let us state the form of the axiom of choice that we will be using.
+
+\begin{lemma}[Zorn's lemma]
+  Let $(A, \leq)$ be a non-empty partially ordered set. A subset $C \subseteq A$ is a \emph{chain} if for any two elements $c, c' \in C$, we either have $c \leq c'$ or $c' \leq c$. Assume that for every chain $C$ in $A$ there exists an upper bound $b \in A$, that is, an element such that $c \leq b$ for all $c \in C$. Then there exists a maximal element $m$ of $A$, that is, an $m$ such that $m \not\leq a$ for any $a \neq m$.
+\end{lemma}
+
+Having stated this, we can now proceed to state and prove our theorem about spanning trees.
+
+\begin{theorem}
+  Assuming the axiom of choice, all (multi)graphs have a spanning tree.
+
+  \begin{proof}
+    Let $G = (V,E)$ be some graph. We will apply Zorn's lemma with $A$ as the set of all cycle-free spanning subgraphs of $G$, and $\leq$ as the ``is a subgraph of'' relation.\sidenote[][]{Here we mean literal subgraph of, not just ``isomorphic to a subgraph of'' -- we really need one to be a subset of the other.} This gives $A$ the structure of a partially ordered set -- and it is nonempty since the subgraph containing all the vertices and none of the edges is trivially spanning and cycle free.
+
+    So, let $C$ be some chain in $A$, consisting of elements $H_i = (V, E_i)$ for $i \in I$,\sidenote[][]{We really need the index \emph{set} $I$ here, not just integer indices -- the cardinality of $C$ could be enormous!} and define
+    $$B = \left(V, \bigcup_{i\in I} E_i\right).$$
+    We want to show that $B$ is an upper bound for the chain $C$ -- if we can do this, Zorn's lemma will apply and give us the theorem.
+
+    By construction, $B$ is a spanning subgraph of $G$. We want to show that it is an element of $A$, so we need to show that it is also cycle-free. So, assume for contradiction that it contains some cycle consisting of edges $e_1, e_2, \ldots, e_r$. Each of these edges must then be contained in some $H_i$ -- let us say that $e_j$ is contained in $H_{i(j)}$.
+
+    Since $C$ is a chain, one of these graphs $H_{i(1)}, H_{i(2)}, \ldots, H_{i(r)}$ must contain all of the others -- say it is $H_j$.
+  \end{proof}
+\end{theorem}
+
+\begin{theorem}
+  
+\end{theorem}
+
 \section{Exercises}
 
+\begin{xca}
+  We proved that all graphs, including infinite graphs, have a spanning tree using the axiom of choice in the lecture, and we stated that in fact the two are equivalent.
+
+  Prove the axiom of choice using the assumption that all graphs have spanning trees.
+\end{xca}
 %\bibliography{references}
 %\bibliographystyle{plainnat}
 
