@@ -40,7 +40,7 @@
 
 \begin{abstract}
 \noindent
-We start by introducing a few named families of graphs. Then we introduce the class of \emph{trees}, and prove some results about them. The main result is Cayley's theorem, which counts the number of labelled trees on $n$ vertices.
+We start by introducing a few named families of graphs. Then we introduce the class of \emph{trees}, and prove some results about them, such as that they have leaves.\sidenote[][]{Contradicting what our own eyes can see outside in the November weather.} The main result is Cayley's theorem, which counts the number of labelled trees on $n$ vertices.
 \end{abstract}
 
 \section{Common graph families}
@@ -121,6 +121,83 @@ Just like for graphs in general, there are countless variants of the notion of a
 
   Finally, we need to quicksort the list $9,8$, where we can pick $9$ as our pivot and get $L = 8$, $R = \emptyset$. The resulting tree of what we just did is drawn in Figure \ref{fig:quicksort_tree}.
 \end{example}
+
+Having seen this example of a place where trees appear, let us start proving some properties of trees.
+
+\begin{lemma}\label{lemma:trees_have_leaves}
+  Every finite\sidenote[][]{
+    \begin{xca}
+      Why do we need the finiteness assumption?
+    \end{xca}
+  } tree with at least $2$ vertices contains at least two vertices of degree $1$. Such vertices are called leaves.
+
+  \begin{proof}
+    Let $T$ be a finite tree on at least two vertices. Consider a path $P = x e_1 x_1 e_2 \ldots y$ of maximum length in $T$. Assume for contradiction that one of $x$ and $y$ -- w.l.o.g.,\sidenote[][]{``without loss of generality''.} let's say $x$ -- has degree at least $2$.
+
+    \begin{figure}
+      \centering
+      \includegraphics[width=0.5\textwidth]{graphics/L3_trees/lemma_trees_have_leaves.png}
+      \caption[][0cm]{The two cases we consider in the proof of Lemma \ref{lemma:trees_have_leaves}, illustrated in dashed red lines, with the maximal path drawn in blue.}
+      \label{fig:lemma_trees_have_leaves}
+    \end{figure}
+
+    Then $x$ has a neighbour $w$ different from $x_1$. There are two cases, which are also illustrated in Figure \ref{fig:lemma_trees_have_leaves}:
+    \begin{enumerate}
+      \item $w$ is not already a vertex on the path $P$. Then we could just extend the path to include $w$, contradicting our assumption that $P$ was maximal.
+      \item $w$ is already a vertex on the path $P$. However, this must mean there is a cycle in the graph -- we can start walking along $T$ from $x$ until we reach $w$, and then loop back along the edge from $w$ to $x$ -- contradicting our assumption that the graph is a tree.
+    \end{enumerate}
+
+    So neither case is possible, and so we conclude that $d_x = d_y = 1$, proving the lemma.
+  \end{proof}
+\end{lemma}
+
+We also get a very simple formula for the number of edges of a tree:
+
+\begin{lemma}
+  Any tree on $n$ vertices has $n-1$ edges.
+
+  \begin{proof}
+    We prove this by induction in the number of vertices. The base case is the simple graph on a single vertex, which clearly has one vertex and zero edges, satisfying the theorem.
+
+    Now, suppose $T$ is a tree on $n > 1$ vertices. By Lemma \ref{lemma:trees_have_leaves}, it has at least two vertices of degree $1$. Pick one of them, say $x$, and remove it and the edge it is incident to from the graph.\sidenote[][]{So, formally, we are looking at the induced subgraph $T[V\setminus \{x\}]$.} 
+    
+    This leaves us with a tree on $n-1$ vertices, and so by our induction hypothesis it has $n-2$ edges. So by removing a vertex and an edge, we were left with $n-1$ vertices and $n-2$ edges -- so clearly we must have started with $n$ vertices and $n-1$ edges, as the lemma claimed.
+  \end{proof}
+\end{lemma}
+
+We can actually give an exact count of the number of labelled trees on $n$ vertices as well. We will state the theorem here, but we postpone the proof of it until a later lecture, when we will have seen the Kirchhoff matrix-tree theorem, which is a nice way of proving it.\sidenote[][-1.8cm]{In previous years, this course included a proof of this theorem using Prüfer sequences. However, that proof -- and a different one using double counting -- is also included in the course on combinatorics in this department. So, in the interest of keeping the contents of the courses disjoint, we give the proof using the matrix-tree theorem instead.
+
+If you are interested, and can read Swedish, you can find the other two proofs of this theorem in these lecture notes: \url{https://vagdur.github.io/Kombinatorik-1MA020/lecture8.pdf}.}
+
+\begin{theorem}[Cayley's formula]
+  There are $n^{n-2}$ labelled trees on $n$ vertices.
+\end{theorem}
+
+Having seen all these results about trees, let us give a result giving a few equivalent characterisations of trees:
+
+\begin{theorem}
+  The following statements are equivalent:
+  \begin{enumerate}
+    \item $T$ is a tree.
+    \item For any two vertices $x, y$ of $T$ there exists a unique path connecting $x$ and $y$.
+    \item $T$ is edge-minimal among connected graphs, that is, removing any edge from it makes it disconnected.
+    \item $T$ is edge-maximal among cycle-free graphs, that is, adding an edge between any two vertices introduces a cycle.
+  \end{enumerate}
+
+  \begin{proof}
+    We will show that (1) implies (2), that (2) implies (3) and (4), and that both (3) and (4) imply (1), showing the theorem.
+
+    $(1) \Rightarrow (2)$: Assume $T$ is a tree and $x$ and $y$ two vertices. Since $T$ is connected, there is at least one path from $x$ to $y$. If there was another distinct path, the union of the two paths would contain a cycle, which is impossible in a tree. Thus the path is unique.
+
+    $(2) \Rightarrow (3)$: Consider any edge $\{x,y\} \in E$. By (2), this must in fact be the \emph{unique} path between $x$ and $y$, so removing this edge would disconnect these two vertices and thus the graph.
+
+    $(2) \Rightarrow (4)$: Consider any two vertices $x, y \in T$. By (2), there is a unique path connecting them. Adding an edge $\{x,y\}$ would thus create a cycle -- walk along the path from $x$ to $y$ and then head back along the new edge.
+
+    $(3) \Rightarrow (1)$: If $T$ is edge-minimal among connected graphs, it is of course connected. So what we need to show to show that it is a tree is that it contains no cycles. So, assume for contradiction that it has a cycle -- then we could delete an edge of this cycle without disconnecting the graph,\sidenote[][]{Why?} contradicting our assumption of edge-minimality.
+
+    $(4) \Rightarrow (1):$ If $T$ is edge-maximal among cycle-free graphs, it is in particular cycle-free, and so what we need to show in order to show that it is a tree is that it is connected. So assume for contradiction that it is disconnected -- then we could add an edge between two connected components without introducing any cycles, contradicing our assumption of edge-maximality.
+  \end{proof}
+\end{theorem}
 
 \section{Exercises}
 
