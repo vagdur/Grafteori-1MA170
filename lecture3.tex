@@ -87,6 +87,41 @@ For most of these, it is obvious how many edges they will have. Let us state a l
 
 \section{Trees}
 
+The main topic of this lecture is the so-called \emph{trees}. Informally, they are just graphs that look like trees -- though with this intuition we are drawing them upside-down.\sidenote[][]{Unless you are a computer scientist, in which case you draw them the right way up, I believe.}
+
+\begin{definition}
+  A \emph{tree} is a graph $T = (V,E)$ that is both connected and contains no cycles.
+\end{definition}
+
+Just like for graphs in general, there are countless variants of the notion of a tree. We can give the tree a root,\sidenote[][]{Which is quite necessary for a biological tree.} we can consider orderings of the vertices in various ways, and so on. None of this will actually be necessary in the course, however, so we skip defining these notions.
+
+\begin{example}
+  Trees appear in many places in various areas -- one common place for them to appear is in the study of algorithms. Let's study the quicksort algorithm, and see how it can be represented as a tree. The algorithm sorts a list of numbers in ascending order, and it works as follows:
+  \begin{enumerate}
+    \item Fix an arbitrary pivot $p$ element from the list.
+    \item Compare all non-pivot elements with the pivot, and put the ones that are smaller in a list we call $L$, and the ones that are larger in a list we call $R$.\sidenote[][-1.8cm]{This is of course not the most efficient way to \emph{implement} this algorithm -- the correct thing to do is to move elements around in a single list, since this can be done ``in place'' and so will be faster. But this is mathematically equivalent, and easier to phrase.}
+    \item Apply the quicksort algorithm to $L$ and $R$ if they contain more than one element.\sidenote[][-0.3cm]{Since we did not include the pivot element in either set, they are both strictly shorter lists than the one we started with, so this recursion will terminate.}
+    \item Return the list $LpR$.
+  \end{enumerate}
+
+  We can represent this algorithm with a rooted ordered binary\sidenote[][]{Binary in the sense of a computer scientist, since this is after all an algorithm. A mathematician would have a slightly different definition of binary tree.} tree. This means the tree has one designated vertex we call the root, and every vertex has potentially a left child and a right child, where a ``child'' is a neighbour who is further from the root than themselves.
+
+  We create a tree from this algorithm by letting the pivot element be the root of the tree, and then recursively letting its left child be the root of of the tree quicksort gives us for the list $L$, and the right child be the root of the tree we get for the list $R$. This hopefully becomes clearer if we work through an example:
+
+  Consider the list $3,7,1,4,9,8,6,2,5$, and choose $7$ as our pivot element. Then we get $L = 3,1,4,6,2,5$ and $R = 9,8$.
+
+  So, recursing, we now need to sort the list $3,1,4,6,2,5$, and we pick $3$ as our pivot element, getting a new $L = 1,2$ and $R = 4,6,5$. If we pick $1$ as our pivot in $L$, we get $L = \emptyset$ and $R = 2$. Picking $5$ as out pivot in the previous $R$, we get $L = 4$ and $R = 6$.
+
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.6\textwidth]{graphics/L3_trees/quicksort_tree.png}
+    \caption[][0cm]{A tree gotten from quicksorting a list of integers in our example.}
+    \label{fig:quicksort_tree}
+  \end{figure}
+
+  Finally, we need to quicksort the list $9,8$, where we can pick $9$ as our pivot and get $L = 8$, $R = \emptyset$. The resulting tree of what we just did is drawn in Figure \ref{fig:quicksort_tree}.
+\end{example}
+
 \section{Exercises}
 
 %\bibliography{references}
