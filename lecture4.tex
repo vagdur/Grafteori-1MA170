@@ -115,7 +115,7 @@ Having said this, we can now define the incidence matrix of a directed graph.
 
 Having given these definitions, let us start seeing why these matrices are interesting.
 
-\begin{lemma}
+\begin{lemma}\label{lemma:ranks_of_incidence_matrix}
     Let $D$ be an incidence matrix of a finite graph $G$. Then
     \begin{enumerate}
         \item the sum of any column of $D$ is zero, hence $\rank D \leq n - 1$,
@@ -136,6 +136,24 @@ Having given these definitions, let us start seeing why these matrices are inter
         To see the final part, observe that we can always relabel the vertices and edges in such a way that $D$ is in block-diagonal form, with every block being the incidence matrix of a connected components. So the claim follows from the statement for connected graphs.
     \end{proof}
 \end{lemma}
+
+The statement we are looking towards, counting spanning trees, will involve determinants, so let's start proving things about determinants of these matrices.
+
+\begin{lemma}
+    Any square submatrix of an incidence matrix $D$ has determinant $0$, $1$, or $-1$.
+
+    \begin{proof}
+        We prove this by induction in the size $k$ of the $k\times k$ submatrix. The statement is obvious for $k=1$, since all the entries of an incidence matrix are zero, one, or minus one.
+
+        Now consider a submatrix $M$ of size $(k+1)\times(k+1)$. If every column of $M$ has either two or no non-zero entries, then $\det M = 0$, since then every column will sum to zero. Otherwise, there is a column of $M$ having exactly one non-zero entry. Expanding $m$ along this column yields $\det M = \pm \det M'$ where $M'$ is a $k \times k$ submatrix of $D$. Hence the result follows by induction.
+    \end{proof}
+\end{lemma}
+
+Now, consider what happens if we pick some set of edges $S \subset E$, and let $D_S$ be just the columns that correspond to these edges -- this will in fact be the incidence matrix of the spanning subgraph $(V, S)$ of $G$. So if we pick $S$ as a set of $n-1$ edges, this spanning subgraph will be a spanning tree exactly if it is connected\sidenote[][]{
+    \begin{xca}
+        Prove that a graph on $n$ vertices and $n-1$ edges is a tree if and only if it is connected.
+    \end{xca}
+} -- and Lemma \ref{lemma:ranks_of_incidence_matrix} gives us a nice way of checking if it is connected or not: It is connected whenever $\rank D_S = n - 1$.
 
 \section{Exercises}
 
