@@ -175,7 +175,7 @@ If you are interested, and can read Swedish, you can find the other two proofs o
 
 Having seen all these results about trees, let us give a result giving a few equivalent characterisations of trees:
 
-\begin{theorem}
+\begin{theorem}\label{theorem:classification_of_trees}
   The following statements are equivalent:
   \begin{enumerate}
     \item $T$ is a tree.
@@ -240,7 +240,11 @@ Having stated this, we can now proceed to state and prove our theorem about span
 
     By construction, $B$ is a spanning subgraph of $G$. We want to show that it is an element of $A$, so we need to show that it is also cycle-free. So, assume for contradiction that it contains some cycle consisting of edges $e_1, e_2, \ldots, e_r$. Each of these edges must then be contained in some $H_i$ -- let us say that $e_j$ is contained in $H_{i(j)}$.
 
-    Since $C$ is a chain, one of these graphs $H_{i(1)}, H_{i(2)}, \ldots, H_{i(r)}$ must contain all of the others -- say it is $H_j$.
+    Since $C$ is a chain, one of these graphs $H_{i(1)}, H_{i(2)}, \ldots, H_{i(r)}$ must contain all of the others -- say it is $H_j$. Then this $H_j$ must contain all of the edges $e_1, e_2, \ldots, e_r$, and so contain a cycle -- but this is a contradiction, since $H_j$ is an element of $A$ and thus cycle-free.
+
+    Now, we need to show that $B$ is indeed an upper bound of the chain $C$, in order for Zorn's lemma to apply. This, however, is easy -- of course $E_i \subseteq \bigcup_{i\in I} E_i$, and so $H_i$ is a subgraph of $B$ for each $i$.
+
+    The conclusion of Zorn's lemma now gives us the existence of a cycle-free spanning subgraph that is maximal with respect to the subgraph ordering, which in this case means it is edge-maximal. So, by an analogous argument as in Theorem \ref{theorem:classification_of_trees},\sidenote[][]{We can't quite apply this theorem directly, because it assumes it is edge-maximal among \emph{all} cycle-free graphs, not just among the cycle-free subgraphs of a fixed graph. In last year's lecture notes they just appeal to this theorem, but that seems to me to be subtly wrong.} this maximal subgraph is in fact a tree, and so we have found our desired spanning tree.
   \end{proof}
 \end{theorem}
 
