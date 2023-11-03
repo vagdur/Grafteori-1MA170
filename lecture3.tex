@@ -248,9 +248,15 @@ Having stated this, we can now proceed to state and prove our theorem about span
   \end{proof}
 \end{theorem}
 
-\begin{theorem}
-  
-\end{theorem}
+Let us close out this lecture by defining the notion we will be studying next lecture, namely the \emph{complexity} of a graph.
+
+\begin{definition}
+  Let $G$ be a labelled graph. The \emph{complexity} of $G$ is the number of spanning trees of $G$, denote $t(G)$.
+\end{definition}
+
+\begin{example}
+  Any tree of course has complexity $1$, because its only spanning subgraph is the tree itself. A cycle graph on $n$ vertices will have complexity $n$. Cayley's formula\sidenote[][]{Which we admittedly haven't proven yet.} tells us that the complexity of $K_n$ is $n^{n-2}$. It turns out that the complexity of the complete bipartite graph $K_{a,b}$ is $a^{b-1}b^{a-1}$, but this is not an easy fact to prove.
+\end{example}
 
 \section{Exercises}
 
