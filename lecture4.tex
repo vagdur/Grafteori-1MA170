@@ -116,24 +116,20 @@ Having said this, we can now define the incidence matrix of a directed graph.
 Having given these definitions, let us start seeing why these matrices are interesting.
 
 \begin{lemma}\label{lemma:ranks_of_incidence_matrix}
-    Let $D$ be an incidence matrix of a finite graph $G$. Then
-    \begin{enumerate}
-        \item the sum of any column of $D$ is zero, hence $\rank D \leq n - 1$,
-        \item if $G$ is connected,\sidenote[][-0.8cm]{If you were wondering why we are proving this lemma for incidence matrices of undirected graphs, the reason lies here -- there are several notions of connectedness of directed graphs, and most are not equivalent to being connected when you forget the directions of the edges.} then $\rank D = n - 1$,
-        \item and if $G$ has $c$ components, then $\rank D = n - c$.
-    \end{enumerate}
+    Let $G$ be a finite simple graph on $n$ vertices with $c$ connected components, and $D$ be an incidence matrix of $G$. It holds that
+    $$\rank D = n - c.$$
 
     \begin{proof}
-        The column sums of $D$ are all zero, since each column contains exactly one $1$ and one $-1$, for the source and target of its associated edge. Therefore, if we take the sum of all the \emph{row}-vectors, each entry will be zero, so we have a non-trivial linear combination of $0$, and hence $\rank D \leq n - 1$.
+        To begin with, let us see that $\rank D \leq n - 1$. The column sums of $D$ are all zero, since each column contains exactly one $1$ and one $-1$, for the source and target of its associated edge. Therefore, if we take the sum of all the \emph{row}-vectors, each entry will be zero, so we have a non-trivial linear combination of $0$, and hence $\rank D \leq n - 1$.
 
-        To show the second part, we will show that this is, up to scaling, the only non-trivial linear combination of $0$ with the row-vectors. So, let $r_i$ for $i = 1,\ldots,n$ denote the row-vectors of $D$, and suppose we have a non-trivial linear combination
+        Now, assume $G$ is in fact connected -- then, we will show that this linear combination of $0$ is in fact, up to scaling, the only non-trivial linear combination of $0$ with the row-vectors. So, let $r_i$ for $i = 1,\ldots,n$ denote the row-vectors of $D$, and suppose we have a non-trivial linear combination
         $$\sum_{i=1}^n \alpha_i r_i = 0.$$
 
         Consider a row $k$ for which $\alpha_k \neq 0$ -- in this row, there is a non-zero entry in every column corresponding to an edge incident to the vertex $k$. Each of these columns has one other non-zero entry, and that entry has the opposite sign of the one in our row. So for these to sum to zero, the coefficients in the linear combination must be the same. So what we have seen is that $\alpha_\ell = \alpha_k$ whenever $\ell$ is adjacent to $k$.
 
-        However, the graph is connected, so this argument in fact extends to showing that all the coefficients must equal $\alpha_k$, and so this shows the linear combination is indeed just a rescaling of the sum of all the rows.
+        However, we assumed $G$ is connected, so this argument in fact extends to showing that all the coefficients must equal $\alpha_k$, and so this shows the linear combination is indeed just a rescaling of the sum of all the rows.
 
-        To see the final part, observe that we can always relabel the vertices and edges in such a way that $D$ is in block-diagonal form, with every block being the incidence matrix of a connected components. So the claim follows from the statement for connected graphs.
+        Finally, assume $G$ has $c$ connected components, and observe that we can always relabel the vertices and edges in such a way that $D$ is in block-diagonal form, with every block being the incidence matrix of a connected component. So the claim follows from the statement for connected graphs.
     \end{proof}
 \end{lemma}
 
