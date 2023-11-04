@@ -45,6 +45,8 @@ We introduce the basic notions of spectral graph theory, such as the adjacency a
 
 Throughout this lecture, we will assume that $G = (V, E)$ is a graph on $n$ vertices, with vertex set $[n]$, and $m$ edges $\{e_1, \ldots, e_m\}$.
 
+\section{Adjacency matrices}
+
 \begin{definition}
     The \emph{adjacency matrix} $A$ of a graph $G$ is the $n\times n$ matrix having entries $A_{ij} = 1$ if $i$ and $j$ are neighbours, and zero otherwise.
 \end{definition}
@@ -72,6 +74,8 @@ Throughout this lecture, we will assume that $G = (V, E)$ is a graph on $n$ vert
 
     Finally, it follows from the spectral theorem for symmetric matrices that all eigenvalues of $A$ are real.
 \end{remark}
+
+\section{Incidence matrices}
 
 There is another way to turn a graph into a matrix that is very useful, but it is easiest to define it first for directed graphs, so we begin by giving a definition of a directed graph.
 
@@ -161,6 +165,7 @@ Now, consider what happens if we pick some set of edges $S \subset E$, and let $
     \end{proof}
 \end{lemma}
 
+\section{The Laplacian matrix}
 \section{Exercises}
 
 %\bibliography{references}
