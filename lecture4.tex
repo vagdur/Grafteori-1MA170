@@ -145,11 +145,21 @@ The statement we are looking towards, counting spanning trees, will involve dete
     \end{proof}
 \end{lemma}
 
-Now, consider what happens if we pick some set of edges $S \subset E$, and let $D_S$ be just the columns that correspond to these edges -- this will in fact be the incidence matrix of the spanning subgraph $(V, S)$ of $G$. So if we pick $S$ as a set of $n-1$ edges, this spanning subgraph will be a spanning tree exactly if it is connected\sidenote[][]{
+Now, consider what happens if we pick some set of edges $S \subset E$, and let $D_S$ be just the columns of the incidence matrix that correspond to these edges -- this will in fact be the incidence matrix of the spanning subgraph $(V, S)$ of $G$. So if we pick $S$ as a set of $n-1$ edges, this spanning subgraph will be a spanning tree exactly if it is connected\sidenote[][]{
     \begin{xca}
         Prove that a graph on $n$ vertices and $n-1$ edges is a tree if and only if it is connected.
     \end{xca}
 } -- and Lemma \ref{lemma:ranks_of_incidence_matrix} gives us a nice way of checking if it is connected or not: It is connected whenever $\rank D_S = n - 1$.
+
+\begin{lemma}
+    Let $S$ be an $n-1$-element subset of the edges of $G$, and let $M$ denote any $(n-1)\times (n-1)$ submatrix of the $n \times (n-1)$ matrix $D_S$. Then $M$ is invertible if and only if $(V,S)$ is a spanning tree of $G$.
+
+    \begin{proof}
+        We already observed that $D_S$ has rank $n-1$ whenever $(V,S)$ is a spanning tree, so removing any row from it will create a non-singular square matrix $M$.
+
+        In the other direction, if $M$ is nonsingular, then $D_S$ contains at least $n-1$ linearly independent rows and the same number of linearly independent columns. Hence $\rank D_S = n - 1$ and so $(V,S)$ must be connected and thus a tree.
+    \end{proof}
+\end{lemma}
 
 \section{Exercises}
 
