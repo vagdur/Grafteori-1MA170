@@ -127,6 +127,7 @@
 \DeclareMathOperator{\im}{im}
 \DeclareMathOperator{\lspan}{span}
 \DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\adj}{adj}
 \DeclareMathOperator{\Vol}{Vol}
 
 % Mängddifferens

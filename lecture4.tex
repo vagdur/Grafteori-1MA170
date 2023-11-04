@@ -139,7 +139,7 @@ Having given these definitions, let us start seeing why these matrices are inter
 
 The statement we are looking towards, counting spanning trees, will involve determinants, so let's start proving things about determinants of these matrices.
 
-\begin{lemma}
+\begin{lemma}\label{lemma:square_submats_of_incmat}
     Any square submatrix of an incidence matrix $D$ has determinant $0$, $1$, or $-1$.
 
     \begin{proof}
@@ -155,7 +155,7 @@ Now, consider what happens if we pick some set of edges $S \subset E$, and let $
     \end{xca}
 } -- and Lemma \ref{lemma:ranks_of_incidence_matrix} gives us a nice way of checking if it is connected or not: It is connected whenever $\rank D_S = n - 1$.
 
-\begin{lemma}
+\begin{lemma}\label{lemma:invertible_iff_spanningtree}
     Let $S$ be an $n-1$-element subset of the edges of $G$, and let $M$ denote any $(n-1)\times (n-1)$ submatrix of the $n \times (n-1)$ matrix $D_S$. Then $M$ is invertible if and only if $(V,S)$ is a spanning tree of $G$.
 
     \begin{proof}
@@ -166,6 +166,109 @@ Now, consider what happens if we pick some set of edges $S \subset E$, and let $
 \end{lemma}
 
 \section{The Laplacian matrix}
+
+We have now gotten to the point where we can introduce the final matrix associated to a graph that we want to study.
+
+\begin{definition}
+    Let $G$ be a finite simple graph. Denote its adjacency matrix by $A$, and let $\Delta$ be a diagonal $n\times n$ matrix having diagonal entries $\Delta_{ii} = d_i$ for each $i$. Then, the \emph{Laplacian matrix} $Q$ of $G$ is given by
+    $Q = \Delta - A.$
+\end{definition}
+
+The reason we define this matrix is because it connects the adjacency and incidence matrices in a nice way.
+
+\begin{theorem}
+    Let $G$ be a finite simple graph, $A$ its adjacency matrix, $D$ an incidence matrix for $G$, and $Q$ its Laplacian matrix. Then it holds that
+    $$Q = DD^t = \Delta - A.$$
+
+    Notice that in particular this means that $DD^t$ is the same for every incidence matrix, independent of the orientation chosen of the edges.
+
+    \begin{proof}
+        The entry $(DD^t)_{ij}$ is the inner product of rows $r_i$ and $r_j$ of $D$.
+
+        If $i = j$, this amounts to summing the squares of the entries in $r_i$, and there are $d_i$ of them, each $\pm 1$, so the sum of their squares is just $d_i$, as needed.
+        
+        Now, if $i \neq j$, there is a non-zero entry in position $\ell$ in both $r_i$ and $r_j$ precisely when $e_\ell$ is an edge between $i$ and $j$ -- and this entry has to be $(1)(-1) = -1$. Since we assumed $G$ is simple, there can be at most one edge between $i$ and $j$. So we have seen that $(DD^t)_{ij}$ is $-1$ if $\{i,j\}$ is an edge, and zero otherwise.
+    \end{proof}
+\end{theorem}
+
+In order to arrive at the result we are looking for, we will need some heavier linear-algebraic machinery.
+
+\begin{definition}
+    Suppose $M$ is a square matrix. A \emph{cofactor} $M_{ij}$ of this matrix is the determinant of the submatrix of $M$ in which row $i$ and column $j$ have been removed.
+
+    If we consider the matrix whose entries are the cofactors, and take its transpose, we get the \emph{adjugate matrix} of $M$, denoted $\adj M$.
+\end{definition}
+
+Let us gather some linear-algebraic facts we will need and use without proof in one lemma:
+
+\begin{lemma}\label{lemma:linear_algebra_facts}
+    Let $M$ be an arbitrary $n\times n$ matrix. It holds that
+    \begin{enumerate}
+        \item $M(\adj M) = (\det M)I_n$.
+        \item If $M$ is symmetric, so is $\adj M$.\sidenote[][]{This one is perhaps nearly obvious, but still good to state explicitly.}
+        \item Suppose $M$ is symmetric and the row- and column-sums of $M$ are all zero, and let the non-zero eigenvalues of $M$ be $\lambda_1, \ldots, \lambda_{n-1}$. Then any cofactor of $M$ is equal to $\frac{1}{n}\lambda_1\ldots\lambda_n$.
+    \end{enumerate}
+\end{lemma}
+
+\begin{lemma}
+    Let $Q$ be the Laplacian matrix of a graph $G$, and denote by $J$ the $n\times n$ matrix all of whose entries are $1$. Then $\adj Q$ is a scalar multiple of $J$.
+
+    \begin{proof}
+        We observe first that $\rank Q = \rank D$. So if $G$ is disconnected, then we know by Lemma \ref{lemma:ranks_of_incidence_matrix} that $\rank Q < n - 1$, so all the $(n-1)\times(n-1)$ matrices determining the cofactors must also be singular, and thus $\adj Q = 0$.
+
+        Now, if $G$ is connected, we get that $\rank Q = n - 1$ and thus $\det Q = 0$, and so 
+        $$Q(\adj Q) = (\det Q)I_n = 0.$$
+
+        That $Q(\adj Q) = 0$ implies that every column vector of $\adj Q$ is in the kernel of $Q$. Now, since $\rank Q = n - 1$, this kernel is one-dimensional -- in fact, it is spanned by $(1,1,\ldots,1)^t$, since we can compute
+        \begin{align*}
+            Q_{i, \cdot}\cdot(1,1,\ldots,1)^t &= (\Delta - A)_{i, \cdot}(1,1,\ldots,1)^t\\
+            &= d_i - \sum_{j \sim i} 1 = 0.
+        \end{align*}
+
+        So it follows that every column of $\adj Q$ is a scalar multiple of $(1,1,\ldots,1)^t$ -- but since $Q$ is symmetric, so is $\adj Q$, and thus all these scalar multiples have to be the same, proving the lemma.
+    \end{proof}
+\end{lemma}
+
+So we have shown that all these cofactors are in fact equal -- so the final step is to show that they are actually the number of spanning trees of the graph. To see this, we need one final big hammer from linear algebra.
+
+\begin{theorem}[Cauchy-Binet]
+    Let $A$ and $B$ be two $n\times m$ matrices, with $n \leq m$. For any set $S\subseteq [m]$, denote by $A_S$ ($B_S$) the submatrix of $A$ ($B$) acquired by picking only the columns in $S$. Then
+    $$\det\left(AB^t\right) = \sum_{\substack{S \subseteq [m]\\\abs{S} = n}} \det\left(A_S\right)\det\left(B_S\right).$$
+\end{theorem}
+
+Now we can finally state and prove the Kirchhoff matrix-tree theorem:
+
+\begin{theorem}[Kirchhoff's matrix-tree theorem]
+    Let $G$ be a finite simple graph with Laplacian $Q$. Then any cofactor of $Q$ equals $t(G)$, the number of spanning trees of $G$,\sidenote[][]{Note that this is the part of the theorem that gives a good algorithm for computing the number of spanning trees: The Laplacian is trivial to compute, and computing a cofactor of it just requires you to compute a single determinant. The second half of the statement, on the other hand, would require you to compute the entire spectrum of the graph, which is notably more computation.} and if $\lambda_1, \lambda_2, \ldots, \lambda_{n-1}$ are the non-zero eigenvalues of $Q$, then
+    $$t(G) = \frac{1}{n}\prod_{i=1}^{n-1}\lambda_i.$$
+
+    \begin{proof}
+        We've already proven that all the cofactors are equal, so we can focus on just a single cofactor. Let $D$ be an incidence matrix of $G$, and let $\Tilde{D}$ be $D$ with its last row removed. Then $\det\left(\Tilde{D}\Tilde{D}^t\right)$ is a cofactor of $Q = DD^t$, and we can express this cofactor using the Cauchy-Binet theorem as
+        $$\det\left(\Tilde{D}\Tilde{D}^t\right) = \sum_{\substack{S \subseteq E\\\abs{S} = n - 1}} \left(\det \Tilde{D}_S\right)^2.$$
+
+        Now, we know from Lemma \ref{lemma:square_submats_of_incmat} that the determinant of a square submatrix of an incidence matrix always has determinant $-1$, $1$, or $0$,\sidenote[][]{So since $\Tilde{D}$ is a submatrix of $D$, a square submatrix of $\Tilde{D}$ is a square submatrix of $D$ as well.} so each summand on the right is either $0$ or $1$. However, we know from Lemma \ref{lemma:invertible_iff_spanningtree} that such a square matrix is invertible -- and thus has non-zero determinant -- if and only if the corresponding spanning subgraph is a spanning tree. So the right hand sum in fact counts spanning trees.
+
+        That the second statement of the theorem follows from the first is exactly the third statement of Lemma \ref{lemma:linear_algebra_facts}.
+    \end{proof}
+\end{theorem}
+
+Having arrived at our big result, let us now -- as promised -- use it to give a proof of Cayley's formula.
+
+\begin{proof}[Proof of Cayley's formula]
+    The key observation here is that a tree whose vertices are labelled from $1$ through $n$ is precisely a spanning tree of the complete graph on $n$ vertices, if we label also its vertices by $1$ through $n$. So if we apply the matrix-tree theorem to the complete graph, we will get a count of the labelled trees on $n$ vertices.
+
+    It is easy to see that the Laplacian of $K_n$ is
+    $$\begin{pmatrix}
+        n-1 & -1 & \dots & -1 \\
+        -1 & n-1 & \ddots & \vdots \\
+        \vdots & \ddots & \ddots & -1 \\
+        -1 & \dots & -1 & n-1
+       \end{pmatrix}$$
+    and as expected the vector $(1,1,\ldots,1)^t$ is an eigenvector for the eigenvalue $0$. A little bit of thought reveals that there are $n-1$ other eigenvectors of the form $(0,\ldots,0,1,-1,0,\ldots,0)^t$ all corresponding to the eigenvalue $n$. Hence
+    $$t(K_n) = \frac{1}{n}n^{n-1} = n^{n-2}$$
+    as desired.
+\end{proof}
+
 \section{Exercises}
 
 %\bibliography{references}
