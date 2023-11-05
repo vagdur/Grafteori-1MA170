@@ -269,6 +269,28 @@ Having arrived at our big result, let us now -- as promised -- use it to give a 
     as desired.
 \end{proof}
 
+\section{Weighted graphs and minimum spanning trees}
+
+We saw in our final theorem that there is an effective way of computing how many spanning trees there are. Is there also a good way of finding one? The answer to this is also yes -- and in fact we can do something much stronger in an efficient way.
+
+To explain the problem we are concerned with, let us introduce the notion of a \emph{weighted} graph. We will consider simple weighted graphs, but the same notion makes perfect sense also for multigraphs and directed graphs.
+
+\begin{definition}
+    A \emph{weighted graph} is a simple graph $G = (V,E)$ together with a \emph{weight function} $w: E \to \R$. If $H = (V', E')$ is a subgraph of $G$, its \emph{weight} is defined as $w(H) = \sum_{e\in E'} w(e)$, whenever this is well defined.\sidenote[][-1cm]{If it contains infinitely many positive and infinitely many negative weights, the sum might not converge, but this case is entirely pathological and won't occur for us.} A \emph{minimum spanning tree} (MST) is a spanning tree $T$ of $G$ such that $w(T)$ is minimal among all spanning trees.
+\end{definition}
+
+It is clear that for finite weighted graphs, there always exists at least one minimum spanning tree,\sidenote[][-0.6cm]{
+    \begin{xca}
+        Show that this statement is not true for infinite graphs, by finding an infinite weighted graph without a minimum spanning tree. Can you find one with only positive weights?
+    \end{xca}
+} but they are not necessarily unique -- if all edges have the same weight, then of course every spanning tree is minimal. However, if all edges are given different weights, then the minimum spanning tree is indeed unique.\sidenote[][]{
+    \begin{xca}
+        Prove this. (A proof is in the lecture notes from last year, if you can't find one yourself.)
+    \end{xca}
+}
+
+The problem of actually finding these minimum spanning trees algorithmically is one we will be considering during our next exercise session, and then dealing with in the lecture after that.
+
 \section{Exercises}
 
 \begin{xca}
