@@ -1,0 +1,71 @@
+\documentclass[nobib]{tufte-handout}
+
+\title{Exercise session 5: Weights, distances, flows $\cdot$ 1MA020}
+
+\author[Vilhelm Agdur]{Vilhelm Agdur\thanks{\href{mailto:vilhelm.agdur@math.uu.se}{\nolinkurl{vilhelm.agdur@math.uu.se}}}}
+
+\date{6 November 2023}
+
+
+%\geometry{showframe} % display margins for debugging page layout
+
+\usepackage{graphicx} % allow embedded images
+  \setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+  \graphicspath{{graphics/}} % set of paths to search for images
+\usepackage{amsmath}  % extended mathematics
+\usepackage{booktabs} % book-quality tables
+\usepackage{units}    % non-stacked fractions and better unit spacing
+\usepackage{multicol} % multiple column layout facilities
+\usepackage{lipsum}   % filler text
+\usepackage{fancyvrb} % extended verbatim environments
+  \fvset{fontsize=\normalsize}% default font size for fancy-verbatim environments
+
+\usepackage{color,soul} % Highlights for text
+
+% Standardize command font styles and environments
+\newcommand{\doccmd}[1]{\texttt{\textbackslash#1}}% command name -- adds backslash automatically
+\newcommand{\docopt}[1]{\ensuremath{\langle}\textrm{\textit{#1}}\ensuremath{\rangle}}% optional command argument
+\newcommand{\docarg}[1]{\textrm{\textit{#1}}}% (required) command argument
+\newcommand{\docenv}[1]{\textsf{#1}}% environment name
+\newcommand{\docpkg}[1]{\texttt{#1}}% package name
+\newcommand{\doccls}[1]{\texttt{#1}}% document class name
+\newcommand{\docclsopt}[1]{\texttt{#1}}% document class option name
+\newenvironment{docspec}{\begin{quote}\noindent}{\end{quote}}% command specification environment
+
+\include{mathcommands.extratex}
+
+\begin{document}
+
+\maketitle% this prints the handout title, author, and date
+
+\begin{abstract}
+\noindent
+In the previous lecture, we learned how to count the number of spanning trees of a graph. Now, we study how to find spanning trees, and minimal spanning trees. We also think about the vertex version of Eulerian circuits, which are called Hamilton paths. Finally, we consider flows in graphs.
+\end{abstract}
+
+\section{Weighted graphs and minimum spanning trees}
+
+We saw in our final theorem of the previous lecture that there is an effective way of computing how many spanning trees there are. Is there also a good way of finding one? The answer to this is also yes -- and in fact we can do something much stronger in an efficient way.
+
+To explain the problem we are concerned with, let us introduce the notion of a \emph{weighted} graph. We will consider simple weighted graphs, but the same notion makes perfect sense also for multigraphs and directed graphs.
+
+\begin{definition}
+    A \emph{weighted graph} is a simple graph $G = (V,E)$ together with a \emph{weight function} $w: E \to \R$. If $H = (V', E')$ is a subgraph of $G$, its \emph{weight} is defined as $w(H) = \sum_{e\in E'} w(e)$, whenever this is well defined.\sidenote[][-1cm]{If it contains infinitely many positive and infinitely many negative weights, the sum might not converge, but this case is entirely pathological and won't occur for us.} A \emph{minimum spanning tree} (MST) is a spanning tree $T$ of $G$ such that $w(T)$ is minimal among all spanning trees.
+\end{definition}
+
+It is clear that for finite weighted graphs, there always exists at least one minimum spanning tree, but they are not necessarily unique -- if all edges have the same weight, then of course every spanning tree is minimal. However, if all edges are given different weights, then the minimum spanning tree is indeed unique.
+
+\begin{xca}
+    The things we do here don't work at all for infinite graphs. To demonstrate this, find an infinite weighted graph without a minimum spanning tree. Can you find one with only positive weights?
+\end{xca}
+
+\begin{xca}
+    Prove that if all edges have different weights, then the minimum spanning tree is unique.
+\end{xca}
+
+The problem of actually finding these minimum spanning trees algorithmically is one we will be considering during our next exercise session, and then dealing with in the lecture after that.
+
+%\bibliography{references}
+%\bibliographystyle{plainnat}
+
+\end{document}
