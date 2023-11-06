@@ -102,6 +102,20 @@ It turns out that this notion of graph distance does indeed turn a graph into a 
   If you're feeling ambitious, it is actually possible to efficiently find the distances between a fixed vertex $v_0$ and every other vertex in the graph -- how might you do this?
 \end{xca}
 
+\section{Hamilton cycles, independent sets, and matchings}
+
+We defined in our first exercise session that a \emph{cycle} in a graph is a walk that starts and ends at the same vertex, but other than that never reuses a vertex. Then we did not use this concept, and instead studied walks that never reuse edges, arriving at the notion of Eulerian circuit.
+
+Now, we will pursue the cycles instead, and define that a \emph{Hamilton cycle} is a cycle that uses every vertex of a graph. We say that a graph is \emph{Hamiltonian} if it has a Hamilton cycle.
+
+\begin{xca}
+  For Eulerian circuits there was a rather easy to find method of determining if a graph contains one, and if so of finding one. Is there a similarly easy method to see whether a graph is Hamiltonian?\sidenote[][]{The answer is that there is not -- so the point of the exercise is to just see that the naïve approaches fail.
+  
+  Or at least, there is no such method assuming $P \neq NP$ -- so if you find one, write it down quick and get that million-dollar Millenium prize.}
+\end{xca}
+
+If you are of a more computer-sciencey bent, it may interest you to look up how one proves that determining if a graph is Hamiltonian is NP-complete. It is a fairly neat proof, but not quite simple enough to just give as an exercise.
+
 %\bibliography{references}
 %\bibliographystyle{plainnat}
 
