@@ -45,7 +45,7 @@ In the previous lecture, we learned how to count the number of spanning trees of
 
 \section{Weighted graphs and minimum spanning trees}
 
-We saw in our final theorem of the previous lecture that there is an effective way of computing how many spanning trees there are. Is there also a good way of finding one? The answer to this is also yes -- and in fact we can do something much stronger in an efficient way.
+We saw in our final theorem of the previous lecture that there is an effective way of computing how many spanning trees there are. Is there also a good way of finding one? The answer to this is yes -- and in fact we can do something much stronger in an efficient way.
 
 To explain the problem we are concerned with, let us introduce the notion of a \emph{weighted} graph. We will consider simple weighted graphs, but the same notion makes perfect sense also for multigraphs and directed graphs.
 
@@ -63,7 +63,38 @@ It is clear that for finite weighted graphs, there always exists at least one mi
     Prove that if all edges have different weights, then the minimum spanning tree is unique.
 \end{xca}
 
-The problem of actually finding these minimum spanning trees algorithmically is one we will be considering during our next exercise session, and then dealing with in the lecture after that.
+So we have seen that for finite directed graphs, there does exist a unique minimal spanning tree. How do we find it?
+
+\begin{xca}
+  Come up with a reasonable\sidenote[][]{``Reasonable'' here meaning something like at least not brute force, or in polynomial time. The two algorithms we'll look at in the next lecture, and which I'm fishing for with this exercise, run in time $O\left(\abs{E} + \abs{V}\log\left(\abs{V}\right)\right)$ and $\abs{E}\log\left(\abs{V}\right)$ respectively, if implemented optimally.} method for finding a minimum spanning tree. It might be useful here to consider the result we proved two lectures ago, giving four equivalent statements, where one of them was ``$T$ is a tree''.
+
+  One approach might be to build it up by starting at one vertex and then adding in neighbours, and one might be to build it up one edge at a time, making sure never to create a cycle.
+
+  This exercise is likely one of the harder ones on this sheet, so if you get stuck, move on to the later ones.
+\end{xca}
+
+If all the weights on our graph are positive, we can interpret the weights on our graph as being distances between vertices, or time it takes to travel between them.\sidenote[][]{If we have negative weights, this of course makes no sense: We can't have negative distances. It would also make a lot of what we are about to do just not work, as we will see in an exercise.} Then it makes sense to make the following definition:
+
+\begin{definition}
+  For a weighted graph $G$ with positive edge-weights, we define the \emph{graph distance} between two vertices $v, v' \in G$ by
+  $$d_G(v, v') = \min_{\text{paths }P\text{ from }v\text{ to }v'} \sum_{e \in E(P)} w(e).$$
+\end{definition}
+
+\begin{xca}
+  There's a reason we require positive edge-weights. What could happen if we allowed negative weights? Find an example of a weighted graph with some negative weights where the distance function isn't well-defined.
+\end{xca}
+
+It turns out that this notion of graph distance does indeed turn a graph into a metric space, for those of you who know what that is.
+
+\begin{xca}
+  Convince yourselves that the following three properties of $d_G$ hold:
+  \begin{enumerate}
+    \item For all $v, v' \in V$, we have $d_G(v, v') \geq 0$, and $d_G(v,v') = 0$ if and only if $v = v'$.
+    \item We have $d_G(v,v') = d_G(v',v)$ for all $v, v' \in V$.
+    \item The triangle inequality holds, that is, for all $v, u, w \in V$,
+    $$d_G(v, w) \leq d_G(v, u) + d_G(u, w).$$
+  \end{enumerate}
+\end{xca}
 
 %\bibliography{references}
 %\bibliographystyle{plainnat}
