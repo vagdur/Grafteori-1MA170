@@ -116,6 +116,26 @@ Now, we will pursue the cycles instead, and define that a \emph{Hamilton cycle} 
 
 If you are of a more computer-sciencey bent, it may interest you to look up how one proves that determining if a graph is Hamiltonian is NP-complete. It is a fairly neat proof, but not quite simple enough to just give as an exercise.
 
+Another structure that is interesting to study, and where the computational hardness is actually easy to see, is independent sets.
+
+\begin{definition}
+  An \emph{independent set} in a graph $G = (V,E)$ is a subset $I$ of the vertices such that no two elements of $I$ are adjacent.
+\end{definition}
+
+It turns out that determining if a general graph has an independent set of size $k$ is NP-hard.\sidenote[][]{However, if you restrict to smaller classes of graphs, this may no longer be true -- and there are many results of the form ``if a graph has properties so-and-so, it has an independent set of at least size something'', some of which we might see later in the course.} To show this, let us reduce $3$-SAT to the independent set problem.
+
+\begin{definition}
+  A $3$-SAT formula is a formula that looks like
+  $$\left(x_1 \vee x_2 \vee \notl x_3\right) \wedge \left(x_2 \vee x_3 \vee \notl x_4\right) \wedge \left(x_1 \vee \notl x_2 \vee x_4\right).$$
+  That is, it consists of a conjunction of some number of \emph{clauses}, each of which is a disjunction of three (possibly negated) variables. A \emph{satisfying assignment} is a way to assign the values true or false to each of the variables, so that the entire formula becomes true.\sidenote[][]{This is of course not a real definition -- but it is hopefully clearer about what it actually is than the pile of notation that a real definition would be.}
+\end{definition}
+
+\begin{xca}
+  We can construct a graph from a $3$-SAT formula as follows: For each clause, draw a triangle, labelling each vertex of the triangle with one of the variables in the disjunction, including whether it was negated or not. Then draw an edge between any two vertices labelled $x_i$ and $\notl x_i$ for every $i$.
+
+  Do this for the $3$-SAT formula we gave in our ``definition''. Show that there is a satistfying assignment for the $3$-SAT formula if and only if there is an independent set of size $k$ in the corresponding graph. This will show that the independent set problem is NP-Hard.
+\end{xca}
+
 %\bibliography{references}
 %\bibliographystyle{plainnat}
 
