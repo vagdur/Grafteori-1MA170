@@ -136,6 +136,22 @@ It turns out that determining if a general graph has an independent set of size 
   Do this for the $3$-SAT formula we gave in our ``definition''. Show that there is a satistfying assignment for the $3$-SAT formula if and only if there is an independent set of size $k$ in the corresponding graph. This will show that the independent set problem is NP-Hard.
 \end{xca}
 
+One final structure we are going to study in a graph is a so-called \emph{matching}.
+
+\begin{definition}
+  A \emph{matching} in a graph $G = (V,E)$ is a set of edges $M \subseteq E$ such that no two edges in $M$ share an endpoint. If $\{v, w\} \in M$ we say that $v$ and $w$ have been matched to each other.
+\end{definition}
+
+It turns out that this concept is actually closely related to that of independent sets, if you squint at it in the right way.
+
+\begin{definition}
+  Given a graph $G = (V, E)$, the \emph{line graph} $L(G)$ of $G$ has as its vertices the \emph{edges} of $G$, and there is an edge between $e$ and $e'$ whenever they share an endpoint in $G$.
+\end{definition}
+
+\begin{xca}
+  Convince yourselves that a matching in $G$ and an independent set in $L(G)$ are precisely the same thing.
+\end{xca}
+
 %\bibliography{references}
 %\bibliographystyle{plainnat}
 
