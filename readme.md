@@ -7,7 +7,8 @@ Welcome to the course in graph theory at the bachelor's level at Uppsala Univers
 1. [Exercise session 1: Introduction - what is graph theory?](https://vagdur.github.io/Grafteori-1MA170/exercise_session1.pdf)
 2. [Lecture 2: Eulerianity, simple graphs, and subgraphs](https://vagdur.github.io/Grafteori-1MA170/lecture1.pdf)
 3. [Lecture 3: Common graph families, trees, and Cayley's theorem](https://vagdur.github.io/Grafteori-1MA170/lecture3.pdf)
-4. [Lecture 4: Spectral graph theory and the matrix-tree theorem](https://vagdur.github.io/Grafteori-1MA170/lecture4.pdf) (Work In Progress)
+4. [Lecture 4: Spectral graph theory and the matrix-tree theorem](https://vagdur.github.io/Grafteori-1MA170/lecture4.pdf)
+5. [Exercise session 5: Weights, distances, flows](https://vagdur.github.io/Grafteori-1MA170/exercise_session5.pdf) (Work In Progress)
 
 # Other course material
 
