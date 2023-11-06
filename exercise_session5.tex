@@ -102,6 +102,33 @@ It turns out that this notion of graph distance does indeed turn a graph into a 
   If you're feeling ambitious, it is actually possible to efficiently find the distances between a fixed vertex $v_0$ and every other vertex in the graph -- how might you do this?
 \end{xca}
 
+\section{Flows}
+
+One situation we might want to model using a graph is the flow of traffic in a road network, or of water in a set of pipes. So we imagine we have a bunch of locations, each of which is a vertex, and a collection of edges denoting roads from one location to another, with weights noting how much traffic the road can handle per hour.
+
+To simplify things slightly, we assume all roads are one-directional, and that all vehicles enter the graph through a single \emph{source} vertex in the graph and travel to a \emph{sink} vertex where they leave the graph. 
+
+\begin{xca}
+  Can you turn this intuitive description into a formal mathematical definition of a problem to study?
+\end{xca}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.85\textwidth]{graphics/L5_exc_MSTs_etc/train_network_flow.png}
+  \caption[][0cm]{A hypothetical graph modelling public transport flow from Uppsala to Södertälje.}
+  \label{fig:uppsala_stockholm_traffic}
+\end{figure}
+
+\begin{xca}
+  It should be clear from the intuitive description that we can't have an arbitrary amount of traffic flowing through our graph -- there will always be some upper limit to the traffic, and this will be determined by the worst bottleneck for traffic. 
+  
+  For example, looking at Figure \ref{fig:uppsala_stockholm_traffic}, it should be obvious that increasing capacity on the Uppsala-Knivsta connection won't improve the flow to Södertälje at all, as long as the Stockholm-Södertälje connection has lower capacity. The only place we can really hope to improve flow as this graph currently looks is by increasing the capacity of either the Enköping-Bålsta or the Knivsta-Märsta connections.
+  
+  Can you find a rigorous mathematical notion that corresponds to this intuition?
+\end{xca}
+
+If you find this interesting or are feeling ambitious, you could even try to figure out an algorithm to determine the maximal flow through the graph. We will give one during the lecture on this.
+
 \section{Hamilton cycles, independent sets, and matchings}
 
 We defined in our first exercise session that a \emph{cycle} in a graph is a walk that starts and ends at the same vertex, but other than that never reuses a vertex. Then we did not use this concept, and instead studied walks that never reuse edges, arriving at the notion of Eulerian circuit.
