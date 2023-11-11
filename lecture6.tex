@@ -115,6 +115,23 @@ Before we can prove that this algorithm actually works, we will need a little le
   The runtime of this algorithm will depend on the implementation -- specifically on how the graph is represented\sidenote[][-0.9cm]{Are you storing essentially an adjacency matrix, or a list of edges, or something like a ``linked list'' kind of structure? There are many ways of representing a graph in memory.} and on how you find the next edge between $V(T_i)$ and $V(T_i)^c$. A good implementation has a runtime of $O\left(\abs{E} + \abs{V}\log\left(\abs{V}\right)\right)$.\sidenote[][]{If you just store an adjacency matrix, you get a runtime of $O\left(\abs{V}^2\right)$, while if you store the graph as a list of vertices, where each vertex is a list of its neighbours, and use a Fibonacci heap to help finding the minimal edges, you get the runtime of the ``good'' implementation.}
 \end{remark}
 
+\section{Kruskal's algorithm}
+
+The second algorithm we consider for finding MSTs is \emph{Kruskal's algorithm}, which doesn't iteratively create larger trees, but instead creates a forest that grows until it becomes a tree.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.85\textwidth]{graphics/L6_prim_kruskal_dijkstra/kruskals_algorithm.png}
+  \caption[][0cm]{An illustration of how Kruskal's algorithm finds a minimal spanning tree in the same graph as the one in Figure \ref{fig:prims_algorithm}, which illustrated Prim's algorithm.}
+  \label{fig:kruskals_algorithm}
+\end{figure}
+
+\begin{definition}[Kruskal's algorithm]
+  Let $G = (V,E,w)$ be a connected finite weighted graph, and let $L$ be a list of the edges of $G$ sorted in ascending order of weight. Initialize the algorithm by setting $F_0 = (V, \emptyset)$. At time step $i$, remove the first entry from $L$, and call it $e_i$. If adding $e_i$ to $F_{i-1}$ would not create a cycle, let $F_i = (V, E(F_{i-1})\cup\{e_i\})$, otherwise let $F_i = F_{i-1}$. The algorithm terminates when we add the $n-1$th edge.
+
+  How this algorithm constructs an MST is illustrated in Figure \ref{fig:kruskals_algorithm}.
+\end{definition}
+
 \section{Exercises}
 
 \begin{xca}
