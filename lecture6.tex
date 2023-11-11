@@ -111,6 +111,10 @@ Before we can prove that this algorithm actually works, we will need a little le
   \end{proof}
 \end{theorem}
 
+\begin{remark}
+  The runtime of this algorithm will depend on the implementation -- specifically on how the graph is represented\sidenote[][-0.9cm]{Are you storing essentially an adjacency matrix, or a list of edges, or something like a ``linked list'' kind of structure? There are many ways of representing a graph in memory.} and on how you find the next edge between $V(T_i)$ and $V(T_i)^c$. A good implementation has a runtime of $O\left(\abs{E} + \abs{V}\log\left(\abs{V}\right)\right)$.\sidenote[][]{If you just store an adjacency matrix, you get a runtime of $O\left(\abs{V}^2\right)$, while if you store the graph as a list of vertices, where each vertex is a list of its neighbours, and use a Fibonacci heap to help finding the minimal edges, you get the runtime of the ``good'' implementation.}
+\end{remark}
+
 \section{Exercises}
 
 %\bibliography{references}
