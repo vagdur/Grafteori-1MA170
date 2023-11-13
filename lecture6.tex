@@ -154,6 +154,22 @@ The second algorithm we consider for finding MSTs is \emph{Kruskal's algorithm},
   Kruskal's algorithm has a runtime of $O\left(\abs{E}\log\left(\abs{V}\right)\right)$, but if you are already given the edges sorted by weight, it runs in $O\left(\abs{E}\mathop{\alpha}\left(\abs{V}\right)\right)$ time, where $\alpha$ is the inverse of the Ackermann function.
 \end{remark}
 
+\section{Graph distances}
+
+Another thing we did in our exercises was to consider distance functions on graphs. Recall the following definition from the exercises:
+
+\begin{definition}
+  For a weighted graph $G$ with positive edge-weights, we define the \emph{graph distance} between two vertices $v, v' \in G$ by
+  $$d_G(v, v') = \min_{\text{walks }P\text{ from }v\text{ to }v'} \sum_{e \in E(P)} w(e).$$
+\end{definition}
+
+We proved during the exercises that this actually is a metric on the set of vertices whenever the graph is connected, so it makes sense to call this a distance and use the language of metric spaces. We can also extend this definition to disconnected metric spaces if we recall the convention that a minimum over an empty set is $\infty$.\sidenote[][]{This is really the same thing as why an empty sum is zero, an empty product $1$, an empty union is $\emptyset$, and so on.}
+
+\begin{definition}
+  The \emph{diameter} of a graph is the same as the diameter for any metric space -- it is the maximum distance between any two vertices.\sidenote[][]{This has also been called ``longest shortest path'', presumably by people who like confusing terminology.} That is,
+  $$\diam(G) = \max_{v, u \in V(G)} d(v,u).$$
+\end{definition}
+
 \section{Exercises}
 
 \begin{xca}

@@ -129,6 +129,7 @@
 \DeclareMathOperator{\rank}{rank}
 \DeclareMathOperator{\adj}{adj}
 \DeclareMathOperator{\Vol}{Vol}
+\DeclareMathOperator{\diam}{diam}
 
 % Mängddifferens
 \newcommand{\symdiff}{\mathbin{\triangle}}
