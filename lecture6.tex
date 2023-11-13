@@ -170,6 +170,50 @@ We proved during the exercises that this actually is a metric on the set of vert
   $$\diam(G) = \max_{v, u \in V(G)} d(v,u).$$
 \end{definition}
 
+Instead of trying to compute the diameter of a graph, let us just try to compute the distance between two vertices. Or rather, it turns out to not be markedly harder to compute the distance between a given vertex and every other vertex, so we give an algorithm that can do this, and then we will say how to turn this into an algorithm for the simpler problem.
+
+In fact, we can interpret the problem of finding the distances between a given vertex and the rest of the graph as a problem of finding a certain spanning tree, rooted at the given vertex. If we just let each vertex pick its neighbour closest to the root as its parent, this tree precisely encodes the information we need.\sidenote[][]{
+  \begin{xca}
+    Prove that this really is a tree. You can equivalently think of it as the union of all shortest paths between the root $v$ and some other vertex. (This tree is called a shortest-path tree.)
+  \end{xca}
+}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.85\textwidth]{graphics/L6_prim_kruskal_dijkstra/dijkstras_algorithm.png}
+  \caption[][0cm]{An illustration of how Dijkstra's algorithm finds a shortest path tree in a graph. Edge weights are given in blue, the distance function $d(v_0, \cdot)$ is given in red, and the parent function $p$ is indicated by the red arrows pointing along edges.}
+  \label{fig:dijkstras_algorithm}
+\end{figure}
+
+\begin{definition}[Dijkstra's algorithm]
+  We take as arguments a weighted graph $G = (V,E,w)$ and an initial vertex $v_0$, and the state of the algorithm consists of a \emph{currently visited vertex} $v$, a set $Q$ of \emph{unvisited vertices}, a partially function $p: V \to V$ assigning each vertex its \emph{parent}, and a \emph{distance function} $d(v_0, \cdot)$. 
+  
+  We initialize the algorithm by setting $v = v_0$, $Q = V$, $p(v_0) = v_0$ and undefined otherwise, and
+  $$d(v_0, v) = \begin{cases}
+    0&\text{if }v=v_0\\
+    \infty&\text{otherwise.}
+  \end{cases}$$
+
+  In each time step, we do the following:
+  \begin{enumerate}
+    \item Remove the currently visited vertex $v$ from $Q$.
+    \item For each neighbour $v'$ of $v$, check whether
+          $$d(v_0, v) + w(\{v, v'\}) < d(v_0, v').$$
+          If this is the case, going from $v'$ to $v$ and then back to $v_0$ gives a shorter path to $v_0$ than previously known, so we set $d(v_0, v')$ to $d(v_0, v) + w(\{v, v'\})$ and let $p(v')$ be $v$.
+    \item If $Q$ contains a vertex with finite value of $d(v_0, \cdot)$,\sidenote[][]{The reason we phrase it like this is that we want the algorithm to be able to handle disconnected graphs as well. If $G$ is disconnected, $Q$ will never be empty, but the things in different connected components will have distance $\infty$ even after we have seen the entire connected component of $v_0$.} we set the new currently visited vertex to be the vertex $v$ in $Q$ with smallest $d(v_0,v)$. Otherwise, the algorithm terminates and returns the distance function $d$ and the parent function $p$.
+  \end{enumerate}
+
+  How this algorithm works is illustrated in Figure \ref{fig:dijkstras_algorithm}.
+\end{definition}
+
+\begin{remark}
+  If we are only interested in the distance to some specific vertex $v'$, we can find the distance to it by terminating the algorithm already when $v'$ is the currently visited vertex.
+
+  If we want to find the actual path that realizes the found distance, we can just iterate the parent function $p$ -- starting in a vertex $v$, walk to $p(v)$, then to $p(p(v))$, and so on until you reach $v_0$.
+
+  With the right implementation, Dijkstra's algorithm has a runtime of $O\left(\abs{E} + \abs{V}\log\left(\abs{V}\right)\right)$.
+\end{remark}
+
 \section{Exercises}
 
 \begin{xca}
