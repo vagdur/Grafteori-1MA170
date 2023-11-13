@@ -132,6 +132,28 @@ The second algorithm we consider for finding MSTs is \emph{Kruskal's algorithm},
   How this algorithm constructs an MST is illustrated in Figure \ref{fig:kruskals_algorithm}.
 \end{definition}
 
+\begin{theorem}
+  Kruskal's algorithm is correct, that is, it always generates an MST.
+
+  \begin{proof}
+    Let $G = (V,E,w)$ be a finite connected weighted graph. It is clear by construction that Kruskal's algorithm always generates a cycle-free spanning subgraph which is edge maximal, and so by a similar argument as when we were proving all graphs have spanning trees, it must always generate a spanning tree.
+
+    To see that this spanning tree is in fact maximal, we again compare with a known MST. In particular, let $T$ be the spanning tree found by Kruskal's algorithm, and let $T'$ denote an MST that has a maximal number of edges shared with $T$. We will show that if $T \neq T'$ we can actually modify $T'$ to have even more edges in common with $T$, while still being an MST, contradicting our maximality assumption, and so we must have $T \neq T'$.
+
+    So, assuming $T \neq T'$, let $e$ be the lowest-weight edge of $T$ that is not contained in $T'$. Adding $e$ to $T'$ will create a cycle, and somewhere on this cycle there must be an edge $f$ not contained in $T$.
+
+    Our modification of $T'$ will be to remove $f$ and add $e$, getting a new spanning tree $T''$..\sidenote[][]{
+      \begin{xca}
+        Prove that $T''$ actually is a spanning tree.
+      \end{xca}
+    } Since $T'$ is an MST, $w(T') \leq w(T'')$. On the other hand, since Kruskal's algorithm chose to add $e$ instead of $f$ when given the choice, we must have $w(e) \leq w(f)$, and so therefore we also have $w(T'') \leq w(T')$, and so $w(T') = w(T'')$, and $T''$ is also an MST. This, however, gives us our contradiction, since $T''$ shares more edges with $T$ than $T'$ did.
+  \end{proof}
+\end{theorem}
+
+\begin{remark}
+  Kruskal's algorithm has a runtime of $O\left(\abs{E}\log\left(\abs{V}\right)\right)$, but if you are already given the edges sorted by weight, it runs in $O\left(\abs{E}\mathop{\alpha}\left(\abs{V}\right)\right)$ time, where $\alpha$ is the inverse of the Ackermann function.
+\end{remark}
+
 \section{Exercises}
 
 \begin{xca}
