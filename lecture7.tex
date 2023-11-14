@@ -214,6 +214,19 @@ Having now finally set up all the terminology and lemmata we need, we can finall
     Notice how this theorem does not actually say anything about the \emph{existence} of a maximal flow. For finite networks, however, we can do a bit of analysis-style reasoning to prove that a maximum flow must exist. The details of this are left as an exercise.
 \end{remark}
 
+The Ford-Fulkerson theorem very nearly gives us an algorithm, by just repeatedly finding augmenting paths and augmenting along them. It is still a bit unspecified,\sidenote[][]{If you find your augmenting paths in a sufficiently poor way, and you have irrational values for some capacities, the algorithm might not terminate at all!} however -- specifying the details gives you for example the Edmonds-Karp algorithm.
+
+\begin{definition}[Edmonds-Karp Algorithm]
+    Given a flow network $G$, let $f$ be the zero-flow. Then, in each time step:
+    \begin{enumerate}
+        \item Construct $G_f$.
+        \item Find a shortest augmenting path in $G_f$ using breadth-first search -- if none exists, we are done and return $f$.
+        \item If we found such a path, augment $f$ using it.
+    \end{enumerate}
+
+    Analysing this algorithm shows that it will have a running time of $O\left(\abs{V}^2\abs{E}\right)$.
+\end{definition}
+
 \section{Exercises}
 
 \begin{xca}
