@@ -114,7 +114,7 @@ Considering our intuition about the bottlenecks, it should be clear that any flo
 
 In fact, it turns out that equality is only achieved in this inequality in the most extreme case.
 
-\begin{lemma}
+\begin{lemma}\label{lemma:cut_equals_flowvalue_implies_maximal}
     Let $G$ be a flow network with a flow $f$ and an s-t-cut of $V$ into $S$ and $T$. If $\abs{f} = c(S,T)$, then $\abs{f}$ is maximal among all flows, and $c(S,T)$ is minimal among all s-t-cuts.
 
     \begin{proof}
@@ -148,7 +148,73 @@ A central construction in the theory of flow networks is the \emph{residual netw
     We give an example of this in Figure \ref{fig:residual_network}, using the same flow network we have seen before.
 \end{definition}
 
+How can we use these residual networks to find ways to improve a flow? The idea is that a walk from the source to the sink in the residual graph will correspond to a way of improving the flow. However, so far we have only defined walks in undirected graphs, so let us define what we mean here.
+
+\begin{definition}
+    In any directed graph, a \emph{directed path} consists of a sequence of vertices $v_0\, v_1\, \ldots\, v_k$ and a sequence of edges $e_1\, e_2\, \ldots\, e_k$, such that edge $e_i$ points from $e_{i-1}$ to $e_i$. We also call such a path a $v_0$-$v_k$-path.
+
+    If $G$ is a residual network, a directed path $P$ from $s$ to $t$ is called an \emph{augmenting path}, and it has \emph{residual capacity}
+    $$c_f(P) = \min_{e\in E(P)} w(e).$$
+\end{definition}
+
+That these augmenting paths correspond precisely to ways to improve the flow is the content of our next lemma.
+
+\begin{lemma}\label{lemma:can_augment_flows}
+    Let $f$ be a flow in a flow network $G$ such that $G_f$ admits an augmenting path $P$. Then the flow $f'$ defined by
+    $$f'(u,v) = \begin{cases}
+        f(u,v) + c_f(P)&\text{if }(u,v)\text{ is an edge in }P\\
+        f(u,v) - c_f(P)&\text{if }(v,u)\text{ is an edge in }P\\
+        f(u,v)&\text{otherwise}
+    \end{cases}$$
+    satisfies $\abs{f'} > \abs{f}$.
+
+    \begin{xca}
+        This proof is mostly just a slightly tedious unpacking of the definitions, which is not very illuminating to do during a lecture, but useful to do yourself for learning the definitions. Therefore, we leave it as an exercise. Remember that there are three things you need to check:
+        \begin{enumerate}
+            \item The capacity constraint on $f'$,
+            \item the conservation constraint on $f'$,
+            \item and that $\abs{f'} > \abs{f}$. (Note that this is a \emph{strict} inequality!)
+        \end{enumerate}
+    \end{xca}
+\end{lemma}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{graphics/L7_flows/augmenting_path.png}
+    \caption[][0cm]{An augmenting path in the residual network of Figure \ref{fig:residual_network}, and the new flow $f'$ gotten from it.}
+    \label{fig:augmenting_path}
+\end{figure}
+
+We see one example of improving a flow using an augmenting path in Figure \ref{fig:augmenting_path}.
+
+Having now finally set up all the terminology and lemmata we need, we can finally state and prove the Ford-Fulkerson theorem.
+
+\begin{theorem}
+    Let $f$ be a flow on the flow network $G$. Then, the following are equivalent:
+    \begin{enumerate}
+        \item $f$ is a maximal flow,
+        \item $G_f$ contains no augmenting path, and
+        \item there is an s-t-cut $S,T$ with $\abs{f} = c(S,T)$.
+    \end{enumerate}
+
+    \begin{proof}
+        That 3. implies 1. is precisely the content of Lemma \ref{lemma:cut_equals_flowvalue_implies_maximal}. To see that 1. implies 2., consider what the contrapositive of this implication is -- it is precisely that the existence of an augmenting path implies there is a higher-value flow, which is exactly Lemma \ref{lemma:can_augment_flows}.
+
+        Therefore, the thing we need to show is that 2. implies 3. -- so assume $G_f$ does not contain an augmenting path,and let $S$ be the set of vertices that can be reached from $s$ by a directed path. Let $T = V \setminus S$. We want to show that these $S$ and $T$ are the desired s-t-cut with capacity equal to $\abs{f}$.
+        
+        By assumption $t\in T$, since otherwise there would be an augmenting path. We also see that every arrow $u \to v$ from $S$ to $T$ in $G$ must have its full capacity used by $f$, or there would be an arrow in $G_f$ from $u$ to $v$ corresponding to the unused capacity. Likewise, every arrow $u \to v$ from $T$ to $S$ must have a flow of zero, or there would be an arrow in the opposite direction in $G_f$. Therefore we must have $c(S,T) = \abs{f}$, as desired.
+    \end{proof}
+\end{theorem}
+
+\begin{remark}
+    Notice how this theorem does not actually say anything about the \emph{existence} of a maximal flow. For finite networks, however, we can do a bit of analysis-style reasoning to prove that a maximum flow must exist. The details of this are left as an exercise.
+\end{remark}
+
 \section{Exercises}
+
+\begin{xca}
+    Prove that for a finite flow network $G = (V,E,w)$ there always exists a maximal flow, because the set of possible flows can be seen as a compact subset of $\R^{\abs{E}}$, and the function sending $f$ to $\abs{f}$ is continuous.
+\end{xca}
 
 %\bibliography{references}
 %\bibliographystyle{plainnat}
