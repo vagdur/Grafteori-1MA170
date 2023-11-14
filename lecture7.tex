@@ -1,6 +1,6 @@
 \documentclass[nobib]{tufte-handout}
 
-\title{Lecture 7: The max-flow min-cut theorem $\cdot$ 1MA020}
+\title{Lecture 7: The max-flow min-cut and marriage theorems $\cdot$ 1MA020}
 
 \author[Vilhelm Agdur]{Vilhelm Agdur\thanks{\href{mailto:vilhelm.agdur@math.uu.se}{\nolinkurl{vilhelm.agdur@math.uu.se}}}}
 
@@ -226,6 +226,78 @@ The Ford-Fulkerson theorem very nearly gives us an algorithm, by just repeatedly
 
     Analysing this algorithm shows that it will have a running time of $O\left(\abs{V}^2\abs{E}\right)$.
 \end{definition}
+
+\begin{remark}
+    If you look through our proofs and constructions,\sidenote[][]{
+        \begin{xca}
+            Actually do this, reading through the notes with an eye to keeping everything an integer.
+        \end{xca}
+    } always assuming all capacities are actually integers, you will see that the proofs actually give the existence of an \emph{integer} maximal flow, that is, a maximal flow where $f(e)\in\Z$ for every edge $e$.
+\end{remark}
+
+\section{The Hall marriage theorem}
+
+The final thing we are going to do in this lecture is to apply what we have just learned about flows to prove the Hall marriage theorem. We already saw in the exercise session that a \emph{matching} in a graph $G = (V,E)$ is a subset $M$ of the edges, such that no two edges in $M$ share an endpoint. A matching in which every vertex is incident to some edge in the matching is called \emph{perfect}.
+
+The Hall marriage theorem concerns itself particularly with finding perfect matchings in \emph{bipartite} graphs, so let us define what those are.
+
+\begin{definition}
+    A graph $G = (V, E)$ is called \emph{bipartite} if there is a partition of $V$ into two sets $A$ and $B$, such that $E \subseteq A \times B$. That is, all edges go between $A$ and $B$, not within the two parts.
+\end{definition}
+
+For a bipartite graph, it makes sense to relax the notion of a perfect matching to a \emph{matching of $A$ into $B$}, which is just a matching such that every vertex in $A$ is incident to an edge in the matching.
+
+In order for this to be possible, it must clearly be the case that for every subset $Q \subseteq A$, it has at least $\abs{Q}$ neighbours in $B$, or we would trivially be unable to match $Q$ into $B$. So, for any set of vertices $Q$, let us denote its set of neighbours by $N(Q)$. What the Hall marriage theorem says is that our necessary condition is in fact also sufficient.
+
+\begin{theorem}[Hall's marriage theorem]
+    Let $G = (V,E)$ be a finite bipartite graph with $V = A \coprod B$. Then $G$ contains a matching of $A$ into $B$ if and only if $\abs{N(Q)} \geq Q$ for all $Q \subseteq A$.
+
+    \begin{proof}
+        We have already seen the necessity of the condition, so what remains is to show that it is sufficient. So assume that $\abs{N(Q)} \geq \abs{Q}$ for all $Q \subseteq A$.
+
+        We create a flow network as follows: We introduce a new vertex $s$ which is a neighbour to every vertex in $A$, and a new vertex $t$ which is a neighbour to every vertex in $B$. We direct the edges so that they all point away from $s$ towards $t$, and give the edges incident to $s$ or $t$ capacity $1$, and the edges between $A$ and $B$ capacity $\infty$.\sidenote[][-0.5cm]{This is just for convenience -- we could do it with a sufficiently large integer depending on $G$ here instead, but the argument seems clearer if we don't have to worry about these capacities.}
+
+        \begin{figure}
+            \centering
+            \includegraphics[width=0.8\textwidth]{graphics/L7_flows/flow_from_bipartite.png}
+            \caption[][0.5cm]{A flow network gotten from a bipartite graph as in the proof of the marriage theorem.}
+            \label{fig:flow_from_bipartite}
+        \end{figure}
+
+        Now consider the easy s-t-cut where $S' = \{s\}$ and $T' = A \cup B \cup \{t\}$. It is easy to see that this cut has capacity $c(S',T') = \abs{A}$, and hence $c(S,T) \leq \abs{A}$ for any minimum cut $(S,T)$.
+
+        In particular, this means that for any minimum s-t-cut $S,T$ there cannot be an edge $u\to v$ with $u\in S\cap A$ and $v \in T \cap B$, since if so the capacity of the flow would be infinite. So any neighbour of $S\cap A$ must lie in $S\cap B$ -- it must be in $B$ by the bipartition, and must still be in $S$ for the flow to still have finite capacity. Or, in other words, $N(S \cap A) \subseteq S \cap B$.
+
+        \begin{marginfigure}[-2cm]
+            \centering
+            \includegraphics[width=0.8\textwidth]{graphics/L7_flows/bipartite_s_t_cut.png}
+            \caption{An example of a non-trivial minimal s-t-cut in a flow network gotten from a bipartite graph.}
+            \label{fig:bipartite_s_t_cut}
+        \end{marginfigure}
+
+        So, using this, let us compute a lower bound on $c(S,T)$:\sidenote[][]{The first equality is just the definition of the capacity of a cut.
+        
+        The second equality uses our observation that there can't be any edges from $S\cap A$ into $T\cap B$ -- so the only edges that can contribute to the capacity of the cut are edges from $s$ to things in $T \cap A$, or edges from things in $S\cap B$ to $t$. It may be helpful to consider Figure \ref{fig:bipartite_s_t_cut} to understand what is going on here.
+        
+        The third equality just uses that all the terms of the sums are $1$.
+        
+        For the first inequality, we in fact have $\abs{T\cap A} = (\abs{A} - \abs{S \cap A})$. The inequality part is that $\abs{N(S\cap A)} \leq \cap{S\cap B}$, which is just our observation that $N(S \cap A) \subseteq S \cap B$.
+        
+        The final inequality, that $\abs{N(S\cap A)} \geq \abs{S \cap A}$, is where we use the assumption of the theorem.}
+        \begin{align*}
+            c(S,T) &= \sum_{u \in S, v \in T} c(u,v)\\
+            &= \sum_{v \in T \cap A} c(s,v) + \sum_{u \in S\cap B} c(u,t)\\
+            &= \abs{T \cap A} + \abs{S \cap B}\\
+            &\geq \left(\abs{A} - \abs{S\cap A}\right) + \abs{N\left(S\cap A\right)}\\
+            &\geq \abs{A} - \abs{S\cap A} + \abs{S\cap A} = \abs{A}.
+        \end{align*}
+        Since we've already seen that a minimum cut has capacity at most $\abs{A}$, this proves that minimum cuts in fact have a capacity of exactly $\abs{A}$.
+
+        Using our remark about integer flows, we see that this implies that there exists an integer flow with value $\abs{A}$. So this flow must fill every outgoing edge from $s$, and so by the conservation property each vertex in $A$ must have outgoing flow $1$. Since the flow is integral, all this flow must use a single edge.
+
+        Looking at the other endpoint of this edge in $B$, we see that this in fact can't have in-flow from any other vertex, since it can only have a maximum out-flow of $1$ to $t$. So therefore the set of edges $e$ from $A$ to $B$ such that $f(e) = 1$ form a matching of $A$ into $B$.
+    \end{proof}
+\end{theorem}
 
 \section{Exercises}
 
