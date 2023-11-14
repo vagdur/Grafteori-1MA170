@@ -83,10 +83,70 @@ In our exercises, we saw this figure:
         $$\sum_{w \in V} f(w, v) = \sum_{u \in V} f(v, u)$$
         whenever $v \in V \setminus \{s,t\}$.
     \end{enumerate}
-  \end{definition}
 
+    The \emph{value} of a flow, denoted by $\abs{f}$, is the net out-flow at the source, that is
+    $$\abs{f} = \sum_{v \in V} f(s, v) - \sum_{w \in V} f(w, s).$$
+\end{definition}
 
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\textwidth]{graphics/L7_flows/flow.png}
+    \caption[][0cm]{An example of a flow in the graph from Figure \ref{fig:uppsala_stockholm_traffic}. The weights of the edges are given in red, and the flows through them in blue. This flow has value $1.5$, which we can see both by computing the net out-flow from Uppsala and the net flow into Södertälje.}
+    \label{fig:flow}
+\end{figure}
 
+\begin{remark}
+    It follows from the conservation constraint that $\abs{f}$ is also equal to the net in-flow at the sink.\sidenote[][]{
+        \begin{xca}
+            Prove this.
+        \end{xca}
+    } Therefore, we can always assume that $\abs{f} \geq 0$, since if it were not, we could just swap the roles of $s$ and $t$.
+\end{remark}
+
+Having defined what we mean by a flow, let us next formalize the intuitive notion of a bottleneck in the graph.
+
+\begin{definition}
+    Let $G = (V,E,w,s,t)$ be a flow network with source $s$ and sink $t$. An \emph{s-t-cut} is a partitioning of $V$ into two sets $S, T$ such that $s \in S$ and $t \in T$. The \emph{capacity} of the cut is
+    $$c(S,T) = \sum_{(v,v') \in S \times T} c(v,v') = \sum_{e \in E(S,T)} w(e).$$
+\end{definition}
+
+Considering our intuition about the bottlenecks, it should be clear that any flow from $s$ to $t$ has to at some point pass from $S$ into $T$, and so use some of the capacity of the cut. So the total flow cannot be greater than the capacity of the cut, that is, $\abs{f} \leq c(S,T)$ for any flow $f$ and any s-t-cut $S,T$.
+
+In fact, it turns out that equality is only achieved in this inequality in the most extreme case.
+
+\begin{lemma}
+    Let $G$ be a flow network with a flow $f$ and an s-t-cut of $V$ into $S$ and $T$. If $\abs{f} = c(S,T)$, then $\abs{f}$ is maximal among all flows, and $c(S,T)$ is minimal among all s-t-cuts.
+
+    \begin{proof}
+        As we saw, for any other flow $f'$, we must have 
+        $$\abs{f'} \leq c(S,T) = \abs{f},$$
+        and so $f$ is maximal. Similarly, for any other s-t-cut $S', T'$ we have
+        $$c(S,T) = \abs{f} \leq c(S',T')$$
+        and so $S, T$ is minimal.
+    \end{proof}
+\end{lemma}
+
+A central construction in the theory of flow networks is the \emph{residual network}, which as the name suggests encodes how much capacity is left over by a flow.
+
+\begin{definition}
+    Let $G$ be a flow network with capacity function $c$, and let $f$ be a flow on $G$. The \emph{residual capacity} $c_f$ is a function from $V\times V$ into $[0,\infty)$ defined by\sidenote[][]{Notice how we use the assumption that there are no back-and-forth edges in $G$ here -- otherwise the definition would not make sense.}
+    $$c_f(u,v) = \begin{cases}
+        c(u,v) - f(u,v)&\text{if }(u,v)\text{ is an edge in }G\\
+        f(v,u)&\text{if }(v,u)\text{ is an edge in }G\\
+        0&\text{otherwise.}
+    \end{cases}$$
+    
+    The \emph{residual network} $G_f$ is the weighted directed graph which has an edge $u \to v$ whenever $c_f(u,v) > 0$, and this edge has weight $c_f(u,v)$ if so.
+
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.8\textwidth]{graphics/L7_flows/residual_network.png}
+        \caption[][0cm]{The residual network of the flow in Figure \ref{fig:flow}.}
+        \label{fig:residual_network}
+    \end{figure}
+
+    We give an example of this in Figure \ref{fig:residual_network}, using the same flow network we have seen before.
+\end{definition}
 
 \section{Exercises}
 
