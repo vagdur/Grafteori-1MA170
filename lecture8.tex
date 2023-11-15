@@ -76,6 +76,51 @@ In our last lecture, we proved the Ford-Fulkerson theorem relating minimum cuts 
     \end{proof}
 \end{theorem}
 
+\section{Hamilton cycles}
+
+We studied, at the very beginning of the course, the notion of Eulerian circuits. The twin notion of Hamilton cycles appeared in our exercise session, but less us quickly repeat what we said about those.
+
+\begin{definition}
+    Let $G = (V,E)$ be a finite simple graph. A \emph{Hamilton cycle} in $G$ is a cycle that visits every vertex of $G$.\sidenote[][]{Recall that a \emph{cycle} by definition is a walk that starts and ends at the same vertex, and does not reuse any vertices other than the one it started with.} If $G$ admits a Hamilton cycle, we call it \emph{Hamiltonian}.
+\end{definition}
+
+Unlike for Eulerianity, there is no simple condition to determine whether a graph is Hamiltonian. In fact, computing whether a graph is Hamiltonian is an NP-Complete problem.
+
+\begin{remark}
+    Given a Hamiltonian cycle $C$ in $G$, we can easily construct a perfect matching of $G$ by just picking every second edge in the cycle. We can of course not in general turn a perfect matching into a Hamilton cycle, so Hamiltonicity is a stronger condition than having a perfect matching.
+\end{remark}
+
+That Hamiltonicity is an NP-Complete problem means we probably will never have any necessary and sufficient conditions for it. However, we can still prove results of the form ``if condition so-and-so holds, $G$ is Hamiltonian''. Let us prove the most famous such result.\sidenote[][]{It is named after a different Dirac than the one of quantum mechanics fame.}
+
+\begin{theorem}[Dirac's theorem]
+    Let $G = (V,E)$ be a simple graph on $n \geq 3$ vertices, such that every vertex has degree at least $\frac{n}{2}$. Then $G$ is Hamiltonian.
+
+    \begin{proof}
+        Assume $G$ is a graph satisfying the conditions of the theorem. Let us begin by observing that this $G$ cannot be disconnected -- if it were, the vertices in the smallest component would have fewer than half of the other vertices to connect to, so they would have too low degree.
+
+        \begin{marginfigure}
+            \centering
+            \includegraphics[width=1.0\textwidth]{graphics/L8_vx_covers_hamiltonicity_etc/diracs_thm_fig1.png}
+            \caption{The path $P$ along with the configuration of two edges that must exist by the pigeonhole principle.}
+            \label{fig:dirac_thm_fig1}
+        \end{marginfigure}
+
+        Now, consider a path $P$ of maximum length in $G$, say
+        $$P = v_0\,e_1\,v_1\,\ldots\,v_{k-1}\,e_k\,v_k.$$
+        Since this path is maximal, it contains all neighbours of $v_0$ and of $v_k$, since otherwise it could be extended. By our degree condition, there are (counting with multiplicity) at least $n$ such neighbours -- and so by essentially the pigeonhole principle, there must be an edge $e_i = \{v_{i-1},v_i\}$ on our path such that $v_i$ is a neighbour of $v_0$ and $v_{i-1}$ is a neighbour of $v_k$, as in Figure \ref{fig:dirac_thm_fig1}.
+
+        Now we notice that this in fact lets us turn our path into a cycle -- we start at $v_0$, walk until $v_{i-1}$, then use the edge to $v_k$, walk backwards to $v_i$, and finally use the edge to $v_0$. This gives us a cycle $C$.
+
+        \begin{marginfigure}
+            \centering
+            \includegraphics[width=0.6\textwidth]{graphics/L8_vx_covers_hamiltonicity_etc/diracs_thm_longer_path.png}
+            \caption{A longer path than $P$ created from the cycle $C$, assuming it was not a Hamilton cycle.}
+            \label{fig:diracs_thm_longer_path}
+        \end{marginfigure}
+
+        It remains to see that this $C$ is in fact a Hamilton cycle. So, suppose for contradiction that it is not, so that there is some vertex $v$ not on the cycle. Since $G$ is connected, we can in fact assume that this vertex is adjacent to some vertex of $C$. This, however, means we can create a longer path than $P$, by starting at $v$, walking onto $C$, and then following the cycle, as indicated in Figure \ref{fig:diracs_thm_longer_path}. However, we assumed $P$ was a maximal path, so we have a contradiction. So $C$ must be a Hamilton cycle.
+    \end{proof}
+\end{theorem}
 
 \section{Exercises}
 
