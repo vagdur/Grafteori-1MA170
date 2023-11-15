@@ -122,6 +122,49 @@ That Hamiltonicity is an NP-Complete problem means we probably will never have a
     \end{proof}
 \end{theorem}
 
+\begin{figure}
+    \centering
+    \includegraphics[width=0.65\textwidth]{graphics/L8_vx_covers_hamiltonicity_etc/diracs_theorem_counterexample.png}
+    \caption[][0cm]{A graph used to show that the condition in Dirac's theorem is the best possible uniform lower bound.}
+    \label{fig:dirac_counterexample}
+  \end{figure}
+
+\begin{remark}
+    This result is in fact the best possible result with a uniform lower bound on the degrees of the vertices -- if we had picked any $k(n)$ less than $\frac{n}{2}$, there would be a counterexample. For example, consider the graph in Figure \ref{fig:dirac_counterexample}, where we have taken $k = \floor{\frac{n-1}{2}}$ and glued together two copies of $K_{k-1}$ by identifying two vertices. This graph has minimum degree $k$, but can of course not contain a Hamilton cycle since such a cycle would have to visit the glued-together vertex twice.
+\end{remark}
+
+Let us consider one particular example of a graph family that is Hamiltonian.
+
+\begin{definition}
+    The \emph{$d$-dimensional cube graph} has as its vertex set $\{0,1\}^d$, that is, the set of binary strings of length $d$. Two vertices are neighbours if the corresponding binary strings differ in only one position. The first few are illustrated in Figure \ref{fig:hypercubes}. 
+\end{definition}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.65\textwidth]{graphics/L8_vx_covers_hamiltonicity_etc/binary_hypercubes.png}
+    \caption[][0cm]{The $d$-dimensional cubes for $d = 0,1,2,4$. In the four-dimensional case we have highlighted some edges in red, to illustrate the inductive structure of the graph family.}
+    \label{fig:hypercubes}
+\end{figure}
+
+\begin{theorem}\label{thm:hypercube_is_hamiltonian}
+    The $d$-dimensional cube is Hamiltonian for all $d$.
+
+    \begin{xca}
+        Prove this.\qed
+    \end{xca}
+\end{theorem}
+
+\begin{marginfigure}
+    \centering
+    \includegraphics[width=1.0\textwidth]{graphics/L8_vx_covers_hamiltonicity_etc/gray_code_patent.png}
+    \caption{The original patent for the device using a Gray code -- this supposedly happens in the thingy labelled by 15?}
+    \label{fig:gray_code_patent}
+\end{marginfigure}
+
+\begin{remark}
+    Notice that Theorem \ref{thm:hypercube_is_hamiltonian} gives us an ordering of the length-$d$ bit strings suh that going from one to the next always only requires us to change one of the bits. This ordering is known as the \emph{Gray code}, and it was originally invented to help in converting from analog to digital signals for colour television in the fifties.
+\end{remark}
+
 \section{Exercises}
 
 
