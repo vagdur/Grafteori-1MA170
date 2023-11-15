@@ -165,6 +165,51 @@ Let us consider one particular example of a graph family that is Hamiltonian.
     Notice that Theorem \ref{thm:hypercube_is_hamiltonian} gives us an ordering of the length-$d$ bit strings suh that going from one to the next always only requires us to change one of the bits. This ordering is known as the \emph{Gray code}, and it was originally invented to help in converting from analog to digital signals for colour television in the fifties.
 \end{remark}
 
+\section{Independent sets}
+
+Another notion we encountered during the exercises is that of an \emph{independent set}. Let us repeat the definition again here.
+
+\begin{definition}
+    An \emph{independent set} in a graph $G = (V,E)$ is a subset $I \subseteq V$ of the vertices such that no two elements of $I$ are adjacent.
+\end{definition}
+
+We saw that this concept in fact connects to the concept of matchings if we consider the line graph of a graph.
+
+\begin{definition}
+    Given a graph $G = (V, E)$, the \emph{line graph} $L(G)$ of $G$ has as its vertices the \emph{edges} of $G$, and there is an edge between $e$ and $e'$ whenever they share an endpoint in $G$. This is illustrated in Figure \ref{fig:line_graph}.
+\end{definition}
+
+\begin{marginfigure}
+    \centering
+    \includegraphics[width=0.85\textwidth]{graphics/L8_vx_covers_hamiltonicity_etc/line_graph.png}
+    \caption{A graph $G$ on the left, and on the right we have its line graph $L(G)$ drawn on top of $G$ in red.}
+    \label{fig:line_graph}
+\end{marginfigure}
+
+\begin{remark}
+    A matching on a graph $G$ is precisely the same thing as an independent set in its line graph $L(G)$.
+\end{remark}
+
+In the exercises, we sketched out an argument as to why finding an independent set is NP-Complete. Let us now actually go through the details of the proof.
+
+Our method will be to show that we can encode an instance of 3-SAT as a problem of finding an independent set of a certain size in a graph. This will prove that independent set is NP-Complete, because the Cook-Levin theorem tells us that 3-SAT is.
+
+So first, let us define what an instance of 3-SAT is.
+
+\begin{definition}
+    An instance of 3-SAT is the problem of determining whether a given logical formula consisting of a conjunction of clauses of length $3$ is satisfiable. So, we have some set of logical variables $x_1, x_2, \ldots, x_n$. A literal is $x_i$ or $\notl x_i$ for some $i \in [n]$, and a clause of length $3$ is a disjunction of three literals, e.g. $x_4\vee \notl x_{10} \vee x_3$. We then take the conjunction of some number of such clauses, getting a formula like
+    $$\left(x_1 \vee x_2 \vee \notl x_3\right) \wedge \left(x_2 \vee x_3 \vee \notl x_4\right) \wedge \left(x_1 \vee \notl x_2 \vee x_4\right),$$
+    and what we want to determine is whether we can assign each variable a true or false value in such a way that the entire formula is true.
+\end{definition}
+
+\begin{theorem}
+    The problem of determining whether a graph contains an independent set of size $k$ is NP-Complete.
+
+    \begin{proof}
+        
+    \end{proof}
+\end{theorem}
+
 \section{Exercises}
 
 
