@@ -1,0 +1,86 @@
+\documentclass[nobib]{tufte-handout}
+
+\title{Lecture 8: Hamilton cycles, matchings, independent sets $\cdot$ 1MA020}
+
+\author[Vilhelm Agdur]{Vilhelm Agdur\thanks{\href{mailto:vilhelm.agdur@math.uu.se}{\nolinkurl{vilhelm.agdur@math.uu.se}}}}
+
+\date{15 November 2023}
+
+
+%\geometry{showframe} % display margins for debugging page layout
+
+\usepackage{graphicx} % allow embedded images
+  \setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+  \graphicspath{{graphics/}} % set of paths to search for images
+\usepackage{amsmath}  % extended mathematics
+\usepackage{booktabs} % book-quality tables
+\usepackage{units}    % non-stacked fractions and better unit spacing
+\usepackage{multicol} % multiple column layout facilities
+\usepackage{lipsum}   % filler text
+\usepackage{fancyvrb} % extended verbatim environments
+  \fvset{fontsize=\normalsize}% default font size for fancy-verbatim environments
+
+\usepackage{color,soul} % Highlights for text
+
+% Standardize command font styles and environments
+\newcommand{\doccmd}[1]{\texttt{\textbackslash#1}}% command name -- adds backslash automatically
+\newcommand{\docopt}[1]{\ensuremath{\langle}\textrm{\textit{#1}}\ensuremath{\rangle}}% optional command argument
+\newcommand{\docarg}[1]{\textrm{\textit{#1}}}% (required) command argument
+\newcommand{\docenv}[1]{\textsf{#1}}% environment name
+\newcommand{\docpkg}[1]{\texttt{#1}}% package name
+\newcommand{\doccls}[1]{\texttt{#1}}% document class name
+\newcommand{\docclsopt}[1]{\texttt{#1}}% document class option name
+\newenvironment{docspec}{\begin{quote}\noindent}{\end{quote}}% command specification environment
+
+\include{mathcommands.extratex}
+
+\begin{document}
+
+\maketitle% this prints the handout title, author, and date
+
+\begin{abstract}
+\noindent
+We begin by continuing to pursue consequences of the Ford-Fulkerson theorem, proving König's theorem.
+\end{abstract}
+
+\section{König's theorem}
+
+In our last lecture, we proved the Ford-Fulkerson theorem relating minimum cuts and maximal flows, and used it to prove the Hall marriage theorem on matchings in bipartite graphs. We begin this lecture by proving another result we can derive from Ford-Fulkerson, namely König's theorem about vertex covers of bipartite graphs.
+
+\begin{definition}
+    Let $G$ be a finite simple graph. A \emph{vertex cover} of $G$ is a subset $S\subseteq V$ such that every edge has an endpoint in $S$. The \emph{covering number} of $G$, denoted $\beta(G)$, is the minimum size of any vertex cover of $G$.
+\end{definition}
+
+\begin{example}
+    A star graph has covering number $1$, while a complete graph on $n$ vertices has covering number $n-1$. A cycle graph on $2n$ vertices has covering number $n$.
+\end{example}
+
+\begin{theorem}[König's theorem]
+    Let $G$ be a bipartite graph. Then the maximum cardinality of a matching on $G$ equals $\beta(G)$, the minimum cardinality of a vertex cover of $G$.
+
+    \begin{proof}
+        Let $M$ be a maximal matching in $G$, and like in the proof of the marriage theorem, construct a flow network $G'$ from $G$. As we saw in the proof of that theorem, this matching $M$ corresponds to a maximal flow in $G'$ of value $\abs{M}$. By Ford-Fulkerson, this means there is a minimum cut $S, T$ on $G'$ of capacity $\abs{M}$.
+
+        \begin{figure}
+            \centering
+            \includegraphics[width=0.5\textwidth]{graphics/L7_flows/bipartite_s_t_cut.png}
+            \caption[][0cm]{A non-trivial minimal s-t-cut in a flow network created from a bipartite graph.}
+            \label{fig:minimal_s_t_cut}
+        \end{figure}
+
+        Now, given this cut, let us construct a vertex cover. In particular, we let
+        $$C = (A \cap T) \cup (B \cap S).$$
+        That this $C$ is a vertex cover of $G$ is precisely the statement that there is no edge $a \to b$ with $a \in A \cap S$ and $b \in B \cap T$. This, however, is something we already saw is true for all minimum cuts in the previous proof -- because if there were such an edge, it would contribute $\infty$ to the capacity of the cut. So $C$ is indeed a vertex cover, and it is easy to convince oneself, looking at Figure \ref{fig:minimal_s_t_cut}, that $\abs{C} = c(S,T) = \abs{f} = \abs{M}$. So what we have seen is that the size of a maximal matching upper bounds the minimum vertex cover size, that is, $\beta(G) \leq \abs{M}$. 
+        
+        The other direction of the inequality in fact holds for all graphs, not just bipartite graphs -- every edge of a matching has to be covered by a vertex in the cover, and no vertex can cover more than one edge of the matching at a time. So any vertex cover has to have at least as many vertices in it as a maximal matching has edges.
+    \end{proof}
+\end{theorem}
+
+
+\section{Exercises}
+
+
+%\bibliography{references}
+%\bibliographystyle{plainnat}
+
+\end{document}
