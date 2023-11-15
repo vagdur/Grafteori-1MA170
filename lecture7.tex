@@ -41,6 +41,8 @@
 \begin{abstract}
 \noindent
 Continuing our exploration of things that can be done with weighted graphs, we move on to considering \emph{flows} in weighted directed graphs, which model things like traffic flows. We see the connection between these and edge cuts of graphs, and prove the Ford-Fulkerson theorem.
+
+Finally, we use our result about flows to prove the Hall marriage theorem.
 \end{abstract}
 
 In our exercises, we saw this figure:
@@ -158,7 +160,7 @@ How can we use these residual networks to find ways to improve a flow? The idea 
     In any directed graph, a \emph{directed path} consists of a sequence of vertices $v_0\, v_1\, \ldots\, v_k$ and a sequence of edges $e_1\, e_2\, \ldots\, e_k$, such that edge $e_i$ points from $e_{i-1}$ to $e_i$. We also call such a path a $v_0$-$v_k$-path.
 
     If $G$ is a residual network, a directed path $P$ from $s$ to $t$ is called an \emph{augmenting path}, and it has \emph{residual capacity}
-    $$c_f(P) = \min_{e\in E(P)} w(e).$$
+    $$c_f(P) = \min_{e\in E(P)} c_f(e).$$
 \end{definition}
 
 That these augmenting paths correspond precisely to ways to improve the flow is the content of our next lemma.
@@ -193,7 +195,7 @@ We see one example of improving a flow using an augmenting path in Figure \ref{f
 
 Having now finally set up all the terminology and lemmata we need, we can finally state and prove the Ford-Fulkerson theorem.
 
-\begin{theorem}
+\begin{theorem}[Ford-Fulkerson]
     Let $f$ be a flow on the flow network $G$. Then, the following are equivalent:
     \begin{enumerate}
         \item $f$ is a maximal flow,
