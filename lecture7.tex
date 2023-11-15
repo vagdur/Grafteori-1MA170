@@ -252,7 +252,7 @@ For a bipartite graph, it makes sense to relax the notion of a perfect matching 
 In order for this to be possible, it must clearly be the case that for every subset $Q \subseteq A$, it has at least $\abs{Q}$ neighbours in $B$, or we would trivially be unable to match $Q$ into $B$. So, for any set of vertices $Q$, let us denote its set of neighbours by $N(Q)$. What the Hall marriage theorem says is that our necessary condition is in fact also sufficient.
 
 \begin{theorem}[Hall's marriage theorem]
-    Let $G = (V,E)$ be a finite bipartite graph with $V = A \coprod B$. Then $G$ contains a matching of $A$ into $B$ if and only if $\abs{N(Q)} \geq Q$ for all $Q \subseteq A$.
+    Let $G = (V,E)$ be a finite bipartite graph with $V = A \coprod B$. Then $G$ contains a matching of $A$ into $B$ if and only if $\abs{N(Q)} \geq \abs{Q}$ for all $Q \subseteq A$.
 
     \begin{proof}
         We have already seen the necessity of the condition, so what remains is to show that it is sufficient. So assume that $\abs{N(Q)} \geq \abs{Q}$ for all $Q \subseteq A$.
