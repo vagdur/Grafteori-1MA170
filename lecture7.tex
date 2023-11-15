@@ -307,6 +307,16 @@ In order for this to be possible, it must clearly be the case that for every sub
     Prove that for a finite flow network $G = (V,E,w)$ there always exists a maximal flow, because the set of possible flows can be seen as a compact subset of $\R^{\abs{E}}$, and the function sending $f$ to $\abs{f}$ is continuous.
 \end{xca}
 
+\begin{xca}
+    Let $G = (V,E)$ be some flow network with source $s$ and sink $t$. Let $R$ be the set of all vertices $v$ such that there is a directed path in $G$ starting at $s$, passing through $v$, and finishing at $t$.
+    
+    Prove that for any flow $f$ and any edge $e$ which does not have both endpoints in $R$, $f(e) = 0$. Deduce from this that we may as well assume that $V = R$ whenever we reason about flow networks.
+\end{xca}
+
+\begin{xca}
+    Let $G = (V,E)$ be some flow network, and assume that $V = R$ in the sense of the previous exercise. Let $S, T$ be a minimal s-t-cut of $G$. Prove that for any vertex $v \in S$, there is a directed path from $s$ to $v$ entirely contained in $S$, and for any vertex $u \in T$, there is a directed path from $u$ to $t$ entirely contained in $T$.
+\end{xca}
+
 %\bibliography{references}
 %\bibliographystyle{plainnat}
 
