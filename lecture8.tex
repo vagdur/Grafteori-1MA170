@@ -228,6 +228,39 @@ So first, let us define what an instance of 3-SAT is.
 
     So we have that the complement of a maximum independent set is a minimum vertex cover, and so $\alpha(G) + \beta(G) = n$. So we can use König's theorem also to find a maximum independent set in bipartite graphs.
 \end{remark}
+
+Similarly to how the NP-Completeness of finding Hamilton cycles meant we can't give a general characterization of those, we can't find an easy formula for $\alpha(G)$. We can, however, give some lower bounds on it -- and this will let us introduce a new proof technique to the course, the \emph{probabilistic method}.\sidenote[][]{As the name implies, this method requires some probability theory. It shouldn't involve anything much more involved than high school probability, and certainly nothing beyond an introductory university course in the subject.
+
+This method features prominently in the course on combinatorics at this university, and the Caro-Wei theorem is proved in that course as well. That course gives more theoretical foundation to the probability theory, as well as applying the method to problems across combinatorics, not just to graph theory.}
+
+\begin{theorem}[Caro-Wei]
+    It holds for any graph $G = (V,E)$ that
+    $$\alpha(G) \geq \sum_{v \in V} \frac{1}{d_v + 1}.$$
+
+    \begin{proof}
+        To prove this, we will consider a randomized greedy method of constructing an independent set, and show that it on average produces an independent set of this size.
+
+        So, suppose we have been given a list $L$ of the vertices of $G$. Our greedy algorithm starts with a set $I = \emptyset$, and then at each time step it removes the first element $v$ of $L$, checks whether any neighbour of $v$ is in $I$, and if not, adds $v$ to $I$.
+        
+        That this process gives us an independent set is clear -- we never add in a vertex adjacent to something already in the set. Now, let us introduce the randomization to the algorithm, by picking a \emph{uniformly random} order for the list $L$.
+
+        We can compute\sidenote[][]{This is a very standard computation in the probabilistic method, and one of the reasons it is so powerful -- we reduce a complicated calculation that involves the entire structure of a graph into a sum of easy calculations that just involve a vertex and its neighbours.} the expected size of the independent set found as
+        $$\E{\abs{I}} = \E{\sum{v\in V} \ind{v \in I}} = \sum_{v \in V} \E{\ind{v \in V}} = \sum_{v\in V}\Prob{v \in I},$$
+        so what we need is a lower bound on the probability that a given vertex is in the independent set.
+
+        Now, clearly, if a vertex ends up first among all its neighbours on the list, then it will always be added to $I$, since none of its neighbours will be in $I$. So the probability that it ends up first on the list is a lower bound on the probability that it ends up in $I$.\sidenote[][]{
+            \begin{xca}
+                In general this is a lower bound, not an equality. Why?
+            \end{xca}
+        }
+
+        The probability that it ends up on the list before all its neighbours is precisely the probability that in the list of just it and its neighbours, which has length $d_v + 1$, it ends up first. This probability is easily seen to be $\frac{1}{d_v + 1}$,\sidenote[][]{You can think of it as that we first choose a random slot for $v$, which can be done in $d_v + 1$ ways, and then place the rest of the elements. Only the choice of place for $v$ matters for the desired probability.} which gives us the desired lower bound of
+        $$\E{\abs{I}} \geq \sum_{v\in V} \frac{1}{d_v + 1}.$$
+
+        How do we get from this bound on the expected value to the statement that there actually exists such an independent set? We observe that the average outcome can't possibly be greater than every possible outcome, so there has to be an actual outcome which achieves this lower bound.
+    \end{proof}
+\end{theorem}
+
 \section{Exercises}
 
 \begin{xca}
