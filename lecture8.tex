@@ -206,7 +206,20 @@ So first, let us define what an instance of 3-SAT is.
     The problem of determining whether a graph contains an independent set of size $k$ is NP-Complete.
 
     \begin{proof}
-        
+        We prove this by associating to each instance of 3-SAT an instance of the independent set problem, and showing that the 3-SAT formula is satisfiable if and only if there is an independent set of the right size in the graph.
+
+        \begin{figure}
+            \centering
+            \includegraphics[width=0.65\textwidth]{graphics/L8_vx_covers_hamiltonicity_etc/3sat_triangles.png}
+            \caption[][0cm]{The graph corresponding to the 3-SAT formula $\left(x_1 \vee x_2 \vee \notl x_3\right) \wedge \left(x_2 \vee x_3 \vee \notl x_4\right) \wedge \left(x_1 \vee \notl x_2 \vee x_4\right)$.}
+            \label{fig:3sat_triangles}
+        \end{figure}
+
+        In particular, given a formula, we create a graph as follows: For each clause, draw a triangle, and label its vertices with the literals of the clause. Then, for each literal, draw an edge between its vertex and any vertex labelled with the negation of the literal. An example of this process is given in Figure \ref{fig:3sat_triangles}.
+
+        We claim that this graph has an independent set of size equal to the number of clauses, i.e. the number of triangles we drew, if and only if the corresponding formula is satisfiable. If there is an independent set of that size, it is clear that it must contain one vertex from each triangle, which corresponds to picking one literal from each clause. Assigning the variables so that each of these literals becomes true gives a satisfying assignment.
+
+        In the other direction, any satisfying assignment must of course make at least one literal per clause true. Picking a vertex corresponding to one of those literals from each clause gives us an independent set of the desired size.
     \end{proof}
 \end{theorem}
 
