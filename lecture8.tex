@@ -261,10 +261,49 @@ This method features prominently in the course on combinatorics at this universi
     \end{proof}
 \end{theorem}
 
+\section{Vertex colourings}
+
+The final thing we introduce in this lecture, but mostly discuss in a later lecture, is the notion of a vertex colouring.
+
+\begin{definition}
+    A \emph{$k$-colouring} of a graph $G = (V,E)$ is a function $c: V \to [k]$, where we think of the numbers $1,2,\ldots,k$ as colours, such that no two adjacent vertices are sent to the same colour.\sidenote[][]{On rare occasions, we will want to think about colourings that do not necessarily fulfill this condition. Then we will call those colourings \emph{improper}, and the ones with the property will be \emph{proper colourings}.} The \emph{chromatic number} of a graph $G$, denoted $\chi(G)$, is the least integer $k$ such that $G$ has a $k$-colouring.
+\end{definition}
+
+\begin{example}
+    The complete graph $K_n$ has chromatic number $n$, and a bipartite graph has chromatic number $2$.\sidenote[][]{Unless it contains no edges at all, in which case it of course has chromatic number $1$.}
+\end{example}
+
+\begin{remark}
+    Notice how, for a $k$-colouring $c$, each of the $k$ colour classes $c^{-1}(i)$ forms an independent set in $G$.
+\end{remark}
+
+This concept of course has relations to other graph parameters. Let us introduce a final one, and then state some relations.
+
+\begin{definition}
+    If $G = (V,E)$ is a graph, a set $C\subseteq V$ is called a \emph{clique} if the induced subgraph $V[C]$ is complete. The \emph{clique number} of $G$, denoted $\omega(G)$, is the largest integer $k$ such that there exists a clique of size $k$ in $G$.
+\end{definition}
+
+\begin{proposition}
+    The following inequalities hold for any graph $G = (V,E)$:
+    \begin{enumerate}
+        \item $$\chi(G) \geq \frac{\abs{V}}{\alpha(G)}.$$
+        \item $$\chi(G) \geq \omega(G).$$
+    \end{enumerate}
+
+    \begin{xca}
+        Prove this.\qed
+    \end{xca}
+\end{proposition}
+
 \section{Exercises}
 
 \begin{xca}
     Show that the $d$-dimensional cube graph is bipartite.
+\end{xca}
+
+\begin{xca}
+    For a graph $G = (V,E)$, let $\Delta = \max_{v \in V} d_v$ be the maximum degree of $G$. Show that\sidenote[][]{How would you colour a graph with a greedy algorithm?}
+    $$\chi(G) \leq \Delta + 1.$$
 \end{xca}
 
 
