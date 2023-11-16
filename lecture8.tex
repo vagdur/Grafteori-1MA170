@@ -170,7 +170,7 @@ Let us consider one particular example of a graph family that is Hamiltonian.
 Another notion we encountered during the exercises is that of an \emph{independent set}. Let us repeat the definition again here.
 
 \begin{definition}
-    An \emph{independent set} in a graph $G = (V,E)$ is a subset $I \subseteq V$ of the vertices such that no two elements of $I$ are adjacent.
+    An \emph{independent set} in a graph $G = (V,E)$ is a subset $I \subseteq V$ of the vertices such that no two elements of $I$ are adjacent. The size of a maximum independent set in $G$ is called the \emph{independence number} of $G$, denoted $\alpha(G)$.
 \end{definition}
 
 We saw that this concept in fact connects to the concept of matchings if we consider the line graph of a graph.
@@ -223,6 +223,11 @@ So first, let us define what an instance of 3-SAT is.
     \end{proof}
 \end{theorem}
 
+\begin{remark}
+    Earlier, we considered vertex covers, which are sets $S$ of vertices such that every edge has an endpoint in $S$. Notice that the complement of an independent set is a vertex cover -- if there were some edge that wasn't covered by this complement, both its endpoints would be in the complement of the complement, that is, in the independent set, which is of course impossible.
+
+    So we have that the complement of a maximum independent set is a minimum vertex cover, and so $\alpha(G) + \beta(G) = n$. So we can use König's theorem also to find a maximum independent set in bipartite graphs.
+\end{remark}
 \section{Exercises}
 
 
