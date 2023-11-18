@@ -75,6 +75,49 @@ After doing all this work, you get another call from Regeringskansliet. It turns
 \begin{xca}
   What can you say about the structure of a $2$-connected graph?\sidenote[][]{This exercise is intentionally very vague. We will be proving some structure theorems about $2$- and $3$-connected graphs in the next lecture, so this exercise is intended for you to get a feel for what they look like. Work on it until you run out of ideas, and then move on. Or look in last year's lecture notes for the theorem statements and try to prove them for yourselves, without looking at the proofs from last year.}
 \end{xca}
+
+\section{Planarity}
+
+Consider the map of England and Wales given in Figure \ref{fig:england_wales_map}.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth]{graphics/L9_connectivity_planarity_colouring/england_wales_map.png}
+  \caption[][1.5cm]{A map of England, divided into various areas of land. For the purposes of this exercise, ignore the existence of Anglesey, Isle of Man, Isle of Wight, and all other smaller islands, and pretend like the four-way meeting of Northampton, Westminster, Arundel \& Brighton, and Portsmouth doesn't exist -- let us say that Northampton and Arundel \& Brighton have a stretch of border, instead.}
+  \label{fig:england_wales_map}
+\end{figure}
+
+There are two ways to turn this map into a graph. One way is to consider the vertices to be wherever three areas meet (considering the ocean/Scotland to be one area), and the edges to be the border lines between the areas. The other way is to consider the vertices to be the little cross icons (including an imaginary one in the ocean, or in Scotland), and draw an edge between two of them if their areas share a border.
+
+\begin{xca}
+  Draw both of these graphs.\sidenote[][]{Or, if you quite reasonably don't want to do this much drawing, pretend like a terrible flood has drowned all of the South, Midlands, and Wales, and just draw the two graphs for the northern parts of the map.}
+\end{xca}
+
+\begin{xca}
+  We could of course have done this for any map. The crucial property of the graph we got by taking borders as edges is that no edges ever cross in our drawing of the graph. An embedding of a graph with this property is called \emph{planar}, and a graph which can be embedded in such a way is also called planar. A graph with a particular embedding fixed is called a \emph{plane} graph.
+
+  Given any planar embedding of a graph, we can in fact derive another graph like the one we got by having the crosses be vertices and drawing edges between adjacent regions. Can you give a mathematical definition of this \emph{planar dual} of an embedding of a planar graph?\sidenote[][]{Consider in particular the fact that a planar embedding of a graph can have things happen that cannot happen if we got it from a map. In particular, what happens if the graph we are embedding has vertices of degree one or two? The map will, as you can convince yourself, always have minimum degree three.
+  
+  Another thing that can happen in general, but does not in the example we gave, is the situation at the France-Spain-Andorra borders.}
+\end{xca}
+
+\begin{xca}
+  What happens if you repeat the process of taking the planar dual, taking the dual of the dual?
+\end{xca}
+
+\begin{xca}
+  Given a planar graph, there can be more than one way of embedding it in the plane to get a plane graph. Do these different ways always give rise to the same planar dual?
+\end{xca}
+
+Finally, notice how we can in fact consider the plane graph $G$ and its planar dual $G^*$ to have the \emph{same} edge set, by identifying an edge in $G$ with the edge in $G^*$ which crosses it. So the following statement actually makes sense:
+
+\begin{lemma}
+  Suppose $G = (V,E)$ is some plane graph, and $G^* = (F, E)$ its planar dual. For any set of edges $S$, $(V, S)$ is a spanning tree if and only if $(F, E \setminus S)$ is a spanning tree of $G^*$.
+\end{lemma}
+
+\begin{xca}
+  Prove this.\sidenote[][]{If you're feeling ambitious, you could also show that, if we attach weights to the edges, the minimum spanning tree of $G$ corresponds to a maximum spanning tree of $G^*$. If you're feeling less ambitious, skip this exercise -- we will give a proof in the lecture on this stuff.}
+\end{xca}
 %\bibliography{references}
 %\bibliographystyle{plainnat}
 
