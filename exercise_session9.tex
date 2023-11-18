@@ -43,6 +43,38 @@
 We consider the notion of $k$-connectivity, which is a more robust version of the normal notion of connectedness. Then, we investigate how one may draw a graph on paper, and learn about planarity. Finally, we think about colourings of graphs, both the vertices and the edges.
 \end{abstract}
 
+\section{Connectivity}
+
+Imagine you are tasked with designing the Swedish electricity network. One of your interns comes to you with a terrible proposal which isn't even connected. You yell at them a bit, and they add a single edge to make it connected.
+
+You yell at them again, telling them it needs to be \emph{more} connected than that. What if a Russian operative or an explosive moose destroys that single edge? Exasperated, your intern asks you what you mean by ``more connected'' than just being connected.
+
+\begin{xca}
+  What \emph{do} you mean?\sidenote[][-1cm]{There are many possible things you could mean by this, and there are many many papers about different versions. Try to think about what you are trying to defend against. 
+  
+  Are you worried about trees falling in storms and severing the electricity mains, or are you worried about Russians sneaking in and attempting to sabotage our infrastructure? Do these threats give you different notions of connectivity to strive for?}
+\end{xca}
+
+After much debating on this issue, considering storms and explosive meese and Russians, you get a call from Regeringskansliet. This is 2023: Russia is the only relevant threat, worrying about storms and climate change is for the future. You have intel that the Russian approach will be to blow up substations, not the wires themselves,\sidenote[][]{That is, they're destroying vertices, not edges.} and your goal is to maximize the number of substations they have to blow up in order to disconnect the entire network.
+
+After some work, your team has come up with three candidate definitions of the \emph{connectivity} $\kappa(G)$ of a graph:
+\begin{enumerate}
+  \item A graph $G$ is $k$-connected if it has more than $k$ vertices, and for any set of less than $k$ vertices, removing those vertices does not disconnect $G$. The \emph{connectivity} $\kappa(G)$ is the greatest $k$ for which $G$ is $k$-connected.
+  \item For any two vertices $v, w \in G$, we say that a set $X$ \emph{separates} $v$ from $w$ if $v, w \not\in X$ and every path from $v$ to $w$ contains at least one vertex from $X$. Let the minimum size of a set that separates $v$ from $w$ be denoted $\kappa(v,w)$, and then define the \emph{connectivity} of $G$ to be
+  $$\kappa(G) = \min_{\substack{v, w \in V\\v\sim w \not\in E}} \kappa(v,w).$$
+  \item For any two vertices $v, w \in G$, define $\kappa(v,w)$ to be the maximum size of a set of disjoint paths from $v$ to $w$.\sidenote[][]{That is, a set $W$ of paths from $v$ to $w$, such that for any two paths $P, P' \in W$, $V(P) \cap V(P') = \{v,w\}$.} Define the \emph{connectivity} of $G$ to be
+  $$\kappa(G) = \min_{\substack{v, w \in V\\v\sim w \not\in E}} \kappa(v,w).$$
+\end{enumerate}
+
+\begin{xca}
+  Prove that these definitions are in fact all equivalent.\sidenote[][]{The trickiest part of this is to show that the two different definitions of $\kappa(v,w)$ are equivalent. There is a clever quick proof of this using another flow graph construction (and perhaps a clever construction using duality for linear programming, of which max-flow min-cut is a special case), but it can also be done with a more hands-on approach. Make an attempt at it, but if you get stuck completely, move on to the other exercises.}
+\end{xca}
+
+After doing all this work, you get another call from Regeringskansliet. It turns out that the Russians have spent all their military resources on their invasion of Ukraine, so there's only one special ops team left to assault the Swedish electricity network. Thus, you only need to make sure the network is $2$-connected in order to thwart Putin.
+
+\begin{xca}
+  What can you say about the structure of a $2$-connected graph?\sidenote[][]{This exercise is intentionally very vague. We will be proving some structure theorems about $2$- and $3$-connected graphs in the next lecture, so this exercise is intended for you to get a feel for what they look like. Work on it until you run out of ideas, and then move on. Or look in last year's lecture notes for the theorem statements and try to prove them for yourselves, without looking at the proofs from last year.}
+\end{xca}
 %\bibliography{references}
 %\bibliographystyle{plainnat}
 
