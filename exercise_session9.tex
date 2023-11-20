@@ -118,6 +118,53 @@ Finally, notice how we can in fact consider the plane graph $G$ and its planar d
 \begin{xca}
   Prove this.\sidenote[][]{If you're feeling ambitious, you could also show that, if we attach weights to the edges, the minimum spanning tree of $G$ corresponds to a maximum spanning tree of $G^*$. If you're feeling less ambitious, skip this exercise -- we will give a proof in the lecture on this stuff.}
 \end{xca}
+
+\section{Vertex colourings}
+
+We already gave a definition of a vertex colouring in our last lecture, but let us restate it here as well:
+
+\begin{definition}
+  A \emph{$k$-colouring} of a graph $G = (V,E)$ is a function $c: V \to [k]$, where we think of the numbers $1,2,\ldots,k$ as colours, such that no two adjacent vertices are sent to the same colour.\sidenote[][]{On rare occasions, we will want to think about colourings that do not necessarily fulfill this condition. Then we will call those colourings \emph{improper}, and the ones with the property will be \emph{proper colourings}.} The \emph{chromatic number} of a graph $G$, denoted $\chi(G)$, is the least integer $k$ such that $G$ has a $k$-colouring.
+\end{definition}
+
+Let us also give an exercise here that we gave in the lecture where we stated this definition:
+
+\begin{xca}
+  For a graph $G = (V,E)$, let $\Delta = \max_{v \in V} d_v$ be the maximum degree of $G$. Show that\sidenote[][]{How would you colour a graph with a greedy algorithm?}
+  $$\chi(G) \leq \Delta + 1.$$
+\end{xca}
+
+Next, let us look at a definition:
+
+\begin{definition}
+  Let $G = (V,E)$ be some graph with a $k$-colouring $c: V \to [k]$. Let $a, b \in [k]$ and let $G(a,b) = G[c^{-1}(\{a,b\})]$ be the induced subgraph of just vertices coloured $a$ or $b$. An \emph{$(a,b)$-component}, also known as a \emph{Kempe chain}, of $G$ is a connected component of $G(a,b)$. The operation of swapping the two colours in a Kempe chain is called a \emph{Kempe change}.
+\end{definition}
+
+\begin{xca}
+  Convince yourselves that what you get after a Kempe change is still a valid $k$-colouring.
+\end{xca}
+
+Let us finish off with a few exercises that aren't about the exact theorems we will be proving in the lecture, but are still useful for learning to think about colourings.
+
+First, a fairly easy one, once you see the argument:
+
+\begin{xca}
+  Show that, for any graph $G = (V,E)$, it holds that
+  $$\abs{E} \geq \binom{\chi(G)}{2}.$$
+\end{xca}
+
+Then, a slightly trickier one:
+
+\begin{xca}
+  Let $G$ be the infinite graph whose vertices are the points of $\R^2$, and where there is an edge $x \sim y$ whenever $\norm{x - y} = 1$. What bounds can you find for the chromatic number of $G$?\sidenote[][-1cm]{It should be possible for you to find both a lower bound and an upper bound -- the best you can reasonably find limits it to a range of four integers. Up until 2018, these were the best known bounds -- then the range was shrunk to just three integers. The exact value is still unknown.}
+\end{xca}
+
+Finally, one of somewhat unknown difficulty:\sidenote[][]{I stole it from an exercise sheet for a graph theory course at Oxford. It looks fun, but I haven't actually solved it myself.}
+
+\begin{xca}
+  Find two graphs $G_1 = (V_1, E_1)$, $G_2 = (V_2, E_2)$, such that $V_1 \cap V_2 = \{u, v\}$, $u \sim v \not\in E_1 \cup E_2$, and $\chi(G_1 \cup G_2) > \max(\chi(G_1), \chi(G_2))$, where by $G_1 \cup G_2$ we mean the graph $(V_1\cup V_2, E_1 \cup E_2)$. How big can the difference be?
+\end{xca}
+
 %\bibliography{references}
 %\bibliographystyle{plainnat}
 
