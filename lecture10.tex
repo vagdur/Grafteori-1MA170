@@ -72,7 +72,7 @@ We already began our study of connectivity in the exercise session, but let us r
   A set $X \subseteq V$ \emph{separates} $A$ from $B$ if every path from a vertex in $A$ to a vertex in $B$ contains at least one vertex of $X$. Notice that here we do not require $A$, $B$, and $X$ to be disjoint -- and in fact if $A\cap B\neq \emptyset$ we must have this intersection contained in $X$, or the lazy path starting and ending at the same vertex in $A\cap B$ would prevent separation.
 \end{definition}
 
-\begin{lemma}
+\begin{lemma}\label{lemma:connectivity_is_min_of_pairwise_connectivity}
   For a graph $G = (V,E)$ that is not a complete graph, we have
   $$\kappa(G) = \min_{\substack{u, v \in V\\u\sim v \not\in E}} \kappa(u,v).$$
 
@@ -105,6 +105,24 @@ We are now ready to show Menger's theorem, the content of which is that we could
     Likewise, it is easy to see that a cut must, to have finite capacity, cut only through the edges of weight one, which correspond to vertices in the original graph, and their capacity is precisely the number of such vertices it cuts. So the capacity of a minimum cut is the minimum size of a set of vertices separating $u$ from $v$.
 
     So, by the max-flow min-cut theorem, the maximum number of independent paths equals the minimum size of a separating set.
+  \end{proof}
+\end{theorem}
+
+At first glance, the following corollary looks like it should be entirely trivial, but it actually requires a little bit of work.
+
+\begin{theorem}[Menger, global version]
+  A graph is $k$-connected if and only if it contains $k$ independent paths between any two vertices.
+
+  \begin{proof}
+    Let $G = (V,E)$ be a graph. If $G$ has $k$ or fewer vertices, it is by definition not $k$-connected, and it is clearly impossible for there to be $k$ independent paths at all, since there are just too few vertices. Similarly, if $G$ is complete on more than $k$ vertices, we see easily that it is both $k$-connected and has the requisite number of independent paths. So we lose no generality in assuming $G$ is a non-complete graph on more than $k$ vertices.
+
+    If $G$ is $k$-connected, then $\kappa(G) \geq k$ and hence $\kappa(u,v) \geq k$ for any two non-adjacent vertices $u$ and $v$ by Lemma \ref{lemma:connectivity_is_min_of_pairwise_connectivity}. By Menger's theorem, $u$ and $v$ are thus connected by at least $k$ independent paths.
+
+    What remains to be shown is that we also have enough independent paths in the case where $u$ and $v$ \emph{are} adjacent. So assume for contradiction that there are at most $k-1$ independent paths from $u$ to $v$. After removing the edge $u \sim v$ from $G$ to get a graph $G'$, we are left with at most $k - 2$ independent paths from $u$ to $v$ in $G'$.
+
+    Hence, by Menger's theorem, we can separate $u$ from $v$ by a set $X$ of size at most $k-2$ in $G'$. Since $G$ has more than $k$ vertices, there must be a vertex $w \in V \setminus (X \cup \{v,w\})$. Then this $w$ is separated by $X$ in $G'$ from either $u$ or $v$, say $u$. This however implies that $X \cup \{v\}$ separates $w$ from $u$, and $\abs{X \cup \{v\}} \leq k - 1$. This however contradicts the assumption that $G$ is $k$-connected.
+
+    In the other direction, assume there exist at least $k$ independent paths between any two vertices. Then this holds in particular for any pair of non-adjacent vertices, and by assumption there is such a pair. So by Menger's theorem we have $\kappa(x,y)\geq k$ for all such pairs, and thus $\kappa(G) \geq k$ by Lemma \ref{lemma:connectivity_is_min_of_pairwise_connectivity}.
   \end{proof}
 \end{theorem}
 
