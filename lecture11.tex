@@ -141,6 +141,69 @@ Next, let us prove a theorem about what is often referred to as Euler's formula,
   \end{definition}
 \end{theorem}
 
+It is easy to see how one might show a graph is planar -- just find a planar embedding of it. How do you prove a graph is \emph{not} planar? It is not immediately obvious how one would do that, other than by somehow considering every embedding and finding a pair of edges which intersect.
+
+So we are interested in simpler ways to prove that a graph is not planar. Our first method is just a corollary of Euler's formula.
+
+\begin{corollary}
+  If $G = (V,E)$ is a planar graph on at least three vertices, then
+  $$\abs{E} \leq 3\abs{V} - 6.$$
+
+  If it additionally does not contain a triangle, then
+  $$\abs{E} \leq 2\abs{V} - 4.$$
+
+  \begin{proof}
+    We will prove this by a double counting argument. The thing we will count is the number pairs of an edge and a face it is incident to, counting with multiplicity.\sidenote[][]{So, for a $K_2$, its one edge is incident to the single face twice, once per side of the edge.}
+
+    On the one hand, clearly, each edge is incident two two faces, so the total is $2\abs{E}$. On the other hand, each face clearly has at least three edges incident to it, so the the total is at least $3\abs{F}$.
+
+    So we have seen that $3\abs{F} \leq 2\abs{E}$, which together with Euler's formula gives the result. If $G$ additionally contains no triangles, then of course each face is incident to at least \emph{four} edges,\sidenote[][]{You see here how we could get an entire family of results, by assuming that $G$ has no cycles of length less than $k$ for varying $k$. The length of the shortest cycle in a graph is its \emph{girth}, as we shall see in our next lecture.} giving us instead $4\abs{F} \leq 2\abs{E}$, which together with Euler's formula rearranges to the stronger result.
+  \end{proof}
+\end{corollary}
+
+\begin{corollary}
+  The graphs $K_5$ and $K_{3,3}$ are non-planar.
+
+  \begin{proof}
+    For $K_5$, it follows by the first part of the previous corollary. $K_{3,3}$ is of course bipartite, and so in particular contains no triangles, and so it follows for this graph by the second part of the corollary.
+  \end{proof}
+\end{corollary}
+
+So we have shown two graphs to be non-planar. This in fact gives us a more general method to see that a graph is non-planar: If it contains a subgraph isomorphic to $K_5$ or to $K_{3,3}$ it cannot be planar, since already that subgraph can't be embedded without edges crossing, and adding more edges and vertices certainly won't change that.
+
+It turns out that in fact this classifies exactly which graphs are non-planar, if we expand our notion of ``containing'' from just ``having a subgraph'' to the notion of a \emph{minor}.
+
+\begin{definition}
+  Let $G$ and $H$ be graphs. A \emph{subdivision} of $H$ is a graph where some of the edges of $H$ were replaced by paths. If a graph $G$ contains a subdivision of $H$,\sidenote[][]{That is, has a subgraph isomorphic to a subdivision of $H$.} then $H$ is a \emph{topological minor} of $G$.
+\end{definition}
+
+It should be intuitively clear that a subdivision of $H$ is planar if and only if $H$ is, so the operation of taking subdivisions doesn't affect planarity. So if a graph has a topological minor that is non-planar, then it itself is also non-planar.
+
+There is also a second notion of minor, which is what we normally mean by being a minor:
+
+\begin{definition}
+  Let $G$ and $H$ be graphs. $H$ is a \emph{minor} of $G$ if there is a subgraph $G'$ of $G$ such that $H$ can be obtained from $G'$ by a sequence of edge-contractions. Equivalently, $H$ is a minor of $G$ if it can be obtained from $G$ by deleting vertices or edges and contracting edges.
+\end{definition}
+
+If you think about it for a bit, it should be clear that it is also true that having a minor in this sense that is non-planar means you cannot yourself be planar.
+
+So, a graph that has a $K_5$ or a $K_{3,3}$ as a minor or topological minor cannot be planar. In fact, it turns out that the converse is also true -- any non-planar graph has one of them as a minor and as a topological minor. This is the content of the theorems of Kuratowski and Wagner:
+
+\begin{theorem}[Kuratowski, 1930]
+  A graph is planar if and only if it contains neither a $K_5$ nor a $K_{3,3}$ as a topological minor.
+\end{theorem}
+
+\begin{theorem}[Wagner, 1937]
+  A graph is planar if and only if it contains neither a $K_5$ nor a $K_{3,3}$ as a minor.
+\end{theorem}
+
+The proof of the hard direction of this theorem is in three steps, of which we will only do the second:
+\begin{enumerate}
+  \item Show that a graph contains one of $K_{5}$ or $K_{3,3}$ as a topological minor if and only if it contains one of them as a minor.\sidenote[][]{This is Proposition 1.7.3 and Lemma 4.4.2 in the book by Diestel, if you want to see a proof -- or just Google for it.}
+  \item One proves that any three-connected graph which does not contain $K_5$ or $K_{3,3}$ as a minor is planar.
+  \item Finally, we show that the edge-maximal graphs without $K_5$ or $K_{3,3}$ as a topological minor are three-connected.\sidenote[][]{Which is the content of Lemmas 4.4.4 and 4.4.5 in the Diestel book.} The idea then is that given any graph $G$ not containing the forbidden minors, you can add edges avoiding creating a $K_5$ or $K_{3,3}$ until it is maximal, and it will then be three-connected without those minors, which by the previous step implies that it is planar. Then of course any subgraph of it is also planar, and so in particular the $G$ you started with is planar.
+\end{enumerate}
+
 \section{Exercises}
 
 
