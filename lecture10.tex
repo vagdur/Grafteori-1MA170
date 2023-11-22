@@ -89,7 +89,7 @@ We already began our study of connectivity in the exercise session, but let us r
 
 We are now ready to show Menger's theorem, the content of which is that we could also have defined connectivity in terms of independent paths.
 
-\begin{theorem}[Menger]
+\begin{theorem}[Menger]\label{thm:menger_local}
   Let $G$ be a graph, and let $u$ and $v$ be two non-adjacent vertices of $G$. Then $\kappa(u,v)$, the minimum size of a set that separates $u$ and $v$, equals the maximum size of a set of independent paths from $v$ to $w$, where we say that two paths are independent if they share only their start and end point.
 
   \begin{proof}
@@ -129,6 +129,16 @@ At first glance, the following corollary looks like it should be entirely trivia
     In the other direction, assume there exist at least $k$ independent paths between any two vertices. Then this holds in particular for any pair of non-adjacent vertices, and by assumption there is such a pair. So by Menger's theorem we have $\kappa(x,y)\geq k$ for all such pairs, and thus $\kappa(G) \geq k$ by Lemma \ref{lemma:connectivity_is_min_of_pairwise_connectivity}.
   \end{proof}
 \end{theorem}
+
+We could also have modified our proof of the ``local'' version of Menger's theorem to instead get this theorem:
+
+\begin{theorem}[Menger]\label{thm:menger_setsep}
+  Let $G = (V,E)$ be a graph, and let $A, B \subseteq V$ be sets of vertices. Then the minimum size of a set $X$ that separates $A$ from $B$ is equal to the maximum number of disjoint paths with one end in $A$ and the other end in $B$.
+\end{theorem}
+
+\begin{xca}
+  Modify the proof of Theorem \ref{thm:menger_local} into a proof of Theorem \ref{thm:menger_setsep}.
+\end{xca}
 
 \section{Exercises}
 
