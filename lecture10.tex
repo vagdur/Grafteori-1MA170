@@ -140,6 +140,159 @@ We could also have modified our proof of the ``local'' version of Menger's theor
   Modify the proof of Theorem \ref{thm:menger_local} into a proof of Theorem \ref{thm:menger_setsep}.
 \end{xca}
 
+\section{The structure of two-connected graphs}
+
+Determining what the one-connected graphs are is easy: They're the connected graphs. Can we give a similarly easy classification of the two-connected graphs? It turns out the answer is yes.
+
+\begin{theorem}\label{lemma:structure_of_twoconnected_graphs}
+  A finite\sidenote[][]{Do you actually need this assumption? If you enjoyed thinking about transfinite induction when we proved that Zorn's lemma implies \emph{all} graphs have spanning trees, you may enjoy trying to formalize a version of this without the finiteness assumption.} graph is two-connected if and only if it can be constructed from a cycle graph by successively adding paths to it, both of whose endpoints lie in the graph already constructed.
+
+  \begin{proof}
+    Every graph constructed in this way will be two-connected,\sidenote[][]{
+      \begin{xca}
+        Prove this. (Hint: Induction on the number of paths added.)
+      \end{xca}
+    } so what we need to show is that every two-connected graph can be constructed like this.
+
+    Let us call a graph that can be constructed like this \emph{constructible}, and let $G$ be a two-connected graph. Clearly, $G$ must contain a cycle, since otherwise it'd be a tree or a forest, neither of which is two-connected. Thus, the set of constructible subgraphs of $G$ is non-empty, and it must in particular have a maximal (under the subgraph relation) element $H$.
+
+    This $H$ must in fact be induced: If $x$ and $y$ were vertices of $H$ and $x\sim y$ an edge of $G$ but not of $H$, then this edge would be a path with both its endpoints in $H$, so we could add it to $H$ to get a larger constructible subgraph, which is a contradiction.
+
+    So it remains to see that $H$ is spanning. So suppose it is not, and there exists some vertex in $G$ but not in $H$. Since $G$ is connected, there must in particular be such a vertex that is adjacent to $H$. Call it $y$, and let its neighbour in $H$ be $x$.
+    
+    Now, since $G$ is two-connected, removing the vertex $x$ does not disconnect it. Therefore, there still must exist a path $P$ connecting $y$ to some vertex in $H$. Then, however, this path $P$ together with the edge $y \sim x$ is a path with both endpoints in $H$, and so could be added to $H$ to get a larger constructible subgraph, a contradiction. So $H$ is spanning and induced, and thus $G = H$.
+  \end{proof}
+\end{theorem}
+
+We know very well that we can divide a connected graph into its connected components. One way of phrasing this is that we can divide a zero-connected graph into parts that are one-connected. Can we also divide a one-connected graph into parts which are two-connected?
+
+The answer to this question turns out to essentially be yes.\sidenote[][-1.5cm]{The same question for dividing a two-connected graph into three-connected components also turns out to have an affirmative answer, involving the amusingly named \emph{Tutte's angry theorem}. Unfortunately the pattern then breaks down, and you need special properties of the graph to be able to meaningfully talk about it having four-connected components and so on.}
+
+\begin{definition}
+  Let $G$ be a graph. A \emph{cutvertex} is a vertex whose removal increases the number of connected components of $G$. A \emph{bridge} is an edge whose removal increases the number of connected components of $G$. A \emph{block} is a maximal connected subgraph $H$ without a cutvertex in $H$,\sidenote[][]{By which we mean that $H$ considered as a graph on its own has no cutvertices, not that no vertex of $H$ is a cutvertex of $G$.} where we by maximal mean maximal with respect to the subgraph relation.
+\end{definition}
+
+Now, a block is not exactly the same thing as a two-connected subgraph, but it is very close to being that, as we shall see. It is clear that a two-connected graph has no cutvertices, so any two-connected subgraph is contained in a block -- and as we will see, it is contained in exactly one block.
+
+To be able to prove this, we need the following innocuous-looking but in fact rather deep lemma:
+
+\begin{lemma}\label{lemma:block_cycle_intersection}
+  For any cycle $C$ in $G$, there is exactly one block intersecting it in more than one vertex.
+
+  \begin{proof}
+    Suppose $C$ is a cycle in $G$, and suppose for contradiction that $A$ and $B$ are two blocks both intersecting $C$ in multiple vertices. We claim that it is then the case that $C \cup A \cup B$ is a connected graph with no cutvertices, contradicting the maximality of $A$ and $B$.
+
+    So suppose we remove a vertex $v$ from $C \cup A \cup B$. If $v \in C$, this clearly does not disconnect the graph. If $v\in A$, this does not disconnect $A$ itself, because $A$ had no cutvertices, and it cannot disconnect $A$ from the rest of $C \cup A \cup B$ since $A$ intersected $C$ in multiple vertices. The same argument of course works for $v \in B$. So we have shown that $C \cup A \cup B$ has no cutvertices.
+  \end{proof}
+\end{lemma}
+
+What does a block look like? We can give a very precise classification.
+
+\begin{lemma}\label{lemma:classification_of_blocks}
+  Let $G$ be a graph, and $H$ a block of $G$. Then $H$ is an \emph{induced} subgraph of $G$, and three cases are possible:
+  \begin{enumerate}
+    \item $H$ contains just a single vertex of degree zero, an isolated vertex.
+    \item $H$ consists of two vertices connected by an edge, and this edge is a bridge.
+    \item $H$ is two-connected.
+  \end{enumerate}
+
+  Conversely, an isolated vertex always forms its own block, and the two vertices incident to a bridge always form a block.
+
+  \begin{xca}
+    Prove this. For the second case, use Lemma \ref{lemma:block_cycle_intersection}, and for the last, use Menger's theorem.
+  \end{xca}
+\end{lemma}
+
+Our next question to ask is of course how the blocks may overlap. For the division of a graph into its connected components, they may of course not overlap at all, but for finding the twoconnected components we will have to allow a little bit of overlap. Fortunately, we can show that this is only ever a single vertex.
+
+\begin{lemma}
+  Let $G = (V,E)$ be a graph. Any two blocks of $G$ intersect in only zero or one vertices. If they intersect in a single vertex, that vertex must be a cutvertex of $G$.
+
+  \begin{proof}
+    Suppose for contradiction that $A$ and $B$ are two blocks of $G$, and $A \cap B \ni u,v$. It is clear by Lemma \ref{lemma:classification_of_blocks} that at least one of them has to be two-connected, say $A$.
+    
+    Since $A$ and $B$ are both connected, there exist paths $P$ and $P'$ connecting $u$ to $v$ in $A$ and $B$ respectively. If $u \sim v$ is not an edge, gluing together $P$ and $P'$ yields a cycle $C$ intersecting both $A$ and $B$ in the two vertices $u$ and $v$, contradicting Lemma \ref{lemma:block_cycle_intersection}.
+
+    If $u\sim v \in E$, we could have been unlucky and picked both $P$ and $P'$ as the path consisting of just that one edge. However, we know $A$ is two-connected, so in $A$ there has to be two independent paths between $u$ and $v$. So we can just pick the one that is not the single edge, and then the union is again a cycle, yielding the first part of the lemma.
+
+    For the second part the lemma, suppose $A$ and $B$ are two blocks intersecting in $v$, but $v$ is not a cutvertex of $G$. Then, pick a neighbours $a$ and $b$ of $v$ in $A$ and $B$ respectively.\sidenote[][]{These must exist, since otherwise one of the blocks would be of size one and thus a subset of the other, which is absurd.} Since $v$ is not a cutvertex of $G$, there exists a path in $G$ from $a$ to $b$ not using $v$. But then this path together with the path $a\, v\, b$ forms a cycle in $G$, intersecting $A$ in $a$ and $v$ and intersecting $B$ in $b$ and $v$ -- and this is a contradiction with Lemma \ref{lemma:block_cycle_intersection}.
+  \end{proof}
+\end{lemma}
+
+\begin{corollary}\label{cor:noncutvertices_single_block}
+  Any vertex $v$ of $G$ which is not a cutvertex is contained in exactly one block.
+\end{corollary}
+
+\begin{lemma}\label{lemma:edges_imply_same_block}
+  Suppose $u$ and $v$ are two adjacent vertices. Then $u$ and $v$ belong to the same block.
+
+  \begin{proof}
+    If the edge $u \sim v$ is a bridge, then the set $\{u,v\}$ is itself a block by Lemma \ref{lemma:classification_of_blocks}, and so we are done.
+
+    If it is not a bridge, then there is some path from $u$ to $v$ in $G$ not using the edge $u \sim v$, and so this path together with the edge forms a cycle. A cycle, however, is a graph with no cutvertices, so the subgraph it forms must sit within a maximal cutvertexless subgraph -- a block. So in particular $u$ and $v$ must share a block.
+  \end{proof}
+\end{lemma}
+
+In fact, we can prove something much stronger than just that they intersect in nice ways -- we can create a graph whose vertices are the blocks and cutvertices of our original graph, and this graph will have a very nice structure.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.75\textwidth]{graphics/L10_connectivity/graph_with_blockgraph.png}
+  \caption[][0cm]{A graph, with its blocks circled in blue and labelled with red capital letters and its cutvertices labelled in red minuscule letters. Below, the corresponding block graph, with the same labeling.}
+  \label{fig:graph_with_blockgraph}
+\end{figure}
+
+\begin{definition}
+  Let $G$ be a graph, let $A$ be its collection of cutvertices, and $B$ its collection of blocks. The \emph{block graph} of $G$ is a bipartite graph with vertices $A \coprod B$, where an edge is drawn from $a\in A$ to $b\in B$ if $a$ is a vertex in $B$.
+\end{definition}
+
+\begin{lemma}\label{lemma:pathcorrespondence}
+  Let $G$ be a graph and $B(G)$ its block graph. A walk in $G$ corresponds to a walk in $B(G)$ which intersects the same blocks and cutvertices in the same order. Likewise, for any walk in $B(G)$, there exists at least one walk in $G$ which corresponds to it.
+
+  \begin{proof}[``Proof'']
+    Look at Figure \ref{fig:pathcorrespondence} and convince yourself it is obvious.
+  \end{proof}
+
+  \begin{xca}
+    Prove this rigorously.\sidenote[][]{I made an effort while writing the lecture notes, and it turned immediately into an unenlightening division into four cases.}
+  \end{xca}
+
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.75\textwidth]{graphics/L10_connectivity/pathcorrespondence.png}
+    \caption[][0cm]{Figure \ref{fig:graph_with_blockgraph} with a walk drawn in in red on the graph, and its corresponding walk on the blackgraph, also in red.}
+    \label{fig:pathcorrespondence}
+  \end{figure}
+  
+  \begin{comment}
+    Let $W = v_0\, e_1\, v_1\, \ldots\, v_{k-1}\, e_k\, v_k$ be a walk in $G$. If $v_0$ is a cutvertex, we of course start the walk in $B(G)$ at the vertex corresponding to this cutvertex. If it is not a cutvertex, it belongs to exactly one block by Corollary \ref{cor:noncutvertices_single_block}, so we can unambiguously pick this block as our starting point in $B(G)$.
+
+    Then, we proceed in our construction of the path. Suppose we are currently at a vertex $v$ in our walk on $G$, and the next vertex in the walk $W$ is $w$. In our walk on $B(G)$, we are at a vertex $b$. There are four cases:
+    \begin{enumerate}
+      \item $b$ is on the block side, and $w$ is not a cutvertex. By Lemma \ref{lemma:edges_imply_same_block} $v$ and $w$ are in the same block, so we can stay at $b$ and advance our walk on $G$ by one step.
+      \item $b$ is on the block side, and $w$ is a cutvertex. What we want to do here is to take a step from $b$ to $w$ in our walk on $B(G)$, but to be able to do this we must see that there is such an edge. Now, since $v$ and $w$ are adjacent, they are in the same block, and so $w$ is also in the block $b$, and so by our construction there is an edge $w \sim b$ in $B(G)$. So we can step to $w$ in both our walks, advancing both one step.
+      \item $b$ is on the cutvertex side, and so corresponds to the cutvertex $v$, and $w$ is not a cutvertex. Since $w$ is not a cutvertex, it belongs to a single block, say $b'$. Since $v$ and $w$ are adjacent, $v$ also belongs to $b'$, and so there is an 
+    \end{enumerate}
+
+    \begin{enumerate}
+      \item $v$ is not a cutvertex, and neither is $w$. Then Lemma \ref{lemma:edges_imply_same_block} tells us that $w$ must still be in the same block, and so in our walk on the block graph, we just stay put at our current block.
+      \item $v$ is not a cutvertex, but $w$ is. Then, in our walk on $B(G)$, we walk to the vertex corresponding to $w$. To see that we can do this, we must see that there is an edge in $B(G)$ from the block of $v$ to the cutvertex $w$. Since $v$ and $w$ are adjacent, they are in the same block, and so there is an edge in $B(G)$ between the cutvertex $w$ and the block of $w$, which is also the block of $v$.
+      \item $v$ is a cutvertex, but $w$ is not. Since $w$ is not a cutvertex, it belongs to only one block, and since $w$ and $v$ are adjacent, $v$ also belongs to this block. So by a similar argument as in the previous case, we can continue our walk in $B(G)$ from the cutvertex $v$ to the block of $w$.
+      \item $v$ and $w$ are both cutvertices. Since they are adjacent, they must share a block, 
+    \end{enumerate}
+  \end{comment}
+\end{lemma}
+
+\begin{lemma}
+  For any graph $G$, its block graph is a forest. If $G$ is connected, its block graph is a tree.
+
+  \begin{proof}
+    It is clear that if we prove the second assertion, the first follows by applying it to each connected component. So assume $G$ is connected.
+
+    Now assume for contradiction that the block graph of $G$ contains a cycle. Since the block graph is bipartite, this cycle has to traverse at least two blocks of $G$. By Lemma \ref{lemma:pathcorrespondence}, this cycle in the block graph corresponds to a cycle in $G$, and this cycle must intersect two different blocks. If you think through the details of how the correspondence between walks in the graph and its block graph works,\sidenote[][]{Such as by doing the exercise to prove Lemma \ref{lemma:pathcorrespondence}.} it is clear that this cycle must intersect the blocks in at least two vertices, and so we have a contradiction with Lemma \ref{lemma:block_cycle_intersection}.
+  \end{proof}
+\end{lemma}
+
 \section{Exercises}
 
 
