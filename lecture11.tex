@@ -86,6 +86,61 @@ For our final theorem, we do not offer a proof, just a statement. It is in some 
   A graph $G$ is three-connected if and only if there exists a sequence $G_0, G_1,\ldots, G_n$ of graphs, where $G_0 = K_4$, $G_n = G$, and for every $i \in [n]$ the graph $G_i$ has an edge $u \sim v$ with $d_{G_i}(u), d_{G_i}(v) \geq 3$ and $G_{i-1} = G_i/(u\sim v)$.
 \end{theorem}
 
+\section{Planarity}
+
+One way to think about the notion of planarity is that we want to study graphs arising from maps, as we saw in the exercise session. Another might be that we just want to find nice ways to draw graphs. Let us give a not very precise definition of what we mean by drawing a graph:
+
+\begin{definition}
+  A \emph{drawing} or \emph{embedding} of a graph in $\R^2$ is a way of placing all the vertices of the graph at distinct points, and drawing an arc\sidenote[][]{In a more precise definition we would have to state what we assume about these arcs -- are they continuous, smooth, piecewise linear?} between any two adjacent vertices.
+
+  We say that an embedding is \emph{planar}, and call the embedded graph a \emph{plane} graph, if this can be done so that none of the edges intersect.
+\end{definition}
+
+\begin{definition}
+  Any planar embedding of a graph divides the plane into several connected components, called \emph{faces}. Exactly one of these faces is unbounded, and any other faces are bounded.\sidenote[][]{In order to prove this you need the seemingly obvious but surprisingly hard-to-prove Jordan curve theorem.}
+
+  Generally, any cycle $C$ in a plane graph $G = (V,E)$ will separate the vertices of $G$ into three sets,
+  $$V = O \amalg V(C) \amalg I,$$
+  where $O$ are the vertices outside the cycle and $I$ the vertices inside the circle. There are no edges between the sets $O$ and $I$.
+\end{definition}
+
+Now we can give a definition of the notion of planar dual, which we introduced in the exercises:
+
+\begin{definition}
+  Let $G = (V,E)$ be a plane graph, that is, a planar graph with a given embedding. The \emph{planar dual} $G^* = (F, E^*)$ of $G$ is the multigraph whose vertices are the faces of the embedding of $G$, and where we draw an edge between two faces $f$ and $f'$ if they border each other.
+
+  There is a natural one-to-one correspondence between $E$ and $E^*$ by sending each edge $e\in E$ to the edge between the two faces it separates.
+
+  See Figure \ref{fig:planar_dual} for an illustration of this.
+\end{definition}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.65\textwidth]{graphics/L11_planarity/planar_dual.png}
+  \caption[][0cm]{A plane graph, with circular black vertices and grey edges, and its planar dual, with black crosses as vertices and red edges. Notice how the correspondence between $E$ and $E^*$ is on display here -- each red edge intersects precisely one grey edge, and vice versa.}
+  \label{fig:planar_dual}
+\end{figure}
+
+Next, let us prove a theorem about what is often referred to as Euler's formula, though Euler in fact did not think about this for graphs but for polyhedra.
+
+\begin{theorem}[Euler's formula]
+  Let $G = (V,E)$ be a connected planar graph, and let $f$ be the number of faces for some planar embedding of $G$. Then\sidenote[][]{The thing on the left-hand side here is called the \emph{Euler characteristic}, which is the first step on a long journey of geometry and the genus of surfaces. If you want a book-length discussion of the history of this formula, and the history of the notion of mathematical proof in general, read Imre Lakatos \emph{Proofs and Refutations}.}
+  $$\abs{V} - \abs{E} + f = 2,$$
+  and so in particular any two planar embeddings have the same number of faces.
+
+  \begin{definition}
+    Let $G = (V,E)$ be a connected planar graph, fix a planar embedding of it, and construct its planar dual $G^* = (F, E^*)$. Next, fix a spanning tree $T = (V, E_T)$ of $G$, and consider its complement in the planar dual, $T* = (F, E^* \setminus E_T)$.
+
+    Now, let us show that this $T^*$ is in fact a tree.\sidenote[][]{We already showed this in the exercise session, but let us repeat ourselves.} If $T^*$ were disconnected, one of its connected components would not contain the unbounded face, and this set of faces would be enclosed by a cycle of $T$. But $T$ has no cycles, since it is a tree.
+
+    If $T^*$ contained a cycle, this cycle would necessarily enclose a vertex of $T$, which would be separated from the rest of $T$, and so $T$ would be disconnected, which is again impossible since $T$ is a tree.
+
+    So, we have seen that $T$ is a tree on $\abs{V}$ vertices and thus has $\abs{V} - 1$ edges, and $T^*$ is a tree on $\abs{F}$ vertices and thus $\abs{F}-1$ edges. However, since $T^*$ has as its edges the complement of the edges of $T$, they must together have $\abs{E}$ edges. So we have shown that
+    $$\left(\abs{V} - 1\right) + \left(\abs{F} - 1\right) = \abs{E},$$
+    which rearranges to show the theorem.
+  \end{definition}
+\end{theorem}
+
 \section{Exercises}
 
 
