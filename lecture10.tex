@@ -43,6 +43,8 @@
 We study the notion of the \emph{connectivity} of a graph, which quantifies \emph{how} connected a graph is. Then we prove some structure theorems about $2$- and $3$-connected graphs.
 \end{abstract}
 
+\section{Definitions}
+
 We already began our study of connectivity in the exercise session, but let us restate the central definitions again.
 
 \begin{definition}
@@ -82,6 +84,8 @@ We already began our study of connectivity in the exercise session, but let us r
     Conversely, let $x_0$ and $y_0$ be two non-adjacent vertices such that $\kappa(x_0, y_0)$ attains this minimum. Then there exists a separating set $X$ for $x_0$ and $y_0$ of size $\kappa(x_0, y_0) = \min_{x,y \in V: x\sim y \not\in E} \kappa(x, y)$. So in particular a set of this size suffices to disconnect $G$, and hence $\kappa(G) \leq \min_{x,y \in V: x\sim y \not\in E} \kappa(x, y)$.
   \end{proof}
 \end{lemma}
+
+\section{Menger's theorem}
 
 We are now ready to show Menger's theorem, the content of which is that we could also have defined connectivity in terms of independent paths.
 
