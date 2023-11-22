@@ -13,7 +13,8 @@ Welcome to the course in graph theory at the bachelor's level at Uppsala Univers
 7. [Lecture 7: The max-flow min-cut and marriage theorems](https://vagdur.github.io/Grafteori-1MA170/lecture7.pdf)
 8. [Lecture 8: Vertex covers, Hamilton cycles, independent sets](https://vagdur.github.io/Grafteori-1MA170/lecture8.pdf)
 9. [Exercise session 9: Connectivity, planarity, colourings](https://vagdur.github.io/Grafteori-1MA170/exercise_session9.pdf) 
-10. [Lecture 10: Connectivity](https://vagdur.github.io/Grafteori-1MA170/lecture10.pdf) (Work In Progress)
+10. [Lecture 10: Connectivity](https://vagdur.github.io/Grafteori-1MA170/lecture10.pdf)
+11. [Lecture 11: Planarity](https://vagdur.github.io/Grafteori-1MA170/lecture11.pdf) (Work In Progress)
 
 # Other course material
 
