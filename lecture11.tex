@@ -60,7 +60,7 @@ While the topic of this lecture is planarity, we will need a result about the st
   Introduce a new vertex $v_{xy}$, and let $V(G/e) = (V \setminus \{x,y\}) \cup \{v_{xy}\}$. Replace each edge $w \sim x$ or $w \sim y$ with an edge $w \sim v_{xy}$.
 \end{definition}
 
-\begin{lemma}
+\begin{lemma}\label{lemma:existence_of_contraction_edge}
   If $G = (V,E)$ is three-connected and has more than four vertices, then there exists an edge $e \in E$ such that $G/e$ is again three-connected.
 
   \begin{proof}
@@ -80,7 +80,7 @@ While the topic of this lecture is planarity, we will need a result about the st
   \end{proof}
 \end{lemma}
 
-For our final theorem, we do not offer a proof, just a statement. It is in some sense analogous to our theorem about two-connected graphs being constructible by adding paths to a cycle graph.
+We also state, but do not prove, a classification of the three-connected graphs, due to Tutte. It is in some sense analogous to our theorem about two-connected graphs being constructible by adding paths to a cycle graph.
 
 \begin{theorem}[Tutte, 1961]
   A graph $G$ is three-connected if and only if there exists a sequence $G_0, G_1,\ldots, G_n$ of graphs, where $G_0 = K_4$, $G_n = G$, and for every $i \in [n]$ the graph $G_i$ has an edge $u \sim v$ with $d_{G_i}(u), d_{G_i}(v) \geq 3$ and $G_{i-1} = G_i/(u\sim v)$.
@@ -203,6 +203,73 @@ The proof of the hard direction of this theorem is in three steps, of which we w
   \item One proves that any three-connected graph which does not contain $K_5$ or $K_{3,3}$ as a minor is planar.
   \item Finally, we show that the edge-maximal graphs without $K_5$ or $K_{3,3}$ as a topological minor are three-connected.\sidenote[][]{Which is the content of Lemmas 4.4.4 and 4.4.5 in the Diestel book.} The idea then is that given any graph $G$ not containing the forbidden minors, you can add edges avoiding creating a $K_5$ or $K_{3,3}$ until it is maximal, and it will then be three-connected without those minors, which by the previous step implies that it is planar. Then of course any subgraph of it is also planar, and so in particular the $G$ you started with is planar.
 \end{enumerate}
+
+Having seen the overall structure of the proof, let us actually do a proof of the second step:
+
+\begin{lemma}
+  Let $G = (V,E)$ be a three-connected graph without a $K_5$ or a $K_{3,3}$ as a minor. Then $G$ is planar.
+
+  \begin{proof}
+    We prove this by induction in the number of vertices. The smallest three-connected graph is a $K_4$, and this one is evidently planar and has no such minors.
+
+    So assume $\abs{V} > 4$ and that the claim holds for all graphs on fewer vertices. Since $G$ is three-connected on more than four vertices, it follows from Lemma \ref{lemma:existence_of_contraction_edge} that there exists an edge $e = \{x,y\}$ in $G$ such that the contraction $G/e$ is again three-connected.
+
+    Now, this $G/e$ is a minor of $G$, and hence it can't contain a $K_5$ or $K_{3,3}$ minor.\sidenote[][]{This follows from the fact that being a minor is a transitive relation -- if $G$ is a minor of $G'$ and $G'$ a minor of $G''$, then $G$ is a minor of $G''$.} So by our induction hypothesis, $G/e$ is planar.
+
+    Now, consider a planar embedding of $G/e$. If we remove the vertex $v_{xy}$, the one we got by contracting the edge $x\sim y$, we again get a plane graph, and in this drawing of $G/e - v_{xy}$ there is one face that used to contain $v_{xy}$. Since $G/e$ is three-connected, the boundary of this face is a cycle $C$.\sidenote[][]{Why do we need three-connectedness here?}
+
+    \begin{figure}
+      \centering
+      \includegraphics[width=0.7\textwidth]{graphics/L11_planarity/wagner_kuratowski_proof.png}
+      \caption[][0cm]{Top left, a three-connected graph with an edge $x\sim y$ highlighted. Top right, another graph which is the result of contracting this edge, with the new edges and vertices in red. Bottom, the result of removing the contraction vertex $v_{xy}$, with the face on which it sat indicated by a dotted red line, which is also the cycle $C$, and the sets $X$ and $Y$ indicated.}
+      \label{fig:wagner_kuratowski}
+    \end{figure}
+
+    Let $X = N(x)\setminus \{y\}$ be the set of neighbours of $x$ other than $y$, and likewise let $Y = N(y) \setminus \{x\}$. Notice how $X$ and $Y$ are both subsets of the cycle $C$.
+
+    Now, if we take our embedding of $G/e$ and remove all edges $v_{xy}\sim w$ for $w \in Y \setminus X$, we get an embedding of the graph $G[V\setminus\{y\}]$, with the vertex $v_{xy}$ replacing $x$. So if we can find a way to add $y$ back into this drawing, then we will have a planar embedding of $G$.
+
+    So, number the vertices of $X$ as $x_1, x_2, \ldots, x_r$ in clockwise order around the cycle $C$, and notice that they partition the cycle $C$ into paths $P_i$ from $x_i$ to $x_{i+1}$, as in Figure \ref{fig:w_k_cycle}.
+
+    \begin{figure}
+      \centering
+      \includegraphics[width=0.6\textwidth]{graphics/L11_planarity/w_k_cycle.png}
+      \caption[][0cm]{A local picture of the embedding of $G[V\setminus\{y\}]$, with the vertices of $X$ labelled, and the paths between in dashed red lines.}
+      \label{fig:w_k_cycle}
+    \end{figure}
+
+    If we could show that all the vertices of $Y$ lie on the same path $P_i$, then we could add $y$ back into the drawing by adding to the face bounded by this path and the edges between it and $x$.
+
+    So suppose for contradiction that not all neighbours of $y$ lie on the same path $P_i$. There are three cases:\sidenote[][-1.5cm]{These are exhaustive, but not mutually exclusive.}
+
+    \begin{marginfigure}
+      \centering
+      \includegraphics[width=0.75\textwidth]{graphics/L11_planarity/w_k_case1.png}
+      \caption[]{A drawing of the first case in our case analysis.}
+      \label{fig:w_k_case1}
+    \end{marginfigure}
+
+    \begin{enumerate}
+      \item Suppose $y_1 \in Y \setminus X$ lies on the interior of some $P_i$, and there is a $y_2 \in Y$ that is not on $P_i$. Then $\{x, y_1, y_2\}$ and $\{y, x_i, x_{i+1}\}$ form the vertices of a topological $K_{3,3}$. This is illustrated in Figure \ref{fig:w_k_case1}.
+      \begin{marginfigure}
+        \centering
+        \includegraphics[width=0.75\textwidth]{graphics/L11_planarity/w_k_case2.png}
+        \caption[]{A drawing of the second case in our case analysis.}
+        \label{fig:w_k_case2}
+      \end{marginfigure}
+      \item Suppose that $X \cap Y$ has more than two elements -- say $x_i, x_j, x_k$. But then $\{x, y, x_i, x_j, x_k\}$ forms the vertex set of a topological $K_5$. This is illustrated in Figure \ref{fig:w_k_case2}.
+      \begin{marginfigure}
+        \centering
+        \includegraphics[width=0.75\textwidth]{graphics/L11_planarity/w_k_case3.png}
+        \caption[]{A drawing of the third case in our case analysis.}
+        \label{fig:w_k_case3}
+      \end{marginfigure}
+      \item If neither of the above two cases occurs, but $y$ still has neighbours that do not share a path, we must have that $y$ has two neighbours shared with $x$, say $x_i$ and $x_k$, which do not lie on a common path. Then there must be vertices $x_j$ and $x_\ell$ between them. Now $\{x_i, x, x_k\}$ and $\{x_j, y, x_\ell\}$ form the vertices of a topological $K_{3,3}$. This is illustrated in Figure \ref{fig:w_k_case3}.
+    \end{enumerate}
+
+    So we have seen that all neighbours of $y$ other than $x$ share a path, and so we can draw $y$ into the corresponding face, getting a planar embedding of the entire graph $G$.
+  \end{proof}
+\end{lemma}
 
 \section{Exercises}
 
