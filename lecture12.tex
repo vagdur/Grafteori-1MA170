@@ -159,6 +159,22 @@ Are there any other cases where this inequality is sharp? It turns out that thes
   \end{proof}
 \end{theorem}
 
+\section{Girth and chromatic number}
+
+Already when we first introduced the chromatic number, we mentioned the obvious fact that a large clique of course forces a graph to have high chromatic number. One might be led by this to believe that being very sparse, without any cliques, would mean you have low chromatic number. This unfortunately turns out to be not at all true, in a pretty strong sense.
+
+\begin{definition}
+  The \emph{girth} of a graph $G$ is the length of the shortest cycle in the graph.
+\end{definition}
+
+So the notion of girth generalizes the notion of being triangle-free, which is just having girth greater than three. Of course any triangle-free graph also contains no larger cliques, so this is indeed a strong notion of having no cliques.
+
+\begin{theorem}[Erd\H{o}s, 1959]
+  For all positive integers $k$ there exists a graph $G$ of girth and chromatic number at least $k$.
+\end{theorem}
+
+The proof of this uses the probabilistic method, and proceeds by considering a random graph from a suitably chosen distribution, and showing that the probability that it has girth and chromatic number at least $k$ is greater than $0$. We postpone the proof of this until a later lecture, when we will have developed our probabilistic toolbox a bit more.
+
 \section{Exercises}
 
 
