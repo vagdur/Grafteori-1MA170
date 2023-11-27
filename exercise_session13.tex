@@ -71,6 +71,28 @@ In our study of vertex colourings, we proved that all planar graphs can be colou
     \end{theorem}
 \end{xca}
 
+\section{Ramsey theory}
+
+Ramsey theory, named after remarkable British mathematician Frank P. Ramsey,\sidenote[][]{Seriously, read his Wikipedia page if you get bored, he was almost a modern day Newton in terms of being British and inventing tons of stuff across fields.} studies the question of how large a graph has to be in order to always contain a given structure. The simplest case is that of the eponymous \emph{Ramsey number}. Let us give two definitions of it:
+
+\begin{definition}
+    For any integer $k$, the $k$-th \emph{Ramsey number} $R(k)$ is the smallest integer $n$ such that every edge-colouring of $K_n$ contains a monochromatic $K_k$.\sidenote[][]{Clearly, we mean improper edge colourings here, since there is no proper $2$-edge-colouring of any $K_n$ other than $K_2$. By ``containing a monochromatic $K_k$'' we mean that for some colour $i$, the edge-induced subgraph $K_n\langle c^{-1}(i)\rangle$ contains a $k$-clique.}
+\end{definition}
+
+\begin{definition}
+    For any integer $k$, the $k$-th \emph{Ramsey number} $R(k)$ is the smallest integer $n$ such that every graph on $n$ vertices contains either a $k$-clique or an independent set of size $k$.
+\end{definition}
+
+\begin{xca}
+    Prove that the above two definitions are equivalent.
+\end{xca}
+
+Of course, it is a non-trivial fact that these Ramsey numbers in fact even exist -- apriori it could be the case that for some $k$, there exist arbitrarily big graphs that contain neither a $k$-clique nor an independent set of size $k$. We will prove that this is not the case later, using the probabilistic method. For now, let us just show that one Ramsey number is finite:
+
+\begin{xca}
+    Prove that $R(3) = 6$.
+\end{xca}
+
 
 %\bibliography{references}
 %\bibliographystyle{plainnat}
