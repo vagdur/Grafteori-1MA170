@@ -16,7 +16,7 @@ Welcome to the course in graph theory at the bachelor's level at Uppsala Univers
 10. [Lecture 10: Connectivity](https://vagdur.github.io/Grafteori-1MA170/lecture10.pdf)
 11. [Lecture 11: Planarity](https://vagdur.github.io/Grafteori-1MA170/lecture11.pdf)
 12. [Lecture 12: Vertex colourings](https://vagdur.github.io/Grafteori-1MA170/lecture12.pdf)
-13. [Exercise session 13: Edge-colourings, Ramsey theory, and the probabilistic method](https://vagdur.github.io/Grafteori-1MA170/exercise_session13.pdf) (Work in Progress)
+13. [Exercise session 13: The probabilistic method, edge-colourings, and Ramsey theory](https://vagdur.github.io/Grafteori-1MA170/exercise_session13.pdf) (Work in Progress)
 
 # Other course material
 
