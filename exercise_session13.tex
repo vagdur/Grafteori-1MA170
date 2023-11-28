@@ -93,6 +93,57 @@ Of course, it is a non-trivial fact that these Ramsey numbers in fact even exist
     Prove that $R(3) = 6$.
 \end{xca}
 
+\section{The Rado graph}
+
+In almost all of this course, we only care about finite graphs. On the few occasions we have mentioned infinite graphs, it has been to demonstrate that things can turn weird if we allow infinite graphs, because infinity is strange.
+
+In this section, we will see perhaps the strangest example of all, the \emph{Rado graph}, also known as \textcaps{the} \emph{random graph}, with emphasis on \textcaps{the}.
+
+\begin{definition}
+  The \emph{Rado graph} is the unique\sidenote[][]{Up to isomorphism.} countably infinite homogeneous graph $G$ such that, for any finite graph $H$, $H$ is isomorphic to an induced subgraph of $G$.\sidenote[][]{In fact, the Rado graph contains every \emph{countably infinite} graph as an induced subgraph as well, but let's skip that in the definition.}
+\end{definition}
+
+This definition should leave you with two large questions hovering in your mind, and one smaller one:
+\begin{enumerate}
+  \item Can such a thing even exist?!
+  \item Even if such a thing exists, how can it be unique?
+  \item Wait, what does it mean for a graph to be ``homogeneous''?
+\end{enumerate}
+
+We will explore some of the strangeness of this graph, but the definition we gave of it is a bit hard to work with. So let us offer two definitions -- first, what did we mean by homogeneous?
+
+\begin{definition}
+  Let $G = (V,E)$ be a finite or infinite graph. We say that $G$ is \emph{homogeneous} if, for any two subsets $A, B \subseteq V$ such that the induced subgraphs $G[A]$ and $G[B]$ are isomorphic, the isomorphism between them can be extended to an automorphism of the entire graph.
+
+  Concretely, this means that if $f: A \to B$ is the isomorphism between $G[A]$ and $G[B]$, there is an isomorphism $g: V \to V$ between $G$ and itself, such that $f(a) = g(a)$ whenever $a \in A$.
+\end{definition}
+
+\begin{xca}
+  Find at least two different examples of families of homogeneous graphs.\sidenote[][]{There are two somewhat ``trivial'' examples that come to mind immediately for me, among the graph families we have already defined in the course. Plus a funny construction of an infinite graph with this property.}
+\end{xca}
+
+The version of the definition of the Rado graph that we can actually work with is in terms of \emph{saturation}.
+
+\begin{definition}
+  A graph $G = (V,E)$, finite or infinite, is \emph{$k$-saturated} if, for any two subsets $U, W \subseteq V$, each of size at most $k$, there exists a vertex $v \in V$ such that $v \sim u \in E$ for every $u \in U$, and $v \sim w \not\in E$ for every $w \in W$.
+\end{definition}
+
+\begin{xca}
+  Consider the graph $G$ whose vertices are the two-element subsets of the set $\{1,2,\ldots,6\}$, and where there is an edge between two such subsets if their intersection is non-empty. Prove that this graph is $2$-saturated.
+\end{xca}
+
+\begin{xca}
+  Prove that if $G$ is $k$-saturated, then for any graph $H$ on at most $k$ vertices, $G$ contains $H$ as an induced subgraph.\sidenote[][]{\textbf{Hint:} Use induction in the size of $H$.}
+\end{xca}
+
+Having done all this, let us give the definition of the Rado graph that we will actually be using:
+
+\begin{definition}
+  The \emph{Rado graph} is the unique countably infinite graph which is $k$-saturated for every $k \in \N$.
+\end{definition}
+
+Notice how the previous exercise we did proves that the Rado graph by this definition does contain every finite graph as an induced subgraph. We leave the proof of the existence of the Rado graph, and of the equivalence of the two definitions, to the actual lecture.\sidenote[][]{Though proving homogeneity of the Rado graph according to the second definition is actually not too hard, so if you like you can try to find a proof of this yourself.}
+
 
 %\bibliography{references}
 %\bibliographystyle{plainnat}
