@@ -43,6 +43,65 @@
 We introduce the probabilistic method and the Erd\H{o}s-Rényi graph. Then we discuss the idea of edge-colourings of graphs, and the most basic notions of Ramsey theory. Finally, we discuss the Rado graph.
 \end{abstract}
 
+\section{Random graphs and the probabilistic method}
+
+We have already seen one example of the probabilistic method, when we proved the result of Caro-Wei about the existence of independent sets of size at least $\sum_{v\in V} (d_v + 1)^{-1}$. We are going to see several more results from various parts of graph theory proven using the probabilistic method.
+
+We will, in a few of the proofs, need to use a randomly chosen graph. The study of random graphs is in fact in itself a major research area in graph theory.\sidenote[][]{It is also one of the main things done by graph theory people in our department, actually.} One particularly well-studied random graph is the perhaps simplest one, the \emph{Erd\H{o}s-Rényi graph}.
+
+\begin{definition}
+  For any integer $n \in \N$ and any probability $p \in [0,1]$, the \emph{Erd\H{o}s-Rényi graph} $G(n,p)$ is a random graph on $n$ vertices,\sidenote[][]{We will normally assume its vertex set is $[n]$, unless otherwise stated.} where each of the $\binom{n}{2}$ potential edges is present independently at random with probability $p$.
+\end{definition}
+
+There are, in a broad overview, three kinds of argument that we tend to make when using the probabilistic method. Let us give sketches of the three methods here, and exercises using the first two methods.
+
+\textbf{Probabilistic method proof of existence:} We wish to show that there exists an object with some certain property, such as a graph with high chromatic number containing no short cycles. In order to prove this, we
+\begin{enumerate}
+  \item first carefully select a way to choose a random graph. If we are lucky, we can do this by choosing the right values of $n$ and $p$ in an Erd\H{o}s-Rényi graph.
+  \item Then we lower bound the probability that our random graph will have the desired property -- so in this case that it will have high chromatic number and no short cycles. What we need to show is that this probability is greater than zero.
+  \item We conclude that if the probability of an event is greater than zero, there must be some particular outcome in which the event happens -- that is, there exists such a graph.
+\end{enumerate}
+
+A common trick we end up using is the so called \textbf{union bound}. We want to find an upper bound for the probability of some event $A$ -- say, the event that a random graph has a four-cycle. We divide this event up into a bunch of not necessarily mutually exclusive events $A_1, A_2, \ldots, A_n$, writing $A = \bigcup_{i=1}^n A_i$ -- for example, one event for each four-tuple of vertices, where the event is that this tuple in particular forms a four-cycle. Then we use the fact that
+$$\Prob{A} = \Prob{\bigcup_{i=1}^n A_i} \leq \sum_{i=1}^n \Prob{A_i}$$
+and bound each of the summands instead.
+
+\begin{xca}
+  Prove using the union bound method that if $G = G(n,p)$ is an Erd\H{o}s-Rényi graph, then
+  $$\Prob{\alpha\left(G\right) \geq k} \leq \binom{n}{k}(1-p)^{\binom{k}{2}},$$
+  where $\alpha(G)$ is the independence number of $G$.
+\end{xca}
+
+\textbf{First moment method:} We wish to show that there is an object of a certain size. For example, in Caro-Wei, we wanted to show that there is an independent set in a graph of a certain size. In order to do this, we
+\begin{enumerate}
+  \item first choose a random independent set in a clever way. Again, we need to choose this in such a way that the rest of the calculations work out.
+  \item Then we compute the expected size of the independent set. The crucial part in this argument is normally that the expected size of a random subset $A$ of a big set $X$ can always be written as
+  $$\E{\abs{A}} = \E{\sum_{x \in X} \ind{x \in A}} = \sum_{x \in X} \E{\ind{x \in A}} = \sum_{x\in X} \Prob{x \in A},$$
+  using linearity of expectation. So we can reduce to calculating the probability that a single vertex is in the set, which is usually much easier to do.
+  \item We conclude that if the expected size of the independent set is at least what we wanted, then there must be an actual outcome of this size, since the average cannot be greater than every single outcome.
+\end{enumerate}
+
+Sometimes, what we want to show is not existence of something, but rather that something does \emph{not} exist -- that is, we want to show that the set of such things has size zero.\sidenote[][]{Normally, we mean this in an asymptotic sense -- as some underlying parameter such as the number of vertices goes to infinity, the probability that the thing exists in the graph goes to zero.} We can do this as well using the first moment method, replacing the last step with an application of Markov's inequality from probability theory:
+
+\begin{lemma}[Markov's inequality]
+  Suppose $X$ is a random variable that always takes non-negative values. Then for any $a > 0$,
+  $$\Prob{X > a} \leq \frac{\E{X}}{a}.$$
+
+  In particular, if we have a sequence of random variables $X_n$ such that $\E{X_n} \to 0$, then also $\Prob{X_n > 0} \to 0$.
+\end{lemma}
+
+\begin{xca}
+  Recall that the \emph{diameter} of a graph is the longest distance between any two vertices in the graph. Prove that for every $p \in (0,1)$, we have
+  $$\Prob{\diam\left(G(n,p)\right) = 2} \to 1\qquad \text{as}\qquad n \to \infty.$$
+\end{xca}
+
+Sometimes we want to show that something occurs basically every time in a random graph. Unfortunately, you cannot prove this just by showing that the expected number of times it occurs is large: Imagine a lottery where you have a $\frac{1}{n}$ chance to win $n^2$ gold bars. The expected number of gold bars you win is always $n$, but it is still true that the probability of winning goes to zero with $n$. So the expectation alone being high does not tell you you will actually usually win anything at all.
+
+In this situation, we will instead have recourse to the second-moment method.\sidenote[][-1.8cm]{The version we give here is a slightly limited case of the more general method -- in general, what makes a proof a second-moment method proof is that we compute second moments and appeal to Chebyshev's inequality.}
+
+\textbf{The second moment method:} We wish to show that something asymptotically almost always\sidenote[][]{This sounds like imprecise language, but it actually is a mathematical term that means ``occurs with probability converging to one''.} occurs in a random graph, for example that it has a triangles. What we do is that we let $X$ be the random number of triangles, compute the expectation and variance of $X$, and appeal to the following inequality\sidenote[][]{Which follows from Chebyshev's inequality, and holds whenver the right-hand side is well defined. (If the expectation is infinite, the variance is undefined, and the right hand side becomes undefined divided by infinity.)}
+$$\Prob{X = 0} \leq \frac{\Var{X}}{\E{X}^2}.$$
+
 \section{Edge-colourings}
 
 In our last lecture, we looked at the notion of a vertex colouring of a graph, and derived a few results about it. Of course, vertices are not the only thing we could be colouring -- we could also look at colouring the \emph{edges} of a graph.
