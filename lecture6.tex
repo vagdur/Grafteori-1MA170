@@ -62,9 +62,10 @@ The first algorithm we introduce for this is Prim's algorithm, which works by st
   Let $G = (V,E,w)$ be a finite connected weighted graph, and let $v \in V$ be an arbitrary vertex of $G$.
 \begin{enumerate}
     \item Initialise a tree $T = (\{v\}, \emptyset)$, i.e. the subtree containing only $v$.
-    \item While $T$ is not a spanning subgraph, I.e. $V(T) \neq V$, find an edge $e$ of $G$ between $V(T)$ and $V(T)^c$ (all vertices in G that are not in T) which has minimal weight. Add this edge together with its endpoint in $V(T)^c$ to $T$.
-\end{enumerate}
-  $T$ is now an MST. How this algorithm constructs an MST is illustrated in Figure \ref{fig:prims_algorithm}.
+    \item While $T$ is not a spanning subgraph, I.e. $V(T) \neq V$, find an edge $e$ of $G$ between $V(T)$ and $V(T)^c$ (all vertices in $G$ that are not in $T$) which has minimal weight. Add this edge together with its endpoint in $V(T)^c$ to $T$.
+    \item Return $T$.
+    \end{enumerate}
+  How this algorithm constructs an MST is illustrated in Figure \ref{fig:prims_algorithm}.
 \end{definition}
 
 Before we can prove that this algorithm actually works, we will need a little lemma about what happens when you remove edges from trees.\sidenote[][]{This statement is perhaps in some sense obvious, but it did not occur to me immediately. The proof in the old lecture notes omits the steps that would even require the lemma, and the proofs I found online did not omit those steps but did leave the lemma implicit.}
@@ -131,9 +132,10 @@ The second algorithm we consider for finding MSTs is \emph{Kruskal's algorithm},
   Let $G = (V,E,w)$ be a connected finite weighted graph, and let $L$ be a list of the edges of $G$ sorted in ascending order of weight.
   \begin{enumerate}
       \item Initialise the forest $F = (V, \emptyset)$. 
-      \item While $F$ is not spanning and $L$ is not empty remove the first entry from $L$, and call it $e$. If adding $e$ to $F$ would not create a cycle add $e$ to $F$.
+      \item While $F$ is not spanning remove the first entry from $L$, and call it $e$. If adding $e$ to $F$ would not create a cycle add $e$ to $F$.
+      \item Return $F$.
     \end{enumerate}
-  $F$ is now and MST. How this algorithm constructs an MST is illustrated in Figure \ref{fig:kruskals_algorithm}.
+  How this algorithm constructs an MST is illustrated in Figure \ref{fig:kruskals_algorithm}.
 \end{definition}
 
 \begin{theorem}
@@ -150,7 +152,7 @@ The second algorithm we consider for finding MSTs is \emph{Kruskal's algorithm},
       \begin{xca}
         Prove that $T''$ actually is a spanning tree.
       \end{xca}
-    } Since $T'$ is a MST, $w(T') \leq w(T'')$. On the other hand, since Kruskal's algorithm chose to add $e$ instead of $f$ when given the choice, we must have $w(e) \leq w(f)$, and so therefore we also have $w(T'') \leq w(T')$, and so $w(T') = w(T'')$, and $T''$ is also an MST. This, however, gives us our contradiction, since $T''$ shares more edges with $T$ than $T'$ did.
+    } Since $T'$ is an MST, $w(T') \leq w(T'')$. On the other hand, since Kruskal's algorithm chose to add $e$ instead of $f$ when given the choice, we must have $w(e) \leq w(f)$, and so therefore we also have $w(T'') \leq w(T')$, and so $w(T') = w(T'')$, and $T''$ is also an MST. This, however, gives us our contradiction, since $T''$ shares more edges with $T$ than $T'$ did.
   \end{proof}
 \end{theorem}
 
@@ -176,7 +178,7 @@ We proved during the exercises that this actually is a metric on the set of vert
 
 Instead of trying to compute the diameter of a graph, let us just try to compute the distance between two vertices. Or rather, it turns out to not be markedly harder to compute the distance between a given vertex and every other vertex, so we give an algorithm that can do this, and then we will say how to turn this into an algorithm for the simpler problem.
 
-In fact, we can interpret the problem of finding the distances between a given vertex and the rest of the graph as a problem of finding a certain spanning tree, rooted at the given vertex. If we just let each vertex pick its neighbour closest to the root as its parent, this tree precisely encodes the information we need.\sidenote[][]{
+In fact, we can interpret the problem of finding the distances between a given vertex and the rest of the graph as a problem of finding a certain spanning tree, rooted at the given vertex. If we just let each vertex pick its neighbour closest to the root as its parent, and if a vertex has more than one possible parent, pick one of them, this tree precisely encodes the information we need.\sidenote[][]{
   \begin{xca}
     Prove that this really is a tree. You can equivalently think of it as the union of all shortest paths between the root $v$ and some other vertex. (This tree is called a shortest-path tree.)
   \end{xca}
@@ -220,6 +222,7 @@ In fact, we can interpret the problem of finding the distances between a given v
 
 \section{Exercises}
 
+Note: We should write the algorithms presented in this lecture in a more readable way. 
 \begin{xca}
   We have shown in an exercise during our previous exercise session\sidenote[][]{If you did not solve that exercise, a proof is also in last years lecture notes.} that a weighted graph with all weights distinct has a unique minimum spanning tree.
 
@@ -237,7 +240,7 @@ In fact, we can interpret the problem of finding the distances between a given v
 \end{xca}
 
 \begin{xca}
-Use Prim's algorithm and Kruskal's algorithm to find the minimum spanning tree of the graph in figure \ref{fig:new_exercise} make sure that you carry out the individual steps of the algorithm carefully and completely. 
+Use Prim's algorithm and Kruskal's algorithm to find the minimum spanning tree of the graph in figure \ref{fig:new_exercise}.
 \begin{figure}
     \centering
     \includegraphics[width=0.7\textwidth]{graphics/L6_prim_kruskal_dijkstra/graph_exc6-7.png}
@@ -247,8 +250,9 @@ Use Prim's algorithm and Kruskal's algorithm to find the minimum spanning tree o
 \end{xca}
 
 \begin{xca}
-Implement Dijkstras algorithm on the graph in figure \ref{fig:dijkstras_algorithm} using the vertex in the lower left corner as the initial vertex $v_0$.
+Implement Dijkstras algorithm on the graph in Figure \ref{fig:new_exercise} using the vertex in the lower left corner as the initial vertex $v_0$.
 \end{xca}
+
 
 %\bibliography{references}
 %\bibliographystyle{plainnat}
