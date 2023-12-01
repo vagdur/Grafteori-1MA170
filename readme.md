@@ -17,6 +17,7 @@ Welcome to the course in graph theory at the bachelor's level at Uppsala Univers
 11. [Lecture 11: Planarity](https://vagdur.github.io/Grafteori-1MA170/lecture11.pdf)
 12. [Lecture 12: Vertex colourings](https://vagdur.github.io/Grafteori-1MA170/lecture12.pdf)
 13. [Exercise session 13: The probabilistic method, edge-colourings, and the Rado graph](https://vagdur.github.io/Grafteori-1MA170/exercise_session13.pdf)
+12. [Lecture 14: The probabilistic method and the Erd\H{o}s-Rényi random graph](https://vagdur.github.io/Grafteori-1MA170/lecture14.pdf) (Work in Progress)
 
 # Other course material
 
