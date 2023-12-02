@@ -141,6 +141,77 @@ It is somewhat cumbersome to explicitly write out the sequence of random graphs 
   \end{proof}
 \end{proposition}
 
+\section{Triangles in the Erd\H{o}s-Rényi graph}
+
+Having seen these two results from the exercises, let us do a slightly more involved calculation, that will make use of the second-moment method. In order to see interesting things happening in the $G(n,p)$, we will almost always have to choose a probability $p$ that shrinks as $n$ grows, to control the sparsity of the graph.
+
+\begin{proposition}
+  If $p = o\left(n^{-1}\right)$, $G(n,p)$ a.a.s. contains no triangle. If $p = \omega\left(n^{-1}\right)$, $G(n,p)$ contains a triangle w.h.p.\sidenote[][]{As a recap on the $O$ and $\Omega$ family of notations, recall that $f = o(g)$ means that $\lim_{n\to\infty} \frac{f(n)}{g(n)} = 0$, while $f = \omega(g)$ means that $\lim_{n\to\infty} \frac{f(n)}{g(n)} = \infty$.
+  
+  We will also use the notations $f \sim g$, which means that $\lim_{n\to\infty} \frac{f(n)}{g(n)} = 1$, and $f = O(g)$, which means that $f$ is asymptotically not of higher order than $g$, i.e. $\limsup_{n\to \infty} \frac{f(n)}{g(n)} < \infty$.
+  
+  Finally, we use the notation $f = \Theta(g)$, which means that $f = O(g)$ and $g = O(f)$, and use the fact that $f \sim g$ implies $f = \Theta(g)$ without comment.}
+
+  \begin{proof}
+    For each set $\tau$ of three vertices of $G$, i.e. three integers from $[n]$, let $T_\tau$ be the event that they form a triangle, and for convenience let us write $Y_\tau = \ind{T_\tau}$ for the indicator variable of this event. It is clear that $\Prob{T_\tau} = \E{Y_\tau} = p^3$, and so if we let the total number of triangles in $G$ be $X$, we compute by linearity of expectation that
+    $$\E{X} = \E{\sum_{\tau \in \binom{[n]}{3}} Y_\tau} = \sum_{\tau \in \binom{[n]}{3}} \Prob{T_\tau} = \binom{n}{3}p^3 \sim (np)^3$$
+    and so if $np \to 0$, we have $\E{X} \to 0$, and so by a first-moment method argument there are w.h.p. no triangles in $G$.
+
+    Now, to prove that there are triangles if $p = \omega\left( n^{-1} \right)$, it does not suffice to see that the expected number of triangles is high,\sidenote[][]{As we discussed in the exercise sheet about this -- see them for an explanation of this.} and so we need to also compute the variance in the number of triangles.
+
+    So we find that
+    \begin{align*}
+      \E{X^2} &= \E{\left(\sum_{\tau \in \binom{[n]}{3}} Y_\tau\right)^2}
+      = \E{\sum_{\tau, \sigma \in \binom{[n]}{3}} Y_\tau Y_\sigma}\\
+      &= \E{\sum_{\tau \in \binom{[n]}{3}} Y_\tau^2 + \sum_{\substack{\tau, \sigma \in \binom{[n]}{3}\\\tau \neq \sigma}} Y_\tau Y_\sigma}\\
+      &= \sum_{\tau \in \binom{[n]}{3}} \E{Y_\tau^2} + \sum_{\substack{\tau, \sigma \in \binom{[n]}{3}\\\tau \neq \sigma}} \E{Y_\tau Y_\sigma},
+    \end{align*}
+    and for the first of the two sums we can notice that $Y_\tau = Y_\tau^2$ always, since it is always either zero or one, so that sum is in fact just $\E{X}$, and so we have seen that
+    $$\E{X^2} = \E{X} + \sum_{\substack{\tau, \sigma \in \binom{[n]}{3}\\\tau \neq \sigma}} \E{Y_\tau Y_\sigma}.$$
+
+    For the second term, we need to break it apart into how the two sets $\sigma$ and $\tau$ can overlap,\sidenote[][]{So far, this calculation has been in a sense ``entirely standard'' -- any second-moment method argument will involve these steps, up to looking at how the things we count can overlap. The points where they differ is just in how hard it is to understand these overlaps -- fortunately, how two triangles can overlap without being equal is pretty easy to see.} and so we write that
+    \begin{align*}
+      \sum_{\substack{\tau, \sigma \in \binom{[n]}{3}\\\tau \neq \sigma}} \E{Y_\tau Y_\sigma} &= \sum_{\substack{\tau, \sigma \in \binom{[n]}{3}\\\tau \cap \sigma = \emptyset}} \E{Y_\tau Y_\sigma} + \sum_{\substack{\tau, \sigma \in \binom{[n]}{3}\\\abs{\tau \cap \sigma = 1}}} \E{Y_\tau Y_\sigma} + \sum_{\substack{\tau, \sigma \in \binom{[n]}{3}\\\abs{\tau \cap \sigma} = 2}} \E{Y_\tau Y_\sigma}
+    \end{align*}
+    and analyse each case separately.
+
+    If they do not overlap at all, then there are six edges that need to be present, and so $\E{Y_\tau Y_\sigma} = p^6$. There are $\binom{n}{3}\binom{n-3}{3}$ ways to choose two disjoint sets of size three, and so in total\sidenote[][]{We choose not to summarize this term with a big-O because we will need to compare it to a different thing of the same order later, so we do need the exact value. For the rest of the terms, we summarize them, since we don't need more details.}
+    $$\sum_{\substack{\tau, \sigma \in \binom{[n]}{3}\\\tau \cap \sigma = \emptyset}} \E{Y_\tau Y_\sigma} = p^6\binom{n}{3}\binom{n-3}{3}$$% = O\left((pn)^6\right).$$
+
+    If they overlap in a single vertex, there are still six edges that need to be present, so we still have $\E{Y_\tau Y_\sigma} = p^6$. However, there are $n\binom{n-1}{2}\binom{n-3}{2}$ ways to choose two sets of size three that overlap in one vertex, and so we see that
+    $$\sum_{\substack{\tau, \sigma \in \binom{[n]}{3}\\\abs{\tau \cap \sigma = 1}}} \E{Y_\tau Y_\sigma} = p^6 n\binom{n-1}{2}\binom{n-3}{2} = O\left(p^6 n^5\right).$$
+
+    Finally, if they overlap in two vertices, there are only five edges that need to be present, and so we now have $\E{Y_\tau Y_\sigma} = p^5$. There are $\binom{n}{2}(n-2)(n-3)$ ways to choose two sets of size three that overlap in two vertices, and so we have
+    $$\sum_{\substack{\tau, \sigma \in \binom{[n]}{3}\\\abs{\tau \cap \sigma = 2}}} \E{Y_\tau Y_\sigma} = p^5 \binom{n}{2}(n-2)(n-3) = O\left(p^5 n^4\right).$$
+
+    Assembling this calculation, we find that
+    \begin{align*}
+      \E{X^2} &= \E{X} + p^6\binom{n}{3}\binom{n-3}{3} + O\left(p^6 n^5\right) + O\left(p^5 n^4\right)\\
+      &= O\left(p^3 n^3\right) + p^6\binom{n}{3}\binom{n-3}{3} + O\left(p^6 n^5\right) + O\left(p^5 n^4\right)
+    \end{align*}
+    and so
+    \begin{align*}
+      \Var{X} &= \E{X^2} - \E{X}^2\\
+      &= O\left(p^3 n^3\right) + p^6\binom{n}{3}\binom{n-3}{3} + O\left(p^6 n^5\right) + O\left(p^5 n^4\right) - \left(\binom{n}{3} p^3\right)^2\\
+      &\leq O\left(p^3 n^3\right) + O\left(p^6 n^5\right) + O\left(p^5 n^4\right)
+    \end{align*}
+    where we did a somewhat messy calculation to get the final inequality.\sidenote[][]{In particular, we observe that
+    $$\binom{n}{3}\binom{n-3}{3} - \left(\binom{n}{3} p^3\right)^2$$
+    equals
+    $$-\frac{1}{12} n (3 n^4 - 24 n^3 + 71 n^2 - 90 n + 40)$$
+    and so it is asymptotically negative, and so we get the inequality when we drop both terms.}
+
+    So if we follow the recipe we gave in the exercises for the second-moment method, we now need to compare the variance to $\E{X}^2$, which we do, seeing that
+    \begin{align*}
+      \frac{\Var{X}}{\E{X}^2} &\leq \frac{O\left(p^3 n^3\right) + O\left(p^6 n^5\right) + O\left(p^5 n^4\right)}{\left(\Theta\left(n^3 p^3\right)\right)^2}\\
+      &= O\left((pn)^{-3}\right) + O\left(n^{-1}\right) + O\left((pn)^{-1}n^{-1}\right)
+    \end{align*}
+    which we see must go to zero with $n$ if $pn \to \infty$ with $n$. Thus our lemma for the second-moment method gives us that
+    $$\Prob{X = 0} \leq \frac{\Var{X}}{\E{X}^2} \to 0,$$
+    and so $G$ contains at least one triangle, as desired.
+  \end{proof}
+\end{proposition}
+
 \section{Girth and chromatic number}
 
 Already when we first introduced the chromatic number, we mentioned the obvious fact that a large clique forces a graph to have high chromatic number. One might be led by this to believe that being very sparse, without any cliques, would mean you have low chromatic number. This unfortunately turns out to be not at all true, in a pretty strong sense.
