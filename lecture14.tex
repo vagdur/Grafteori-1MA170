@@ -212,9 +212,29 @@ Having seen these two results from the exercises, let us do a slightly more invo
   \end{proof}
 \end{proposition}
 
-\begin{remark}
-  We have seen what happens if $p$ is asymptotically less than or greater than $\frac{1}{n}$. What happens if $p = \frac{c}{n}$ for some $c>0$? This turns out to be the ``critical'' range for a lot of interesting questions. In this case, a $G\left(n, \frac{c}{n}\right)$ will contain a Poisson distributed amount of triangles, with mean $\frac{c^3}{6}$ -- so sometimes it has a triangle and sometimes it does not!
-\end{remark}
+\section{The growth of $G(n,p)$}
+
+We have seen whether $G(n,p)$ contains triangles if $p$ is asymptotically less than or greater than $\frac{1}{n}$. What happens if $p = \frac{c}{n}$ for some $c>0$? This turns out to be the ``critical'' range for a lot of interesting questions. In this case, a $G\left(n, \frac{c}{n}\right)$ will contain a Poisson distributed amount of triangles, with mean $\frac{c^3}{6}$ -- so sometimes it has a triangle and sometimes it does not!
+
+Let us sketch a few more things that can be said about how the structure of $G(n,p)$ changes as the value of $p$ changes. Many more things can be said, but since we aren't going to prove any of them, we just give an outline here.
+
+\begin{itemize}
+  \item If $p = o\left(n^{-1}\right)$ we don't just get no triangles, we in fact get no cycles of any length -- so $G(n,p)$ is a forest.
+  \item For $p = \frac{c}{n}$ with $0 < c < 1$, each connected component is either a tree or contains a single cycle. If $C_{\max}$ denotes the number of vertices in the largest component, we have
+  $$\frac{C_{\max}}{\log(n)} \to \frac{1}{c - 1 - \log(c)}$$
+  in probability.\sidenote[][]{A sequence of random variables $X_n$ converges to $a \in \R$ \emph{in probability} if, for every $\epsilon > 0$,
+  $$\Prob{\abs{X_n - a} > \epsilon} \to 0$$
+  as $n \to \infty$. Note the order of the quantifiers here: This is a pointwise thing, in that we first fix $\epsilon$ and then take the limit. It is not equivalent to ask that this thing go to zero for every $\epsilon$ simultaneously.}
+  \item If $p = \frac{1}{n}$ exactly, the largest component has about $n^{2/3}$ vertices.
+  \item For every $c > 1$ there exists a constant $\zeta_c > 0$ such that the largest connected component of $G\left(n, \frac{c}{n}\right)$ contains about a $\zeta_c$ fraction of the vertices, up to an error of about $\pm \sqrt{n}$.\sidenote[][]{Here is an incredibly precise version of this statement, for those of you who really enjoy quantifiers and constants:
+  
+  \begin{align*}
+    \forall c > &1 \,\exists \zeta_c > 0\, \forall \nu \in \left(\frac{1}{2},1\right) \exists \delta > 0:\\ &\Prob{\abs{C_{\max} - \zeta_c n} \geq n^\nu} = O\left(n^{-\delta}\right).
+  \end{align*}}
+
+  This largest component is unique, and is called the \emph{giant component} -- all other connected components are trees on $O\left(\log(n)\right)$ vertices. The giant component contains enough edges to be non-planar.
+  \item If $p = c\frac{\log(n)}{n}$, the graph is a.a.s. connected and Hamiltonian.
+\end{itemize}
 
 \section{Girth and chromatic number}
 
