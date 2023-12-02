@@ -71,6 +71,76 @@ Of course, most graphs do not split up that nicely, but we can still try to divi
   \end{proof}
 \end{proposition}
 
+\section{The Erd\H{o}s-Rényi graph}
+
+As we saw in the previous exercise session, the simplest and most common random graph model is the Erd\H{o}s-Rényi graph, where all edges appear independently with the same probability. Let us restate the definition here, for completeness.
+
+\begin{definition}
+  For any integer $n \in \N$ and any probability $p \in [0,1]$, the \emph{Erd\H{o}s-Rényi graph} $G(n,p)$ is a random graph on $n$ vertices,\sidenote[][]{We will normally assume its vertex set is $[n]$, unless otherwise stated.} where each of the $\binom{n}{2}$ potential edges is present independently at random with probability $p$.
+\end{definition}
+
+\begin{proposition}
+  Let $\Hat G = (V,E)$ be a labelled graph on $n$ vertices, and $G = G(n,p)$ be an Erd\H{o}s-Rényi graph on the same number of vertices. The probability that $G = \Hat G$ is precisely
+  $$\Prob{G = \Hat G} = p^{\abs{E}}(1-p)^{\binom{n}{2} - \abs{E}},$$
+  and so in particular if $p = \frac{1}{2}$, the Erd\H{o}s-Rényi graph is in fact a uniformly random graph.
+\end{proposition}
+
+We proved two things about the Erd\H{o}s-Rényi graph during the exercises, but let us restate those results and their proofs here.
+
+\begin{lemma}
+  If $G = G(n,p)$ is an Erd\H{o}s-Rényi graph, the probability that it has an independent set of size at least $k$ is bounded by
+  $$\Prob{\alpha(G) \geq k} \leq \binom{n}{k}(1-p)^{\binom{k}{2}}.$$
+
+  \begin{proof}
+    There are a total of $\binom{n}{k}$ subsets of $[n]$ of size $k$, so for each such set $X \in \binom{[n]}{k}$, let $A_X$ be the event that $X$ is an independent set in $G$.
+
+    Clearly, $A_X$ happens whenever none of the $\binom{k}{2}$ possible edges inside $X$ are present, which happens with probability $(1-p)^{\binom{k}{2}}$. So we can calculate, using a union bound, that
+    \begin{align*}
+      \Prob{\alpha(G) \geq k} &= \Prob{\bigcup_{X \in \binom{[n]}{k}} A_X}\\
+      &\leq \sum_{X \in \binom{[n]}{k}} \Prob{A_X}\\
+      &= \sum_{X \in \binom{[n]}{k}} (1-p)^{\binom{k}{2}} = \binom{n}{k}(1-p)^{\binom{k}{2}}
+    \end{align*}
+    where we used in the last equality that we had $\binom{n}{k}$ summands, giving the lemma.
+  \end{proof}
+\end{lemma}
+
+\begin{proposition}
+  For any $p \in (0,1)$, if $G_n = G(n,p)$ is an Erd\H{o}s-Rényi graph for each $n$, it holds that
+  $$\Prob{\diam(G_n) = 2} \to 1\quad\text{as}\quad n \to \infty.$$
+\end{proposition}
+
+It is somewhat cumbersome to explicitly write out the sequence of random graphs and the limit every time we want to say something about an asymptotic property of the Erd\H{o}s-Rényi graph, so we will generally use the following way of phrasing such results instead:
+
+\begin{proposition}
+  For each fixed $p \in (0,1)$, it holds that $\diam(G(n,p)) = 2$ with high probability.\sidenote[][-1cm]{We also synonymously say that a property holds ``asymptotically almost surely'' -- these two phrases are then abbreviated to ``w.h.p.'' or ``a.a.s.'' when convenient. In both cases, what we mean is that the property holds with probability tending to one as we increase the number of vertices of the graph.}
+
+  \begin{proof}
+    The only graphs with diameter one are the complete graphs, and it is easy to see\sidenote[][]{
+      \begin{xca}
+        See this.
+      \end{xca}
+    } that the Erd\H{o}s-Rényi graph is not complete w.h.p. for any $p < 1$. So all we need to do is to show that $\diam G(n,p) \leq 2$ w.h.p.
+
+    So, for any pair of two distinct vertices $i$ and $j$, let $B_{ij}$ be the event that there is no edge between $i$ and $j$ and they additionally have no common neighbour. We call such a pair of vertices a \emph{bad} pair -- it is clear that a graph has diameter at most two precisely when it has no bad pairs.
+    
+    Now we can compute, using the fact that edges appear independently, that
+    \begin{align*}
+      \Prob{B_{ij}} &= \Prob{\left(i \sim j \not\in E\right) \wedge \left(\bigwedge_{k \in [n]\setminus \{i,j\}} (i \sim k \not\in E)\vee (k \sim j \not \in E)\right)}\\
+      &= (1-p)\prod_{k \in [n] \setminus \{i,j\}} \Prob{(i \sim k \not\in E)\vee (k \sim j \not \in E)}\\
+      &= (1-p)\prod_{k \in [n] \setminus \{i,j\}} (1 - p^2) = (1-p)(1 - p^2)^{n-2},
+    \end{align*}
+    and so letting $X$ be the number of bad pairs, we compute using linearity of expectation that
+    \begin{align*}
+      \E{X} &= \E{\sum_{\{i,j\} \in \binom{[n]}{2}} \ind{B_{ij}}}\\
+      &= \sum_{\{i,j\} \in \binom{[n]}{2}} \Prob{B_{ij}}\\
+      &= \binom{n}{2}(1-p)(1 - p^2)^{n-2}
+    \end{align*}
+    which we easily see goes to zero for fixed $p \in (0,1)$ as $n \to \infty$.
+
+    The result now follows by following the recipe for the first-moment method, applying Markov's inequality to see that we also have $\Prob{X > 0} \to 0$ as $n \to \infty$.
+  \end{proof}
+\end{proposition}
+
 \section{Girth and chromatic number}
 
 Already when we first introduced the chromatic number, we mentioned the obvious fact that a large clique forces a graph to have high chromatic number. One might be led by this to believe that being very sparse, without any cliques, would mean you have low chromatic number. This unfortunately turns out to be not at all true, in a pretty strong sense.
