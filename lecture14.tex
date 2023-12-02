@@ -248,10 +248,19 @@ So the notion of girth generalizes the notion of being triangle-free, which is j
 
 \begin{theorem}[Erd\H{o}s, 1959]
   For all positive integers $k$ there exists a graph $G$ of girth and chromatic number at least $k$.
+
+  \begin{proof}
+    Fix a $k \geq 3$ and an $\epsilon \in \left(0, \frac{1}{k}\right)$, and let $p = n^{-(1-\epsilon)}$. Let $G$ be a $G(n,p)$. Our strategy is the following:
+    \begin{enumerate}
+      \item We count the number of cycles of length at most $k$ in $G$, and show that with probability greater than $\frac{1}{2}$ there are fewer than $\frac{n}{2}$ of them.
+      \item We calculate the probability that $G$ has no independent set of size $\frac{n}{2k}$, and see that this is greater than $\frac{1}{2}$.
+      \item We observe that two events both of which have probability greater than one half cannot be disjoint, so there exists some graph $\Hat G$ which has fewer than $\frac{n}{2}$ cycles of length at most $k$ and has independence number less than $\frac{n}{2k}$.
+      \item We finally observe that if we remove one vertex from each cycle of $\Hat G$ we get an induced subgraph $H$ with girth at least $k$ and independence number at most $\frac{n}{2k}$, and so we can apply the inequality
+      $$\chi(H) \geq \frac{\abs{V(H)}}{\alpha(H)}$$
+      to get that the chromatic number of $H$ is also at least $k$. So $H$ is a graph of the type we desired to show exists.
+    \end{enumerate}
+  \end{proof}
 \end{theorem}
-
-The proof of this uses the probabilistic method, and proceeds by considering a random graph from a suitably chosen distribution, and showing that the probability that it has girth and chromatic number at least $k$ is greater than $0$. We postpone the proof of this until a later lecture, when we will have developed our probabilistic toolbox a bit more.
-
 
 \section{Exercises}
 
