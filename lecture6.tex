@@ -178,7 +178,7 @@ We proved during the exercises that this actually is a metric on the set of vert
 
 Instead of trying to compute the diameter of a graph, let us just try to compute the distance between two vertices. Or rather, it turns out to not be markedly harder to compute the distance between a given vertex and every other vertex, so we give an algorithm that can do this, and then we will say how to turn this into an algorithm for the simpler problem.
 
-In fact, we can interpret the problem of finding the distances between a given vertex and the rest of the graph as a problem of finding a certain spanning tree, rooted at the given vertex. If we just let each vertex pick its neighbour closest to the root as its parent, and if a vertex has more than one possible parent, pick one of them, this tree precisely encodes the information we need.\sidenote[][]{
+In fact, we can interpret the problem of finding the distances between a given vertex and the rest of the graph as a problem of finding a certain spanning tree, rooted at the given vertex. If we just let each vertex pick its neighbour closest to the root as its parent, tiebreaking arbitrarily\sidenote[][]{That is, if a vertex has two neighbours that minimize the distance to the root, we pick one of them arbitrarily.}, this tree precisely encodes the information we need.\sidenote[][]{
   \begin{xca}
     Prove that this really is a tree. You can equivalently think of it as the union of all shortest paths between the root $v$ and some other vertex. (This tree is called a shortest-path tree.)
   \end{xca}
