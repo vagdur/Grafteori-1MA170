@@ -38,15 +38,15 @@ Thus, having a vertex with more than one parent is a contradiction. Hence $T$ is
 \emph{Is it true that, under the assumption that all edges have different weights, no two spanning trees of a graph G have the same weight?}
 \vspace{0.4cm}
 
-To see that this does not hold we can look at an example.
-
 \begin{figure}[h]
     \centering
     \includegraphics{Ex_3_project.png}
        \caption{counterexample exercise 3}
     \label{ex_3}
 \end{figure}
-Let $G=(V,E)$ be the graph for $V = \{a,b,c,d\}$ and $E = \{ \{a,b\}, \{a,c\}, \{b,c\}, \{b,d\}, \{c,d\} \}$. We can choose spanning trees $T_1 = (V, E_1)$ and $T_2 = (V, E_2)$ with $E_1 = \{ \{a,c\}, \{b,c\}, \{c,d\} \}$ and $E_2=\{a,b\}, \{b,c\}, \{b,d\} \}$ (see Figure \ref{ex_3}). If we assign weights as shown in the figure we obtain a weight of 12 for both $T_1$ and $T_2$. Hence the statement is not true.
+To see that this does not hold we can look at an example. Let $G=(V,E)$ be the graph for
+$$V = \{a,b,c,d\}\quad\text{and}\quad E = \{ \{a,b\}, \{a,c\}, \{b,c\}, \{b,d\}, \{c,d\} \}.$$ 
+We can choose spanning trees $T_1 = (V, E_1)$ and $T_2 = (V, E_2)$ with $E_1 = \{ \{a,c\}, \{b,c\}, \{c,d\} \}$ and $E_2=\{a,b\}, \{b,c\}, \{b,d\} \}$ (see Figure \ref{ex_3}). If we assign weights as shown in the figure we obtain a weight of 12 for both $T_1$ and $T_2$. Hence the statement is not true.
 
 
 
