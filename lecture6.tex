@@ -62,7 +62,7 @@ The first algorithm we introduce for this is Prim's algorithm, which works by st
   Let $G = (V,E,w)$ be a finite connected weighted graph, and let $v \in V$ be an arbitrary vertex of $G$.
 \begin{enumerate}
     \item Initialise a tree $T = (\{v\}, \emptyset)$, i.e. the subtree containing only $v$.
-    \item While $T$ is not a spanning subgraph, I.e. $V(T) \neq V$, find an edge $e$ of $G$ between $V(T)$ and $V(T)^c$ (all vertices in $G$ that are not in $T$) which has minimal weight. Add this edge together with its endpoint in $V(T)^c$ to $T$.
+    \item While $T$ is not a spanning subgraph, i.e. $V(T) \neq V$, find an edge $e$ of $G$ between $V(T)$ and $V(T)^c$ (all vertices in $G$ that are not in $T$) which has minimal weight. Add this edge together with its endpoint in $V(T)^c$ to $T$.
     \item Return $T$.
     \end{enumerate}
   How this algorithm constructs an MST is illustrated in Figure \ref{fig:prims_algorithm}.
