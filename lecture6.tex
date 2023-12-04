@@ -59,10 +59,12 @@ The first algorithm we introduce for this is Prim's algorithm, which works by st
 \end{figure}
 
 \begin{definition}[Prim's algorithm]
-  Let $G = (V,E,w)$ be a finite connected weighted graph, and let $v \in V$ be an arbitrary vertex of $G$. Initialize the algorithm by setting $T = (\{v\}, \emptyset)$, the subtree containing only $v$.
-
-  As long as $T$ is not a spanning subgraph, find an edge $e$ of $G$ between $V(T)$ and $V(T)^c$ which has minimal weight. Add this edge together with its endpoint in $V(T)^c$ to $T$. When $V(T) = V$, return $T$.
-
+  Let $G = (V,E,w)$ be a finite connected weighted graph, and let $v \in V$ be an arbitrary vertex of $G$.
+\begin{enumerate}
+    \item Initialise a tree $T = (\{v\}, \emptyset)$, i.e. the subtree containing only $v$.
+    \item While $T$ is not a spanning subgraph, i.e. $V(T) \neq V$, find an edge $e$ of $G$ between $V(T)$ and $V(T)^c$ (all vertices in $G$ that are not in $T$) which has minimal weight. Add this edge together with its endpoint in $V(T)^c$ to $T$.
+    \item Return $T$.
+    \end{enumerate}
   How this algorithm constructs an MST is illustrated in Figure \ref{fig:prims_algorithm}.
 \end{definition}
 
@@ -76,7 +78,7 @@ Before we can prove that this algorithm actually works, we will need a little le
   \begin{proof}
     That the connected components of a graph gotten by removing edges from a tree will always be trees is easy to see -- they are by definition connected, and removing edges can't have introduced any cycles, so they are connected and acyclic, i.e. trees.\sidenote[][]{A graph all of whose connected components are trees is called a \emph{forest}, of course. These are precisely the acyclic graphs. So one very poor definition of ``tree'' could be ``a tree is a connected forest''.}
 
-    Now, to see that $F$ must have exactly two connected components, let $U$ be the connected component containing $u$, and likewise for $W$. Assume $v$ is some vertex not in $U$ -- we will show it is then in $W$.
+    Now, to see that $F$ must have exactly two connected components, let $U$ be the connected component containing $u$, and $W$ be the connected component containing $w$. Assume $v$ is some vertex not in $U$ -- we will show it is then in $W$.
 
     Since $T$ is connected, there is a path $P$ connecting $v$ to $u$ -- and since $v$ is not in $U$, this path must have been destroyed by removing the edge $e$. Now, since $e = (w, u)$ is incident to $u$, it must in fact have been the final edge of the path $P$, so we can write
     $$P = v\, e_1\, v_1\, e_2\, \ldots\, e_\ell\, w\, e\, u.$$
@@ -127,8 +129,12 @@ The second algorithm we consider for finding MSTs is \emph{Kruskal's algorithm},
 \end{figure}
 
 \begin{definition}[Kruskal's algorithm]
-  Let $G = (V,E,w)$ be a connected finite weighted graph, and let $L$ be a list of the edges of $G$ sorted in ascending order of weight. Initialize the algorithm by setting $F_0 = (V, \emptyset)$. At time step $i$, remove the first entry from $L$, and call it $e_i$. If adding $e_i$ to $F_{i-1}$ would not create a cycle, let $F_i = (V, E(F_{i-1})\cup\{e_i\})$, otherwise let $F_i = F_{i-1}$. The algorithm terminates when we add the $n-1$th edge.
-
+  Let $G = (V,E,w)$ be a connected finite weighted graph, and let $L$ be a list of the edges of $G$ sorted in ascending order of weight.
+  \begin{enumerate}
+      \item Initialise the forest $F = (V, \emptyset)$. 
+      \item While $F$ is not spanning remove the first entry from $L$, and call it $e$. If adding $e$ to $F$ would not create a cycle add $e$ to $F$.
+      \item Return $F$.
+    \end{enumerate}
   How this algorithm constructs an MST is illustrated in Figure \ref{fig:kruskals_algorithm}.
 \end{definition}
 
@@ -138,7 +144,7 @@ The second algorithm we consider for finding MSTs is \emph{Kruskal's algorithm},
   \begin{proof}
     Let $G = (V,E,w)$ be a finite connected weighted graph. It is clear by construction that Kruskal's algorithm always generates a cycle-free spanning subgraph which is edge maximal, and so by a similar argument as when we were proving all graphs have spanning trees, it must always generate a spanning tree.
 
-    To see that this spanning tree is in fact maximal, we again compare with a known MST. In particular, let $T$ be the spanning tree found by Kruskal's algorithm, and let $T'$ denote an MST that has a maximal number of edges shared with $T$. We will show that if $T \neq T'$ we can actually modify $T'$ to have even more edges in common with $T$, while still being an MST, contradicting our maximality assumption, and so we must have $T \neq T'$.
+    To see that this spanning tree is in fact maximal, we again compare with a known MST. In particular, let $T$ be the spanning tree found by Kruskal's algorithm, and let $T'$ denote an MST that has a maximal number of edges shared with $T$. We will show that if $T \neq T'$ we can actually modify $T'$ to have even more edges in common with $T$, while still being an MST, contradicting our maximality assumption, and so we must have $T = T'$.
 
     So, assuming $T \neq T'$, let $e$ be the lowest-weight edge of $T$ that is not contained in $T'$. Adding $e$ to $T'$ will create a cycle, and somewhere on this cycle there must be an edge $f$ not contained in $T$.
 
@@ -172,7 +178,7 @@ We proved during the exercises that this actually is a metric on the set of vert
 
 Instead of trying to compute the diameter of a graph, let us just try to compute the distance between two vertices. Or rather, it turns out to not be markedly harder to compute the distance between a given vertex and every other vertex, so we give an algorithm that can do this, and then we will say how to turn this into an algorithm for the simpler problem.
 
-In fact, we can interpret the problem of finding the distances between a given vertex and the rest of the graph as a problem of finding a certain spanning tree, rooted at the given vertex. If we just let each vertex pick its neighbour closest to the root as its parent, this tree precisely encodes the information we need.\sidenote[][]{
+In fact, we can interpret the problem of finding the distances between a given vertex and the rest of the graph as a problem of finding a certain spanning tree, rooted at the given vertex. If we just let each vertex pick its neighbour closest to the root as its parent, tiebreaking arbitrarily\sidenote[][]{That is, if a vertex has two neighbours that minimize the distance to the root, we pick one of them arbitrarily.}, this tree precisely encodes the information we need.\sidenote[][]{
   \begin{xca}
     Prove that this really is a tree. You can equivalently think of it as the union of all shortest paths between the root $v$ and some other vertex. (This tree is called a shortest-path tree.)
   \end{xca}
@@ -215,7 +221,7 @@ In fact, we can interpret the problem of finding the distances between a given v
 \end{remark}
 
 \section{Exercises}
-
+ 
 \begin{xca}
   We have shown in an exercise during our previous exercise session\sidenote[][]{If you did not solve that exercise, a proof is also in last years lecture notes.} that a weighted graph with all weights distinct has a unique minimum spanning tree.
 
@@ -231,6 +237,21 @@ In fact, we can interpret the problem of finding the distances between a given v
 \begin{xca}
   Are any of the things we did in this lecture useful for computing the diameter of a graph? Think about how one might do it, and what runtimes your suggested algorithms will have.\sidenote[][]{You can then, if you like, spend some time googling to learn what the best approaches known achieve.}
 \end{xca}
+
+\begin{xca}
+Use Prim's algorithm and Kruskal's algorithm to find the minimum spanning tree of the graph in figure \ref{fig:new_exercise}.
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\textwidth]{graphics/L6_prim_kruskal_dijkstra/graph_exc6-7.png}
+    \caption{Graph for exercise 6 and 7.}
+    \label{fig:new_exercise}
+\end{figure}
+\end{xca}
+
+\begin{xca}
+Implement Dijkstras algorithm on the graph in Figure \ref{fig:new_exercise} using the vertex in the lower left corner as the initial vertex $v_0$.
+\end{xca}
+
 
 %\bibliography{references}
 %\bibliographystyle{plainnat}
