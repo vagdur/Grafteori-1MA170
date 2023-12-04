@@ -12,6 +12,8 @@
 
 \usepackage{hyperref}
 
+\usepackage{enumitem}
+
 \usepackage{verbatim}
 
 \usepackage{tabularx}
