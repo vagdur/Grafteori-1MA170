@@ -73,15 +73,16 @@ If we know something about the graph, we can be a bit more clever in our choice 
 \begin{definition}
   Let $G = (V,E)$ be a graph. \emph{Breadth-first search} started at a vertex $v$ proceeds as follows:
   \begin{enumerate}
-    \item Initialize the \emph{currently visited vertex} to $v$, the list of \emph{discovered vertices} $D$ to be empty, and the list of \emph{visited vertices} $W$ to be empty.
-    \item Add all the neighbours of the currently visited vertex to the end of $D$, in an arbitrary order.
-    \item Add the currently visited vertex to the end of $W$.
-    \item If $D$ is not empty, remove the first element of $D$, and let it be the new currently visited vertex. Otherwise, return $W$.
+    \item Pick a starting vertex \(v\).
+    \item Initialize a list (tree) and an queue\sidenote[][]{A queue is a first in, first out, data structure; you add (enqueue) elements in the back and remove them (dequeue) from the front so that the element that has been the longest in the queue is removed first.} by adding \(v\) to the list (root of tree) and enqueuing it to the queue .
+    \item Now, until the queue is empty do the following:
+    \item Dequeue a vertex from the queue, let's call it the current vertex.
+    \item For each neighbour of the current vertex: if the neighbour is not already in the list (tree), add it to the list (tree, as a child of the current vertex) and enqueue it to the queue.
   \end{enumerate}
 
   This algorithm will return a list of the vertices of the connected component containing $v$. The order in which these vertices appear is called a \emph{breadth-first ordering} of the vertices, started at $v$. 
   
-  We could also modify the algorithm slightly, to make each vertex remember which vertex was the currently visited one when it was added to the list of discovered vertices. Then we get a \emph{breadth-first spanning tree} rooted at $v$ by having each vertex consider its parent as the vertex that discovered it.
+  We could also modify the algorithm slightly (as indicated in parenthesis), to make each vertex remember which vertex was the currently visited one when it was added to the list of discovered vertices. Then we get a \emph{breadth-first spanning tree} rooted at $v$ by having each vertex consider its parent as the vertex that discovered it.
 \end{definition}
 
 \begin{lemma}\label{lemma:brooks_for_irregular}
