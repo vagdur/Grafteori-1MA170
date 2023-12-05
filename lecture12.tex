@@ -73,7 +73,6 @@ If we know something about the graph, we can be a bit more clever in our choice 
 \begin{definition}
   Let $G = (V,E)$ be a graph. \emph{Breadth-first search} started at a vertex $v$ proceeds as follows:
   \begin{enumerate}
-    \item Pick a starting vertex \(v\).
     \item Initialize a list (tree) and an queue\sidenote[][]{A queue is a first in, first out, data structure; you add (enqueue) elements in the back and remove them (dequeue) from the front so that the element that has been the longest in the queue is removed first.} by adding \(v\) to the list (root of tree) and enqueuing it to the queue .
     \item Now, until the queue is empty do the following:
     \item Dequeue a vertex from the queue, let's call it the current vertex.
