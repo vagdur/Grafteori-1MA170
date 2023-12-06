@@ -113,7 +113,7 @@ Before we can prove that this algorithm actually works, we will need a little le
 \end{theorem}
 
 \begin{remark}
-  The runtime of this algorithm will depend on the implementation -- specifically on how the graph is represented\sidenote[][-0.9cm]{Are you storing essentially an adjacency matrix, or a list of edges, or something like a ``linked list'' kind of structure? There are many ways of representing a graph in memory.} and on how you find the next edge between $V(T_i)$ and $V(T_i)^c$. A good implementation has a runtime of $\mc{O}\left(\abs{E} + \abs{V}\log\left(\abs{V}\right)\right)$.\sidenote[][]{If you just store an adjacency matrix, you get a runtime of $\mc{O}\left(\abs{V}^2\right)$, while if you store the graph as a list of vertices, where each vertex is a list of its neighbours, and use a Fibonacci heap to help finding the minimal edges, you get the runtime of the ``good'' implementation.}
+  The runtime of this algorithm will depend on the implementation -- specifically on how the graph is represented\sidenote[][-0.9cm]{Are you storing essentially an adjacency matrix, or a list of edges, or something like a ``linked list'' kind of structure? There are many ways of representing a graph in memory.} and on how you find the next edge between $V(T_i)$ and $V(T_i)^c$. A good implementation has a runtime of $\mc{O}\left(\abs{E} + \abs{V}\log\left(\abs{V}\right)\right)$.\sidenote[][1cm]{If you just store an adjacency matrix, you get a runtime of $\mc{O}\left(\abs{V}^2\right)$, while if you store the graph as a list of vertices, where each vertex is a list of its neighbours, and use a Fibonacci heap to help finding the minimal edges, you get the runtime of the ``good'' implementation.}
 \end{remark}
 
 \section{Kruskal's algorithm}
@@ -122,7 +122,7 @@ The second algorithm we consider for finding MSTs is \emph{Kruskal's algorithm},
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.9\textwidth]{graphics/L6_prim_kruskal_dijkstra/kruskal.png}
+  \includegraphics[width=1.1\textwidth]{graphics/L6_prim_kruskal_dijkstra/kruskal.png}
   \caption[][0cm]{An illustration of how Kruskal's algorithm finds a minimal spanning tree in a similar graph as the one in Figure \ref{fig:prims_algorithm}, which illustrated Prim's algorithm. Notice that adding the edge with weight 2 would create a loop and thus it is skipped.}
   \label{fig:kruskals_algorithm}
 \end{figure}
@@ -164,7 +164,7 @@ Another thing we did in our exercises was to consider distance functions on grap
   $$d_G(v, v') = \min_{\text{walks }P\text{ from }v\text{ to }v'} \sum_{e \in E(P)} w(e).$$
 \end{definition}
 
-We proved during the exercises that this actually is a metric on the set of vertices whenever the graph is connected, so it makes sense to call this a distance and use the language of metric spaces. We can also extend this definition to disconnected metric spaces if we recall the convention that a minimum over an empty set is $\infty$.\sidenote[][]{This is really the same thing as why an empty sum is zero, an empty product $1$, an empty union is $\emptyset$, and so on.}
+We proved during the exercises that this actually is a metric on the set of vertices whenever the graph is connected, so it makes sense to call this a distance and use the language of metric spaces. We can also extend this definition to disconnected metric spaces if we recall the convention that a minimum over an empty set is $\infty$.\sidenote[][-1cm]{This is really the same thing as why an empty sum is zero, an empty product $1$, an empty union is $\emptyset$, and so on.}
 
 \begin{figure}
     \centering
@@ -173,14 +173,14 @@ We proved during the exercises that this actually is a metric on the set of vert
     \label{fig:distance}
 \end{figure}
 
-In the context of real world application, one can have a look at Figure \ref{fig:distance} where we have used cities as vertices and intercity routes as edges, and the distances between cities as weights. We note that the \textit{graph distance} is not always the same as the \textit{distance} travelled. For instance, the graph distance between Uppsala and Södertälje would mean the total weights of the path via Uppsala, Enkoping, Bålsta, Stockholm and Södertälje, which is 11. On the other hand, the distance travelled between Uppsala and Södertälje is dependent on the path taken which doesnt need to be the shortest.
+In the context of real world application, one can have a look at Figure \ref{fig:distance} where we have used cities as vertices and intercity routes as edges, and the distances between cities as weights. \sidenote[][]{We will need to assume that cars/bus/trucks can only travelled on these intercity routes.} We note that the \textit{graph distance} is not always the same as the \textit{distance} travelled. For instance, the graph distance between Uppsala and Södertälje would mean the total weights of the path via Uppsala, Enköping, Bålsta, Stockholm and Södertälje, which is 11. On the other hand, the distance travelled between Uppsala and Södertälje is dependent on the path taken which can be any path as long as you can reach the destination. And in this case, it doesn't need to be the shortest.
 
 \begin{definition}
   The \emph{diameter} of a graph is the same as the diameter for any metric space -- it is the maximum distance between any two vertices.\sidenote[][]{This has also been called ``longest shortest path'', presumably by people who like confusing terminology.} That is,
   $$\diam(G) = \max_{v, u \in V(G)} d(v,u).$$
 \end{definition}
 
-Using again Figure \ref{fig:distance} as an example, the diameter of the graph would represent the longest direct journey you might have to make to get from one city to another. It's like figuring out the most distant pair of cities, measuring the travel distance not by the actual road length but by the number of connections or edges you need to traverse to get from one city to another. And in this case, the diameter would be the distance from Uppsala to Södertälje. For instance, consider a scenario where you're trying to establish a reliable courier service to deliver packages between cities. Knowing the diameter of the transportation network helps you determine the longest route your couriers might have to take. This information is useful for planning efficient logistics and ensuring timely deliveries.
+Using again Figure \ref{fig:distance} as an example, the diameter of the graph would represent the longest direct journey you might have to make to get from one city to another. It's like figuring out the most distant pair of cities, measured only by the shortest possible distance you need to traverse to get from one city to another. And in this case, the diameter would be the distance from Uppsala to Södertälje. For instance, consider a scenario where you're trying to establish a reliable courier service to deliver packages between cities. Knowing the diameter of the transportation network helps you determine the longest route your couriers might have to take. This information is useful for planning efficient logistics and ensuring timely deliveries.
 
 Instead of trying to compute the diameter of a graph, let us just try to compute the distance between two vertices. Or rather, it turns out to not be markedly harder to compute the distance between a given vertex and every other vertex, so we give an algorithm that can do this, and then we will say how to turn this into an algorithm for the simpler problem.
 
@@ -189,7 +189,6 @@ In fact, we can interpret the problem of finding the distances between a given v
     Prove that this really is a tree. You can equivalently think of it as the union of all shortest paths between the root $v$ and some other vertex. (This tree is called a shortest-path tree.)
   \end{xca}
 }
-\newpage
 \begin{figure}
   \centering
   \includegraphics[width=0.85\textwidth]{graphics/L6_prim_kruskal_dijkstra/dijkstras_algorithm.png}
@@ -221,7 +220,7 @@ In fact, we can interpret the problem of finding the distances between a given v
 \begin{remark}
   If we are only interested in the distance to some specific vertex $v'$, we can find the distance to it by terminating the algorithm already when $v'$ is the currently visited vertex.
 
-  If we want to find the actual path that realizes the found distance, we can just iterate the parent function $p$ -- starting in a vertex $v$, walk to $p(v)$, then to $p(p(v))$, and so on until you reach $v_0$. Notice that this path is not the unique path realizing the found distance.
+  If we want to find the actual path that realizes the found distance, we can just iterate the parent function $p$ -- starting in a vertex $v$, walk to $p(v)$, then to $p(p(v))$, and so on until you reach $v_0$. Notice that this path is not necessarily the unique path realizing the found distance.
 
   With the right implementation, Dijkstra's algorithm has a runtime of $\mc{O}\left(\abs{E} + \abs{V}\log\left(\abs{V}\right)\right)$.
 \end{remark}
@@ -231,7 +230,7 @@ In fact, we can interpret the problem of finding the distances between a given v
 \begin{xca}
   We have shown in an exercise during our previous exercise session\sidenote[][]{If you did not solve that exercise, a proof is also in last years lecture notes.} that a weighted graph with all weights distinct has a unique minimum spanning tree.
 
-  Is the stronger statement also true, that in a graph G with distinct weights no two spanning trees can have the same weigh?
+  Is the stronger statement also true, that in a graph G with distinct weights no two spanning trees can have the same weight?
 \end{xca}
 
 \begin{xca}
@@ -245,7 +244,7 @@ In fact, we can interpret the problem of finding the distances between a given v
 \end{xca}
 
 \begin{xca}
-  If there are multiple edges of the same weight there may be some indeterminacy in Prim's and Kruskal's algorithm. Show that all MST:s of a graph can be found using both of the algorithms.
+  If there are multiple edges of the same weight there may be some element of choice in the ordering of the edges in Prim's and Kruskal's algorithms. Using this show that given an arbitrary MST the algorithms can always find it.
 \end{xca}
 
 %\bibliography{references}
