@@ -69,6 +69,17 @@ Having done this warmup, we can move on to the original question that motivated 
   Can you generalize what you just did to finding $\ex(n; K_k)$ for $k > 3$?
 \end{xca}
 
+In the lecture, we will see several very elegant proofs of Turán's theorem, which is the theorem that gives the answer to this question. Let us close out with an exercise that is definitely rather tough, but has a very elegant solution\sidenote[][]{Which uses a probabilistic method style of argument.} which points towards more advanced problems.
+
+\begin{xca}
+  Let us generalize the definition of $\ex(n; H)$ to saying that for every graph $G$,
+  $$\ex(G; H) = \max\left\{\abs{E(F)} \given H \not\subseteq F \subseteq G\right\},$$
+  that is, $\ex(G;H)$ is the largest number of edges of an $H$-free subgraph of $G$. So $\ex(n; H) = \ex(K_n; H)$.
+
+  Prove that for all $H$ and all $n$-vertex graphs $G$,
+  $$\ex(G; H) \geq \ex(n; H) \frac{\abs{E(G)}}{\binom{n}{2}}.$$
+\end{xca}
+
 %\bibliography{references}
 %\bibliographystyle{plainnat}
 
