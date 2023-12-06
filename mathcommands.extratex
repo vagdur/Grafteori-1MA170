@@ -134,6 +134,7 @@
 \DeclareMathOperator{\adj}{adj}
 \DeclareMathOperator{\Vol}{Vol}
 \DeclareMathOperator{\diam}{diam}
+\DeclareMathOperator{\ex}{ex}
 
 % Mängddifferens
 \newcommand{\symdiff}{\mathbin{\triangle}}

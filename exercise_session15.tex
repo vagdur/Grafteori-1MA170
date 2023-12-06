@@ -43,7 +43,31 @@
 We introduce the concept of extremal graph theory, starting with Turan's theorem. Then we introduce Szemerédi's regularity lemma as a tool for extremal graph theory.
 \end{abstract}
 
-\section{Extremal triangle free graphs}
+\section{Extremal graphs}
+
+We start with the central definition of extremal graph theory, and then we explain what it actually means through some exercises.
+
+\begin{definition}
+  Given any graph $H$, we say that a graph $G$ is \emph{$H$-free} if it has no subgraph isomorphic to $H$. We say that it is \emph{maximal $H$-free} if adding any edge to it would create a subgraph isomorphic to $H$, and we say that is is \emph{maximum $H$-free} (or \emph{extremal} among $H$-free graphs) if additionally no other $H$-free graph has more edges than $G$.
+
+  For each integer $n$, we define the \emph{extremal function for $H$}, denoted $\ex(n; H)$, to be the number of edges of a maximum $H$-free graph on $n$ vertices.
+\end{definition}
+
+\begin{xca}
+  As a warm-up exercise, if $H$ is the path on three vertices, what is $\ex(n;H)$? What are the extremal graphs for this problem?
+
+  Letting $H_k$ be a star graph with $k$ leaves,\sidenote[][]{That is, a tree with one root with $k$ children, and no other vertices or edges.} what is $\ex(n;H_k)$? Which are the extremal graphs here?
+\end{xca}
+
+Having done this warmup, we can move on to the original question that motivated the start of extremal graph theory: How many edges can a graph have if it does not contain any triangles? This requirement clearly imposes \emph{some} bound on the number of edges -- a complete graph certainly contains a triangle -- but what is the bound?
+
+\begin{xca}
+  Letting $H = K_3$, the triangle graph, what is $\ex(n; K_3)$? What do the extremal graphs look like?\sidenote[][]{Side exercise: Can you find a graph that is maximal triangle-free but not extremal?}
+\end{xca}
+
+\begin{xca}
+  Can you generalize what you just did to finding $\ex(n; K_k)$ for $k > 3$?
+\end{xca}
 
 %\bibliography{references}
 %\bibliographystyle{plainnat}
