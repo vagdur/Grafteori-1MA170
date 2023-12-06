@@ -43,6 +43,50 @@
 Continuing our previous work on vertex colourings, we now consider the related notion of edge colourings. Then we discuss the basic notions of Ramsey theory.
 \end{abstract}
 
+\section{Edge-colourings}
+
+We already saw the definition of an edge-colouring in the exercise session, but let us restate it here as well:
+
+\begin{definition}
+    Let $G = (V,E)$ be a graph. A \emph{proper}\sidenote[][]{Unlike for vertex colourings, we will actually be interested in improper edge colourings more often than proper ones, so we choose the opposite convention of including the word proper and omitting the word improper for them.} \emph{$k$-edge-colouring} is a function $c: E \to [k]$ such that no two edges which are incident to each other (i.e. share an endpoint) are assigned the same colour. If we do not have this restriction on incident edges, we call it just an (improper) edge colouring.
+
+    The \emph{edge-chromatic number} of $G$, denoted $\chi_1(G)$,\sidenote[][]{This is sometimes also called the \emph{chromatic index} of $G$. The $1$ in the notation indicates that edges are one-dimensional -- if we ever need to refer to both the chromatic number and the edge-chromatic number at the same time, we may thus denote the chromatic number by $\chi_0(G)$, since vertices are zero-dimensional. In some texts the edge-chromatic number is denoted by $\chi'(G)$, but $\chi$ and $\chi'$ look way too similar in \LaTeX\ and on a blackboard, so let us avoid that notation.} is the smallest integer $k$ such that $G$ has a proper $k$-edge-colouring.
+\end{definition}
+
+\begin{remark}
+    We notice immediately that for a proper edge-colouring, the colour classes are all matchings, just like how for a vertex colouring the colour classes are all independent sets. In fact, of course, a proper edge-colouring is a vertex colouring of the line graph, so this is just an instance of the correspondence between matchings on $G$ and independent sets in $L(G)$.
+\end{remark}
+
+We can also see that if $v$ is a vertex of maximum degree, its incident edges must all have different colours, so we must have that $\chi_1(G) \geq \Delta$.\sidenote[][]{We could also phrase this as that these $\Delta$ edges form a clique in the line graph, so the chromatic number of the line graph must be at least $\Delta$, and $\chi(L(G)) = \chi_1(G)$.} In fact this bound is attained for bipartite graphs.
+
+\begin{theorem}[König's line-colouring theorem, 1916]
+    Every bipartite graph $G$ with maximum degree $\Delta$ has edge-chromatic number $\chi_1(G) = \Delta$.
+
+    \begin{proof}
+        We prove the result by induction on the number $m = \abs{E}$ of edges. The base case of $m = 0$ is trivial.
+
+        So, let $G = (V,E)$ be bipartite, with $m$ edges and maximum degree $\Delta$. Pick an arbitrary edge $\{v,w\}$, and let $G'$ be the graph obtained from $G$ by deleting the edge $v \sim w$.
+
+        Now $G'$ is a bipartite graph on fewer edges, and so by the induction hypothesis it can be properly edge-coloured with $\Delta(G') \leq \Delta$ colours, so we pick such a colouring.
+
+        Each of the vertices $v$ and $w$ are incident to at most $\Delta-1$ edges in $G'$, so there must exist a colour $i$ not used by any edge incident to $v$, and likewise a colour $j$ not incident to $w$. If $i = j$ we can just colour the edge $v \sim w$ in this colour, so assume that $i \neq j$.
+
+        The rest of the argument essentially proceeds by considering the Kempe chains of the colouring, and doing a Kempe change. Of course, we defined Kempe chains only for \emph{vertex} colourings, so we need to consider edge-induced subgraphs instead of induced subgraphs.
+
+        So consider the graph $G\langle i,j\rangle$ -- the edge-induced subgraph of $G$ consisting only of the edges coloured with $i$ or with $j$. If we could show that $v$ and $w$ are in different connected components of this graph, then we could swap the two colours $i$ and $j$ in the component containing $w$, enabling us to colour the edge $v \sim w$ in colour $i$.
+
+        So suppose for contradiction that there were a path $P$ from $v$ to $w$ in $G\langle i,j\rangle$. Then, since $v$ is not incident to any edge of colour $i$ by assumption, the path $P$ has to start with an edge coloured $j$. Likewise, $w$ is not incident to any edge coloured $j$, so $P$ has to end with an edge coloured $i$.
+
+        So if we just look at the sequence of colours of edges in $P$, it has to look like
+        $$j\,i\,j\,i\ldots j\,i\,j\,i$$
+        and so in particular we see that it must be of even length, since all the $i$s occur in even-numbered positions and the sequence ends on an $i$.
+
+        Therefore, the path $P$ together with the edge $v \sim w$ forms a cycle in $G$ of odd length. This, however, is impossible, since a graph is bipartite if and only if it contains no cycles of odd length.\sidenote[][]{This, unfortunately, is not a statement we have had occasion to prove in the course. Fortunately, it makes for a very nice exercise.
+        
+        \begin{xca}Prove this characterization of bipartite graphs.\end{xca}}
+    \end{proof}
+\end{theorem}
+
 
 \section{Exercises}
 
