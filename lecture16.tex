@@ -65,7 +65,7 @@ We can also see that if $v$ is a vertex of maximum degree, its incident edges mu
     \begin{proof}
         We prove the result by induction on the number $m = \abs{E}$ of edges. The base case of $m = 0$ is trivial.
 
-        So, let $G = (V,E)$ be bipartite, with $m$ edges and maximum degree $\Delta$. Pick an arbitrary edge $\{v,w\}$, and let $G'$ be the graph obtained from $G$ by deleting the edge $v \sim w$.
+        So, let $G = (V,E)$ be bipartite, with $m$ edges and maximum degree $\Delta$. Pick an arbitrary edge $v \sim w$, and let $G'$ be the graph obtained from $G$ by deleting this edge.
 
         Now $G'$ is a bipartite graph on fewer edges, and so by the induction hypothesis it can be properly edge-coloured with $\Delta(G') \leq \Delta$ colours, so we pick such a colouring.
 
