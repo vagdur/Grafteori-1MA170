@@ -139,7 +139,7 @@ Having seen the upper bound, let us now also establish a lower bound on this qua
   \begin{proof}
     As advertised, we consider a random edge-colouring of a $K_n$ -- we just assign each edge red or blue with equal probability.
 
-    So, for each set $S \in \binom{[n]}{k}$, let $R_S$ be the event that $K_n[S]$ is monochrome red, and $B_S$ the event that it is monochrome blue. Clearly $\Prob{R_S} = \Prob{B_S} = 2^{-\binom{n}{k}}$.
+    So, for each set $S \in \binom{[n]}{k}$, let $R_S$ be the event that $K_n[S]$ is monochrome red, and $B_S$ the event that it is monochrome blue. Clearly $\Prob{R_S} = \Prob{B_S} = 2^{-\binom{k}{2}}$.
     
     Then the event that the colouring has a monochrome $K_k$ is just
     $$\bigcup_{S \in \binom{[n]}{k}} R_S \cup B_S,$$
