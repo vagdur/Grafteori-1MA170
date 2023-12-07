@@ -93,6 +93,64 @@ So we have seen that the obvious bound is sharp for the bipartite graphs. What o
   For any graph $G$ of maximum degree $\Delta$, it holds that $\chi_1(G) \in \{\Delta,\, \Delta+1\}$. A graph such that $\chi_1(G) = \Delta$ is said to be of \emph{class one}, and a graph such that $\chi_1(G) = \Delta + 1$ is said to be of \emph{class two}.\sidenote[][]{It turns out that there is no known classification of which graphs are of which class, but some partial results are known.\begin{xca}For which values of $n$ is $K_n$ of class one and for which of class two?\end{xca}}
 \end{theorem}
 
+\section{Ramsey theory}
+
+Let us now dip our toes into the field of Ramsey theory. It is a large research area with many questions to be posed, and we will give it a shamefully short treatment. Let us start by stating the second most elementary definition in the area.\sidenote[][]{In the exercises, we saw \emph{the} most basic definition. Let's make it mildly more interesting here.}
+
+\begin{definition}
+  For any integers $r$ and $k$, the \emph{Ramsey number} $R(r,k)$ is the smallest integer $n$ such that every edge-colouring of $K_n$ using only the two colours red and blue contains a red $K_r$ or a blue $K_k$.\sidenote[][]{By ``containing a monochromatic $K_r$'' we mean that for some colour $i$, the edge-induced subgraph $K_n\langle c^{-1}(i)\rangle$ contains an $r$-clique.} Equivalently, it is the smallest integer $n$ such that any graph on $n$ vertices contains either an independent set of size $k$ or has a clique of size $r$.
+\end{definition}
+
+\begin{remark}
+  Why are the two things we stated equivalent? Given any graph $G = (V,E)$ on $n$ vertices, we can edge-colour the complete graph $K_n$ by colouring the edge $i \sim j$ red if $i \sim j \in E$, and blue otherwise. Then a red clique in the colouring is a clique in $G$, and a blue clique is an independent set in $G$.
+\end{remark}
+
+Of course, these definitions contain the hidden assumption that these numbers actually exist. A priori there might be some $r$ and $k$ such that there exist arbitrarily large graphs $G$ with $\alpha(G) < k$ and $\omega(G) < r$. So let us prove that these numbers are indeed finite.
+
+\begin{lemma}\label{lemma:ramsey_recursion_ub}
+  For all $m$ and $n$, it holds that
+  $$R(m,n) \leq R(m-1,n) + R(m, n-1).$$
+
+  \begin{proof}
+    To keep the notation manageable, let us let $s = R(m-1, n)$ and $t = R(m, n-1)$. Consider some edge-colouring of $K_{s+t}$, and pick an arbitrary vertex $v$. By the pigeonhole principle, this $v$ has either $s$ incident red edges or $t$ incident blue edges.\sidenote[][]{If it did not, the total number of vertices in the $K_{s+t}$ would be upper bounded by
+    $$1 + (s - 1) + (t - 1) = s + t - 1$$
+    which is a contradiction.}
+
+    So assume without loss of generality that it has $s$ neighbours by red edges,\sidenote[][]{The argument if it instead had $t$ neighbours by blue edges is entirely the same.} and let $S$ be this set of neighbours. Then the induced subgraph of just these neighbours is a $K_s$, which thus must contain either a blue $K_n$ or a red $K_{m-1}$. In the first case, we are done, and in the second case, the red $K_{m-1}$ together with $v$ forms a red $K_m$, and we are again done.
+  \end{proof}
+\end{lemma}
+
+\begin{corollary}
+  For all $m$ and $n$, $R(m,n)$ is finite, and in particular,
+  $$R(m,n) \leq \binom{m + n - 2}{m - 1}.$$
+
+  \begin{proof}
+    It is easy to see that $R(m,1) = R(1,m) = 1$, so the finiteness is immediate by induction. To see the more explicit bound, we observe that it is nearly as immediate that $R(m,2) = m$ and $R(2,n) = n$, and then do a standard proof by induction, which we omit.\sidenote[][]{It is just a version of the very basic ``prove this formula with binomial coefficients'' proofs that one sees when first introduced to induction, there are no fancy ideas here. Do work out the details if you like.}
+  \end{proof}
+\end{corollary}
+
+Having seen the upper bound, let us now also establish a lower bound on this quantity. To see a lower bound, it suffices to find a single edge-colouring of a $K_n$ which contains no monochromatic $K_k$. This time, we will get to use the probabilistic method -- the idea is just to consider a random colouring, and show that the probability that it has a monochromatic clique is less than one.\sidenote[][]{This is one of the early proofs by Erd\H{o}s using the probabilistic method, that really made its power clear.}
+
+\begin{theorem}[Erd\H{o}s, 1947]
+  If $\binom{n}{k}2^{1 - \binom{k}{2}} < 1$, then $R(k,k) > n$. In particular, $R(k,k) \geq \floor{2^{k/2}}$ for all $k \geq 3$.\sidenote[][]{We only prove the first statement -- the second follows just by seeing that
+  $$\binom{\floor{2^{k/2}}}{k}2^{1 - \binom{k}{2}} < 1,$$
+  which is not a calculation we want to have to do.}
+
+  \begin{proof}
+    As advertised, we consider a random edge-colouring of a $K_n$ -- we just assign each edge red or blue with equal probability.
+
+    So, for each set $S \in \binom{[n]}{k}$, let $R_S$ be the event that $K_n[S]$ is monochrome red, and $B_S$ the event that it is monochrome blue. Clearly $\Prob{R_S} = \Prob{B_S} = 2^{-\binom{n}{k}}$.
+    
+    Then the event that the colouring has a monochrome $K_k$ is just
+    $$\bigcup_{S \in \binom{[n]}{k}} R_S \cup B_S,$$
+    and so we can use a union bound to see that
+    \begin{align*}
+      \Prob{\bigcup_{S \in \binom{[n]}{k}} R_S \cup B_S} &\leq \sum_{S \in \binom{[n]}{k}} \Prob{R_S} + \Prob{B_S} = \binom{n}{k}2^{1 - \binom{k}{2}}
+    \end{align*}
+    which by assumption is less than one, and so there must exist an outcome in which the event does not occur, which will be our example.
+  \end{proof}
+\end{theorem}
+
 \section{Exercises}
 
 
