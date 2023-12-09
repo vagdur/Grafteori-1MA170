@@ -89,9 +89,66 @@ We can also see that if $v$ is a vertex of maximum degree, its incident edges mu
 
 So we have seen that the obvious bound is sharp for the bipartite graphs. What other values can the edge-chromatic number take? It turns out that the range of values is far more restricted than for vertex colourings.
 
-\begin{theorem}[Vizing, 1964]
+\begin{theorem}[Vizing, 1964]\label{thm:vizing}
   For any graph $G$ of maximum degree $\Delta$, it holds that $\chi_1(G) \in \{\Delta,\, \Delta+1\}$. A graph such that $\chi_1(G) = \Delta$ is said to be of \emph{class one}, and a graph such that $\chi_1(G) = \Delta + 1$ is said to be of \emph{class two}.\sidenote[][]{It turns out that there is no known classification of which graphs are of which class, but some partial results are known.\begin{xca}For which values of $n$ is $K_n$ of class one and for which of class two?\end{xca}}
 \end{theorem}
+
+To see this result, it suffices to see the following lemma:
+
+\begin{lemma}\label{lemma:vizing_thm_lemma}
+  Let $G$ be a graph, $v$ a vertex of $G$, and $k \geq \Delta$ an integer. Suppose $G[V\setminus\{v\}]$ has a proper $k$-edge-colouring such that for every neighbour $w$ of $v$ except possibly one, there are at least two colours not used by any edge incident to $w$, and the possible exception has one colour available. Then $G$ is $k$-edge-colourable.
+\end{lemma}
+
+Let us start by seeing how the theorem follows from the lemma, and then proving the lemma.
+
+\begin{proof}[Proof of Theorem \ref{thm:vizing} from Lemma \ref{lemma:vizing_thm_lemma}]
+  The lower bound $\chi_1(G) \geq \Delta$ is clear, so what we need to show is the upper bound. So suppose for contradiction that there were a counterexample to this, and let $G$ be an edge-minimum\sidenote[][]{That is, $G$ is a graph which is a counterexample, and no other counterexample has fewer edges than $G$.} such counterexample. That is, $G$ is such that there exists a single edge $e = v \sim w$ such that the graph $G \setminus e$ is $\Delta+1$-edge-colourable. 
+  
+  So pick a $\Delta+1$-edge-colouring of $G \setminus e$, and notice that this gives us a $\Delta+1$-edge-colouring of $G[V \setminus v]$ as well. So let us check that this colouring of $G[V \setminus v]$ satisfies the conditions of our lemma.
+  
+  Every vertex always has at least one colour available, since we have $\Delta+1$ colours and only at most $\Delta$ incident edges. Removing $v$ will also remove the edges between $v$ and its neighbours in $G \setminus e$, so all neighbours other than $w$ in $G$ will have one more colour freed up, namely the one used by their edge with $v$. So by our lemma there is a $\Delta + 1$-edge-colouring of $G$.
+\end{proof}
+
+\begin{proof}[Proof of Lemma \ref{lemma:vizing_thm_lemma}]
+  \hl{fix the induction hypothesis - needs to somehow be an induction in both k and Delta?}
+
+  We prove the result by induction in $k$. The base case is not entirely trivial.\sidenote[][]{It is, however, simple enough that we can have it be an exercise instead of doing it in the lecture: \begin{xca}Prove the base case. What value of $k$ do we actually start at?\end{xca}}
+
+  Pick a $k$-edge-colouring of $G' = G[V \setminus v]$, and for each $i \in [k]$, let $X_i$ be the set of neighbours of $v$ where colour $i$ is available, that is, the neighbours which are not incident to any edge coloured with colour $i$. Let us assume that we have chosen the colouring $c$ which minimizes $\sum_{i=1}^k \abs{X_i}^2$ -- that is, we have chosen it so that all the parts are of as equal sizes as possible.
+
+  We lose no generality in assuming that there is in fact an exceptional neighbour $w$ at which only one colour is available, and that every other neighbour has exactly two colours available -- if some neighbour has too many colours available, we can just add a leaf to it and use up one colour with the edge to that leaf. If we can edge-colour this larger graph, we can certainly colour the smaller one we started with, so no generality was lost.
+
+  Now we can see by an easy double-counting argument that that the sum over all colours of the number of neighbours it is available in equals the sum over all neighbours of the number of colours it has available, and so
+  $$\sum_{i=1}^{k} \abs{X_i} = 2d_v - 1.$$
+
+  Now we claim that for every pair $i, j$ of colours,
+  $$\abs{\abs{X_i} - \abs{X_j}} \leq 2.$$
+  Suppose for contradiction that this were not the case for some pair $i, j$, so that $\abs{X_i} > \abs{X_j} + 2$, and consider the edge-induced subgraph $G'\langle i, j\rangle$ of edges coloured $i$ or $j$.\sidenote[][]{That is, the edge-induced subgraph $G'\left\langle c^{-1}\left(\left\{i,j\right\}\right)\right\rangle$.}
+
+  This is where we really see why edge-colourings are more restricted than vertex colourings -- a Kempe chain\sidenote[][]{That is, a connected component of the induced subgraph of vertices coloured in two colours by  a vertex colouring.} can look like any connected two-colourable graph, but this $G'\langle i, j\rangle$ has to have maximum degree two, and so every connected component has to be a cycle or a path.\sidenote[][]{Where the path is allowed to be of length one, that is, be just a single isolated vertex.} 
+  
+  If it is a cycle, then at no vertex in the cycle will either colour $i$ or $j$ be available, and so in particular this cycle will be disjoint from $X_i$ and $X_j$. So if a component contains a vertex from $X_i$, that component has to be a path, and in fact the vertex from $X_i$ has to be one of the endpoints.
+
+  There clearly has to be at least one component of $G'\langle i, j\rangle$ which contains more vertices from $X_i$ than from $X_j$ -- and so in particular this component has to be a path with one or both endpoints in $X_i$ and neither in $X_j$. So if we do a Kempe change on this component, swapping the two colours $i$ and $j$, this will decrease $\abs{X_i}^2 + \abs{X_j}^2$, contradicting our assumption of minimality.
+
+  So $\abs{\abs{X_i} - \abs{X_j}} \leq 2$ for all $i$ and $j$, so all the values $\abs{X_i}$ lie in an interval of integers of length three, which in particular implies that there must be some $i$ such that $\abs{X_i} = 1$. If there were not, there are two cases:
+  \begin{enumerate}
+    \item There is some $j$ such that $\abs{X_j} = 0$. Then for every $k$, $\abs{X_k} \in \{0, 2\}$. Then, however, the sum of their sizes would be even, but we know that $\sum_{i=1}^{k} \abs{X_i} = 2d_v - 1$, which is odd.
+    \item The least $\abs{X_j}$ is at least two. Then, however,
+    $$2d_v - 1 = \sum_{i=1}^{k} \abs{X_i} \geq 2k$$
+    and so $d_v > k \geq \Delta$, which is a contradiction.
+  \end{enumerate}
+
+  So suppose we have such an $i$, and say $X_i = \{u\}$. So let 
+  $$G'' = G \setminus (v \sim u \cup c^{-1}(i)),$$
+  that is, $G''$ is the graph gotten by deleting the edge $u \sim v$ and every edge coloured $i$. So $G''[V\setminus v]$ is $(k-1)$-edge-coloured, and \hl{The remaining idea is that this }$G''[V\setminus v]$\hl{ will satisfy the induction hypothesis, so we can extend to a (k-1)-colouring of all of G'', and then we can add all the edges coloured i to the graph and colour the one bad edge u sim v with colour i.}
+
+  %Let us denote the neighbourhood $N(v)$ of $v$ by $N$ for short, and pick a $k$-edge-colouring $c$ of $G' = G[V \setminus v]$. For each $w \in N$, denote by $A(w)$ the set of colours available at $w$.\sidenote[][]{That is, the set of colours not used by any edge incident to $w$ in $G'$.}
+
+  %Now, extend the colouring $c$ to a maximal partially defined proper edge-colouring $\Tilde c$ on all of $G$. If $\Tilde c$ colours all the edges, we are of course done, so we can assume that there are some edges incident to $v$ which are not coloured by $\Tilde c$.
+
+  %We will see that we can in fact modify $\Tilde c$ in such a way that we can colour another edge. Iteratively applying this improvement process will then give us a fully defined proper edge-colouring, proving the lemma.
+\end{proof}
 
 \section{Ramsey theory}
 
@@ -153,6 +210,9 @@ Having seen the upper bound, let us now also establish a lower bound on this qua
 
 \section{Exercises}
 
+\begin{xca}
+  Suppose $G$ is some graph of maximum degree $\Delta$, and let $D$ be the set of vertices of degree $\Delta$. Use Lemma \ref{lemma:vizing_thm_lemma} to show the result by Fournier that if $G[D]$, the subgraph induced by the vertices of maximum degree, is a forest, then $G$ is of class one.
+\end{xca}
 
 %\bibliography{references}
 %\bibliographystyle{plainnat}
