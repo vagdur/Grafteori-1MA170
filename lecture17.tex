@@ -132,6 +132,18 @@ So this gives us half of the implication from property two to property one. The 
     \end{proof}
 \end{lemma}
 
+So now we have showed that the two sets of properties are indeed equivalent -- it remains to show that there is only one graph up to isomorphism that has these properties.
+
+\begin{lemma}
+    Suppose $G = (V,E)$ and $G' = (V',E')$ are two graphs that both have the properties stated in Theorem \ref{thm:two_rado_defs_equiv}, that is, they are both $k$-saturated for every $k$. Then they are isomorphic.
+
+    \begin{proof}[Proof sketch]
+        Just like in the proof of Lemma \ref{lemma:saturated_implies_homogeneous}, we prove this by inductively by the back-and-forth method, starting from the isomorphism between a single-vertex subgraph in $G$ and one in $G'$.
+
+        The argument for extending the isomorphisms is almost exactly the same as in the proof of Lemma \ref{lemma:saturated_implies_homogeneous}, using the saturation to find the next vertex to extend it to, so we leave writing up the details as an exercise.\sidenote[][]{\begin{xca}Do this.\end{xca}}
+    \end{proof}
+\end{lemma}
+
 \section{Exercises}
 
 
