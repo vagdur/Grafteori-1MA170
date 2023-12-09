@@ -24,7 +24,7 @@ Welcome to the course in graph theory at the bachelor's level at Uppsala Univers
 # Other course material
 
 1. In addition to the lecture notes, the book Graph Theory by Reinhard Diestel is listed as course literature, and it may be a useful reference. It ought be [available as a pdf from the university library](https://uub.primo.exlibrisgroup.com/discovery/search?tab=Everything&search_scope=MyInst_and_CI&vid=46LIBRIS_UUB:UUB&offset=0&lang=sv&query=isbn,contains,9783642142789).
-2. The lecture notes from last year's edition of the course [are available here](https://vagdur.github.io/Grafteori-1MA170/lectureNotes2022.pdf). The material covered should be essentially the same, just in a slightly different style. These should be useful if you want to read ahead.
+2. The lecture notes from last year's edition of the course [are available here](https://vagdur.github.io/Grafteori-1MA170/lectureNotes2022.pdf). The material covered should be mostly the same, just in a slightly different style. These should be useful if you want to read ahead.
 
 # Where to find a paper for the assignment
 
