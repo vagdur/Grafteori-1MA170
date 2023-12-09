@@ -81,7 +81,7 @@ We will divide this statement into three lemmas.
     If $G = (V,E)$ is a $k$-saturated graph, it contains a copy of $H$ for any graph $H$ on at most $k$ vertices.
 
     \begin{proof}
-        We prove this by induction on the number $n$ of vertices of $H$. The base case of $n = 1$ is trivial.
+        We prove this by induction on the number $n$ of vertices of $H$. The base case of $n = 1$ is trivial.\sidenote[][]{Well, it requires us to know that $G$ is not the ``empty graph'' $(\emptyset,\emptyset)$. \begin{xca}Prove that a $k$-saturated graph must always have at least $k$ vertices. If you want, try thinking about if you can find a sharper lower bound on the number of vertices than this.\end{xca}}
 
         So suppose we are given some graph $H = (\Tilde V, \Tilde E)$, and pick an arbitrary vertex $v \in \Tilde V$. By induction, there is a copy of $H[\Tilde V \setminus v]$ in $G$ -- let $f: \Tilde V \to V$ be the isomorphism. 
         
