@@ -97,14 +97,22 @@ So this gives us half of the implication from property two to property one. The 
     \begin{proof}
         In order to prove this, it suffices to prove the following statement:
         \begin{quotation}
-            Suppose $A$ and $B$ are two subsets of $V$ such that $G[A]$ and $G[B]$ are isomorphic, via an isomorphism $f: A \to B$. Then there exist $a, b \in V\setminus (A \cup B)$ such that $f$ extends to an isomorphism of $G[A \cup \{a\}]$ and $G[B \cup \{b\}]$ by letting $f(a) = b$.
+            Suppose $A$ and $B$ are two subsets of $V$ such that $G[A]$ and $G[B]$ are isomorphic, via an isomorphism $f: A \to B$. Then for each $a \in V \setminus A$ there exists $b \in V\setminus B$ such that $f$ extends to an isomorphism of $G[A \cup \{a\}]$ and $G[B \cup \{b\}]$ by letting $f(a) = b$, and similarly for each $b \in V \setminus B$ there exists an $a \in V \setminus A$ so that we can likewise extend $f$.
         \end{quotation}
 
-        If we have seen this statement, it will follow by induction that we can just keep extending this isomorphism until it becomes an automorphism of $G$, as we need for $G$ to be homogeneous.
+        To prove the lemma using this statement, we use the so-called ``back-and-forth'' method, which is seen all over model theory. So suppose we are given two sets of vertices $A_0$ and $B_0$ such that $G[A_0]$ and $G[B_0]$ are isomorphic. We then order the vertices of $G$ as $v_1 < v_2 < \ldots$,\sidenote[][]{Here we are of course using our assumption that $G$ is countable. The argument should still work for higher cardinalities if you assume it is $\kappa$-saturated for every cardinal up to the size of your vertex set, you just need different notation for how you order the vertices in the argument.} and we inductively construct larger and larger isomorphisms as follows:
+        \begin{enumerate}
+            \item Pick the first vertex $a$ for which $f$ is not yet defined, and use our statement to find a $b$ to extend $f$ to this $a$.
+            \item Then we pick the first vertex $b$ which is not in the image of $f$, and find an $a$ so that we can extend $f$ to hit this vertex.
+        \end{enumerate}
 
-        So suppose we are given two such subsets $A$ and $B$, and pick an arbitrary vertex $a \in V \setminus A$. Let $U = f\left(N(a) \cap A\right)$ and $W = f\left(A \setminus N(a)\right)$. Then, by saturation of $G$, there exists a $b \in V$ which is adjacent to every vertex in $U$ and no vertex in $W$.
+        This inductively defines an isomorphism between subsets of every finite size -- and if we take a union of all of these, we get the desired automorphism. The first step of this process ensures that the automorphism is defined on all vertices, and the second step ensures that every vertex is in its image, so it really is bijective.\sidenote[][]{Both of these steps are genuinely needed -- if we didn't have the second step, we might not create a surjection. Imagine the vertices of $G$ are just the integers -- the second step is needed to ensure that the map we're creating isn't accidentally a bijection between $\Z$ and $2\Z$. Infinities can behave in ways we don't immediately expect based on how finite sets act.}
+
+        So suppose we are given two such subsets $A$ and $B$ and a vertex $a \in V \setminus A$. Let $U = f\left(N(a) \cap A\right)$ and $W = f\left(A \setminus N(a)\right)$. Then, by saturation of $G$, there exists a $b \in V$ which is adjacent to every vertex in $U$ and no vertex in $W$.
 
         So it is clear that defining $f(a) = b$ extends the isomorphism, since $b$ is adjacent to precisely those vertices in $f(A)$ that $a$ was adjacent to in $A$.
+
+        An entirely analogous argument, letting instead $U = f^{-1}\left(N(b) \cap B\right)$ and $W = f^{-1}\left(B \setminus N(b)\right)$, yields the second half of the statement.
     \end{proof}
 \end{lemma}
 
