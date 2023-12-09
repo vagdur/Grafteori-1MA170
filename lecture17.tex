@@ -43,6 +43,86 @@
 We introduce the Rado graph, prove some of its more remarkable properties, and show that it can be seen as \textcaps{the} random graph on infinitely many vertices.
 \end{abstract}
 
+We have already seen the definition of the Rado graph in the exercise session, and we have mentioned when we introduced the Erd\H{o}s-Rényi graph that the Rado graph is what you will always get if you sample an Erd\H{o}s-Rényi graph on infinitely many vertices.
+
+Let us start by restating definitions, and then we can jump into proving things about this remarkable graph.
+
+\begin{definition}
+    Let $G = (V,E)$ be a finite or infinite graph. We say that $G$ is \emph{homogeneous} if, for any two subsets $A, B \subseteq V$ such that the induced subgraphs $G[A]$ and $G[B]$ are isomorphic, the isomorphism between them can be extended to an automorphism of the entire graph.
+  
+    Concretely, this means that if $f: A \to B$ is the isomorphism between $G[A]$ and $G[B]$, there is an isomorphism $g: V \to V$ between $G$ and itself, such that $f(a) = g(a)$ whenever $a \in A$.
+\end{definition}
+
+\begin{definition}
+    The \emph{Rado graph} is the unique\sidenote[][]{Up to isomorphism.} countably infinite homogeneous graph $G$ such that, for any finite graph $H$, $H$ is isomorphic to an induced subgraph of $G$.\sidenote[][]{The part about being homogeneous is necessary for uniqueness.\begin{xca}Find a graph $G$ on countably many vertices that contains a copy of each finite graph $H$, but is not isomorphic to the Rado graph. In order to prove that it is not isomorphic to the Rado graph, give an explicit example of two isomorphic subgraphs where you cannot extend the isomorphism between them to an automorphism.\end{xca}}
+\end{definition}
+
+This is a nice characterisation of the Rado graph,\sidenote[][]{If you knew some model theory, you might recognize this definition as stating that the Rado graph is the Fraïssé limit of the class of finite graphs. If you do not, those words mean nothing to you. (And you should take a class on model theory at some point -- it is very cool stuff, even if it is a bit outside the usual main track of a mathematics education.)} but it of course does not actually show that this graph \emph{exists}. We will prove that a bit later, but to do so, it is easier to characterise the Rado graph by a different property.
+
+\begin{definition}
+    A graph $G = (V,E)$, finite or infinite, is \emph{$k$-saturated} if, for any two subsets $U, W \subseteq V$, each of size at most $k$, there exists a vertex $v \in V$ such that $v \sim u \in E$ for every $u \in U$, and $v \sim w \not\in E$ for every $w \in W$.
+\end{definition}
+
+Our goal is to show the following theorem, which gives us our desired different characterization of the Rado graph, and gives us a proof of its uniqueness.\sidenote[][]{Proving its existence will come later.}
+
+\begin{theorem}
+    The following two properties of a graph are equivalent:
+    \begin{enumerate}
+        \item $G$ is homogeneous and contains a copy of every finite graph.
+        \item $G$ is $k$-saturated for every $k \in \N$.
+    \end{enumerate}
+
+    In addition, any two graphs that both have these properties are isomorphic.
+\end{theorem}
+
+We will divide this statement into three lemmas.
+
+\begin{lemma}
+    If $G = (V,E)$ is a $k$-saturated graph, it contains a copy of $H$ for any graph $H$ on at most $k$ vertices.
+
+    \begin{proof}
+        We prove this by induction on the number $n$ of vertices of $H$. The base case of $n = 1$ is trivial.
+
+        So suppose we are given some graph $H = (\Tilde V, \Tilde E)$, and pick an arbitrary vertex $v \in \Tilde V$. By induction, there is a copy of $H[\Tilde V \setminus v]$ in $G$ -- let $f: \Tilde V \to V$ be the isomorphism. 
+        
+        So let $U = N(v)$ and $W = \Tilde V \setminus N(v)$. By $k$-saturatedness, there is a vertex $w \in V$ adjacent to every vertex in $f(U)$ but to none of the vertices in $f(W)$. Then, however, we can extend our isomorphism $f$ by just defining $f(v) = w$. So we have found a copy of all of $H$ in $G$.
+    \end{proof}
+\end{lemma}
+
+So this gives us half of the implication from property two to property one. The other half will require us to actually think about infinite graphs a little bit, or at least do a bit of induction.
+
+\begin{lemma}
+    If $G = (V,E)$ is $k$-saturated for every $k$, then it is homogeneous.
+    
+    \begin{proof}
+        In order to prove this, it suffices to prove the following statement:
+        \begin{quotation}
+            Suppose $A$ and $B$ are two subsets of $V$ such that $G[A]$ and $G[B]$ are isomorphic, via an isomorphism $f: A \to B$. Then there exist $a, b \in V\setminus (A \cup B)$ such that $f$ extends to an isomorphism of $G[A \cup \{a\}]$ and $G[B \cup \{b\}]$ by letting $f(a) = b$.
+        \end{quotation}
+
+        If we have seen this statement, it will follow by induction that we can just keep extending this isomorphism until it becomes an automorphism of $G$, as we need for $G$ to be homogeneous.
+
+        So suppose we are given two such subsets $A$ and $B$, and pick an arbitrary vertex $a \in V \setminus A$. Let $U = f\left(N(a) \cap A\right)$ and $W = f\left(A \setminus N(a)\right)$. Then, by saturation of $G$, there exists a $b \in V$ which is adjacent to every vertex in $U$ and no vertex in $W$.
+
+        So it is clear that defining $f(a) = b$ extends the isomorphism, since $b$ is adjacent to precisely those vertices in $f(A)$ that $a$ was adjacent to in $A$.
+    \end{proof}
+\end{lemma}
+
+\begin{lemma}
+    If a graph $G = (V,E)$ is homogeneous and contains a copy of every graph on at most $2k + 1$ vertices, then it is $k$-saturated.
+
+    \begin{proof}
+        Suppose we are given two disjoint sets $U, W \subseteq V$ of size at most $k$. We need to find a vertex adjacent to everything in $U$ and nothing in $W$.
+
+        So construct a graph $H$ by taking the graph $G[U \cup W]$ and adding another vertex $v$ to it, with an edge to everything in $U$ and nothing in $W$. Let the copies of $U$ and $W$ in $H$ be denoted $\Tilde U$ and $\Tilde W$, respectively.
+        
+        Clearly, $H$ is a graph on at most $2k + 1$ vertices, and so there exists a copy of it somewhere in $G$ -- in a slight abuse of notation, we can call the copy $H$ and its vertices $\{\Tilde U, \Tilde W, w\}$ as well.\sidenote[][]{This makes the notation a lot simpler for us -- otherwise, we would have to introduce a letter for the isomorphism between $H$ and the copy of $H$ in $G$, and start writing things like $f(\Tilde U)$ everywhere.}
+
+        Now, by construction, $G[\Tilde U \cup \Tilde W]$ and $G[U \cup W]$ are isomorphic, and so since $G$ is homogeneous the isomorphism between them extends to an automorphism $f$ of $G$. It is clear that we must have that $f(\Tilde U) = U$ and $f(\Tilde W) = W$.
+
+        So consider the vertex $f(v)$ -- since $v$ has an edge to every vertex of $\Tilde U$, $f(v)$ must have an edge to every vertex of $f(\Tilde U) = U$, and likewise for the non-edges between $v$ and $\Tilde W$. So $f(v)$ is the vertex we were looking for. 
+    \end{proof}
+\end{lemma}
 
 \section{Exercises}
 
