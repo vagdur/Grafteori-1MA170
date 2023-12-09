@@ -65,7 +65,7 @@ This is a nice characterisation of the Rado graph,\sidenote[][]{If you knew some
 
 Our goal is to show the following theorem, which gives us our desired different characterization of the Rado graph, and gives us a proof of its uniqueness.\sidenote[][]{Proving its existence will come later.}
 
-\begin{theorem}
+\begin{theorem}\label{thm:two_rado_defs_equiv}
     The following two properties of a graph are equivalent:
     \begin{enumerate}
         \item $G$ is homogeneous and contains a copy of every finite graph.
@@ -91,7 +91,7 @@ We will divide this statement into three lemmas.
 
 So this gives us half of the implication from property two to property one. The other half will require us to actually think about infinite graphs a little bit, or at least do a bit of induction.
 
-\begin{lemma}
+\begin{lemma}\label{lemma:saturated_implies_homogeneous}
     If a graph $G = (V,E)$ on countably many vertices is $k$-saturated for every $k \in \N$, then it is homogeneous.
     
     \begin{proof}
