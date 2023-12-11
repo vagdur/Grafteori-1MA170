@@ -20,7 +20,8 @@ Welcome to the course in graph theory at the bachelor's level at Uppsala Univers
 14. [Lecture 14: The probabilistic method and the Erdős-Rényi random graph](https://vagdur.github.io/Grafteori-1MA170/lecture14.pdf)
 15. [Exercise session 15: Extremal graph theory and Szemerédi's regularity lemma](https://vagdur.github.io/Grafteori-1MA170/exercise_session15.pdf)
 16. [Lecture 16: Edge-colourings and Ramsey theory](https://vagdur.github.io/Grafteori-1MA170/lecture16.pdf)
-17. [Lecture 17: The Rado graph](https://vagdur.github.io/Grafteori-1MA170/lecture17.pdf) (Work in Progress)
+17. [Lecture 17: The Rado graph](https://vagdur.github.io/Grafteori-1MA170/lecture17.pdf)
+18. [Lecture 18: Extremal graphs and Szemerédi's regularity lemma](https://vagdur.github.io/Grafteori-1MA170/lecture18.pdf) (Work in Progress)
 
 # Other course material
 
