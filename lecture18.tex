@@ -43,6 +43,54 @@
 We discuss some basic notions of extremal graph theory, and give some nice proofs of Turán's theorem and related ideas. Then we introduce the Szémeredi regularity lemma, and use it to prove the triangle removal lemma, which we can use to prove Roth's theorem on arithmetic progressions of length three.
 \end{abstract}
 
+As usual, we start by repeating a definition from the exercise session.
+
+\begin{definition}
+    Given any graph $H$, we say that a graph $G$ is \emph{$H$-free} if it has no subgraph isomorphic to $H$. We say that it is \emph{maximal $H$-free} if adding any edge to it would create a subgraph isomorphic to $H$, and we say that is is \emph{maximum $H$-free} (or \emph{extremal} among $H$-free graphs) if additionally no other $H$-free graph has more edges than $G$.
+  
+    For each integer $n$, we define the \emph{extremal function for $H$}, denoted $\ex(n; H)$, to be the number of edges of a maximum $H$-free graph on $n$ vertices.
+\end{definition}
+
+In the exercises, you were asked to investigate what an extermal $r$-clique-free graph might look like. The answer to this problem is a famous theorem due to Turán.\sidenote[][]{The special case of triangle-free graphs is due to Mantel.}
+
+\begin{definition}
+    The \emph{Turán graph} $T(n,r)$ is a complete multipartite graph divided into $r$ parts, with $n$ vertices divided as equally as possible between the parts.\sidenote[][]{Concretely, if $n = qr + s$ for natural numbers $q$ and $s < r$, it has $s$ parts of size $q+1$ and $r - s$ parts of size $q$.}
+
+    This graph has
+    $$\left(1 - \frac{1}{r} + o(1)\right)\frac{n^2}{2}$$
+    edges.
+\end{definition}
+
+\begin{theorem}[Turán, 1941]\label{thm:turan}
+    It holds for every $r$ that
+    $$\ex(n; K_{r+1}) \leq \left(1 - \frac{1}{r}\right)\frac{n^2}{2},$$
+    and in particular the Turán graphs are the extremal $(r+1)$-clique-free graphs.
+\end{theorem}
+
+We will see a few different proofs of this theorem.\sidenote[][]{A few of them will only show the upper bound, not the extremality of the Turán graphs.} Let us start with one that uses a result we have seen before, the Caro-Wei result about independent sets.\sidenote[][]{Which was originally invented to be used in this proof of Turán's theorem.}
+
+\begin{proof}[Proof of Theorem \ref{thm:turan}]
+    We begin by noting that a clique in a graph is precisely an independent set in its complement graph. Now $d_{G^c}(v) = n - 1 - d_{G}(v)$, so by Caro-Wei we get that
+    $$\omega(G) = \alpha\left(G^c\right) \geq \sum_{v \in V} \frac{1}{d_{G^c}(v) + 1} = \sum_{v \in V} \frac{1}{n - d_v}.$$
+
+    Next, we are going to use the Cauchy-Schwarz inequality, which states that\sidenote[][]{Or in the more compact linear algebra formulation,
+    $$\abs{\left\langle a, b\right\rangle} \leq \norm{a}\norm{b},$$
+    but it's more convenient for us to just write out what it means termwise.} for any $(a_1, a_2,\ldots, a_n), (b_1, b_2, \ldots, b_n) \in \R^n$, we have
+    $$\left(\sum_{i=1}^{n} a_i b_i\right)^2 \leq \left(\sum_{i=1}^{n} a_i^2\right)\left(\sum_{i=1}^{n} b_i^2\right).$$
+
+    So let $a_v = \sqrt{n - d_v}$ and $b_v = \frac{1}{\sqrt{n - d_v}}$, so that $a_v b_v = 1$ for all $v$, and Cauchy-Schwarz states that
+    \begin{align*}
+        n^2 &\leq \left(\sum_{v \in V} n - d_v\right)\left(\sum_{v \in V} \frac{1}{n - d_v}\right)\\
+        &\leq \omega(G)\left(\sum_{v \in V} n - d_v\right)\\
+        &= \omega(G)\left(n^2 - 2\abs{E}\right),
+    \end{align*}
+    where in the first step we used our bound on $\omega(G)$ we have just shown, and in the second the fact that $\sum_v d_v = 2\abs{E}$ that we showed near the very beginning of the course.
+
+    So if we assume that $\omega(G) \leq r$, we get that
+    $$n^2 \leq r\left(n^2 - 2\abs{E}\right),$$
+    which if you solve for $\abs{E}$ becomes precisely the inequality of Turán's theorem.
+\end{proof}
+
 \section{Exercises}
 
 
