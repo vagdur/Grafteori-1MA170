@@ -195,8 +195,44 @@ The second result we need is a result relating the probabilities of individual e
     and so the conditions of the second half of the Borel-Cantelli lemma are satisfied, and so in fact the event $A_{U,W,v}$ occurs for \emph{infinitely} many $v$, which is certainly enough to yield our theorem.
 \end{proof}
 
+\section{Fractal properties of the Rado graph}
+
 \begin{remark}
-    We saw in the proof that the Rado graph in fact has an even stronger property than just the $k$-saturation: There exist infinitely many different choices for the vertex $v$ whose existence we are guaranteed by $k$-saturation.
+    We saw in the proof of Theorem \ref{thm:random_graph_is_rado} that the Rado graph in fact has an even stronger property than just $k$-saturation: There exist infinitely many different choices for the vertex $v$ whose existence we are guaranteed by $k$-saturation.
+\end{remark}
+
+This property lets us show some strange fractal-like properties of the Rado graph.
+
+\begin{corollary}
+    If you add or remove any finite number of vertices or edges from the Rado graph, the resulting graph is still isomorphic to the Rado graph.
+
+    \begin{proof}
+        For any given pair of sets $U$ and $W$, removing or adding finitely many vertices and edges can only break at most finitely many choices for a vertex $v$ connected to all of $U$ and none of $W$. Therefore, since we have seen there are infinitely many choices, some such choice must remain.
+    \end{proof}
+\end{corollary}
+
+In fact, the Rado graph exhibits a kind of self-similarity.
+
+\begin{theorem}
+    Suppose $R = (V,E)$ is the Rado graph, and $V = A_1 \cup A_2 \cup \ldots \cup A_k$ is a partitioning of its vertices into $k$ disjoint sets. Then at least one of the graphs $R[A_1], R[A_2], \ldots, R[A_k]$ is isomorphic to $R$.
+
+    \begin{proof}
+        Suppose, for contradiction, that the theorem fails. Then, for each $i \in [k]$, there exists sets $U_i, W_i \subseteq A_i$ such that no vertex $v \in X_i$ has an edge to everything in $U_i$ and nothing in $W_i$.
+
+        Now consider the sets
+        $$U = U_1 \cup U_2 \cup \ldots \cup U_k, \quad W = W_1 \cup W_2 \cup \ldots \cup W_k.$$
+        By saturation, there has to be some vertex $v \in V$ connected to everything in $U$ and nothing in $W$. However, we must have $v \in X_i$ for some $i$, and so this $v$ would in fact in particular be connected to everything in $U_i$ and nothing in $W_i$, which gives our contradiction.
+    \end{proof}
+\end{theorem}
+
+In fact, the Rado graph is the only non-trivial countable graph with this property, though we omit the proof of this.
+
+\begin{proposition}
+    The only countable graphs with the self-similarity property of the above theorem are the Rado graph, the graph on countably many vertices with no edges, and the complete graph on countably many vertices.
+\end{proposition}
+
+\begin{remark}
+    The Rado graph is isomorphic to its complement graph.
 \end{remark}
 
 \section{Exercises}
