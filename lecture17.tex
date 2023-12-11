@@ -235,6 +235,37 @@ In fact, the Rado graph is the only non-trivial countable graph with this proper
     The Rado graph is isomorphic to its complement graph.
 \end{remark}
 
+\section{Explicit constructions of the Rado graph}
+
+So far, we have only seen the existence of the Rado graph proven by a probabilistic existence argument, which is a bit unsatisfying. It would be nicer if we had an explicit construction of it.
+
+Thus, in this section, we give two constructions of it, one which is sensible and one which may shake your faith in the foundations of mathematics. We start with the latter.
+
+\begin{proposition}
+    Let $M$ be a countable model of set theory,\sidenote[][]{That is, $M$ is a countable set equipped with a relation called $\in$, such that all the axioms of Zermelo-Fraenkel set theory are satisfied by this structure.
+    
+    That such a thing exists, assuming the axioms are consistent, follows from the downward Löwenheim-Skolem theorem, and is indeed very shocking.} and create a graph $M^* = (M,E)$ by declaring that there is an edge between $x, y \in M$ whenever $x \in y$ or $y \in x$. Then this $M^*$ is isomorphic to the Rado graph.
+
+    \begin{proof}
+        Let $U = \{u_1,\ldots,u_k\}$ and $W = \{w_1,\ldots,w_k\}$ be two sets of vertices of $M^*$. Let 
+        $$v = \{u_1,\ldots,u_k, \{w_1,\ldots,w_k\}\}.$$
+        
+        We claim that this $v$ has an edge to everything in $U$ and to nothing in $W$. By construction, $u_i \in v$ for every $i$, so we only need to see that $w_i \not\in v$ and $v \not\in w_i$ for every $i$.
+
+        Now, if $w_i \in v$ we would have either $w_i = u_j$ for some $j$, contrary to assumption, or $w_i = \{w_1,\ldots,w_k\}$, so in particular $w_i \in w_i$, which contradicts the axiom of foundation.
+
+        Likewise, if $v \in w_i$, we would have $w_i \in \{w_1,\ldots,w_k\} \in v \in w_i$, which is again a contradiction -- no set is a member of itself.
+    \end{proof}
+\end{proposition}
+
+This was technically an explicit construction, but it still doesn't feel like we've concretely seen it constructed. So let us end this absurd lecture on a nice and concrete note:
+
+\begin{proposition}
+    Let $G = (\N, E)$ be the graph where there is an edge $n \sim m$ if the $n$th digit of the binary expansion of $m$ is a one, or the $m$th digit of the binary expansion of $n$ is a one. Then this $G$ is isomorphic to the Rado graph.\sidenote[][]{We leave the proof of this as an exercise -- you can prove this by just explicitly writing a formula for the vertex $v$ in terms of $U$ and $W$.
+    
+    \begin{xca}Prove this proposition.\end{xca}}
+\end{proposition}
+
 \section{Exercises}
 
 
