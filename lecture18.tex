@@ -116,6 +116,33 @@ The second proof we present of this theorem is due to Erd\H{o}s.
     So we conclude that the maximal $r$-clique-free graphs must be ones which are unchanged by this process, and a moment's thought reveals that these must be precisely the complete multipartite graphs.\sidenote[][]{\begin{xca}Think for a moment.\end{xca}}
 \end{proof}
 
+We can actually employ the idea in this proof to answer a related question: If a triangle-free graph has very nearly $\ex(n; K_3)$ edges, will it be very close to being bipartite?\sidenote[][]{I first saw this proof in a summer school in Prague in 2022, and when the lecturer there introduced this proof he said that it was extremely nice, and if we ever taught a course on graph theory, we had to include it. So now, a year and a half later, I \emph{am} teaching a course on graph theory, and so I dug it up, found it is indeed very nice, and included it.} Results of this kind are called \emph{stability} results, since they answer questions of the type ``if you nudge the extremal object a bit, will it still look similar''.
+
+\begin{theorem}[Simonovits 1968, Füredi 2015]
+    Every triangle free graph with $\ex(n, K_3) - t$ edges may be made bipartite by removing $t$ edges.
+
+    \begin{proof}
+        Take $G = (V,E)$ to be such a graph, and as before, pick $v \in V$ to be a vertex of maximum degree. We set
+        $$A = V \setminus N(v), \qquad B = N(v)$$
+        and notice that due to triangle-freeness, there can be no edges internal to $B$.
+
+        Let us consider the sum of the degrees of the vertices in $A$. On the one hand, we can compute
+        \begin{align*}
+            \sum_{w \in A} d_w &= 2e(A) + e(A,B)\\
+            &= e(A) + \left(e(A) + e(A,B) + e(B)\right) = e(A) + e(G)\\
+            &= \ex(n; K_3) - t + e(A).
+        \end{align*}
+
+        On the other hand, we have since $d_v$ is maximum, that
+        \begin{align*}
+            \sum_{w \in A} d_w \leq \abs{A}d_v = (n-d_v)d_v \leq \ex(n; K_3).
+        \end{align*}
+        Here, the final inequality follows from that $(n-d_v)d_v$ is precisely the number of edges of a complete bipartite graph with parts of size $d_v$ and $n-d_v$, which is certainly triangle free on $n$ vertices and thus has at most $\ex(n; K_3)$ edges.
+
+        So we have seen that $\ex(n; K_3) \geq \ex(n; K_3) - t + e(A)$, so $e(A) \leq t$. So if we remove these at most $t$ edges, there will be no edges internal to either $A$ or $B$, and so $G$ will be bipartite.
+    \end{proof}
+\end{theorem}
+
 \section{Exercises}
 
 
