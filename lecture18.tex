@@ -155,7 +155,12 @@ In particular, the result we are going to show states that if you need to remove
     For every $\varepsilon > 0$ there is a $\delta > 0$ such that if $G$ is an $n$-vertex graph such that at least $\varepsilon n^2$ edges have to be removed from $G$ in order to make it triangle-free, then $G$ has at least $\delta n^3$ triangles.
 \end{theorem}
 
-Since the proof of this uses Szemerédi regularity, let us restate that theorem here as well:
+Since the proof of this uses Szemerédi regularity, let us restate that theorem here as well, along with a crucial definition used in its statement:
+
+\begin{definition}
+    Let $G = (V,E)$ be a graph on $n$ vertices, and $A$ and $B$ two disjoint subsets of $V$. For any $\varepsilon > 0$, we say that the pair $(A,B)$ is \emph{$\varepsilon$-regular} if it holds for all $X \subseteq A, Y \subseteq B$ with $\abs{X} \geq \varepsilon\abs{A}$ and $\abs{Y} \geq \varepsilon\abs{B}$ that
+    $$\abs{d(X,Y) - d(A,B)} \leq \varepsilon.$$
+\end{definition}
 
 \begin{theorem}[Szemerédi's regularity lemma]
     For every $\varepsilon > 0$ and $m \in \N$ there exists an $M \in \N$ such that for every graph $G = (V,E)$ on at least $M$ vertices and every $\delta \in [0,1]$, there exists
