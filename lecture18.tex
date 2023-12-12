@@ -146,6 +146,69 @@ We can actually employ the idea in this proof to answer a related question: If a
 \end{theorem}
 
 \section{Szemerédi's regularity lemma and the triangle removal lemma}
+
+As we explored in the exercises, the Szemerédi regularity lemma tells us that all large enough graphs look roughly like a random multipartite graph, so their structure can be summarized by a ``blueprint'' graph. Let us now see how we can use this result to see a sort of converse result to our previous result about nearly maximum triangle-free graphs.
+
+In particular, the result we are going to show states that if you need to remove a large amount of edges to destroy every triangle in the graph, then the graph must in fact have contained a lot of triangles.
+
+\begin{theorem}[Erd\H{o}s-Simonovits, 1983]\label{thm:triangle_removal}
+    For every $\varepsilon > 0$ there is a $\delta > 0$ such that if $G$ is an $n$-vertex graph such that at least $\varepsilon n^2$ edges have to be removed from $G$ in order to make it triangle-free, then $G$ has at least $\delta n^3$ triangles.
+\end{theorem}
+
+Since the proof of this uses Szemerédi regularity, let us restate that theorem here as well:
+
+\begin{theorem}[Szemerédi's regularity lemma]
+    For every $\varepsilon > 0$ and $m \in \N$ there exists an $M \in \N$ such that for every graph $G = (V,E)$ on at least $M$ vertices and every $\delta \in [0,1]$, there exists
+    \begin{enumerate}[label=\alph*)]
+      \item a blueprint $R = ([k],E_R,w)$ whose minimum weight is at least $\delta$,
+      \item a partition $V = V_0 \coprod V_1 \coprod \ldots \coprod V_k$,
+      \item and a spanning subgraph $G'$ of $G$,
+    \end{enumerate}
+    such that
+    \begin{enumerate}
+      \item $m \leq k \leq M$,
+      \item $0 \leq \abs{V_0} \leq \varepsilon\abs{V}$,\sidenote[][]{So notice in particular that $V_0$ may be empty.}
+      \item $\abs{V_1} = \abs{V_2} = \ldots = \abs{V_k}$,
+      \item for every $v \in V$
+      $$d_{G'}(v) > d_G(v) - (\delta + \epsilon)\abs{V},$$
+      where $d_{G'}$ and $d_G$ denote degrees in $G'$ and $G$ respectively,
+      \item the graph $G'' = G'[V\setminus V_0]$ is multipartite with the sets $V_i$ as parts,\sidenote[][]{Which concretely just means that for every $i = 1,2,\ldots,k$, there are no edges internal to $V_i$ in $G'$, which you could alternatively phrase as that these sets are independent in $G'$.}
+      \item and all of the pairs $(V_i, V_j)$ for $1 \leq i, j \leq k$ are $\varepsilon$-regular, and their density is $w(i \sim j)$ if $i \sim j$ is an edge of $R$, and otherwise there are no edges between them. 
+    \end{enumerate}
+\end{theorem}
+
+\begin{remark}
+    The graph $G''$ will be multipartite, and have at most $\frac{\delta + 3\varepsilon}{2}n^2$ edges fewer than the graph $G$ we started with.\sidenote[][]{Showing this was one of the exercises in the exercise session on this topic.}
+\end{remark}
+
+Let us now give an idea of a proof of the triangle removal lemma -- except we avoid the details of what the exact values of our $\varepsilon$s and $\delta$s will be. We don't need to know that, and it would be painful to keep track of in a lecture.\sidenote[][]{If you wish, try to flesh out the proof with all those details -- or just use Google to find a fully detailed proof.}
+
+\begin{proof}[Proof sketch of Theorem \ref{thm:triangle_removal}]
+    Suppose $G$ is a graph satisfying the hypotheses of the theorem, that is, it has $n$ vertices and you need to remove at least $\varepsilon n^2$ edges to make it triangle-free.
+
+    Then we can pick some $\varepsilon_0$ and $\delta$ such that we, when we insert those into the regularity lemma, get a blueprint $R$ and a multipartite subgraph $G''$ of $G$ which has had less than $\epsilon n^2$ edges removed.
+
+    Then, by our hypothesis, this $G''$ must contain a triangle, and since it is multipartite the vertices of this triangle must belong to three different parts $V_i, V_j, V_k$.
+
+    Thus there has to be a triangle $\{i, j, k\}$ in the blueprint $R$, and the weight of each of the edges of this triangle has to be at least $\delta$. The intuition now is that $G''$ looks like a random multipartite graph with blueprint $R$, and in such a random multipartite graph we would expect to see
+    $$w(i\sim j)w(i\sim k)w(k\sim j)n^3 \geq \delta^3 n^3$$
+    triangles between the three parts.
+
+    Now, we can of course not reason like that, because the graph $G$ is not actually random -- however, all the three pairs $(V_i, V_j)$, $(V_i, V_k)$ and $(V_j, V_k)$ are $\varepsilon_0$-regular, which essentially means that they can't behave too differently from the behaviour of a random graph. So applying the regularity property a few times,\sidenote[][0cm]{
+        In particular, the following lemma comes in handy:
+        \begin{lemma}
+            Let $(A,B)$ be an $\varepsilon$-regular pair with density $d$ in a graph $G$. For any $a \in A$ and $Y \subseteq B$, let
+            $$d_Y(a) = d_{G[Y\cup\{v\}]}(a),$$
+            that is, $d_Y(v)$ is the number of neighbours of $a$ in $Y$.
+            
+            It holds that, if $\abs{Y} \geq \varepsilon\abs{B}$, we have
+            $$\abs{\left\{a \in A \given d_Y(a) < (d - \varepsilon)\abs{Y}\right\}} < \varepsilon\abs{A}.$$
+
+            That is, for any large enough subset $Y$ of $B$, nearly all vertices of $A$ have the expected number of neighbours in $Y$.
+        \end{lemma}
+    } we see that there is indeed a $\delta'$ such that $G''$, and thus also $G$, has at least $\delta' n^3$ triangles.
+\end{proof}
+
 \section{Exercises}
 
 
