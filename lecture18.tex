@@ -214,6 +214,38 @@ Let us now give an idea of a proof of the triangle removal lemma -- except we av
     } we see that there is indeed a $\delta'$ such that $G''$, and thus also $G$, has at least $\delta' n^3$ triangles.
 \end{proof}
 
+\section{Roth's theorem}
+
+For what may be the first time in this course, let us apply graph theory to prove a result about some other part of mathematics. Particularly, we are going to look at part of the result that Szémeredi originally proved the regularity lemma for, namely arithmetic progressions in positive-density sets.
+
+The original theorem he proved is the following:\sidenote[][0.5cm]{His proof of this result is \emph{notoriously} long and difficult to understand, motivating other proofs using methods from different areas of mathematics of the same result, most famously by Furstenberg using ergodic theory, and Gowers, using Fourier analysis.}
+
+\begin{theorem}[Szemerédi, 1975]
+    For every $k \in \N$ and $\alpha > 0$, thre exists some $n_0 \in \N$ such that if $n \geq n_0$ and $A \subseteq [n]$ with $\abs{A} \geq \alpha n$, then $A$ contains a $k$-term arithmetic progression.\sidenote[][0.7cm]{Recall that a $k$-term arithmetic progression is a set of integers $\{a, a + d, a + 2d, \ldots, a + (k-1)d\}$.}
+\end{theorem}
+
+The theorem we shall be proving is just the case of $k = 3$, which is known as Roth's theorem, and was originally proved using techniques from analytic number theory.
+
+\begin{theorem}[Roth, 1953]
+    For every $\alpha > 0$ there is some $n_0$ such that if $n \geq n_0$ and $A \subseteq [n]$ with $\abs{A} \geq \alpha n$, then $A$ contains a three-term arithmetic progression.
+
+    \begin{proof}
+        Suppose we are given some set $A \subseteq [n]$ with $\abs{A} = \alpha n$. We create a tripartite graph $G$ on the vertices $V_1 \coprod V_2 \coprod V_3$, where we let
+        $$V_1 = \left\{(i, 1) \given i \in [n]\right\}, \quad V_2 = \left\{(i, 2) \given i \in [2n]\right\}, \quad V_3 = \left\{(i, 3) \given i \in [3n]\right\},$$
+        so there are $6n$ vertices in total. We add edges by declaring that for every $x \in [n]$ and $a\in A$, the triangle $\{(x,1), (x + a, 2), (x + 2a, 3)\}$ is present.
+
+        Now we observe that all these triangles we have added are edge-disjoint, so we need to remove one edge from each triangle to destroy them all -- and there are a total of $3n\abs{A} = 3\alpha n^2$ edges. So by the triangle removal lemma, there are at least $\delta n^3$ triangles in $G$, for some $\delta$ depending only on $\alpha$.
+
+        We now claim that these triangles in $G$ correspond to three-term arithmetic progressions in $A$. So suppose we have a triangle on the vertices $(x,1)$, $(y,2)$ and $(z,3)$. Since $(x,1) \sim (y,2)$ is an edge, we must have $y = x + a_0$ for some $a_0 \in A$. Similarly, since $(x,1) \sim (z,3)$, we must have $z = x + 2a_1$ for some $a_1 \in A$, and likewise we must have $z = y + a_2$ for some $a_2 \in A$
+
+        If we do some elementary algebra on this, what we have seen is that
+        $$a_2 - a_1 = a_1 - a_0$$
+        so if $a_1 \neq a_0$, the three numbers $a_0, a_1, a_2$ will form a three-term arithmetic progression in $A$ with common difference $a_1 - a_0$.\sidenote[][]{This may of course be negative -- if you prefer your arithmetic sequences not to have negative difference, the sequence $a_2, a_1, a_0$ may be more to your liking.}
+
+        The only case in which this triangle did not correspond to a three-term arithmetic progression is when $a_0 = a_1$. However, these triangles are precisely the edge-disjoint triangles we started with, and we know there are only $4\alpha n^2 < \delta n^3$ of those, so there has to be at least one triangle that did arise from an arithmetic progression.\sidenote[][]{In fact, this of course shows that there are $\Omega(n^3)$ such triangles, which a bit of thought will reveal correspond to $\Omega(n^2)$ arithmetic progressions -- so we could have written a much stronger conclusion to our theorem: It not only has \emph{one} arithmetic progression, it has quite many.}
+    \end{proof}
+\end{theorem}
+
 \section{Exercises}
 
 
