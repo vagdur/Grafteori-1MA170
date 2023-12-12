@@ -67,7 +67,9 @@ In the exercises, you were asked to investigate what an extermal $r$-clique-free
     and in particular the Turán graphs are the extremal $(r+1)$-clique-free graphs.
 \end{theorem}
 
-We will see a few different proofs of this theorem.\sidenote[][]{A few of them will only show the upper bound, not the extremality of the Turán graphs.} Let us start with one that uses a result we have seen before, the Caro-Wei result about independent sets.\sidenote[][]{Which was originally invented to be used in this proof of Turán's theorem.}
+We will see two different proofs of this theorem. The first will only show the upper bound, not the extremality of the Turán graphs, but the second will prove that the Turán graphs are extremal in order to show the bound.
+
+We start with one that uses a result we have seen before, the Caro-Wei result about independent sets.\sidenote[][]{Which was originally invented to be used in this proof of Turán's theorem.}
 
 \begin{proof}[Proof of Theorem \ref{thm:turan}]
     We begin by noting that a clique in a graph is precisely an independent set in its complement graph. Now $d_{G^c}(v) = n - 1 - d_{G}(v)$, so by Caro-Wei we get that
@@ -89,6 +91,29 @@ We will see a few different proofs of this theorem.\sidenote[][]{A few of them w
     So if we assume that $\omega(G) \leq r$, we get that
     $$n^2 \leq r\left(n^2 - 2\abs{E}\right),$$
     which if you solve for $\abs{E}$ becomes precisely the inequality of Turán's theorem.
+\end{proof}
+
+The second proof we present of this theorem is due to Erd\H{o}s.
+
+\begin{proof}[Proof of Theorem \ref{thm:turan}]
+    Our proof will proceed by showing that we can always increase the edge-count of a graph, while retaining its $r$-clique-freeness, in a way that makes it closer to a complete multipartite graph. This will show that the extremal graph must be complete multipartite, and thus in particular must be the Turán graphs.\sidenote[][]{That this is so follows from the following fact: \begin{xca}Show that the Turán graphs are the $r$-partite graphs on $n$ vertices with the most edges.\end{xca}}
+
+    Let $G = (V,E)$ be some $r$-clique-free graph on $n$ vertices, and let $v$ be a vertex of maximum degree in $G$. Let $S = N(v)$ and $T = V \setminus N(v)$. We note that since $G$ is $r$-clique-free and $v$ is adjacent to every vertex of $S$, $G[S]$ must in fact be $(r-1)$-clique-free.
+
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.6\textwidth]{graphics/L18_extremal_szemeredi/erdos_turan_proof.png}
+        \caption[][0cm]{A figure of the construction of $H$ from $G$ in the Erd\H{o}s proof of Theorem \ref{thm:turan}. The black edges are edges that are kept, grey edges are removed, and red edges are added. The vertex $v$ and sets $S$ and $T$ are labelled in blue.}
+        \label{fig:erdos_turan_proof}
+    \end{figure}
+
+    Now we construct a graph $H$ by taking $G$, deleting every edge inside of $T$, and adding every edge between $S$ and $T$. This construction is illustrated in Figure \ref{fig:erdos_turan_proof}.
+
+    Since $G[S]$ is $(r-1)$-clique-free, adding a new neighbour to all of them cannot create an $r$-clique, so $H$ is still $r$-clique-free. It remains to see that it has at least as many edges as $G$.
+
+    So consider the degree of any vertex $w$. If $w = v$, its degree didn't change, if $w \in S$, its degree can only have increased, and if $w \in T$ its new degree is $d_v$, which by assumption was maximum, so it again has not decreased. So since the degree of every vertex has increased or remained unchanged, we conclude that $\abs{E(H)} \geq \abs{E(G)}$.
+
+    So we conclude that the maximal $r$-clique-free graphs must be ones which are unchanged by this process, and a moment's thought reveals that these must be precisely the complete multipartite graphs.\sidenote[][]{\begin{xca}Think for a moment.\end{xca}}
 \end{proof}
 
 \section{Exercises}
