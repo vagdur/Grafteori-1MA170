@@ -170,6 +170,21 @@ In particular, the coding works as follows:
 For definitions, it of course makes no sense to refer to knowing a proof, so we simply highlight definitions \knowdef{like this} if you are expected to know and be able to state the definitions, and \usedef{like this} if you are just expected to be able to use the definition and explain the idea of it if given it, but not to be able to state it.
 
 \section{L2: Eulerianity, simple graphs and subgraphs}
+In our first lecture of the course we started softly, giving the definitions of a \knowdef{multigraph}, a \knowdef{walk}, a \knowdef{trail}, a \knowdef{path}, a \knowdef{circuit}, and a \knowdef{cycle}.
+
+Then we defined what it means for a graph to be \knowdef{connected}, and what its \knowdef{connected components} are.
+
+Having made all these definitions, we defined an \knowdef{Eulerian trail} to be a trail using every edge exactly once, and stated and proved \kskp{Euler's theorem on Eulerian paths}, which characterizes when a graph is Eulerian in terms of the \knowdef{degree} of its vertices.
+
+Then, we stated and proved the \kskp{handshake lemma}, which says that
+$$2\abs{E} = \sum_{v \in V} d_v.$$
+
+Having done all this, we defined a \knowdef{simple graph}\sidenote[][]{Which is of course, for most of the course, the only notion of graph we referred to -- so generally we end up just calling these \emph{graphs}.}, and what a \knowdef{graph morphism} of simple graphs is, in terms of which we could then define \knowdef{isomorphism} of graphs.
+
+Once we knew what it meant for graphs to be isomorphic, we could define an \usedef{unlabelled graph} to be an isomorphism class of graphs.\sidenote[][]{We largely did not end up actually using this concept -- other than in a few counting arguments, where we needed to be clear that we were \emph{not} considering unlabelled but labelled graphs.}
+
+We ended the lecture by defining what a \knowdef{subgraph}, an \knowdef{induced subgraph}, an \knowdef{edge-induced subgraph}, and a \knowdef{spanning subgraph} is.
+
 \section{L3: Common graph families, trees, and Cayley's theorem}
 \section{L4: Spectral graph theory and the matrix-tree theorem}
 \section{L6: Weights, distances, and minimum spanning trees}
