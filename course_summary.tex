@@ -1,0 +1,172 @@
+\documentclass[nobib]{tufte-handout}
+
+\title{Summary of the course $\cdot$ 1MA170}
+
+\author[Vilhelm Agdur]{Vilhelm Agdur\thanks{\href{mailto:vilhelm.agdur@math.uu.se}{\nolinkurl{vilhelm.agdur@math.uu.se}}}}
+
+%\date{20 februari 2023}
+
+
+%\geometry{showframe} % display margins for debugging page layout
+
+\usepackage{graphicx} % allow embedded images
+  \setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+  \graphicspath{{graphics/}} % set of paths to search for images
+\usepackage{amsmath}  % extended mathematics
+\usepackage{booktabs} % book-quality tables
+\usepackage{units}    % non-stacked fractions and better unit spacing
+\usepackage{multicol} % multiple column layout facilities
+\usepackage{lipsum}   % filler text
+\usepackage{fancyvrb} % extended verbatim environments
+  \fvset{fontsize=\normalsize}% default font size for fancy-verbatim environments
+
+\usepackage{color,soul} % Highlights for text
+
+% Standardize command font styles and environments
+\newcommand{\doccmd}[1]{\texttt{\textbackslash#1}}% command name -- adds backslash automatically
+\newcommand{\docopt}[1]{\ensuremath{\langle}\textrm{\textit{#1}}\ensuremath{\rangle}}% optional command argument
+\newcommand{\docarg}[1]{\textrm{\textit{#1}}}% (required) command argument
+\newcommand{\docenv}[1]{\textsf{#1}}% environment name
+\newcommand{\docpkg}[1]{\texttt{#1}}% package name
+\newcommand{\doccls}[1]{\texttt{#1}}% document class name
+\newcommand{\docclsopt}[1]{\texttt{#1}}% document class option name
+\newenvironment{docspec}{\begin{quote}\noindent}{\end{quote}}% command specification environment
+
+\include{mathcommands.extratex}
+
+
+
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usetikzlibrary{decorations.pathmorphing}
+
+\makeatletter
+
+\newcommand{\defhighlighter}[3][]{%
+  \tikzset{every highlighter/.style={color=#2, fill opacity=#3, #1}}%
+}
+
+\defhighlighter{yellow}{.5}
+
+\newcommand{\highlight@DoHighlight}{
+  \fill [ decoration = {random steps, amplitude=1pt, segment length=15pt}
+        , outer sep = -15pt, inner sep = 0pt, decorate
+        , every highlighter, this highlighter ]
+        ($(begin highlight)+(0,8pt)$) rectangle ($(end highlight)+(0,-3pt)$) ;
+}
+
+\newcommand{\highlight@BeginHighlight}{
+  \coordinate (begin highlight) at (0,0) ;
+}
+
+\newcommand{\highlight@EndHighlight}{
+  \coordinate (end highlight) at (0,0) ;
+}
+
+\newdimen\highlight@previous
+\newdimen\highlight@current
+
+\DeclareRobustCommand*\highlight[1][]{%
+  \tikzset{this highlighter/.style={#1}}%
+  \SOUL@setup
+  %
+  \def\SOUL@preamble{%
+    \begin{tikzpicture}[overlay, remember picture]
+      \highlight@BeginHighlight
+      \highlight@EndHighlight
+    \end{tikzpicture}%
+  }%
+  %
+  \def\SOUL@postamble{%
+    \begin{tikzpicture}[overlay, remember picture]
+      \highlight@EndHighlight
+      \highlight@DoHighlight
+    \end{tikzpicture}%
+  }%
+  %
+  \def\SOUL@everyhyphen{%
+    \discretionary{%
+      \SOUL@setkern\SOUL@hyphkern
+      \SOUL@sethyphenchar
+      \tikz[overlay, remember picture] \highlight@EndHighlight ;%
+    }{%
+    }{%
+      \SOUL@setkern\SOUL@charkern
+    }%
+  }%
+  %
+  \def\SOUL@everyexhyphen##1{%
+    \SOUL@setkern\SOUL@hyphkern
+    \hbox{##1}%
+    \discretionary{%
+      \tikz[overlay, remember picture] \highlight@EndHighlight ;%
+    }{%
+    }{%
+      \SOUL@setkern\SOUL@charkern
+    }%
+  }%
+  %
+  \def\SOUL@everysyllable{%
+    \begin{tikzpicture}[overlay, remember picture]
+      \path let \p0 = (begin highlight), \p1 = (0,0) in \pgfextra
+        \global\highlight@previous=\y0
+        \global\highlight@current =\y1
+      \endpgfextra (0,0) ;
+      \ifdim\highlight@current < \highlight@previous
+        \highlight@DoHighlight
+        \highlight@BeginHighlight
+      \fi
+    \end{tikzpicture}%
+    \the\SOUL@syllable
+    \tikz[overlay, remember picture] \highlight@EndHighlight ;%
+  }%
+  \SOUL@
+}
+\makeatother
+
+
+\definecolor{light-gray}{gray}{0.7}
+\definecolor{light-purple}{rgb}{0.796, 0.765, 0.89}
+\definecolor{dark-red}{rgb}{0.8, 0, 0}
+\definecolor{dark-orange}{rgb}{0.98, 0.69, 0.03}
+\definecolor{dark-green}{rgb}{0.0627, 0.4588, 0.1451}
+
+\renewcommand\emph[1]{\highlight[dark-orange]{#1}}
+
+\newcommand{\isnp}[1]{\highlight[light-gray]{#1}}
+\newcommand{\isip}[1]{\highlight[light-purple]{#1}}
+\newcommand{\ksnp}[1]{\highlight[dark-green]{#1}}
+\newcommand{\ksip}[1]{\highlight[dark-orange]{#1}}
+\newcommand{\kskp}[1]{\highlight[dark-red]{#1}}
+
+\begin{document}
+
+\maketitle% this prints the handout title, author, and date
+
+\begin{abstract}
+\noindent
+This document gives a summary of the entire course, with \emph{keywords} highlighted, in colours indicating whether and how it might appear on the exam.
+\end{abstract}
+
+\section{How this document works}
+
+The document goes through each lecture in order, noting what we covered in the lecture. In particular, it highlights the key topics of the course, and marks for each how it may appear on the exam.
+
+In particular, the coding works as follows:
+\begin{enumerate}
+  \item If it is \isnp{highlighted like this}, that indicates that you are expected to be familiar with the statement to the degree that you could use it to show some other statement or solve an exercise, if the highlighted statement is provided to you.
+  
+  You could also be asked to provide a precise statement given a prompt as to what it is about -- so for example if you see \isnp{Dirac's theorem} in this document, an exam question might also be ``What does Dirac's theorem about the existence of Hamiltonian paths say?''. You are not expected to know the proof of the result.
+  \item If it is \isip{highlighted like this}, you are expected to not only know the statement in the same sense as in the previous point, but also to have an idea of the proof of the theorem. So you might be asked to fill in a key step of the proof of the statement, write a precise proof given a prompt of what the general outline is, or write an outline of the idea of the proof.
+  
+  So if you see \isip{Dirac's theorem} in this document, an exam question might give you the proof of the result with the step where the maximal length path is turned into a cycle, and you are asked to fill in that step. Or you could be asked to write a proof, given that the drawings for the proof from the lecture notes are given to you. Or you could be asked to draw those figures and explain the broad idea of taking a maximal length path and showing that it can be turned into a cycle, which must be a Hamilton cycle.
+  \item If it is \ksnp{highlighted like this}, you are expected to know the statement of the theorem without any prompt, but not expected to know the proof.
+  
+  So if you see \ksnp{Dirac's theorem} in this document, an exam question might be ``State Dirac's theorem'', but you would not be asked about the proof.
+  \item If it is \ksip{highlighted like this}, you are expected to know the statement of the result, and additionally to have an idea of the proof. So \ksip{this} is the same as \ksnp{this} and \isip{this} together.
+  \item Finally, if it is \kskp{highlighted like this}, you are expected to know both the theorem and its proof. If you see \kskp{Dirac's theorem}, that means you could see an exam question just ask ``State and prove Dirac's theorem''.
+\end{enumerate}
+%\bibliography{references}
+%\bibliographystyle{plainnat}
+
+\end{document}
