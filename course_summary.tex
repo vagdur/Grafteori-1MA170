@@ -130,11 +130,13 @@
 \definecolor{dark-red}{rgb}{0.8, 0, 0}
 \definecolor{dark-orange}{rgb}{0.98, 0.69, 0.03}
 \definecolor{dark-green}{rgb}{0.0627, 0.4588, 0.1451}
+\definecolor{turquoise}{rgb}{0.282, 0.82, 0.8}
 
 %\renewcommand\emph[1]{\highlight[dark-orange]{#1}}
 
 \newcommand{\isnp}[1]{\highlight[light-gray]{#1}}
 \newcommand{\isip}[1]{\highlight[light-purple]{#1}}
+\newcommand{\iskp}[1]{\highlight[turquoise]{#1}}
 \newcommand{\ksnp}[1]{\highlight[dark-green]{#1}}
 \newcommand{\ksip}[1]{\highlight[dark-orange]{#1}}
 \newcommand{\kskp}[1]{\highlight[dark-red]{#1}}
@@ -162,6 +164,7 @@ In particular, the coding works as follows:
   \item If it is \isip{highlighted like this}, you are expected to not only know the statement in the same sense as in the previous point, but also to have an idea of the proof of the theorem. So you might be asked to fill in a key step of the proof of the statement, write a precise proof given a prompt of what the general outline is, or write an outline of the idea of the proof.
   
   So if you see \isip{Dirac's theorem} in this document, an exam question might give you the proof of the result with the step where the maximal length path is turned into a cycle, and you are asked to fill in that step. Or you could be asked to write a proof, given that the drawings for the proof from the lecture notes are given to you. Or you could be asked to draw those figures and explain the broad idea of taking a maximal length path and showing that it can be turned into a cycle, which must be a Hamilton cycle.
+  \item If it is \iskp{highlighted like this}, you are not expected to recall the exact statement without a prompt, but you are expected to be able to prove it without a reminder of the idea of the proof. So if you see \iskp{Dirac's theorem}, an exam question might look like ``State and prove Dirac's theorem about the existence of Hamilton cycles''.
   \item If it is \ksnp{highlighted like this}, you are expected to know the statement of the theorem without any prompt, but not expected to know the proof.
   
   So if you see \ksnp{Dirac's theorem} in this document, an exam question might be ``State Dirac's theorem'', but you would not be asked about the proof.
