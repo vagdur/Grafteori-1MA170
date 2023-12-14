@@ -194,11 +194,18 @@ We ended the lecture by defining what a \knowdef{subgraph}, an \knowdef{induced 
 
 We started the lecture with giving definitions of a couple of commonly occuring graph families: the \knowdef{complete graphs}, \knowdef{path graphs}, \knowdef{cycle graphs}, \knowdef{complete bipartite graphs}, and \knowdef{complete multipartite graphs}.
 
-Then we moved on to the main topic of the lecture: \knowdef{Trees}. We started by proving that \kskp{any tree on $n$ vertices has $n-1$ edges}. We then stated, but did not prove,\sidenote[][]{The proof was deferred until the next lecture, when we were able to prove it as a corollary of a more general result.} \ksip{Cayley's theorem} on the number of labelled trees on $n$ vertices.
+Then we moved on to the main topic of the lecture: \knowdef{Trees}. We started by proving that \kskp{any tree on $n$ vertices has $n-1$ edges}. We then stated, but did not prove,\sidenote[][]{The proof was deferred until the next lecture, when we were able to prove it as a corollary of a more general result.} \ksip{Cayley's formula} on the number of labelled trees on $n$ vertices.
 
 Having done this, we proved a \iskp{characterisation of trees} in terms of three properties equivalent to being a tree. Then, we defined the notion of a \knowdef{spanning tree}, and proved that \ksnp{all multigraphs have a spanning tree, assuming the axiom of choice}.\sidenote[][]{In fact, the two statements -- existence of spanning trees for arbitrary graphs and the axiom of choice -- are equivalent.}
 
 \section{L4: Spectral graph theory and the matrix-tree theorem}
+
+We started by defining the \knowdef{adjacency matrix} of a graph, then we defined what we mean by a \knowdef{directed graph}, and used that to define what an \knowdef{incidence matrix} of a graph is.
+
+We then proved that the \ksip{rank of the incidence matrix} equals the number of vertices minus the number of connected components. We then defined our final matrix associated to a graph, the \knowdef{Laplacian} $Q$ of a graph, and we showed that \kskp{the Laplacian satisfies $Q = DD^t$}.
+
+Then we did \isnp{a bunch more linear algebra stuff} in order to finally arrive at the \ksnp{Kirchhoff matrix-tree theorem}. We then used this to give a proof of \ksip{Cayley's formula}, which we had stated in the previous lecture.
+
 \section{L6: Weights, distances, and minimum spanning trees}
 \section{L7: The max-flow min-cut and marriage theorems}
 \section{L8: Vertex covers, Hamilton cycles, independent sets}
