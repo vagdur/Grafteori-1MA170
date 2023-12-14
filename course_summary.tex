@@ -235,6 +235,17 @@ Then we stated and proved that the problem of determining \ksip{whether a graph 
 Finally, in a little section of only definitions and nearly no theorems, we defined \knowdef{vertex colourings} of graphs, the \knowdef{chromatic number} $\chi(G)$ of a graph, and the \knowdef{clique number} of a graph.
 
 \section{L10: Connectivity}
+
+We started by defining what it means for a graph to be \knowdef{$k$-connected}, and defined the \knowdef{connectivity} of a graph. We then defined what it means for a set to \knowdef{separate} two vertices, or two sets.
+
+We then showed that \kskp{the minimum size of a set that separates two non-adjacent vertices equals the connectivity} for any graph. Then, we showed \ksip{Menger's theorem}, stating that the minimum size of a set separating two non-adjacent vertices is precisely the largest size of a set of independent paths between them -- a fact we proved using the min-flow-max-cut duality yet again.
+
+Having done this general work, we proceeded to study the structure of two-connected graphs, showing a \kskp{characterisation of two-connected graphs}.
+
+Then, we moved on to generalizing the notion of dividing a disconnected graph into its connected components into dividing a connected graph into its two-connected components, which we called \knowdef{blocks}. To do this, we also needed the notion of a \knowdef{cutvertex} and a \knowdef{bridge}.
+
+The crucial lemma we needed to understand the structure of the blocks was that \kskp{every cycle intersects exactly one block in more than one vertex}. We then defined the \knowdef{block graph} of a graph, and proved that \ksip{the block graph is a tree}.
+
 \section{L11: Planarity}
 \section{L12: Vertex colourings}
 \section{L14: The probabilistic method and the Erd\H{o}s-Rényi random graph}
