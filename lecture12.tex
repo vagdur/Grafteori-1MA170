@@ -1,24 +1,33 @@
 \documentclass[nobib]{tufte-handout}
+\usepackage[english]{babel}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{graphicx}
 
-\title{Lecture 12: Vertex colouring $\cdot$ 1MA170}
+\newtheorem{definition}{Definition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+\newtheorem{xca}{Exercise}
 
-\author[Vilhelm Agdur]{Vilhelm Agdur\thanks{\href{mailto:vilhelm.agdur@math.uu.se}{\nolinkurl{vilhelm.agdur@math.uu.se}}}}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\title{Lecture 12: Vertex colouring $\cdot$ 1MA020}
+
+\author[Vilhelm Agdur]{Vilhelm Agdur\thanks{\href{mailto:vilhelm.agdur@math.uu.se}{\nolinkurl{vilhelm.agdur@math.uu.se}}} \\ Edited by Ebba Brunvall, Anna Enerud, Ismat Halabi and Victor Lemaitre.}
 
 \date{27 November 2023}
 
 
 %\geometry{showframe} % display margins for debugging page layout
 
-\usepackage{graphicx} % allow embedded images
   \setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
   \graphicspath{{graphics/}} % set of paths to search for images
-\usepackage{amsmath}  % extended mathematics
 \usepackage{booktabs} % book-quality tables
 \usepackage{units}    % non-stacked fractions and better unit spacing
 \usepackage{multicol} % multiple column layout facilities
 \usepackage{lipsum}   % filler text
 \usepackage{fancyvrb} % extended verbatim environments
-  \fvset{fontsize=\normalsize}% default font size for fancy-verbatim environments
+\fvset{fontsize=\normalsize}% default font size for fancy-verbatim environments
 
 \usepackage{color,soul} % Highlights for text
 
@@ -32,10 +41,10 @@
 \newcommand{\docclsopt}[1]{\texttt{#1}}% document class option name
 \newenvironment{docspec}{\begin{quote}\noindent}{\end{quote}}% command specification environment
 
+
+
+\begin{document}    
 \include{mathcommands.extratex}
-
-\begin{document}
-
 \maketitle% this prints the handout title, author, and date
 
 \begin{abstract}
@@ -46,7 +55,13 @@ We study the notion of a vertex colouring of a graph, and prove some results abo
 \section{Introductory results}
 
 We already saw the notion of colouring a graph in an earlier lecture, but we proved nothing about it other than some very basic bounds. Let us restate the definition, and then move on to proving some more interesting things.
-
+\begin{marginfigure}
+    \centering
+    \includegraphics[width=0.9\textwidth]{k-coloring.png}
+    \caption{
+    Example of an undirected graph $G_1$ that is three-coloured. In this case the chromatic number of $G_1$ is $\chi(G_1)=3$ since we can find a three-colouring of $G_1$ but not a two-colouring.
+    }
+\end{marginfigure}
 \begin{definition}
   A \emph{$k$-colouring} of a graph $G = (V,E)$ is a function $c: V \to [k]$, where we think of the numbers $1,2,\ldots,k$ as colours, such that no two adjacent vertices are sent to the same colour.\sidenote[][]{On rare occasions, we will want to think about colourings that do not necessarily fulfill this condition. Then we will call those colourings \emph{improper}, and the ones with the property will be \emph{proper colourings}.} The \emph{chromatic number} of a graph $G$, denoted $\chi(G)$, is the least integer $k$ such that $G$ has a $k$-colouring.
 \end{definition}
@@ -69,7 +84,13 @@ If we do nothing special in the choice of ordering of vertices, we don't get any
 \end{lemma}
 
 If we know something about the graph, we can be a bit more clever in our choice of ordering, and get a better bound. To do this, however, we first need to define the breadth-first ordering of the vertices of a graph.
-
+\begin{marginfigure}
+    \centering
+    \includegraphics[width=0.9\textwidth]{BFS_visualization.png}
+    \caption{
+    This is a visualization of the order that we visit each vertex in a graph using Breadth-first search.
+    }
+\end{marginfigure}
 \begin{definition}
   Let $G = (V,E)$ be a graph. \emph{Breadth-first search} started at a vertex $v$ proceeds as follows:
   \begin{enumerate}
@@ -101,22 +122,24 @@ We can also make use of our previous work on connectivity to break down the prob
 
 \begin{lemma}\label{lemma:chi_max_over_biconnecteds}
   Suppose $G$ is some graph which has at least one two-connected block, and let $B_1, B_2, \ldots, B_r$ be its collection of two-connected blocks. Then
-  $$\chi(G) = \max_{i\in[r]} \chi(B_r).$$
+  $$\chi(G) = \max_{i\in[r]} \chi(B_i).$$
 
   If $G$ has no two-connected blocks, $\chi(G) = 2$ if $G$ has at least one edge, and $\chi(G) = 1$ if it has no edges.\sidenote[][-0.5cm]{
     \begin{xca}
       Prove this part of the theorem statement.
-    \end{xca}
-  }
+    \end{xca}}
+\end{lemma}
 
   \begin{proof}
     That the chromatic number of $G$ is lower bounded by the max over the blocks is trivial. To see the other direction, consider the block graph of $G$, which we saw in our previous lecture is a forest.
 
-    Colour each block of $G$, using at most $\max_{i\in[r]} \chi(B_r)$ colours.\sidenote[][]{If the block is two-connected, this is trivially possible. Otherwise it can be coloured with at most two-colours, since it must be an isolated vertex or a $K_2$.} Then, because any two blocks only intersect in at most one vertex, we can permute the colours in each block so that they agree on the cutvertices, and this can be done in such a way that we get a colouring on the entire graph because the block graph is a tree.\sidenote[][]{\begin{xca}
+    Colour each block of $G$, using at most $\max_{i\in[r]} \chi(B_i)$ colours.\sidenote[][]{If the block is two-connected, this is trivially possible. Otherwise it can be coloured with at most two-colours, since it must be an isolated vertex or a $K_2$.} Then, because any two blocks only intersect in at most one vertex, we can permute the colours in each block so that they agree on the cutvertices, and this can be done in such a way that we get a colouring on the entire graph because the block graph is a tree.\sidenote[][]
+    {\begin{xca}
       Write out the details of this argument -- how do you actually algorithmically do this?
-    \end{xca}} Clearly permuting the colours does not add new colours, so our global colouring with also use only $\max_{i\in[r]} \chi(B_r)$ colours.
+    \end{xca}} 
+    Clearly permuting the colours does not add new colours, so our global colouring will also use only $\max_{i\in[r]} \chi(B_i)$ colours.
   \end{proof}
-\end{lemma}
+
 
 \section{Brooks' theorem}
 
@@ -147,7 +170,7 @@ Are there any other cases where this inequality is sharp? It turns out that thes
 
     \begin{marginfigure}
       \centering
-      \includegraphics[width=0.9\textwidth]{graphics/L12_colouring/brooks_theorem_blocktree.png}
+      \includegraphics[width=0.9\textwidth]{brooks_theorem_blocktree.png}
       \caption{A sketch of the block graph of $G[V \setminus \{a\}]$ and the vertex $a$ drawn in in red, with dotted edges connecting it to blocks it is in as a non-cutvertex, and the putative but impossible leaf $B_\ell$ that does not contain $a$. Notice how the addition of $a$ will create cycles forcing everything except $B_\ell$ to become a single block. Also notice how $a$ being the cutvertex in $B_\ell$ wouldn't help -- that would create a dotted line from $a$ to the parent of $B_\ell$, which still does not create a cycle with $B_\ell$ in it.}
     \end{marginfigure}
 
@@ -171,7 +194,7 @@ However, the weaker statement that any planar graph can be coloured with \emph{f
   \begin{proof}
     We prove this by induction in the number of vertices. The base case of the one-vertex graph is trivial.
 
-    For the inductive step, let $v$ be a vertex whose degree in $G$ is minimal. We claim that $d_v \leq 5$.\sidenote[][]{This follows from the inequality $$\abs{E} \leq 3\abs{V} - 6$$ which we proved last lecture.} Now, if we let $G' = G[V \setminus \{v\}]$, this is clearly still planar and has fewer vertices, so by our induction hypothesis we can five-colour it.
+    For the inductive step, let $v$ be a vertex whose degree in $G$ is minimal. We claim that $d_v \leq 5$.\sidenote[][]{This follows from the inequality $$|E| \leq 3|V| - 6$$ which we proved last lecture.} Now, if we let $G' = G[V \setminus \{v\}]$, this is clearly still planar and has fewer vertices, so by our induction hypothesis we can five-colour it.
 
     If $d_v \leq 4$, its neighbours only use at most four colours, so there's a fifth colour available for us to give it. So we may assume $d_v = 5$. If $v$ has two neighbours which have the same colour, there is again an unused colour we can assign to it. So we assume all five neighbours have different colours.
 
@@ -181,7 +204,7 @@ However, the weaker statement that any planar graph can be coloured with \emph{f
 
     \begin{figure}
       \centering
-      \includegraphics[width=0.65\textwidth]{graphics/L12_colouring/planar_five_colour.png}
+      \includegraphics[width=0.65\textwidth]{planar_five_colour.png}
       \caption[][0cm]{An illustration of the situation in the proof of the five-colour theorem. $v_1$ and $v_3$ are in the same $(\text{red},\text{blue})$-component, which forces the existence of the cycle indicated by a dashed red line. This cycle, however, separates $v_2$ and $v_4$ into separate $(\text{green},\text{orange})$-components, so $v_4$ can swap its orange colour with the green of its neighbour. This frees up the colour orange for $v$ to use.}
       \label{fig:planar_five_colour}
     \end{figure}
@@ -206,7 +229,7 @@ The first step to proving this is of course to turn the simple polygon into a gr
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.65\textwidth]{graphics/L12_colouring/triangulated_polygon.png}
+  \includegraphics[width=0.65\textwidth]{triangulated_polygon.png}
   \caption[][0cm]{A simple polygon on the left, and a triangulated version on the right, which we can interpret as a graph with corners as vertices, and the black and red lines as edges.}
   \label{fig:triangulated_polygon}
 \end{figure}
@@ -227,7 +250,7 @@ For these graphs, we can do a lot better than the five-colour theorem we proved 
   \begin{proof}
     By Lemma \ref{lemma:chi_max_over_biconnecteds} it suffices to prove this for two-connected outerplanar graphs, for which we prove it by induction on the number of vertices. 
     
-    The base case of $\abs{V} = 1$ is trivial, so let $G$ be an outerplanar graph on $n \geq 2$ vertices. Since adding edges cannot decrease the chromatic number or connectivity, we may assume that $G$ is in fact edge-maximal two-connected outerplanar. This implies that all faces are triangles, since any face that isn't could be subdivided into triangles by adding an additional edge, while still leaving the graph two-connected outerplanar.
+    The base case of $|{V}| = 1$ is trivial, so let $G$ be an outerplanar graph on $n \geq 2$ vertices. Since adding edges cannot decrease the chromatic number or connectivity, we may assume that $G$ is in fact edge-maximal two-connected outerplanar. This implies that all faces are triangles, since any face that isn't could be subdivided into triangles by adding an additional edge, while still leaving the graph two-connected outerplanar.
 
     We claim that the planar dual of $G$ with the unbounded face deleted\sidenote[][]{This is called the \emph{weak planar dual} of $G$.} is a forest,\sidenote[][]{In fact it will be connected, since we assumed $G$ is two-connected, but we don't need this here.} since if there were a cycle in the weak planar dual, this cycle would enclose a vertex of $G$, which would then not be incident to the unbounded face.
 
@@ -259,6 +282,15 @@ How does this give us a proof of the art gallery theorem? Well, what we have see
   \end{theorem}
 
   \textbf{Hint:} Let $H$ be a minimal induced subgraph of $G$ with $\chi(H) = \chi(G)$. Can you relate the minimum degree of $H$ to the chromatic number of $G$?\sidenote[][]{If you want a solution, a full proof is in the lecture notes from last year.}
+\end{xca}
+
+\begin{xca}
+Assume you have to separate English alphabet letters into boxes such that no two consecutive letters end up in the same box. What is the minimum number of boxes you need for this task?
+\end{xca}
+
+\begin{xca}
+Prove that if a graph has at most two cycles of odd length then it can be
+coloured with 3 colours. \textit{Hint}: a bipartite graph has $\chi(G) = 2$.
 \end{xca}
 
 
