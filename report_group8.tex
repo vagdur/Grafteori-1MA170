@@ -1,0 +1,253 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage[usenames,dvipsnames,svgnames]{xcolor}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+
+\begin{document}
+
+\thispagestyle{empty}
+
+\vspace*{+2em}
+\begin{center}
+    {\LARGE SUMMARY OF DREYFUS' \\
+    AN APPRAISAL OF SOME SHORTEST-PATH \\
+    ALGORITHMS\\}
+\vspace*{+4em}
+
+
+\vspace*{+3em}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.25\textwidth]{logo_uu_se.png}
+\end{figure}
+
+\vspace*{+3em}
+Graph Theory \\
+Uppsala University Ångströms Laboratory\\
+Department of Math\\
+\vspace*{+2em}
+William Paradell, Mira Åkerman, Max Callenmark\\
+
+\vspace*{+10em}
+12\--12\--2023
+
+\end{center}
+
+\newpage
+
+\section{Introduction}
+
+This paper is a short summary of Stuart E. Dreyfus' paper 
+\textit{An appraisal of some shortest-path algorithms}, where five 
+different shortest paths problems are discussed and how good 
+different algorithms are at solving the problems.  \\
+\indent We strive with this summary to summarize the arguments presented
+pertaining to the different problems, as well as try to give an 
+overview of the algorithms presented to simplify understanding. 
+
+\section{Part 1: The shortest-path problem}
+To start off the shortest path problem S.E. Dreyfus presents the problem in greater detail
+as well as a computationally efficient algorithm solving the problem by Whiting and Hillier.
+The algorithm will be skipped since it's presented in relatively great detail in Dreyfus's paper;
+but it's worth mentioning the computational complexity of it, since it's referenced many times
+while he discusses other algorithms. The algorithm requires $\frac{N(N-1)}{2}$ additions and $N(N-1)$ 
+comparisons to solve the problem; where N is the number of nodes. Next he presents other
+algorithms pertaining to the problem and starts off with Pollack and Wiebenson's paper [6], but does not present the algorithm, which will be done in this summary, to 
+further simplify understanding of the points presented pertaining to it. In the paper a duality 
+is presented with Minty's and the Ford-Fulkerson algorithm (where the shortest path is a special case of
+the Ford-Fulkerson algorithm for network flows), since the Ford-fulkerson algorithm is relatively well
+known, only Minty's algorithm will be presented before the duality is explained. Minty's algorithm 
+as it is presented in Pollack and Wiebenson's paper: 
+\vspace{2mm}
+
+\noindent For the shortest-path problem between two specified cities (nodes).
+Label the starting city `A' and the desired destination city `B' (the terminating city). \\
+\indent \textbf{1.} Label the starting city A with the distance `zero' \\
+\indent \textbf{2.} Look at all one-way streets with their `tails' labeled
+and their `heads' unlabeled. For each such street, form the sum of the label and the length. Select a
+street making this sum a minimum and place a check-mark beside it. Label the
+`head' city of this street with the sum. Return to the beginning of 2 
+
+\vspace{2mm}
+
+\noindent According to S.E. Dreyfus, Minty's algorithm is combined with the Ford-Fulkerson
+algorithm to make the \textit{Minty-Ford-Fulkerson} algorithm which is stated to be
+easily programmed, but on the other hand significantly slower than the algorithm he
+started off by presenting, needing a total of $\frac{N^{3}}{6}$ additions and comparisons, versus
+the $\frac{N(N-1)}{2}$ additions and $N(N-1)$ comparisons of the previous algorithm. S.E. Dreyfus does
+present a paper by Whiting and Hillier that discusses a modification to the algorithm
+that speeds up the Minty-Ford-Fulkerson algorithm, but according to Dreyfus, it's not
+enough in order to compete with Dijkstra's algorithm.
+
+\newpage
+
+\section{Part 3: Determination of the second-shortest path}
+Stuart E. Dreyfus also talks about the problem of finding the second-shortest 
+path through a network. To solve this problem he talks about different methods. 
+Firstly Dreyfus refers to the method described by Hoffman and Pavley [27]. 
+The method says that the second-shortest path between specified  initial and terminal 
+nodes is the deviation from the shortest path. The deviation from the shortest path is 
+defined “to be a path that coincides with the shortest path (j may be the origin or the
+terminal node), then deviates directly to some node k not the next node of the shortest
+path, and finally proceeds from k to the fixed terminal node via the shortest path 
+from k”. Using this method will approximately use MK additions and comparisons, beyond
+the ones needed to find the shortest path, where M is the average node outgoing 
+links and K is the number of arcs in the shortest path. 
+\vspace{2mm}
+Secondly Dreyfus refers to the method described by Bellman and Kalaba
+[28]. This method uses the equation:
+
+\begin{equation}
+    \begin{aligned}
+        & v_{i} = \min \left[
+        \begin{aligned} 
+            & \min_{i \neq j}\!_2(d_{ij} + u_{j}), \\
+            & \min_{j \neq i}\!_1(d_{ij} + v_{j})
+        \end{aligned} 
+        \right],\\
+        & v_{N} = \min_{i}\!_1[d_{Ni} + u_{i}].
+    \end{aligned}
+    \hspace*{3em} (i = 1, \dots, N - 1) 
+\end{equation}
+
+\noindent In this equation ui is defined as the length of the shortest path from the node i
+to the terminal node N and vi as the length of the second shortest path. 
+The term $\min \!_2(d_{ij}+u_j)$ determines the best path beginning in node i 
+and deviating from the shortest path in node i and the term $\min\!_1(d_{ij}+v_j) $
+evaluates the best path with any first arc and the second best continuation. 
+Bellman and Kalaba recommends solving the equation above using an iterative procedure 
+until convergence by elevating vi on the left with $(k+1)$ and vj on the right with (k). 
+Using this method will need an average of NML additions and comparisons, where L is the 
+number of iterations needed. Dreyfus compares this method to Hoffman and Pavley and 
+says that Hoffman and Pavley's method is the better one because it requires less 
+calculations.
+\vspace{2mm}
+Dreyfus also writes about a method from Pollack's [29] paper to find the 
+third-shortest path from all initial nodes to N. We get this path by following
+
+\begin{equation}
+    w_i = \min \left[
+    \begin{aligned}
+        & d_{ik} + v_k \\
+        & d_{im} + v_m \\
+        & \min_{j \neq i} \!_3 [d_{ij} + u_j]
+    \end{aligned}
+    \right].
+\end{equation}
+
+\noindent Let $w_i$ represent the length of the third-shortest path from $i$,
+$v_i$ the second-shortest path and $u_i$ the shortest path. If $u_i$ 
+and $v_i$ is determined then $w_i$ can be computed node by node, this 
+by first computing nodes that are one arc distance from N, then two etc. 
+
+\newpage
+\section{Part 4: Time-dependant length of arcs}
+S.E Drayfus refers to the paper [30] that studied the problem of finding 
+the fastest paths between cities, where travel time depends on departure 
+from the starting city. In the paper, Cooke and Halsey refer to two cities
+as i and j and denote $d_{ij}(t)$ as the travel time where $t$ is the time of 
+departure and defines a function $f_i(t)$ as the minimum travel time to N. 
+\begin{equation}
+    \begin{aligned}
+        & f_i(t) = \min_{j \neq i}[d_{ij}(t)+f_j(t+d_{ij}(t))] \\
+        & f_N(t) = 0
+    \end{aligned}
+\end{equation}
+The authors present an iterative algorithm for finding the quickest 
+paths from all cities to city N. The algorithm can be summarized as follows:
+\begin{enumerate}
+    \item Start at city i at time 0 
+    \item Define T as the maximum time taken over all initial cities 
+    \item Assume all cities are connected, even if it takes an infinite time
+    \item The procedure requires most $N^{2}T^{2}$additions and comparisons 
+    \item Use tentative and permanent labels for nodes (cities) 
+    \item Permanently label the initial node $i$ as 0 and all the others nodes as infinity
+    \item Tentatively label nodes with the minimum of the current label and the sum of the current label and the time taken to travel to that node.
+    \item Find the minimum, non-permanent node label and declare it permanent.
+    \item Use the selected node to update labels at other tentatively labeled cities.
+    \item Repeat steps 8\--9 until city $N$ is permanently labeled.
+\end{enumerate}
+
+\noindent After most $N^{2}$ comparisons and $\frac{N^{2}}{2}$ additions, 
+the quickest paths to all nodes, including $N$, are determined. A similar 
+result is achieved by using a variant of the Dijkstra algorithm, where $\frac{N^{2}}{2}$
+additions and $2N^{2}$comparisons are required. If the quickest path from all 
+cities to $N$ is wanted the algorithm must be repeated $N-1$ times. This 
+procedure compares favorably in computation and required assumptions with 
+Cooke and Halsey's algorithm.
+
+\newpage
+
+\section{Part 5: Shortest path visiting specified nodes}
+The last problem S.E Dreyfus discusses in the paper is the problem of
+finding the shortest path between two specified nodes 1 and $N$ that pass
+through $k-1$ nodes $(2,3,\dots,k \leq N-1)$. Dreyfus critiques a solution given to 
+the problem by Saksena and Kumar [31]. The solution proposed by Saksena and 
+Kumar assumes that the shortest path from a specified node $i$ to the destination 
+node $N$, passing through at least p specified nodes can be broken down into two problems:
+\begin{enumerate}
+    \item Finding the shortest path from $i$ to some specified node $j$.
+    \item Finding the shortest path from $j$ to $N$, passing through at 
+    least $p-r-1$ specified nodes, where $r$ is the number of 
+    specified nodes on the shortest unrestricted path from $i$ to $j$.
+    \item Should some candidate path corresponding to some $j$ violate the 
+    duplication-of-nodes proviso above, that possibility is inadmissible 
+    and the possibility of going initially from $i$ to $j$ by the shortest path
+    is dropped from consideration.
+\end{enumerate}
+
+\noindent Dreyfus means that the procedure of the algorithm is flawed. He argues 
+that the algorithm fails to take into account that in this case an alternative path, 
+avoiding the duplication of nodes, may yield a better overall solution. 
+Dreyfus asserts that the problem can be correctly solved as follows assuming 
+paths with loops are admissible: 
+
+\begin{enumerate}
+    \item Solve the shortest path problem for the N-node network for all pairs of
+    initial and final nodes. Let $d_{ij}$ represent the length of the shortest path 
+    from node $i$ to $j$.
+    \item Solve the k+1 “traveling-salesman” problem for the shortest path from 
+    1 to $N$ passing through nodes $2, 3, \dots,k$ where the distance from node 
+    $i$ to $j$ is $d_{ij}$. 
+\end{enumerate}
+
+
+\section{Notes}
+Some notes that didn't fit with the flow of the summary.
+In part 1 it's worth mentioning that it's not clear what algorithm from
+Pollack and Wiebenson's paper S.E. Dreyfus has named the Minty-Ford-Fulkerson
+algorithm, as it's not explicitly stated in the paper that there's a combination
+of Minty's algorithm and the Ford-Fulkerson algorithm; but in their section \textit{Dual
+Solutions} they do discuss a changed Ford-Fulkerson algorithm. Dreyfus's
+paper originally covers 5 parts but because of group problems we decided to
+only cover 4 out of the 5 parts. The part we skipped was part 2, 
+\textit{The shortest paths between all pairs of nodes of a network}. 
+
+\newpage
+
+\section[short]{References}
+The same references that S.E. Dreyfus included with the same numbering, in case further study of the
+algorithms are desired.
+\vspace{1mm}
+
+\noindent 6. M. POLLACK AND W. WIEBENSON, ``Solution of the Shortest-Route Problem-A \\
+\indent Review'', Opns. Res. 8, 224\--230 (1960). \\
+\noindent 27. W. HOFFMAN AND R. PAVLEY, ``A Method for the Solution of the Nth Best \\
+\indent Path Problem'' J. ACM 6, 506\--514 (1959). \\
+\noindent 28. R. BELLMAN AND R. KALABA, ``On $k$th Best Policies'' J. SIAM 8, 582\--588 \\
+\indent (1960). \\
+\noindent 29. M. POLLACK, ``Solutions of the kth Best Route through a Network-A Re- \\
+\indent view'' J. Math. Anal\. and Appl. 3, 547\--559 (1961).
+
+\noindent 30. M. SAKAROVITCH, The k Shortest Routes and the k Shortest Chains in a Graph, \\
+\indent Operations Research Center, University of California, Berkeley, Report \\
+\indent ORC 66\--32, October 1966 \\
+\noindent 31. S. CLARKE, A. KRIKORIAN, AND J. RAUSEN, ``Computing the N Best Loopless \\
+\indent Paths in a Network'' J. SIAM 11, 1096\--1102 (1963).
+
+
+
+\end{document}
+
+ 
