@@ -29,6 +29,16 @@ Welcome to the course in graph theory at the bachelor's level at Uppsala Univers
 2. The lecture notes from last year's edition of the course [are available here](https://vagdur.github.io/Grafteori-1MA170/lectureNotes2022.pdf). The material covered should be mostly the same, just in a slightly different style. These should be useful if you want to read ahead.
 3. A summary of the contents of the course, with indications of what may appear on the exam, [is available here](https://vagdur.github.io/Grafteori-1MA170/course_summary.pdf). (It is currently a work in progress.)
 
+# Old exams
+
+There are some old exams available:
+
+1. [Tentamen 150817 Koponen](https://vagdur.github.io/Grafteori-1MA170/old_exams/Tentamen 150817 Koponen.pdf)
+2. [Tentamen 170110 1MA170 Thörnblad](https://vagdur.github.io/Grafteori-1MA170/old_exams/Tentamen 170110 1MA170 Thörnblad.pdf)
+3. [Tentamen 190611 1MA170 Strömberg](https://vagdur.github.io/Grafteori-1MA170/old_exams/Tentamen 190611 1MA170 Strömberg.pdf)
+4. [Tentamen 220110 1MA170 Burghart](https://vagdur.github.io/Grafteori-1MA170/old_exams/Tentamen 220110 1MA170 Burghart.pdf)
+5. [Tentamen 230105 1MA170 Burghart](https://vagdur.github.io/Grafteori-1MA170/old_exams/Tentamen 230105 1MA170 Burghart.pdf)
+
 # Where to find a paper for the assignment
 
 If you have some specific topic that came up during a lecture that you want to delve deeper into, I may be able to suggest something for you. Otherwise, you can have a look at what was published at some recent conferences in the area. Some of these conferences are about combinatorics more broadly, so not every paper in them will be suitable. One of them is about network science, so it is a good place to look for more applied papers.
