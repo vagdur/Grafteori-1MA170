@@ -85,11 +85,11 @@ If we know something about the graph, we can be a bit more clever in our choice 
 \end{definition}
 
 \begin{lemma}\label{lemma:brooks_for_irregular}
-  Suppose $G$ is a connected graph with maximum degree $\Delta$, whose vertices do not all have the same degree. Then
+  Suppose $G$ is a graph with maximum degree $\Delta$, whose vertices do not all have the same degree. Then
   $$\chi(G) \leq \Delta.$$
 
   \begin{proof}
-    Since not all vertices have the same degree, there must exist a vertex $v$ with $d_v < \Delta$. Now order the vertices of $G$ according to the \emph{inverse} of the breadth-first order on the vertices started at $v$,\sidenote[][]{By assumption $G$ is connected, so the breadth-first search will find every vertex.} and run the greedy colouring algorithm with this ordering.
+    We may assume that \(G\) is connected because otherwise we can look at each connected component. Since not all vertices have the same degree, there must exist a vertex $v$ with $d_v < \Delta$. Now order the vertices of $G$ according to the \emph{inverse} of the breadth-first order on the vertices started at $v$,\sidenote[][]{By assumption $G$ is connected, so the breadth-first search will find every vertex.} and run the greedy colouring algorithm with this ordering.
 
     The crucial property we need from the ordering is that every vertex except $v$ will, when visited by the greedy colouring algorithm, have at least one neighbour that has not yet been coloured, namely its parent. So it has at most $\Delta - 1$ coloured neighbours, and so there is always at least one colour available among the first $\Delta$ colours.
 
@@ -161,7 +161,7 @@ Are there any other cases where this inequality is sharp? It turns out that thes
 
 \section{Colouring planar graphs}
 
-One of the perhaps more famous theorems of graph theory is that any map can be coloured in at most four colours.\sidenote[][]{This is of the best we could hope for, try to think of a planar graph that is not three-colourable. Can you think of multiple ones?} Of course, part of the reason this is famous is because it has only been proved by means of a computer checking many many cases, so in a sense no human has ever understood an entire proof.
+One of the perhaps more famous theorems of graph theory is that any map can be coloured in at most four colours.\sidenote[][]{\begin{xca}This bound is sometimes sharp. Try to think of a planar graph that is not three-colourable. Can you think of two examples, neither of which contains the other?\end{xca}} Of course, part of the reason this is famous is because it has only been proved by means of a computer checking many many cases, so in a sense no human has ever understood an entire proof.
 
 However, the weaker statement that any planar graph can be coloured with \emph{five} colours can be proven much more easily. In fact, the proof we will give is a modification of a flawed early ``proof'' of the four-colour theorem from the late nineteenth century.
 
