@@ -4,7 +4,7 @@
 
 \title{Exercises}
 
-\author[Group 2]{Group 2 }%\thanks{\href{mailto:vilhelm.agdur@math.uu.se}{\nolinkurl{vilhelm.agdur@math.uu.se}}}}
+\author[Group 2]{Group 2}%\thanks{\href{mailto:vilhelm.agdur@math.uu.se}{\nolinkurl{vilhelm.agdur@math.uu.se}}}}
 
 \date{13 November 2023}
 
@@ -93,7 +93,7 @@
 %\noindent
 %Stuff
 %\end{abstract}
-\section{Exercises 1}
+\section{Exercise 1}
     We have two distinct trees $T, T'$. Let $H$ be the graph formed by adding the $e$ from $T$ into $T'$. Since a tree is an edge-minimal acyclical connected graph the only possible outcome of this (in order to not contradict edge-minimality) is that $H$ contains a cycle. Since $T$ is a tree this cycle can not be contained in it, and as such the cycle must contain an edge $f$ that is not in $T$. Lastly we construct $T''$ by removing this edge $f$ from $H$. Prove that $T''$ is a spanning tree. \\
 
     \textbf{Answer:} \\ 
@@ -108,10 +108,10 @@
   Let $G = (V, E)$ be a positively weighted connected graph with $|V| = n$. Dijkstra's algorithm creates a parent function $p$ such that all vertices in the resulting graph except $r$ is assigned a neigbouring parent vertex. Equivalently one could view this as every vertex except $r$ being assigned the edge from it to its assigned parent, and as such the algorithm adds one edge per vertex except $r$. Notice that such an edge may not be the same throughout all of the algorithm and that there may be some ambiguity in choice in the choice of it due to paths of equal length. Therefore upon termination we have a subgraph of $G$, $G'$, such that \ $E(G') \leq n - 1$. Since the algorithm always adds an incident edge of a vertex in question such that the vertex becomes connected to a path to the root $r$ we have that all vertices of $G'$ are connected to $r$ and as such that all vertices are connected to each other, and hence $G'$ is connected. However we also know that trees are edge-minimal connected graphs and that a graph is a tree if and only if it is connected and has $n - 1$ edges. Hence $E(G') \geq n - 1$, and as such $E(G') = n - 1$. Therefore $G'$ is a connected $n$-vertex graph of $n - 1$ edges which means its a tree.
 \newpage
 
-\section{Exercises 3}
-We have shown in an exercise during our previous exercise session that a weighted graph with all weights distinct has a unique minimum spanning tree. \\  
+\section{Exercise 3}
+We have shown in an exercise during our previous exercise session that a weighted graph with all weights distinct has a unique minimum spanning tree.
 
-Is the stronger statement that in fact no two spanning trees have the same weight also true? \\
+Is the stronger statement that in fact no two spanning trees have the same weight also true?
 
 \textbf{Answer:} \\ 
 No, it is not true.
@@ -130,7 +130,7 @@ As a tree $T$ always has $(|V|-1)$ edges, every edge added must result in an edg
 As this can be done for at least some graphs, the statement is proven false.
 \newpage
 
-\section{Exercises 4}
+\section{Exercise 4}
 
   One way to find a path between two vertices is to first find a minimum spanning tree for the graph and then find the unique path between them in this tree.  
 
@@ -145,12 +145,12 @@ As this can be done for at least some graphs, the statement is proven false.
         \item However, in Figure~\ref{fig:ex4_full} (right), we could have use a shorter path (with weight 5) which the edge that was removed to form the MST.  
     \end{itemize}  
     
-\begin{figure}
-  \centering
-  \includegraphics[width=0.85\textwidth]{graphics/L6_prim_kruskal_dijkstra/ex4_full.png}
-  \caption[][0cm]{Left: Example weighted graph. Middle: MST. Right: Shorter Path from C to D}
-  \label{fig:ex4_full}
-\end{figure}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.85\textwidth]{graphics/L6_prim_kruskal_dijkstra/ex4_full.png}
+        \caption[][0cm]{Left: Example weighted graph. Middle: MST. Right: Shorter Path from C to D}
+        \label{fig:ex4_full}
+    \end{figure}
 
     \item If not, will there always be \emph{some} pair of vertices such that this is the shortest path between them?
     
@@ -179,6 +179,7 @@ As this can be done for at least some graphs, the statement is proven false.
     
 \end{enumerate}
 \newpage
+
 \section{Exercise 5}
 
 Are any of the things we did in this lecture useful for computing the diameter of a graph? Think about how one might do it, and what runtimes your suggested algorithms will have.
@@ -194,35 +195,36 @@ One could definitely utilise the fact that intialising Dijkstras algorithm from 
 Searching the internet for a more effective algorithm I found the Floyd-Warshall algorithm which has a time complexity of \( \mathcal{O}(|V|^3) \). This algorithm uses a modified weighted adjacency matrix which finds the distance between all nodes simultaneously by considering each node as an intermediate node. For example, we might know that there is a path of length \( d\) from \( v \) to \( v' \), now consider if the path via \( v''\) is shorter: \( d(v,v'')+d(v'',v')<d(v,v') \)? The complexity of the Floyd-Warshall algorithm is preferred if the amount of edges greatly exceeds the amount of vertices, meaning that the graph is dense. 
 
 \newpage
+
 \section{Exercise 6}
 If there are multiple edges of the same weight there may be some element of choice in the ordering of the edges in Prim's and Kruskal's algorithms. Using this show that given an arbitrary MST the algorithms can always find it.
 
 \textbf{Answers:} \\ 
- \subsection{Kruskal's Reaches all MST:s}
-            Let $T$ be an MST of $G = (V, E)$. We are going to construct a weight-ordered sequence, $L$, of all edges in $E$ as input to Kruskal's algorithm. This sequence will be constructed in such a manner that for any weight $w \in W$ we have that all edges in $E(T)$ of weight $w$ appear first in the list followed by any residual edges in $E \setminus E(T)$ also of weight $w$. \\
-            
-            We will begin by letting $W$ be a $\leq$-ordered sequence of all the weights which appear in $G$. Then for $w \in W$ let $L_w^T$ be a sequence which orders the elements of $\bigset[1]{e \in E(T)}{w(e) = w}$, i.e.\ $L_w$ is an ordering of the edges in $T$ with weight $w$ (might be empty if there are no edges in $T$ of weight $w$), and Let $L_w^{T^c}$ be a sequence which orders $\bigset[1]{e \in E \setminus E(T)}{w(e) = w}$. \\
-            
-            (Below we will use $\oplus$ for sequences and this will be interpreted as $(a_1, \ldots, a_m) \oplus (b_1, \ldots, b_n) = (a_1, \ldots, a_m, b_1, \ldots, b_n)$, and for an ordered sequence $I = (i_1, \ldots, i_k)$ we will interpret $\bigoplus\limits_{i \in I} A_i$ as $A_{i_1} \oplus \ldots \oplus A_{i_k}$) \\
-            
-            Now let $L_w = L_w^T \oplus L_w^{T^c}$ and finally:
+\subsection{Kruskal's Reaches all MST:s}
+Let $T$ be an MST of $G = (V, E)$. We are going to construct a weight-ordered sequence, $L$, of all edges in $E$ as input to Kruskal's algorithm. This sequence will be constructed in such a manner that for any weight $w \in W$ we have that all edges in $E(T)$ of weight $w$ appear first in the list followed by any residual edges in $E \setminus E(T)$ also of weight $w$.
+
+We will begin by letting $W$ be a $\leq$-ordered sequence of all the weights which appear in $G$. Then for $w \in W$ let $L_w^T$ be a sequence which orders the elements of $\bigset[1]{e \in E(T)}{w(e) = w}$, i.e.\ $L_w$ is an ordering of the edges in $T$ with weight $w$ (might be empty if there are no edges in $T$ of weight $w$), and Let $L_w^{T^c}$ be a sequence which orders $\bigset[1]{e \in E \setminus E(T)}{w(e) = w}$.
+
+(Below we will use $\oplus$ for sequences and this will be interpreted as $(a_1, \ldots, a_m) \oplus (b_1, \ldots, b_n) = (a_1, \ldots, a_m, b_1, \ldots, b_n)$, and for an ordered sequence $I = (i_1, \ldots, i_k)$ we will interpret $\bigoplus\limits_{i \in I} A_i$ as $A_{i_1} \oplus \ldots \oplus A_{i_k}$.)
+
+Now let $L_w = L_w^T \oplus L_w^{T^c}$ and finally:
 %
-            \begin{align*}
-                L = \bigoplus_{w \in W} L_w
-            \end{align*}
+\begin{align*}
+    L = \bigoplus_{w \in W} L_w
+\end{align*}
 
-            We now want to show that Kruskal's algorithm indeed returns $T$ upon termination when given $L$ as input. \\
+We now want to show that Kruskal's algorithm indeed returns $T$ upon termination when given $L$ as input.
 
-            We will suppose for contradiction that there is some first timestep $i$ at which Kruskal's deviates from $T$. This deviation could occur in two different ways:
-            
-            \begin{itemize}
-                \item The algorithm adds an edge $e_i$ which is not in $T$.
-                \item The algorithm does not add $e_i$ even though it is in $T$.
-            \end{itemize}
-            
-            In fact the deviation must be of the former type since the second type would mean that adding $e_i$ creates a cycle with the already added edges all of which are in $T$. However this is not possible since that would mean there is a cycle in $T$. \\
+We will suppose for contradiction that there is some first timestep $i$ at which Kruskal's deviates from $T$. This deviation could occur in two different ways:
 
-            Now if we add $e_i$ to $T$ we create a cycle. This cycle must contain some edge of greater weight than $e_i$ since all edges in $T$ of weight $\leq w(e_i)$ have been added before $e_i$ by the algorithm. This is since $e_i$ is in $L_w(e_i)^{T^c}$ which comes after both $L_{w(e_i)}^T$ and all the edges with weight strictly less than $w(e_i)$ in $L$. Now if we remove this edge from the cycle we get a connected graph of $n - 1$ edges. Hence this graph is a tree. Call it $T'$. We now have that $w(T') < w(T)$ which contradicts the fact that $T$ is an MST. Hence the algorithm does not deviate at any point, and as such the algorithm produces $T$.
+\begin{itemize}
+    \item The algorithm adds an edge $e_i$ which is not in $T$.
+    \item The algorithm does not add $e_i$ even though it is in $T$.
+\end{itemize}
+
+In fact the deviation must be of the former type since the second type would mean that adding $e_i$ creates a cycle with the already added edges all of which are in $T$. However this is not possible since that would mean there is a cycle in $T$.
+
+Now if we add $e_i$ to $T$ we create a cycle. This cycle must contain some edge of greater weight than $e_i$ since all edges in $T$ of weight $\leq w(e_i)$ have been added before $e_i$ by the algorithm. This is since $e_i$ is in $L_w(e_i)^{T^c}$ which comes after both $L_{w(e_i)}^T$ and all the edges with weight strictly less than $w(e_i)$ in $L$. Now if we remove this edge from the cycle we get a connected graph of $n - 1$ edges. Hence this graph is a tree. Call it $T'$. We now have that $w(T') < w(T)$ which contradicts the fact that $T$ is an MST. Hence the algorithm does not deviate at any point, and as such the algorithm produces $T$.
 
             
         
