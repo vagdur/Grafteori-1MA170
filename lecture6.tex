@@ -30,7 +30,6 @@
 \newcommand{\docpkg}[1]{\texttt{#1}}% package name
 \newcommand{\doccls}[1]{\texttt{#1}}% document class name
 \newcommand{\docclsopt}[1]{\texttt{#1}}% document class option name
-\newcommand{\mc}[1]{\mathcal{#1}}
 \newenvironment{docspec}{\begin{quote}\noindent}{\end{quote}}% command specification environment
 
 \include{mathcommands.extratex}
@@ -113,7 +112,7 @@ Before we can prove that this algorithm actually works, we will need a little le
 \end{theorem}
 
 \begin{remark}
-  The runtime of this algorithm will depend on the implementation -- specifically on how the graph is represented\sidenote[][-0.9cm]{Are you storing essentially an adjacency matrix, or a list of edges, or something like a ``linked list'' kind of structure? There are many ways of representing a graph in memory.} and on how you find the next edge between $V(T_i)$ and $V(T_i)^c$. A good implementation has a runtime of $\mc{O}\left(\abs{E} + \abs{V}\log\left(\abs{V}\right)\right)$.\sidenote[][1cm]{If you just store an adjacency matrix, you get a runtime of $\mc{O}\left(\abs{V}^2\right)$, while if you store the graph as a list of vertices, where each vertex is a list of its neighbours, and use a Fibonacci heap to help finding the minimal edges, you get the runtime of the ``good'' implementation.}
+  The runtime of this algorithm will depend on the implementation -- specifically on how the graph is represented\sidenote[][-0.9cm]{Are you storing essentially an adjacency matrix, or a list of edges, or something like a ``linked list'' kind of structure? There are many ways of representing a graph in memory.} and on how you find the next edge between $V(T_i)$ and $V(T_i)^c$. A good implementation has a runtime of $O\left(\abs{E} + \abs{V}\log\left(\abs{V}\right)\right)$.\sidenote[][1cm]{If you just store an adjacency matrix, you get a runtime of $O\left(\abs{V}^2\right)$, while if you store the graph as a list of vertices, where each vertex is a list of its neighbours, and use a Fibonacci heap to help finding the minimal edges, you get the runtime of the ``good'' implementation.}
 \end{remark}
 
 \section{Kruskal's algorithm}
@@ -152,7 +151,7 @@ The second algorithm we consider for finding MSTs is \emph{Kruskal's algorithm},
 \end{theorem}
 
 \begin{remark}
-  Kruskal's algorithm has a time complexity of $\mc{O}\left(\abs{E}\log\left(\abs{V}\right)\right)$, but if you are already given the edges sorted by weight, it runs in $\mc{O}\left(\abs{E}\mathop{\alpha}\left(\abs{V}\right)\right)$ time, where $\alpha$ is the inverse of the Ackermann function.
+  Kruskal's algorithm has a time complexity of $O\left(\abs{E}\log\left(\abs{V}\right)\right)$, but if you are already given the edges sorted by weight, it runs in $O\left(\abs{E}\mathop{\alpha}\left(\abs{V}\right)\right)$ time, where $\alpha$ is the inverse of the Ackermann function.
 \end{remark}
 
 \section{Graph distances}
@@ -222,7 +221,7 @@ In fact, we can interpret the problem of finding the distances between a given v
 
   If we want to find the actual path that realizes the found distance, we can just iterate the parent function $p$ -- starting in a vertex $v$, walk to $p(v)$, then to $p(p(v))$, and so on until you reach $v_0$. Notice that this path is not necessarily the unique path realizing the found distance.
 
-  With the right implementation, Dijkstra's algorithm has a runtime of $\mc{O}\left(\abs{E} + \abs{V}\log\left(\abs{V}\right)\right)$.
+  With the right implementation, Dijkstra's algorithm has a runtime of $O\left(\abs{E} + \abs{V}\log\left(\abs{V}\right)\right)$.
 \end{remark}
 
 \section{Exercises}
