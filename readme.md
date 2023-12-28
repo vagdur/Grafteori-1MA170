@@ -27,7 +27,17 @@ Welcome to the course in graph theory at the bachelor's level at Uppsala Univers
 
 1. In addition to the lecture notes, the book Graph Theory by Reinhard Diestel is listed as course literature, and it may be a useful reference. It ought be [available as a pdf from the university library](https://uub.primo.exlibrisgroup.com/discovery/search?tab=Everything&search_scope=MyInst_and_CI&vid=46LIBRIS_UUB:UUB&offset=0&lang=sv&query=isbn,contains,9783642142789).
 2. The lecture notes from last year's edition of the course [are available here](https://vagdur.github.io/Grafteori-1MA170/lectureNotes2022.pdf). The material covered should be mostly the same, just in a slightly different style. These should be useful if you want to read ahead.
-3. A summary of the contents of the course, with indications of what may appear on the exam, [is available here](https://vagdur.github.io/Grafteori-1MA170/course_summary.pdf). (It is currently a work in progress.)
+3. A summary of the contents of the course, with indications of what may appear on the exam, [is available here](https://vagdur.github.io/Grafteori-1MA170/course_summary.pdf).
+
+# Old exams
+
+There are some old exams available:
+
+1. [Tentamen 150817 Koponen](https://vagdur.github.io/Grafteori-1MA170/old_exams/Tentamen 150817 Koponen.pdf)
+2. [Tentamen 170110 1MA170 Thörnblad](https://vagdur.github.io/Grafteori-1MA170/old_exams/Tentamen 170110 1MA170 Thörnblad.pdf)
+3. [Tentamen 190611 1MA170 Strömberg](https://vagdur.github.io/Grafteori-1MA170/old_exams/Tentamen 190611 1MA170 Strömberg.pdf)
+4. [Tentamen 220110 1MA170 Burghart](https://vagdur.github.io/Grafteori-1MA170/old_exams/Tentamen 220110 1MA170 Burghart.pdf)
+5. [Tentamen 230105 1MA170 Burghart](https://vagdur.github.io/Grafteori-1MA170/old_exams/Tentamen 230105 1MA170 Burghart.pdf)
 
 # Where to find a paper for the assignment
 
@@ -38,6 +48,14 @@ If you have some specific topic that came up during a lecture that you want to d
 3. [SAND23](https://sand-conf.org/) (Temporal graphs, more Computer Science-y than mathsy)
 4. [NetSci2023](https://netsci2023.wixsite.com/netsci2023) (Network Science)
 5. [EuroComb23](https://iuuk.mff.cuni.cz/events/conferences/eurocomb23/) (Combinatorics)
+
+# Past group projects
+
+For the groups that did the ``edit lecture notes and solve exercises'' project, all past submissions are in the [pull requests](https://github.com/vagdur/Grafteori-1MA170/pulls) of the repository hosting this page and the lecture notes.
+
+There are also the following past projects summarizing papers:
+
+1. [Temporal graphs and the firefighter problem](https://vagdur.github.io/Grafteori-1MA170/temporal_firefighter_problem.pdf)
 
 <hr />
 
