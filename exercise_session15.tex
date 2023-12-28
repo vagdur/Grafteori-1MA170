@@ -1,0 +1,169 @@
+\documentclass[nobib]{tufte-handout}
+
+\title{Exercise session 15: Extremal graph theory and Szemerédi's regularity lemma $\cdot$ 1MA170}
+
+\author[Vilhelm Agdur]{Vilhelm Agdur\thanks{\href{mailto:vilhelm.agdur@math.uu.se}{\nolinkurl{vilhelm.agdur@math.uu.se}}}}
+
+\date{29 November 2023}
+
+
+%\geometry{showframe} % display margins for debugging page layout
+
+\usepackage{graphicx} % allow embedded images
+  \setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+  \graphicspath{{graphics/}} % set of paths to search for images
+\usepackage{amsmath}  % extended mathematics
+\usepackage{booktabs} % book-quality tables
+\usepackage{units}    % non-stacked fractions and better unit spacing
+\usepackage{multicol} % multiple column layout facilities
+\usepackage{lipsum}   % filler text
+\usepackage{fancyvrb} % extended verbatim environments
+  \fvset{fontsize=\normalsize}% default font size for fancy-verbatim environments
+
+\usepackage{color,soul} % Highlights for text
+
+% Standardize command font styles and environments
+\newcommand{\doccmd}[1]{\texttt{\textbackslash#1}}% command name -- adds backslash automatically
+\newcommand{\docopt}[1]{\ensuremath{\langle}\textrm{\textit{#1}}\ensuremath{\rangle}}% optional command argument
+\newcommand{\docarg}[1]{\textrm{\textit{#1}}}% (required) command argument
+\newcommand{\docenv}[1]{\textsf{#1}}% environment name
+\newcommand{\docpkg}[1]{\texttt{#1}}% package name
+\newcommand{\doccls}[1]{\texttt{#1}}% document class name
+\newcommand{\docclsopt}[1]{\texttt{#1}}% document class option name
+\newenvironment{docspec}{\begin{quote}\noindent}{\end{quote}}% command specification environment
+
+\include{mathcommands.extratex}
+
+\begin{document}
+
+\maketitle% this prints the handout title, author, and date
+
+\begin{abstract}
+\noindent
+We introduce the concept of extremal graph theory, starting with Turan's theorem. Then we introduce Szemerédi's regularity lemma as a tool for extremal graph theory.
+\end{abstract}
+
+\section{Extremal graphs}
+
+We start with the central definition of extremal graph theory, and then we explain what it actually means through some exercises.
+
+\begin{definition}
+  Given any graph $H$, we say that a graph $G$ is \emph{$H$-free} if it has no subgraph isomorphic to $H$. We say that it is \emph{maximal $H$-free} if adding any edge to it would create a subgraph isomorphic to $H$, and we say that is is \emph{maximum $H$-free} (or \emph{extremal} among $H$-free graphs) if additionally no other $H$-free graph has more edges than $G$.
+
+  For each integer $n$, we define the \emph{extremal function for $H$}, denoted $\ex(n; H)$, to be the number of edges of a maximum $H$-free graph on $n$ vertices.
+\end{definition}
+
+\begin{xca}
+  As a warm-up exercise, if $H$ is the path on three vertices, what is $\ex(n;H)$? What are the extremal graphs for this problem?
+
+  Letting $H_k$ be a star graph with $k$ leaves,\sidenote[][]{That is, a tree with one root with $k$ children, and no other vertices or edges.} what is $\ex(n;H_k)$? Which are the extremal graphs here?
+\end{xca}
+
+Having done this warmup, we can move on to the original question that motivated the start of extremal graph theory: How many edges can a graph have if it does not contain any triangles? This requirement clearly imposes \emph{some} bound on the number of edges -- a complete graph certainly contains a triangle -- but what is the bound?
+
+\begin{xca}
+  Letting $H = K_3$, the triangle graph, what is $\ex(n; K_3)$? What do the extremal graphs look like?\sidenote[][]{Side exercise: Can you find a graph that is maximal triangle-free but not extremal?}
+\end{xca}
+
+\begin{xca}
+  Can you generalize what you just did to finding $\ex(n; K_k)$ for $k > 3$?
+\end{xca}
+
+In the lecture, we will see several very elegant proofs of Turán's theorem, which is the theorem that gives the answer to this question. Let us close out with an exercise that is definitely rather tough, but has a very elegant solution\sidenote[][]{Which uses a probabilistic method style of argument.} which points towards more advanced problems.
+
+\begin{xca}
+  Let us generalize the definition of $\ex(n; H)$ to saying that for every graph $G$,
+  $$\ex(G; H) = \max\left\{\abs{E(F)} \given H \not\subseteq F \subseteq G\right\},$$
+  that is, $\ex(G;H)$ is the largest number of edges of an $H$-free subgraph of $G$. So $\ex(n; H) = \ex(K_n; H)$.
+
+  Prove that for all $H$ and all $n$-vertex graphs $G$,
+  $$\ex(G; H) \geq \ex(n; H) \frac{\abs{E(G)}}{\binom{n}{2}}.$$
+\end{xca}
+
+\section{The Szemerédi regularity lemma}
+
+Let $G$ be a very large graph with lots of vertices and edges. Is there a way to summarize roughly what this graph looks like? At first glance, the question seems absurd: If we are considering \emph{any} graph, surely it can look like anything, and so we can't compress the information any further?
+
+The regularity lemma\sidenote[][]{Which is what we will call it throughout, omitting Szemerédi's name in the interest of not having to pronounce too many Hungarian names.} gives us a way of doing this, including error bounds on how wrong our summary is.
+
+Before we give the statement of the regularity lemma with all its quantifiers, let us introduce the following random graph model:
+
+\begin{definition}
+  Take a weighted graph $R = ([k], E, w)$ with weights in the interval $(0,1]$, which we call a \emph{blueprint}. Then, for any $n$ the \emph{random multipartite graph with blueprint $R$}, denoted $G(n,R)$, is a $k$-partite graph whose parts $A_1, A_2, \ldots, A_k$ all have $n$ vertices, and where an edge between $a \in A_i$ and $b \in A_j$ is present with probability $w(i \sim j)$.
+\end{definition}
+
+\begin{xca}
+  Convince yourself that if you take $R$ to be the complete graph on $n$ vertices with all edge weights equal to $p$, then the graph $G(1,R)$ is just an Erd\H{o}s-Rényi graph $G(n,p)$.
+\end{xca}
+
+What the regularity lemma says is essentially that every large enough graph looks mostly like a random multipartite graph for some blueprint, if you squint a bit at it and ignore a few edges. So this blueprint is the summary of the graph which we were looking for.
+
+To see the sense in which this is true, we need first to introduce two more concepts.
+
+\begin{definition}
+  Let $G = (V,E)$ be some graph on $n$ vertices. The \emph{density} of $G$ is
+  $$d(G) = \frac{\abs{E}}{\binom{n}{2}}.$$
+
+  For any two disjoint sets of vertices $X$ and $Y$, let $E(X,Y)$ denote the set of edges with one endpoint in $X$ and one in $Y$, and let $e(X,Y) = \abs{E(X,Y)}$. Then the \emph{density} of the pair $(X,Y)$ is
+  $$d(X,Y) = \frac{e(X,Y)}{\abs{X}\abs{Y}}.$$
+\end{definition}
+
+\begin{xca}
+  Prove that in $G(n,R)$, the random multipartite graph with blueprint $R$, if $X = A_i$ and $Y = A_j$ are two parts of the partition of the graph, the density $d(X,Y)$ converges to $w(i \sim j)$ in probability and almost surely.\sidenote[][]{If you don't recall this from probability theory, what you want to use to prove this is the weak and the strong laws of large numbers, respectively.}
+\end{xca}
+
+So as the result of the previous exercise indicates, the density of a pair of vertex sets is sort of the probability of an edge between them -- except it is a deterministic thing, so it makes sense to talk about for arbitrary graphs.
+
+In fact, our random bipartite graph will have a much stronger property than just having the ``right'' densities between parts -- even if you zoom in on just a subset of the parts, they will still have the right density, as long as they aren't too tiny. No particular subset of a part is ``special''. The way to make this formal is through the notion of \emph{$\varepsilon$-regularity.}
+
+\begin{definition}
+  Let $G = (V,E)$ be a graph on $n$ vertices, and $A$ and $B$ two disjoint subsets of $V$. For any $\varepsilon > 0$, we say that the pair $(A,B)$ is \emph{$\varepsilon$-regular} if it holds for all $X \subseteq A, Y \subseteq B$ with $\abs{X} \geq \varepsilon\abs{A}$ and $\abs{Y} \geq \varepsilon\abs{B}$ that
+  $$\abs{d(X,Y) - d(A,B)} \leq \varepsilon.$$
+\end{definition}
+
+\begin{xca}
+  Can you find a graph $G$ with a pair of vertex sets that fails to be $\frac{1}{4}$-regular?
+\end{xca}
+
+\begin{xca}
+  Convince yourself that it is plausible that for every blueprint $R$ and every $\varepsilon > 0$, it holds with high probability that every pair of parts of a random multipartite graph $G(n,R)$ is $\varepsilon$-regular.\sidenote[][]{The order of quantifiers matters here, so spend a moment to think about it. We first pick an $\varepsilon$, and then we claim that the probability that \emph{every} pair of parts is $\varepsilon$-regular tends to one as $n$ goes to infinity.}
+  
+  If you feel like it, you could even try to prove this, though that would be more of an exercise in probability than in graph theory.\sidenote[][]{To show this it actually suffices to show the version of the statement with the weaker quantifier ordering: that for every $\epsilon$ and every pair of parts, that pair is $\epsilon$-regular with high probability, since there are only a fixed and finite number of pairs of parts.}
+\end{xca}
+
+So the concept of $\varepsilon$-regularity captures a sense in which the edges between two sets of vertices can look like they were chosen at random, which is made plausible by the fact that an actually random graph will have its pairs be $\varepsilon$-regular.
+
+Now, we can finally state the Szemerédi regularity lemma, and it will hopefully make sense why we say it morally means all graphs look roughly like random multipartite graphs.
+
+\begin{theorem}[Szemerédi's regularity lemma]
+  For every $\varepsilon > 0$ and $m \in \N$ there exists an $M \in \N$ such that for every graph $G = (V,E)$ on at least $M$ vertices and every $\delta \in [0,1]$, there exists
+  \begin{enumerate}[label=\alph*)]
+    \item a blueprint $R = ([k],E_R,w)$ whose minimum weight is at least $\delta$,
+    \item a partition $V = V_0 \coprod V_1 \coprod \ldots \coprod V_k$,
+    \item and a spanning subgraph $G'$ of $G$,
+  \end{enumerate}
+  such that
+  \begin{enumerate}
+    \item $m \leq k \leq M$,
+    \item $0 \leq \abs{V_0} \leq \varepsilon\abs{V}$,\sidenote[][]{So notice in particular that $V_0$ may be empty.}
+    \item $\abs{V_1} = \abs{V_2} = \ldots = \abs{V_k}$,
+    \item for every $v \in V$
+    $$d_{G'}(v) > d_G(v) - (\delta + \epsilon)\abs{V},$$
+    where $d_{G'}$ and $d_G$ denote degrees in $G'$ and $G$ respectively,
+    \item the graph $G'' = G'[V\setminus V_0]$ is multipartite with the sets $V_i$ as parts,\sidenote[][]{Which concretely just means that for every $i = 1,2,\ldots,k$, there are no edges internal to $V_i$ in $G'$, which you could alternatively phrase as that these sets are independent in $G'$.}
+    \item and all of the pairs $(V_i, V_j)$ for $1 \leq i, j \leq k$ are $\varepsilon$-regular, and their density is $w(i \sim j)$ if $i \sim j$ is an edge of $R$, and otherwise there are no edges between them. 
+  \end{enumerate}
+\end{theorem}
+
+\begin{xca}
+  That theorem was quite the mouthful. Take a moment to convince yourself that it really is saying that there exists a subgraph $G'' = G'[V \setminus V_0]$ that looks like it was sampled from $G(m, R)$ for the given blueprint $R$ and an $m$ that is approximately $\frac{n}{k}$.
+
+  It is obvious that we have lost at most $\varepsilon\abs{V}$ vertices of $G$ by passing to $G''$. How many edges can we have lost?
+\end{xca}
+
+In the lecture, we will see how we can use this machinery we have set up to prove Roth's theorem on the existence of arithmetic progressions of length three, and also mention that it can also be used to prove the Erd\H{o}s-Stone-Simonovits theorem, which is a vast generalization of what we did with the $K_k$-free graphs.
+
+%\bibliography{references}
+%\bibliographystyle{plainnat}
+
+\end{document}

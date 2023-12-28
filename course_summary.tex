@@ -1,0 +1,308 @@
+\documentclass[nobib]{tufte-handout}
+
+\title{Summary of the course $\cdot$ 1MA170}
+
+\author[Vilhelm Agdur]{Vilhelm Agdur\thanks{\href{mailto:vilhelm.agdur@math.uu.se}{\nolinkurl{vilhelm.agdur@math.uu.se}}}}
+
+%\date{20 februari 2023}
+
+
+%\geometry{showframe} % display margins for debugging page layout
+
+\usepackage{graphicx} % allow embedded images
+  \setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+  \graphicspath{{graphics/}} % set of paths to search for images
+\usepackage{amsmath}  % extended mathematics
+\usepackage{booktabs} % book-quality tables
+\usepackage{units}    % non-stacked fractions and better unit spacing
+\usepackage{multicol} % multiple column layout facilities
+\usepackage{lipsum}   % filler text
+\usepackage{fancyvrb} % extended verbatim environments
+  \fvset{fontsize=\normalsize}% default font size for fancy-verbatim environments
+
+\usepackage{color,soul} % Highlights for text
+
+% Standardize command font styles and environments
+\newcommand{\doccmd}[1]{\texttt{\textbackslash#1}}% command name -- adds backslash automatically
+\newcommand{\docopt}[1]{\ensuremath{\langle}\textrm{\textit{#1}}\ensuremath{\rangle}}% optional command argument
+\newcommand{\docarg}[1]{\textrm{\textit{#1}}}% (required) command argument
+\newcommand{\docenv}[1]{\textsf{#1}}% environment name
+\newcommand{\docpkg}[1]{\texttt{#1}}% package name
+\newcommand{\doccls}[1]{\texttt{#1}}% document class name
+\newcommand{\docclsopt}[1]{\texttt{#1}}% document class option name
+\newenvironment{docspec}{\begin{quote}\noindent}{\end{quote}}% command specification environment
+
+\include{mathcommands.extratex}
+
+
+
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usetikzlibrary{decorations.pathmorphing}
+
+\makeatletter
+
+\newcommand{\defhighlighter}[3][]{%
+  \tikzset{every highlighter/.style={color=#2, fill opacity=#3, #1}}%
+}
+
+\defhighlighter{yellow}{.5}
+
+\newcommand{\highlight@DoHighlight}{
+  \fill [ decoration = {random steps, amplitude=1pt, segment length=15pt}
+        , outer sep = -15pt, inner sep = 0pt, decorate
+        , every highlighter, this highlighter ]
+        ($(begin highlight)+(0,8pt)$) rectangle ($(end highlight)+(0,-3pt)$) ;
+}
+
+\newcommand{\highlight@BeginHighlight}{
+  \coordinate (begin highlight) at (0,0) ;
+}
+
+\newcommand{\highlight@EndHighlight}{
+  \coordinate (end highlight) at (0,0) ;
+}
+
+\newdimen\highlight@previous
+\newdimen\highlight@current
+
+\DeclareRobustCommand*\highlight[1][]{%
+  \tikzset{this highlighter/.style={#1}}%
+  \SOUL@setup
+  %
+  \def\SOUL@preamble{%
+    \begin{tikzpicture}[overlay, remember picture]
+      \highlight@BeginHighlight
+      \highlight@EndHighlight
+    \end{tikzpicture}%
+  }%
+  %
+  \def\SOUL@postamble{%
+    \begin{tikzpicture}[overlay, remember picture]
+      \highlight@EndHighlight
+      \highlight@DoHighlight
+    \end{tikzpicture}%
+  }%
+  %
+  \def\SOUL@everyhyphen{%
+    \discretionary{%
+      \SOUL@setkern\SOUL@hyphkern
+      \SOUL@sethyphenchar
+      \tikz[overlay, remember picture] \highlight@EndHighlight ;%
+    }{%
+    }{%
+      \SOUL@setkern\SOUL@charkern
+    }%
+  }%
+  %
+  \def\SOUL@everyexhyphen##1{%
+    \SOUL@setkern\SOUL@hyphkern
+    \hbox{##1}%
+    \discretionary{%
+      \tikz[overlay, remember picture] \highlight@EndHighlight ;%
+    }{%
+    }{%
+      \SOUL@setkern\SOUL@charkern
+    }%
+  }%
+  %
+  \def\SOUL@everysyllable{%
+    \begin{tikzpicture}[overlay, remember picture]
+      \path let \p0 = (begin highlight), \p1 = (0,0) in \pgfextra
+        \global\highlight@previous=\y0
+        \global\highlight@current =\y1
+      \endpgfextra (0,0) ;
+      \ifdim\highlight@current < \highlight@previous
+        \highlight@DoHighlight
+        \highlight@BeginHighlight
+      \fi
+    \end{tikzpicture}%
+    \the\SOUL@syllable
+    \tikz[overlay, remember picture] \highlight@EndHighlight ;%
+  }%
+  \SOUL@
+}
+\makeatother
+
+
+\definecolor{light-gray}{gray}{0.7}
+\definecolor{light-purple}{rgb}{0.796, 0.765, 0.89}
+\definecolor{dark-red}{rgb}{0.8, 0, 0}
+\definecolor{dark-orange}{rgb}{0.98, 0.69, 0.03}
+\definecolor{dark-green}{rgb}{0.0627, 0.4588, 0.1451}
+\definecolor{turquoise}{rgb}{0.282, 0.82, 0.8}
+
+%\renewcommand\emph[1]{\highlight[dark-orange]{#1}}
+
+\newcommand{\isnp}[1]{\highlight[light-gray]{#1}}
+\newcommand{\isip}[1]{\highlight[light-purple]{#1}}
+\newcommand{\iskp}[1]{\highlight[turquoise]{#1}}
+\newcommand{\ksnp}[1]{\highlight[dark-green]{#1}}
+\newcommand{\ksip}[1]{\highlight[dark-orange]{#1}}
+\newcommand{\kskp}[1]{\highlight[dark-red]{#1}}
+\newcommand{\usedef}[1]{\highlight[light-gray]{#1}}
+\newcommand{\knowdef}[1]{\highlight[dark-green]{#1}}
+
+\begin{document}
+
+\maketitle% this prints the handout title, author, and date
+
+\begin{abstract}
+\noindent
+This document gives a summary of the entire course, with \highlight[dark-orange]{keywords} highlighted, in colours indicating whether and how it might appear on the exam.
+\end{abstract}
+
+\section{How this document works}
+
+The document goes through each lecture in order, noting what we covered in the lecture. In particular, it highlights the key topics of the course, and marks for each how it may appear on the exam.
+
+In particular, the coding works as follows:
+\begin{enumerate}
+  \item If it is \isnp{highlighted like this}, that indicates that you are expected to be familiar with the statement to the degree that you could use it to show some other statement or solve an exercise, if the highlighted statement is provided to you.
+  
+  You could also be asked to provide a precise statement given a prompt as to what it is about -- so for example if you see \isnp{Dirac's theorem} in this document, an exam question might also be ``What does Dirac's theorem about the existence of Hamiltonian paths say?''. You are not expected to know the proof of the result.
+  \item If it is \isip{highlighted like this}, you are expected to not only know the statement in the same sense as in the previous point, but also to have an idea of the proof of the theorem. So you might be asked to fill in a key step of the proof of the statement, write a precise proof given a prompt of what the general outline is, or write an outline of the idea of the proof.
+  
+  So if you see \isip{Dirac's theorem} in this document, an exam question might give you the proof of the result with the step where the maximal length path is turned into a cycle, and you are asked to fill in that step. Or you could be asked to write a proof, given that the drawings for the proof from the lecture notes are given to you. Or you could be asked to draw those figures and explain the broad idea of taking a maximal length path and showing that it can be turned into a cycle, which must be a Hamilton cycle.
+  \item If it is \iskp{highlighted like this}, you are not expected to recall the exact statement without a prompt, but you are expected to be able to prove it without a reminder of the idea of the proof. So if you see \iskp{Dirac's theorem}, an exam question might look like ``State and prove Dirac's theorem about the existence of Hamilton cycles''.
+  \item If it is \ksnp{highlighted like this}, you are expected to know the statement of the theorem without any prompt, but not expected to know the proof.
+  
+  So if you see \ksnp{Dirac's theorem} in this document, an exam question might be ``State Dirac's theorem'', but you would not be asked about the proof.
+  \item If it is \ksip{highlighted like this}, you are expected to know the statement of the result, and additionally to have an idea of the proof. So \ksip{this} is the same as \ksnp{this} and \isip{this} together.
+  \item Finally, if it is \kskp{highlighted like this}, you are expected to know both the theorem and its proof. If you see \kskp{Dirac's theorem}, that means you could see an exam question just ask ``State and prove Dirac's theorem''.
+\end{enumerate}
+
+For definitions, it of course makes no sense to refer to knowing a proof, so we simply highlight definitions \knowdef{like this} if you are expected to know and be able to state the definitions, and \usedef{like this} if you are just expected to be able to use the definition and explain the idea of it if given it, but not to be able to state it.
+
+\section{L2: Eulerianity, simple graphs and subgraphs}
+In our first lecture of the course we started softly, giving the definitions of a \knowdef{multigraph}, a \knowdef{walk}, a \knowdef{trail}, a \knowdef{path}, a \knowdef{circuit}, and a \knowdef{cycle}.
+
+Then we defined what it means for a graph to be \knowdef{connected}, and what its \knowdef{connected components} are.
+
+Having made all these definitions, we defined an \knowdef{Eulerian trail} to be a trail using every edge exactly once, and stated and proved \kskp{Euler's theorem on Eulerian paths}, which characterizes when a graph is Eulerian in terms of the \knowdef{degree} of its vertices.
+
+Then, we stated and proved the \kskp{handshake lemma}, which says that
+$$2\abs{E} = \sum_{v \in V} d_v.$$
+
+Having done all this, we defined a \knowdef{simple graph}\sidenote[][]{Which is of course, for most of the course, the only notion of graph we referred to -- so generally we end up just calling these \emph{graphs}.}, and what a \knowdef{graph morphism} of simple graphs is, in terms of which we could then define \knowdef{isomorphism} of graphs.
+
+Once we knew what it meant for graphs to be isomorphic, we could define an \usedef{unlabelled graph} to be an isomorphism class of graphs.\sidenote[][]{We largely did not end up actually using this concept -- other than in a few counting arguments, where we needed to be clear that we were \emph{not} considering unlabelled but labelled graphs.}
+
+We ended the lecture by defining what a \knowdef{subgraph}, an \knowdef{induced subgraph}, an \knowdef{edge-induced subgraph}, and a \knowdef{spanning subgraph} is.
+
+\section{L3: Common graph families, trees, and Cayley's theorem}
+
+We started the lecture with giving definitions of a couple of commonly occuring graph families: the \knowdef{complete graphs}, \knowdef{path graphs}, \knowdef{cycle graphs}, \knowdef{complete bipartite graphs}, and \knowdef{complete multipartite graphs}.
+
+Then we moved on to the main topic of the lecture: \knowdef{Trees}. We started by proving that \kskp{any tree on $n$ vertices has $n-1$ edges}. We then stated, but did not prove,\sidenote[][]{The proof was deferred until the next lecture, when we were able to prove it as a corollary of a more general result.} \ksip{Cayley's formula} on the number of labelled trees on $n$ vertices.
+
+Having done this, we proved a \iskp{characterisation of trees} in terms of three properties equivalent to being a tree. Then, we defined the notion of a \knowdef{spanning tree}, and proved that \ksnp{all multigraphs have a spanning tree, assuming the axiom of choice}.\sidenote[][]{In fact, the two statements -- existence of spanning trees for arbitrary graphs and the axiom of choice -- are equivalent.}
+
+\section{L4: Spectral graph theory and the matrix-tree theorem}
+
+We started by defining the \knowdef{adjacency matrix} of a graph, then we defined what we mean by a \knowdef{directed graph}, and used that to define what an \knowdef{incidence matrix} of a graph is.
+
+We then proved that the \ksip{rank of the incidence matrix} equals the number of vertices minus the number of connected components. We then defined our final matrix associated to a graph, the \knowdef{Laplacian} $Q$ of a graph, and we showed that \kskp{the Laplacian satisfies $Q = DD^t$}.
+
+Then we did \isnp{a bunch more linear algebra stuff} in order to finally arrive at the \ksnp{Kirchhoff matrix-tree theorem}. We then used this to give a proof of \ksip{Cayley's formula}, which we had stated in the previous lecture.
+
+\section{L6: Weights, distances, and minimum spanning trees}
+
+We started by defining \knowdef{Prim's algorithm}. Then we stated and proved that \kskp{removing an edge from a tree yields a forest of two trees}. Then we proved that \ksip{Prim's algorithm is correct}.
+
+Then, we defined \knowdef{Kruskal's algorithm}, and \ksip{proved that it is correct}. After this, we defined the \knowdef{graph distance} and thus the \knowdef{diameter} of a graph. Having done this, we could define \knowdef{Dijkstra's algorithm}.
+
+\section{L7: The max-flow min-cut and marriage theorems}
+
+We defined what a \knowdef{weighted} directed graph is, and what a \knowdef{flow network} is. Then we defined what a \knowdef{flow} on these networks is, and its \knowdef{value}.
+
+We then defined a \knowdef{cut} on a flow network and its \knowdef{capacity}, and showed that \kskp{the value of any flow is upper bounded by the capacity of any cut}. We then defined the \usedef{residual network} of a flow, and defined an \knowdef{augmenting path} in this network.
+
+We stated that \ksnp{any augmenting path can be used to find a higher-value flow}, and used this to show the \ksip{Ford-Fulkerson theorem}.
+
+Then, we defined what a \knowdef{matching} and a \knowdef{bipartite} graph is, and stated and proved \ksip{Hall's marriage theorem} using the max-flow-min-cut duality we had just seen.
+
+\section{L8: Vertex covers, Hamilton cycles, independent sets}
+
+We continued on the themes of the previous lecture, using max-flow-min-cut to prove \isip{K\"onig's theorem} relating \usedef{vertex covers} to the largest matching on a bipartite graph.
+
+Then, we defined \knowdef{Hamilton cycles}, and stated and proved \ksip{Dirac's theorem}.
+
+The penultimate topic of the lecture was \knowdef{independent sets} and the \knowdef{indepence number} $\alpha(G)$ of a graph $G$. We defined the \knowdef{line graph} of a graph, and noted that matchings are just independent sets in the line graph.
+
+Then we stated and proved that the problem of determining \ksip{whether a graph has an independent set of size $k$ is NP-Complete}. Nevertheless, we were able to prove the \kskp{Caro-Wei theorem} giving a lower bound on the independence number of a graph, which was our first example of a proof using the probabilistic method.
+
+Finally, in a little section of only definitions and nearly no theorems, we defined \knowdef{vertex colourings} of graphs, the \knowdef{chromatic number} $\chi(G)$ of a graph, and the \knowdef{clique number} of a graph.
+
+\section{L10: Connectivity}
+
+We started by defining what it means for a graph to be \knowdef{$k$-connected}, and defined the \knowdef{connectivity} of a graph. We then defined what it means for a set to \knowdef{separate} two vertices, or two sets.
+
+We then showed that \kskp{the minimum size of a set that separates two non-adjacent vertices equals the connectivity} for any graph. Then, we showed \ksip{Menger's theorem}, stating that the minimum size of a set separating two non-adjacent vertices is precisely the largest size of a set of independent paths between them -- a fact we proved using the min-flow-max-cut duality yet again.
+
+Having done this general work, we proceeded to study the structure of two-connected graphs, showing a \kskp{characterisation of two-connected graphs}.
+
+Then, we moved on to generalizing the notion of dividing a disconnected graph into its connected components into dividing a connected graph into its two-connected components, which we called \knowdef{blocks}. To do this, we also needed the notion of a \knowdef{cutvertex} and a \knowdef{bridge}.
+
+The crucial lemma we needed to understand the structure of the blocks was that \kskp{every cycle intersects exactly one block in more than one vertex}. We then defined the \knowdef{block graph} of a graph, and proved that \ksip{the block graph is a tree}.
+
+\section{L11: Planarity}
+
+Despite the lecture primarily being about planarity, we started by defining an \knowdef{edge contraction}, and then stated a lemma about the structure of three-connected graphs -- \isnp{there is an edge in any three-connected graph}\sidenote[][]{On at least four vertices.}\isnp{ that can be contracted to yield another three-connected graph}.
+
+Having set up our lemma, we defined what it means for a graph to be \knowdef{planar}, and what the \knowdef{planar dual} of a graph is. We then used the notion of a planar dual to prove \ksip{Euler's formula} for planar graphs. As a corollary to this, we got an \iskp{upper bound on the number of edges} of a planar graph (or a triangle-free planar graph) in terms of the number of vertices.
+
+Then we defined the notions of a \usedef{topological minor} and a \knowdef{minor} of a graph, and stated and partially proved the \ksnp{forbidden minor characterisation of planar graphs} due to Kuratowski and Wagner.
+
+\section{L12: Vertex colourings}
+
+In this lecture, we finally made use of our earlier definitions of a \knowdef{vertex colouring} and the \knowdef{chromatic number} of a graph.
+
+We started by defining the \knowdef{greedy colouring algorithm}, and used it to prove that \kskp{$\chi(G) \leq \Delta + 1$ for all graphs $G$}.
+
+Then we defined \knowdef{breadth-first search} in a graph, and used this to show that in fact \kskp{$\chi(G) \leq \Delta$ if $G$ is not regular}. Then, we showed \ksip{Brooks' theorem} using a more complicated version of this idea.
+
+We then proved that \kskp{all planar graphs are five-colourable}, using an argument with \knowdef{Kempe chains}. Continuing our study of colourings of planar graphs, we defined the notion of an \knowdef{outerplanar graph}, and proved that \ksip{all outerplanar graphs are three-colourable}, from which followed the \ksip{art gallery theorem}.
+
+\section{L14: The probabilistic method and the Erd\H{o}s-Rényi random graph}
+
+In this lecture, we introduced one of the major techniques of modern combinatorics and graph theory, the \emph{probabilistic method}. We started by showing a \isip{lower bound on the minimum bisection problem}.
+
+Then we defined the \knowdef{Erd\H{o}s-R\'enyi} model for a random graph, and proved a \iskp{bound on the probability of it having high independence number} using the union bound method.
+
+As an application of \isnp{Markov's inequality}, and the first-moment method, we showed that \kskp{a $G(n,p)$ a.a.s. has diameter $2$ for fixed $p$}. (We also defined what we mean by a property holding \knowdef{asymptotically almost surely}/\knowdef{with high probability}.)
+
+Then, as an application of the second-moment method, we showed a \ksip{result about when a $G(n,p)$ has a triangle}. We then sketched a picture of the growth of an Erd\H{o}s-Rényi graph, defined the \usedef{girth} of a graph, and gave a sketch of the proof of Erd\H{o}s's result that \ksnp{there are graphs of arbitrarily high girth and chromatic number}.
+
+\section{L16: Edge-colourings and Ramsey theory}
+
+We started by defining an \knowdef{edge colouring} of a graph, and the \knowdef{edge-chromatic number} of a graph. Then we stated and proved \kskp{K\"onig's line-colouring theorem}, using the idea of a Kempe change for edge-colourings as well.
+
+Then we defined the \knowdef{Ramsey number $R(r,k)$}, and proved their existence using a \iskp{recursion for the Ramsey numbers}, which also gave an upper bound on these numbers. We then proved a \iskp{lower bound on the diagonal Ramsey numbers using the probabilistic method}, with a proof due to Erd\H{o}s.
+
+\section{L17: The Rado graph}
+
+We started the lecture by defining what the \knowdef{Rado graph} is, namely as the unique \knowdef{homogeneous} countable graph containing every finite graph as an induced subgraph.
+
+We then defined the notion of a graph being \knowdef{$k$-saturated}, and proved that \kskp{a graph is the Rado graph if and only if it is countable and $k$-saturated for every $k$}.\sidenote[][]{The proof of this was divided into several lemmas -- if this appears on the exam, it won't be one monster question, it'll be a proof of one of the constituent lemmas.}
+
+Then we finally proved the existence of the Rado graph, by showing that \ksip{an Erd\H{o}s-R\'enyi graph on infinitely many vertices is almost surely isomorphic to the Rado graph}. 
+
+We then used a consequence of this proof to see that \ksip{removing any finite number of vertices or edges of the Rado graph leaves you with a graph isomorphic to the Rado graph}. As a second statement about the fractal-ness of the Rado graph, we showed \iskp{a result about partitioning the Rado graph into induced subgraphs}.
+
+We ended the lecture by giving two explicit constructions of the Rado graph, one of which wasn't actually explicit at all, and one of which was.
+
+\section{L18: Extremal graphs and Szemerédi's regularity lemma}
+
+We started by defining the \knowdef{extremal function of a graph}, the \knowdef{Tur\'an graphs}, and stating Turán's theorem. We then gave two proofs of this -- one \ksip{using the Caro-Wei theorem and Cauchy-Schwarz inequality}, and one directly proving that the Turán graphs are extremal.
+
+Then we proved \isip{a beautiful stability result about nearly-extremal graphs}.
+
+Then, moving on to the second topic of the lecture, we defined the notion of the \knowdef{density} of a pair of vertex sets, and the notion of such a pair being \usedef{$\varepsilon$-regular}. Having defined this, we stated the \isnp{Szemer\'edi	regularity lemma},\sidenote[][]{Obviously, this highlighting does not (as it could in general) indicate that you might be asked to give a precise statement of the lemma -- but a question that gives you the statement and asks you about the idea of it relating to random graphs could appear.} and then we sketched how one can use this to prove the \isip{triangle removal lemma}.
+
+Finally, we stated and gave a mostly complete proof of \isip{Roth's theorem}.
+
+%\bibliography{references}
+%\bibliographystyle{plainnat}
+
+\end{document}

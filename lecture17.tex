@@ -1,0 +1,275 @@
+\documentclass[nobib]{tufte-handout}
+
+\title{Lecture 17: The Rado graph $\cdot$ 1MA170}
+
+\author[Vilhelm Agdur]{Vilhelm Agdur\thanks{\href{mailto:vilhelm.agdur@math.uu.se}{\nolinkurl{vilhelm.agdur@math.uu.se}}}}
+
+\date{9 December 2023}
+
+
+%\geometry{showframe} % display margins for debugging page layout
+
+\usepackage{graphicx} % allow embedded images
+  \setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+  \graphicspath{{graphics/}} % set of paths to search for images
+\usepackage{amsmath}  % extended mathematics
+\usepackage{booktabs} % book-quality tables
+\usepackage{units}    % non-stacked fractions and better unit spacing
+\usepackage{multicol} % multiple column layout facilities
+\usepackage{lipsum}   % filler text
+\usepackage{fancyvrb} % extended verbatim environments
+  \fvset{fontsize=\normalsize}% default font size for fancy-verbatim environments
+
+\usepackage{color,soul} % Highlights for text
+
+% Standardize command font styles and environments
+\newcommand{\doccmd}[1]{\texttt{\textbackslash#1}}% command name -- adds backslash automatically
+\newcommand{\docopt}[1]{\ensuremath{\langle}\textrm{\textit{#1}}\ensuremath{\rangle}}% optional command argument
+\newcommand{\docarg}[1]{\textrm{\textit{#1}}}% (required) command argument
+\newcommand{\docenv}[1]{\textsf{#1}}% environment name
+\newcommand{\docpkg}[1]{\texttt{#1}}% package name
+\newcommand{\doccls}[1]{\texttt{#1}}% document class name
+\newcommand{\docclsopt}[1]{\texttt{#1}}% document class option name
+\newenvironment{docspec}{\begin{quote}\noindent}{\end{quote}}% command specification environment
+
+\include{mathcommands.extratex}
+
+\begin{document}
+
+\maketitle% this prints the handout title, author, and date
+
+\begin{abstract}
+\noindent
+We introduce the Rado graph, prove some of its more remarkable properties, and show that it can be seen as \textcaps{the} random graph on infinitely many vertices.
+\end{abstract}
+
+We have already seen the definition of the Rado graph in the exercise session, and we have mentioned when we introduced the Erd\H{o}s-Rényi graph that the Rado graph is what you will always get if you sample an Erd\H{o}s-Rényi graph on infinitely many vertices.
+
+Let us start by restating definitions, and then we can jump into proving things about this remarkable graph.
+
+\begin{definition}
+    Let $G = (V,E)$ be a finite or infinite graph. We say that $G$ is \emph{homogeneous} if, for any two subsets $A, B \subseteq V$ such that the induced subgraphs $G[A]$ and $G[B]$ are isomorphic, the isomorphism between them can be extended to an automorphism of the entire graph.
+  
+    Concretely, this means that if $f: A \to B$ is the isomorphism between $G[A]$ and $G[B]$, there is an isomorphism $g: V \to V$ between $G$ and itself, such that $f(a) = g(a)$ whenever $a \in A$.
+\end{definition}
+
+\begin{definition}
+    The \emph{Rado graph} is the unique\sidenote[][]{Up to isomorphism.} countably infinite homogeneous graph $G$ such that, for any finite graph $H$, $H$ is isomorphic to an induced subgraph of $G$.\sidenote[][]{The part about being homogeneous is necessary for uniqueness.\begin{xca}Find a graph $G$ on countably many vertices that contains a copy of each finite graph $H$, but is not isomorphic to the Rado graph. In order to prove that it is not isomorphic to the Rado graph, give an explicit example of two isomorphic subgraphs where you cannot extend the isomorphism between them to an automorphism.\end{xca}}
+\end{definition}
+
+This is a nice characterisation of the Rado graph,\sidenote[][]{If you knew some model theory, you might recognize this definition as stating that the Rado graph is the Fraïssé limit of the class of finite graphs. If you do not, those words mean nothing to you. (And you should take a class on model theory at some point -- it is very cool stuff, even if it is a bit outside the usual main track of a mathematics education.)} but it of course does not actually show that this graph \emph{exists}. We will prove that a bit later, but to do so, it is easier to characterise the Rado graph by a different property.
+
+\begin{definition}
+    A graph $G = (V,E)$, finite or infinite, is \emph{$k$-saturated} if, for any two subsets $U, W \subseteq V$, each of size at most $k$, there exists a vertex $v \in V$ such that $v \sim u \in E$ for every $u \in U$, and $v \sim w \not\in E$ for every $w \in W$.
+\end{definition}
+
+Our goal is to show the following theorem, which gives us our desired different characterization of the Rado graph, and gives us a proof of its uniqueness.\sidenote[][]{Proving its existence will come later.}
+
+\begin{theorem}\label{thm:two_rado_defs_equiv}
+    The following two properties of a graph are equivalent:
+    \begin{enumerate}
+        \item $G$ is homogeneous and contains a copy of every finite graph.
+        \item $G$ is $k$-saturated for every $k \in \N$.
+    \end{enumerate}
+
+    In addition, any two countable graphs that both have these properties are isomorphic.
+\end{theorem}
+
+We will divide this statement into three lemmas.
+
+\begin{lemma}
+    If $G = (V,E)$ is a $k$-saturated graph, it contains a copy of $H$ for any graph $H$ on at most $k$ vertices.
+
+    \begin{proof}
+        We prove this by induction on the number $n$ of vertices of $H$. The base case of $n = 1$ is trivial.\sidenote[][]{Well, it requires us to know that $G$ is not the ``empty graph'' $(\emptyset,\emptyset)$. \begin{xca}Prove that a $k$-saturated graph must always have at least $k$ vertices. If you want, try thinking about if you can find a sharper lower bound on the number of vertices than this.\end{xca}}
+
+        So suppose we are given some graph $H = (\Tilde V, \Tilde E)$, and pick an arbitrary vertex $v \in \Tilde V$. By induction, there is a copy of $H[\Tilde V \setminus v]$ in $G$ -- let $f: \Tilde V \to V$ be the isomorphism. 
+        
+        So let $U = N(v)$ and $W = \Tilde V \setminus N(v)$. By $k$-saturatedness, there is a vertex $w \in V$ adjacent to every vertex in $f(U)$ but to none of the vertices in $f(W)$. Then, however, we can extend our isomorphism $f$ by just defining $f(v) = w$. So we have found a copy of all of $H$ in $G$.
+    \end{proof}
+\end{lemma}
+
+So this gives us half of the implication from property two to property one. The other half will require us to actually think about infinite graphs a little bit, or at least do a bit of induction.
+
+\begin{lemma}\label{lemma:saturated_implies_homogeneous}
+    If a graph $G = (V,E)$ on countably many vertices is $k$-saturated for every $k \in \N$, then it is homogeneous.
+    
+    \begin{proof}
+        In order to prove this, it suffices to prove the following statement:
+        \begin{quotation}
+            Suppose $A$ and $B$ are two subsets of $V$ such that $G[A]$ and $G[B]$ are isomorphic, via an isomorphism $f: A \to B$. Then for each $a \in V \setminus A$ there exists $b \in V\setminus B$ such that $f$ extends to an isomorphism of $G[A \cup \{a\}]$ and $G[B \cup \{b\}]$ by letting $f(a) = b$, and similarly for each $b \in V \setminus B$ there exists an $a \in V \setminus A$ so that we can likewise extend $f$.
+        \end{quotation}
+
+        To prove the lemma using this statement, we use the so-called ``back-and-forth'' method, which is seen all over model theory. So suppose we are given two sets of vertices $A_0$ and $B_0$ such that $G[A_0]$ and $G[B_0]$ are isomorphic. We then order the vertices of $G$ as $v_1 < v_2 < \ldots$,\sidenote[][]{Here we are of course using our assumption that $G$ is countable. The argument should still work for higher cardinalities if you assume it is $\kappa$-saturated for every cardinal up to the size of your vertex set, you just need different notation for how you order the vertices in the argument.} and we inductively construct larger and larger isomorphisms as follows:
+        \begin{enumerate}
+            \item Pick the first vertex $a$ for which $f$ is not yet defined, and use our statement to find a $b$ to extend $f$ to this $a$.
+            \item Then we pick the first vertex $b$ which is not in the image of $f$, and find an $a$ so that we can extend $f$ to hit this vertex.
+        \end{enumerate}
+
+        This inductively defines an isomorphism between subsets of every finite size -- and if we take a union of all of these, we get the desired automorphism. The first step of this process ensures that the automorphism is defined on all vertices, and the second step ensures that every vertex is in its image, so it really is bijective.\sidenote[][]{Both of these steps are genuinely needed -- if we didn't have the second step, we might not create a surjection. Imagine the vertices of $G$ are just the integers -- the second step is needed to ensure that the map we're creating isn't accidentally a bijection between $\Z$ and $2\Z$. Infinities can behave in ways we don't immediately expect based on how finite sets act.}
+
+        So suppose we are given two such subsets $A$ and $B$ and a vertex $a \in V \setminus A$. Let $U = f\left(N(a) \cap A\right)$ and $W = f\left(A \setminus N(a)\right)$. Then, by saturation of $G$, there exists a $b \in V$ which is adjacent to every vertex in $U$ and no vertex in $W$.
+
+        So it is clear that defining $f(a) = b$ extends the isomorphism, since $b$ is adjacent to precisely those vertices in $f(A)$ that $a$ was adjacent to in $A$.
+
+        An entirely analogous argument, letting instead $U = f^{-1}\left(N(b) \cap B\right)$ and $W = f^{-1}\left(B \setminus N(b)\right)$, yields the second half of the statement.
+    \end{proof}
+\end{lemma}
+
+\begin{lemma}
+    If a graph $G = (V,E)$ is homogeneous and contains a copy of every graph on at most $2k + 1$ vertices, then it is $k$-saturated.
+
+    \begin{proof}
+        Suppose we are given two disjoint sets $U, W \subseteq V$ of size at most $k$. We need to find a vertex adjacent to everything in $U$ and nothing in $W$.
+
+        So construct a graph $H$ by taking the graph $G[U \cup W]$ and adding another vertex $v$ to it, with an edge to everything in $U$ and nothing in $W$. Let the copies of $U$ and $W$ in $H$ be denoted $\Tilde U$ and $\Tilde W$, respectively.
+        
+        Clearly, $H$ is a graph on at most $2k + 1$ vertices, and so there exists a copy of it somewhere in $G$ -- in a slight abuse of notation, we can call the copy $H$ and its vertices $\{\Tilde U, \Tilde W, w\}$ as well.\sidenote[][]{This makes the notation a lot simpler for us -- otherwise, we would have to introduce a letter for the isomorphism between $H$ and the copy of $H$ in $G$, and start writing things like $f(\Tilde U)$ everywhere.}
+
+        Now, by construction, $G[\Tilde U \cup \Tilde W]$ and $G[U \cup W]$ are isomorphic, and so since $G$ is homogeneous the isomorphism between them extends to an automorphism $f$ of $G$. It is clear that we must have that $f(\Tilde U) = U$ and $f(\Tilde W) = W$.
+
+        So consider the vertex $f(v)$ -- since $v$ has an edge to every vertex of $\Tilde U$, $f(v)$ must have an edge to every vertex of $f(\Tilde U) = U$, and likewise for the non-edges between $v$ and $\Tilde W$. So $f(v)$ is the vertex we were looking for. 
+    \end{proof}
+\end{lemma}
+
+So now we have showed that the two sets of properties are indeed equivalent -- it remains to show that there is only one graph up to isomorphism that has these properties.
+
+\begin{lemma}
+    Suppose $G = (V,E)$ and $G' = (V',E')$ are two graphs that both have the properties stated in Theorem \ref{thm:two_rado_defs_equiv}, that is, they are both $k$-saturated for every $k$. Then they are isomorphic.
+
+    \begin{proof}[Proof sketch]
+        Just like in the proof of Lemma \ref{lemma:saturated_implies_homogeneous}, we prove this by inductively by the back-and-forth method, starting from the isomorphism between a single-vertex subgraph in $G$ and one in $G'$.
+
+        The argument for extending the isomorphisms is almost exactly the same as in the proof of Lemma \ref{lemma:saturated_implies_homogeneous}, using the saturation to find the next vertex to extend it to, so we leave writing up the details as an exercise.\sidenote[][]{\begin{xca}Do this.\end{xca}}
+    \end{proof}
+\end{lemma}
+
+\section{Existence of the Rado graph}
+
+So far, we have proven that a bunch of properties of the Rado graph are equivalent, and we have shown that there can only exist one Rado graph up to isomorphism. However, we still haven't actually shown that it \emph{exists}.
+
+To show that it exists, we will begin by showing that it is indeed \textcaps{the} random graph, that is, that if you pick an Erd\H{o}s-Rényi graph on infinitely many edges with any edge probability, the thing you get will be isomorphic to the Rado graph.
+
+\begin{theorem}\label{thm:random_graph_is_rado}
+    Suppose $G = (\N, E)$ is a random graph on countably many vertices, where each edge is present with probability $p \in (0,1)$, independently of all other edges. Then it almost surely holds that $G$ is $k$-saturated for every $k$, and thus isomorphic to the Rado graph.
+\end{theorem}
+
+In order to show this, we will need two results from probability theory, one very easy and one that is a classical lemma.
+
+\begin{remark}\label{remark:countable_as_intersection_as}
+    Suppose $\{A_1, A_2, \ldots\}$ is a countable set of events, such that $\Prob{A_i} = 1$ for all $i$. Then $\Prob{\bigcap_{i=1}^\infty A_i} = 1$ as well.
+
+    \begin{proof}
+        A union bound yields that
+        $$\Prob{\bigcap_{i=1}^\infty A_i} = 1 - \Prob{\bigcup_{i=1}^\infty A_i^c} \geq 1 - \sum_{i=1}^\infty \Prob{A_i^c} = 1.$$
+    \end{proof}
+\end{remark}
+
+The second result we need is a result relating the probabilities of individual events to the probability of infinitely many of the events occurring.\sidenote[][]{Interestingly, there is a typo in last year's lecture notes, calling it the ``Borell-Cantelli lemma'' -- normally, this would be unremarkable, but there is in fact a different, Swedish, mathematician named Borell who also worked in probability. So for once an extra `l' actually could confuse someone!}
+
+\begin{lemma}[Borel-Cantelli]
+    Let $A_1, A_2, \ldots$ be a sequence of events, and let $A$ be the event that infinitely many of these events occur.\sidenote[][]{Formally, the event that infinitely many $A_i$ occur is the event $\limsup_i A_i$, but we shall not need to worry about this kind of technical detail.}
+
+    \begin{enumerate}
+        \item If
+        $$\sum_{i=1}^\infty \Prob{A_i} < \infty$$
+        then $\Prob{A} = 0$, that is, almost surely only finitely many of the events occur.
+        \item If instead
+        $$\sum_{i=1}^\infty \Prob{A_i} = \infty$$
+        and additionally the events $A_1, A_2,\ldots$ are independent, then $\Prob{A} = 1$.
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}[Proof of Theorem \ref{thm:random_graph_is_rado}]
+    By Remark \ref{remark:countable_as_intersection_as} it suffices to show for each $k$ that $G$ is $k$-saturated with probability one in order to show that it is almost surely $k$-saturated for every $k$.\sidenote[][]{That is, the two orders of quantifiers are in fact equivalent, even though a priori one looks stronger than the other.}
+
+    For each pair of sets $U, W \in \binom{\N}{k}$, and each $v \in \N \setminus (U \cup W)$, let $A_{U,W,v}$ be the event that $v$ has an edge to every vertex in $U$ and none to any vertex of $W$. Clearly, then, the event that $G$ is $k$-saturated is precisely the event
+    $$\bigcap_{U, W \in \binom{\N}{k}} \bigcup_{v \in \N \setminus \{U \cup W\}} A_{U,W,v}.$$
+
+    Now we can apply our remark once again -- there are only countably many pairs of $k$-element subsets of $\N$, so if we can show that for every choice of $U$ and $W$,
+    $$\Prob{\bigcup_{v \in \N \setminus \{U \cup W\}} A_{U,W,v}} = 1,$$
+    then the result will follow.
+
+    Now, it is easy to see that $\Prob{A_{U,W,v}} = p^k(1-p)^k$, since edges appear independently with probability $p$ -- and in fact this independence means that these events are independent for different $v$. So we get that
+    $$\sum_{v \in \N \setminus (U \cup W)} \Prob{A_{U,W,v}} = \sum_{v \in \N \setminus (U \cup W)} p^k(1-p)^k = \infty,$$
+    and so the conditions of the second half of the Borel-Cantelli lemma are satisfied, and so in fact the event $A_{U,W,v}$ occurs for \emph{infinitely} many $v$, which is certainly enough to yield our theorem.
+\end{proof}
+
+\section{Fractal properties of the Rado graph}
+
+\begin{remark}
+    We saw in the proof of Theorem \ref{thm:random_graph_is_rado} that the Rado graph in fact has an even stronger property than just $k$-saturation: There exist infinitely many different choices for the vertex $v$ whose existence we are guaranteed by $k$-saturation.
+\end{remark}
+
+This property lets us show some strange fractal-like properties of the Rado graph.
+
+\begin{corollary}
+    If you add or remove any finite number of vertices or edges from the Rado graph, the resulting graph is still isomorphic to the Rado graph.
+
+    \begin{proof}
+        For any given pair of sets $U$ and $W$, removing or adding finitely many vertices and edges can only break at most finitely many choices for a vertex $v$ connected to all of $U$ and none of $W$. Therefore, since we have seen there are infinitely many choices, some such choice must remain.
+    \end{proof}
+\end{corollary}
+
+In fact, the Rado graph exhibits a kind of self-similarity.
+
+\begin{theorem}
+    Suppose $R = (V,E)$ is the Rado graph, and $V = A_1 \cup A_2 \cup \ldots \cup A_k$ is a partitioning of its vertices into $k$ disjoint sets. Then at least one of the graphs $R[A_1], R[A_2], \ldots, R[A_k]$ is isomorphic to $R$.
+
+    \begin{proof}
+        Suppose, for contradiction, that the theorem fails. Then, for each $i \in [k]$, there exists sets $U_i, W_i \subseteq A_i$ such that no vertex $v \in X_i$ has an edge to everything in $U_i$ and nothing in $W_i$.
+
+        Now consider the sets
+        $$U = U_1 \cup U_2 \cup \ldots \cup U_k, \quad W = W_1 \cup W_2 \cup \ldots \cup W_k.$$
+        By saturation, there has to be some vertex $v \in V$ connected to everything in $U$ and nothing in $W$. However, we must have $v \in X_i$ for some $i$, and so this $v$ would in fact in particular be connected to everything in $U_i$ and nothing in $W_i$, which gives our contradiction.
+    \end{proof}
+\end{theorem}
+
+In fact, the Rado graph is the only non-trivial countable graph with this property, though we omit the proof of this.
+
+\begin{proposition}
+    The only countable graphs with the self-similarity property of the above theorem are the Rado graph, the graph on countably many vertices with no edges, and the complete graph on countably many vertices.
+\end{proposition}
+
+\begin{remark}
+    The Rado graph is isomorphic to its complement graph.
+\end{remark}
+
+\section{Explicit constructions of the Rado graph}
+
+So far, we have only seen the existence of the Rado graph proven by a probabilistic existence argument, which is a bit unsatisfying. It would be nicer if we had an explicit construction of it.
+
+Thus, in this section, we give two constructions of it, one which is sensible and one which may shake your faith in the foundations of mathematics. We start with the latter.
+
+\begin{proposition}
+    Let $M$ be a countable model of set theory,\sidenote[][]{That is, $M$ is a countable set equipped with a relation called $\in$, such that all the axioms of Zermelo-Fraenkel set theory are satisfied by this structure.
+    
+    That such a thing exists, assuming the axioms are consistent, follows from the downward Löwenheim-Skolem theorem, and is indeed very shocking.} and create a graph $M^* = (M,E)$ by declaring that there is an edge between $x, y \in M$ whenever $x \in y$ or $y \in x$. Then this $M^*$ is isomorphic to the Rado graph.
+
+    \begin{proof}
+        Let $U = \{u_1,\ldots,u_k\}$ and $W = \{w_1,\ldots,w_k\}$ be two sets of vertices of $M^*$. Let 
+        $$v = \{u_1,\ldots,u_k, \{w_1,\ldots,w_k\}\}.$$
+        
+        We claim that this $v$ has an edge to everything in $U$ and to nothing in $W$. By construction, $u_i \in v$ for every $i$, so we only need to see that $w_i \not\in v$ and $v \not\in w_i$ for every $i$.
+
+        Now, if $w_i \in v$ we would have either $w_i = u_j$ for some $j$, contrary to assumption, or $w_i = \{w_1,\ldots,w_k\}$, so in particular $w_i \in w_i$, which contradicts the axiom of foundation.
+
+        Likewise, if $v \in w_i$, we would have $w_i \in \{w_1,\ldots,w_k\} \in v \in w_i$, which is again a contradiction -- no set is a member of itself.
+    \end{proof}
+\end{proposition}
+
+This was technically an explicit construction, but it still doesn't feel like we've concretely seen it constructed. So let us end this absurd lecture on a nice and concrete note:
+
+\begin{proposition}
+    Let $G = (\N, E)$ be the graph where there is an edge $n \sim m$ if the $n$th digit of the binary expansion of $m$ is a one, or the $m$th digit of the binary expansion of $n$ is a one. Then this $G$ is isomorphic to the Rado graph.\sidenote[][]{We leave the proof of this as an exercise -- you can prove this by just explicitly writing a formula for the vertex $v$ in terms of $U$ and $W$.
+    
+    \begin{xca}Prove this proposition.\end{xca}}
+\end{proposition}
+
+\section{Exercises}
+
+
+%\bibliography{references}
+%\bibliographystyle{plainnat}
+
+\end{document}
