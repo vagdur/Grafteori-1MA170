@@ -121,7 +121,7 @@ The second algorithm we consider for finding MSTs is \emph{Kruskal's algorithm},
 
 \begin{figure}
   \centering
-  \includegraphics[width=1.1\textwidth]{graphics/L6_prim_kruskal_dijkstra/kruskal.png}
+  \includegraphics[width=0.9\textwidth]{graphics/L6_prim_kruskal_dijkstra/kruskal.png}
   \caption[][0cm]{An illustration of how Kruskal's algorithm finds a minimal spanning tree in a similar graph as the one in Figure \ref{fig:prims_algorithm}, which illustrated Prim's algorithm. Notice that adding the edge with weight 2 would create a loop and thus it is skipped.}
   \label{fig:kruskals_algorithm}
 \end{figure}
@@ -183,7 +183,7 @@ Using again Figure \ref{fig:distance} as an example, the diameter of the graph w
 
 Instead of trying to compute the diameter of a graph, let us just try to compute the distance between two vertices. Or rather, it turns out to not be markedly harder to compute the distance between a given vertex and every other vertex, so we give an algorithm that can do this, and then we will say how to turn this into an algorithm for the simpler problem.
 
-In fact, we can interpret the problem of finding the distances between a given vertex and the rest of the graph as a problem of finding a certain spanning tree, rooted at the given vertex. If we just let each vertex pick its neighbour closest to the root as its parent, this tree precisely encodes the information we need.\sidenote[][]{
+In fact, we can interpret the problem of finding the distances between a given vertex and the rest of the graph as a problem of finding a certain spanning tree, rooted at the given vertex. If we just let each vertex pick its neighbour closest to the root as its parent, this tree precisely encodes the information we need.\sidenote[][-1cm]{
   \begin{xca}
     Prove that this really is a tree. You can equivalently think of it as the union of all shortest paths between the root $v$ and some other vertex. (This tree is called a shortest-path tree.)
   \end{xca}
@@ -191,7 +191,7 @@ In fact, we can interpret the problem of finding the distances between a given v
 \begin{figure}
   \centering
   \includegraphics[width=0.85\textwidth]{graphics/L6_prim_kruskal_dijkstra/dijkstras_algorithm.png}
-  \caption[][0cm]{An illustration of how Dijkstra's algorithm finds a shortest path tree in a graph. Edge weights are given in blue, the distance function $d(v_0, \cdot)$ is given in red, and the parent function $p$ is indicated by the red arrows pointing along edges.}
+  \caption[][0.9cm]{An illustration of how Dijkstra's algorithm finds a shortest path tree in a graph. Edge weights are given in blue, the distance function $d(v_0, \cdot)$ is given in red, and the parent function $p$ is indicated by the red arrows pointing along edges.}
   \label{fig:dijkstras_algorithm}
 \end{figure}
 
