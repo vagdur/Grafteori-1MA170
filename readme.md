@@ -49,6 +49,15 @@ If you have some specific topic that came up during a lecture that you want to d
 4. [NetSci2023](https://netsci2023.wixsite.com/netsci2023) (Network Science)
 5. [EuroComb23](https://iuuk.mff.cuni.cz/events/conferences/eurocomb23/) (Combinatorics)
 
+# Past group projects
+
+For the groups that did the ``edit lecture notes and solve exercises'' project, all past submissions are in the [pull requests](https://github.com/vagdur/Grafteori-1MA170/pulls) of the repository hosting this page and the lecture notes.
+
+There are also the following past projects summarizing papers:
+
+1. [Temporal graphs and the firefighter problem](https://vagdur.github.io/Grafteori-1MA170/temporal_firefighter_problem.pdf)
+2. [Shortest-path algorithms](https://vagdur.github.io/Grafteori-1MA170/shortest_path_problems.pdf)
+
 <hr />
 
 <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Lecture notes for 1MA170 Graph Theory</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/vagdur" property="cc:attributionName" rel="cc:attributionURL">Vilhelm Agdur</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.<br />Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="https://github.com/vagdur/Grafteori-1MA170" rel="dct:source">https://github.com/vagdur/Grafteori-1MA170</a>.
