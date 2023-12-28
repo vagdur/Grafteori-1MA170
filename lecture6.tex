@@ -143,7 +143,7 @@ The second algorithm we consider for finding MSTs is \emph{Kruskal's algorithm},
   \begin{proof}
     Let $G = (V,E,w)$ be a finite connected weighted graph. It is clear by construction that Kruskal's algorithm always generates a cycle-free spanning subgraph which is edge maximal, and so by a similar argument as when we were proving all graphs have spanning trees, it must always generate a spanning tree.
 
-    To see that this spanning tree is in fact maximal, we again compare with a known MST. In particular, let $T$ be the spanning tree found by Kruskal's algorithm, and let $T'$ denote an MST that has a maximal number of edges shared with $T$. We will show that if $T \neq T'$ we can actually modify $T'$ to have even more edges in common with $T$, while still being an MST, contradicting our maximality assumption, and so we must have $T \neq T'$.
+    To see that this spanning tree is in fact maximal, we again compare with a known MST. In particular, let $T$ be the spanning tree found by Kruskal's algorithm, and let $T'$ denote an MST that has a maximal number of edges shared with $T$. We will show that if $T \neq T'$ we can actually modify $T'$ to have even more edges in common with $T$, while still being an MST, contradicting our maximality assumption, and so we must have $T = T'$.
 
     So, assuming $T \neq T'$, let $e$ be the lowest-weight edge of $T$ that is not contained in $T'$. Adding $e$ to $T'$ will create a cycle, and somewhere on this cycle there must be an edge $f$ not contained in $T$.
 
