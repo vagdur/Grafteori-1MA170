@@ -56,6 +56,7 @@ For the groups that did the ``edit lecture notes and solve exercises'' project, 
 There are also the following past projects summarizing papers:
 
 1. [Temporal graphs and the firefighter problem](https://vagdur.github.io/Grafteori-1MA170/temporal_firefighter_problem.pdf)
+2. [Shortest-path algorithms](https://vagdur.github.io/Grafteori-1MA170/shortest_path_problems.pdf)
 
 <hr />
 
