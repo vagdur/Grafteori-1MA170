@@ -115,9 +115,9 @@ Is the stronger statement that in fact no two spanning trees have the same weigh
 
 \textbf{Answer:} \\ 
 No, it is not true.
-\\\\
+
 For a graph $G = (V,E,w)$, where all weights w are distinct, we have a tree $T$. If there is a way to modify $T$ into tree $T^\prime$, which has the same weight as that of $T$, then the statement is false. 
-\\\\
+
 As a tree $T$ always has $(|V|-1)$ edges, every edge added must result in an edge removed and vice versa. And as all weights are distinct no single edge can be switched out in a way that results in a tree with the same weight. So, for weight to be conserved, at least two edges must be removed and switched out for other ones. The condition is that the increase in weight from one edge switch must be counteracted by a decrease in weight from another switch. So, as long as there are unused edges that can facilitate a switch like that, it is indeed possible, which makes the statement false. This can easily be seen in Figure~\ref{fig:distinctWeights}
 
 \begin{figure}
