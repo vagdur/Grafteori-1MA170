@@ -127,7 +127,12 @@ The second algorithm we consider for finding MSTs is \emph{Kruskal's algorithm},
 \end{figure}
 
 \begin{definition}[Kruskal's algorithm]
-  Let $G = (V,E,w)$ be a connected finite weighted graph, and let $L$ be a list of the edges of $G$ sorted in ascending order of weight. Initialize the algorithm by setting $F_0 = (V, \emptyset)$. At time step $i$, remove the first entry from $L$, and call it $e_i$. If adding $e_i$ to $F_{i-1}$ would not create a cycle, let $F_i = (V, E(F_{i-1})\cup\{e_i\})$, otherwise let $F_i = F_{i-1}$. The algorithm terminates when we add the $(n-1)$:th edge.
+  Let $G = (V,E,w)$ be a connected finite weighted graph, and let $L$ be a list of the edges of $G$ sorted in ascending order of weight.
+  \begin{enumerate}
+      \item Initialise the forest $F = (V, \emptyset)$. 
+      \item While $F$ is not spanning remove the first entry from $L$, and call it $e$. If adding $e$ to $F$ would not create a cycle, add $e$ to $F$.
+      \item Return $F$.
+  \end{enumerate}
 
   How this algorithm constructs an MST is illustrated in Figure \ref{fig:kruskals_algorithm}.
 \end{definition}
