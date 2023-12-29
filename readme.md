@@ -9,7 +9,7 @@ Welcome to the course in graph theory at the bachelor's level at Uppsala Univers
 3. [Lecture 3: Common graph families, trees, and Cayley's theorem](https://vagdur.github.io/Grafteori-1MA170/lecture3.pdf)
 4. [Lecture 4: Spectral graph theory and the matrix-tree theorem](https://vagdur.github.io/Grafteori-1MA170/lecture4.pdf)
 5. [Exercise session 5: MSTs, flows, Hamilton cycles and independent sets](https://vagdur.github.io/Grafteori-1MA170/exercise_session5.pdf) 
-6. [Lecture 6: Weights, distances, and minimum spanning trees](https://vagdur.github.io/Grafteori-1MA170/lecture6.pdf) (With [solutions](https://vagdur.github.io/Grafteori-1MA170/lecture6_solutions.pdf))
+6. [Lecture 6: Weights, distances, and minimum spanning trees](https://vagdur.github.io/Grafteori-1MA170/lecture6.pdf) (With solutions from two different groups: [Here](https://vagdur.github.io/Grafteori-1MA170/lecture6_solutions.pdf) and [here](https://vagdur.github.io/Grafteori-1MA170/lecture6_solutions2.pdf).)
 7. [Lecture 7: The max-flow min-cut and marriage theorems](https://vagdur.github.io/Grafteori-1MA170/lecture7.pdf)
 8. [Lecture 8: Vertex covers, Hamilton cycles, independent sets](https://vagdur.github.io/Grafteori-1MA170/lecture8.pdf)
 9. [Exercise session 9: Connectivity, planarity, colourings](https://vagdur.github.io/Grafteori-1MA170/exercise_session9.pdf) 
