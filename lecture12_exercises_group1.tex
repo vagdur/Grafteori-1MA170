@@ -80,37 +80,6 @@ Use the above lemma to prove the below theorem:
 \paragraph{Solution from earlier lecture notes:} Among all induced subgraphs of $G$ there exists a minimal subgraph $H$ (w.r.t inclusion) with $\chi(H)= \chi(G)$. Let $v$ be a vertex of $H$. Then $H - \{v\}$ admits a $\chi(G) - 1$- colouring, and if $deg_{H}(v) < \chi(G) - 1$. then this colouring could be extended to a $\chi(G) - 1$-colouring of $H$, contradicting our choice of $H$. Hence, the minmium degree in $H$ is at least $\chi(G) - 1$. Denote by $A_{H}$ the adjacency matrix of $H$. Then, 
 $$\chi(G) \leq \delta(H) + 1 \leq \lambda_{max}(A_{H}) + 1\leq \lambda_{max}(A_{G}) + 1$$ where we used the inequalities from Lemma 1.\\
 
-We also present a solution that is a bit longer but at least not stolen from the earlier lecture notes:
-
-\paragraph{Alternative solution:} Using the hint we let $H$ be a minimal induced subgraph of $G$ with $\chi(H) = \chi(G)$. (Such an induced subgraph always exists) 
-
-\paragraph{\underline{Claim:}} $\chi(G) \leq \delta(H) + 1 $ 
-
-\paragraph{} Since $H$ is minimal, it is of size $\chi(G)$. To prove the claim we do induction in the size of $G$. For this we assume that $G$ is always coloured with the minimal amount of colours and that we don't remove any edges from $G$. 
-
-\paragraph{\underline{Base case:}} 
-$|G|=1$. Then $\chi(G) = 1$ and $\delta(H) = \delta(G) = 0  \Rightarrow \chi(G) = 1 = \delta(H) + 1$ and so the claim holds for the base case.
-
-\paragraph{\underline{Induction assumption:}} Assume the claim holds when $|G| = n$ and $\chi(G) = k$
-
-\paragraph{\underline{Induction step:}} 
-Now $|G| = n+1$ and we get two cases:
-
-\begin{enumerate}
-    \item \underline{No new colour is added:} Then $\chi(G) = k$ still and since we didn't remove any edges: $\chi(G) = k \leq \delta(H) + 1$ by the inductive assumption.
-    \item \underline{One new colour is added:} We have now added a new vertex and edges s.t $\chi(G) = k+1$.
-    Since $\chi(G) = \chi(H)$ this vertex must have also been added to $H$, we call this vertex $v$. By the definition of a k-colouring, $v$ must have at least degree $k$ since it must be adjacent to at least one of every previously used colour. This gives two cases:
-    
-\begin{enumerate}
-    \item $d_{v} = \delta(H) \geq k$ i.e $v$ is the vertex with lowest degree in $H$. Then $\chi(G) = k+1 \leq \delta(H) + 1$ and so the claim holds. Note that this is only the case when the graph is regular, since otherwise there would be at least one other vertex with degree larger than $k$ and then $\chi(G) > k+1$
-    
-    \item $d_{v} \neq \delta(H)$ i.e one of the "old" vertices, say $u$, has the minimum degree. By the inductive assumption $k \leq \delta(H \setminus \{v\}) + 1$ so for $k+1 \leq \delta(H) +1$ to hold we need that $\delta(H \setminus \{v\}) + 1 \leq \delta(H)$ i.e we need that the new vertex $v$ is adjacent to $u$. Note that $| H | \geq \chi(G)$ since otherwise our construction of $H$ would be contradicted ($\chi(G) = \chi(H) = k+1$ cannot hold if $H$ does not have at least $k+1$ vertices). This means that $u$ must be adjacent to $v$ in $H$ since otherwise we could have used $u's$ colour for $v$ (in $H$) if so $\chi(H) $ would not equal $ \chi(G)$ which contradicts our construction. Remember here that $H$ is minimal! Otherwise there could be another vertex with $u's$ colour that could be adjacent to $v$. This gives that $\delta(H) = d_{u} \geq \delta(H \setminus \{v\}) +1  \Rightarrow  \chi(G) = k+1 \leq \delta(H) +1$
-\end{enumerate}
-\end{enumerate}
-
-So then the claim that $\chi(G) \leq \delta(H) + 1$ holds and by lemma 1: $$\chi(G) \leq \delta(H) + 1 \leq \lambda_{max}(A_{H}) + 1 \leq \lambda_{max}(A_{G}) + 1$$
-Which is what we wanted.
-
 \section*{Exercise 4 (Extra)}
 Assume you have to separate English alphabet letters into boxes such that no two consecutive letters end up in the same box. What is the minimum number of boxes you need for this task?
 
