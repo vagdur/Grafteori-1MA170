@@ -82,10 +82,9 @@ $$\chi(G) \leq \delta(H) + 1 \leq \lambda_{max}(A_{H}) + 1\leq \lambda_{max}(A_{
 where we used the inequalities from Lemma 1.
 
 \section*{Exercise 4 (Extra)}
-Assume you have to separate English alphabet letters into boxes such that no two consecutive letters end up in the same box. What is the minimum number of boxes you need for this task?
-
-\noindent
-(Source: \url {https://math.libretexts.org/Courses/Saint_Mary%27s_College_Notre_Dame_IN/SMC:_MATH_339_-_Discrete_Mathematics_%28Rohatgi%29/Text/5:_Graph_Theory/5.E:_Graph_Theory_%28Exercises%29})
+Assume you have to separate English alphabet letters into boxes such that no two consecutive letters end up in the same box. What is the minimum number of boxes you need for this task?\footnote{
+  Source: \url{https://shorturl.at/bsIVY}
+}
 
 \paragraph{Solution:}
 If we transform the problem into a graph where each letter is a vertex and vertices represent consecutive edges, we will have a graph with degree 1 (letters A and Z) and 2 (other letters). By Brook's theorem, this graph has $\chi(G) = 2$ and the graph is not complete nor has odd cycles. Hence, it is enough with two boxes only.
