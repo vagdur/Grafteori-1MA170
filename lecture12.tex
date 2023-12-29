@@ -5,12 +5,6 @@
 \usepackage{amsmath}
 \usepackage{graphicx}
 
-\newtheorem{definition}{Definition}
-\newtheorem{lemma}{Lemma}
-\newtheorem{theorem}{Theorem}
-\newtheorem{xca}{Exercise}
-
-\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
 \title{Lecture 12: Vertex colouring $\cdot$ 1MA020}
 
 \author[Vilhelm Agdur]{Vilhelm Agdur\thanks{\href{mailto:vilhelm.agdur@math.uu.se}{\nolinkurl{vilhelm.agdur@math.uu.se}}}}
@@ -42,9 +36,9 @@
 \newenvironment{docspec}{\begin{quote}\noindent}{\end{quote}}% command specification environment
 
 
-
-\begin{document}    
 \include{mathcommands.extratex}
+
+\begin{document}
 \maketitle% this prints the handout title, author, and date
 
 \begin{abstract}
@@ -194,7 +188,7 @@ However, the weaker statement that any planar graph can be coloured with \emph{f
   \begin{proof}
     We prove this by induction in the number of vertices. The base case of the one-vertex graph is trivial.
 
-    For the inductive step, let $v$ be a vertex whose degree in $G$ is minimal. We claim that $d_v \leq 5$.\sidenote[][]{This follows from the inequality $$|E| \leq 3|V| - 6$$ which we proved last lecture.} Now, if we let $G' = G[V \setminus \{v\}]$, this is clearly still planar and has fewer vertices, so by our induction hypothesis we can five-colour it.
+    For the inductive step, let $v$ be a vertex whose degree in $G$ is minimal. We claim that $d_v \leq 5$.\sidenote[][]{This follows from the inequality $$\abs{E} \leq 3\abs{V} - 6$$ which we proved last lecture.} Now, if we let $G' = G[V \setminus \{v\}]$, this is clearly still planar and has fewer vertices, so by our induction hypothesis we can five-colour it.
 
     If $d_v \leq 4$, its neighbours only use at most four colours, so there's a fifth colour available for us to give it. So we may assume $d_v = 5$. If $v$ has two neighbours which have the same colour, there is again an unused colour we can assign to it. So we assume all five neighbours have different colours.
 
@@ -250,7 +244,7 @@ For these graphs, we can do a lot better than the five-colour theorem we proved 
   \begin{proof}
     By Lemma \ref{lemma:chi_max_over_biconnecteds} it suffices to prove this for two-connected outerplanar graphs, for which we prove it by induction on the number of vertices. 
     
-    The base case of $|{V}| = 1$ is trivial, so let $G$ be an outerplanar graph on $n \geq 2$ vertices. Since adding edges cannot decrease the chromatic number or connectivity, we may assume that $G$ is in fact edge-maximal two-connected outerplanar. This implies that all faces are triangles, since any face that isn't could be subdivided into triangles by adding an additional edge, while still leaving the graph two-connected outerplanar.
+    The base case of $\abs{V} = 1$ is trivial, so let $G$ be an outerplanar graph on $n \geq 2$ vertices. Since adding edges cannot decrease the chromatic number or connectivity, we may assume that $G$ is in fact edge-maximal two-connected outerplanar. This implies that all faces are triangles, since any face that isn't could be subdivided into triangles by adding an additional edge, while still leaving the graph two-connected outerplanar.
 
     We claim that the planar dual of $G$ with the unbounded face deleted\sidenote[][]{This is called the \emph{weak planar dual} of $G$.} is a forest,\sidenote[][]{In fact it will be connected, since we assumed $G$ is two-connected, but we don't need this here.} since if there were a cycle in the weak planar dual, this cycle would enclose a vertex of $G$, which would then not be incident to the unbounded face.
 
