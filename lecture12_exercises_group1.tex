@@ -52,9 +52,7 @@ Using that method to solve conflict and knowing that a block graph is a forest w
 
 For example :
 
-      
-      \includegraphics[width=0.9\textwidth]{graph_with_blockgraph.png}
-
+\includegraphics[width=0.9\textwidth]{graph_with_blockgraph.png}
 
 In that block graph you would select a leaf A, E or F, let's say we pick A. Then you will change B coloring function in order to solve the possible conflict on cutvertex a, by doing that B now agrees with A on a. You repeat the process with the block C, because C is farther away from the leaf A you change C's coloring function, not B's. You repeat this process until every possible conflict of coloring on cutvertex is solved. This process is guaranteed to finish as there are no cycles on the block graph. 
 
@@ -63,21 +61,21 @@ In that block graph you would select a leaf A, E or F, let's say we pick A. Then
 \section*{Exercise 3}
  In this exercise, we use some \emph{spectral} methods for deriving results about the chromatic number. We rely on the following lemma, which can be proved using the technique of Rayleigh-quotients:
 
-  \begin{lemma}
-    Let $G$ be a graph and $H$ an induced subgraph of $G$, and let their adjacency matrices be $A_G$ and $A_H$ respectively. Then
-    $$\lambda_{\min}\left(A_G\right) \leq \lambda_{\min}\left(A_H\right) \leq \lambda_{\max}\left(A_H\right) \leq \lambda_{\max}\left(A_G\right),$$
-    and
-    $$\delta(G) \leq \lambda_{\max}\left(A_G\right) \leq \Delta(G),$$
-    where $\delta(G)$ and $\Delta(G)$ are the minimum and maximum degree of $G$.
-  \end{lemma}
+\begin{lemma}
+  Let $G$ be a graph and $H$ an induced subgraph of $G$, and let their adjacency matrices be $A_G$ and $A_H$ respectively. Then
+  $$\lambda_{\min}\left(A_G\right) \leq \lambda_{\min}\left(A_H\right) \leq \lambda_{\max}\left(A_H\right) \leq \lambda_{\max}\left(A_G\right),$$
+  and
+  $$\delta(G) \leq \lambda_{\max}\left(A_G\right) \leq \Delta(G),$$
+  where $\delta(G)$ and $\Delta(G)$ are the minimum and maximum degree of $G$.
+\end{lemma}
 
-  Use the above lemma to prove the below theorem:
-  \begin{theorem}[Wilf, 1967]
-    For any graph $G$ with adjacency matrix $A_G$, we have
-    $$\chi(G) \leq \lambda_{\max}\left(A_G\right) + 1.$$
-  \end{theorem}
+Use the above lemma to prove the below theorem:
+\begin{theorem}[Wilf, 1967]
+  For any graph $G$ with adjacency matrix $A_G$, we have
+  $$\chi(G) \leq \lambda_{\max}\left(A_G\right) + 1.$$
+\end{theorem}
 
-  \textbf{Hint:} Let $H$ be a minimal induced subgraph of $G$ with $\chi(H) = \chi(G)$. Can you relate the minimum degree of $H$ to the chromatic number of $G$?
+\textbf{Hint:} Let $H$ be a minimal induced subgraph of $G$ with $\chi(H) = \chi(G)$. Can you relate the minimum degree of $H$ to the chromatic number of $G$?
   
 \paragraph{Solution from earlier lecture notes:} Among all induced subgraphs of $G$ there exists a minimal subgraph $H$ (w.r.t inclusion) with $\chi(H)= \chi(G)$. Let $v$ be a vertex of $H$. Then $H - \{v\}$ admits a $\chi(G) - 1$- colouring, and if $deg_{H}(v) < \chi(G) - 1$. then this colouring could be extended to a $\chi(G) - 1$-colouring of $H$, contradicting our choice of $H$. Hence, the minmium degree in $H$ is at least $\chi(G) - 1$. Denote by $A_{H}$ the adjacency matrix of $H$. Then, 
 $$\chi(G) \leq \delta(H) + 1 \leq \lambda_{max}(A_{H}) + 1\leq \lambda_{max}(A_{G}) + 1$$ where we used the inequalities from Lemma 1.\\
