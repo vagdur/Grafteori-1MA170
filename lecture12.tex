@@ -57,7 +57,7 @@ We study the notion of a vertex colouring of a graph, and prove some results abo
 We already saw the notion of colouring a graph in an earlier lecture, but we proved nothing about it other than some very basic bounds. Let us restate the definition, and then move on to proving some more interesting things.
 \begin{marginfigure}
     \centering
-    \includegraphics[width=0.9\textwidth]{k-coloring.png}
+    \includegraphics[width=0.9\textwidth]{graphics/L12_colouring/k-coloring.png}
     \caption{
     Example of an undirected graph $G_1$ that is three-coloured. In this case the chromatic number of $G_1$ is $\chi(G_1)=3$ since we can find a three-colouring of $G_1$ but not a two-colouring.
     }
@@ -86,7 +86,7 @@ If we do nothing special in the choice of ordering of vertices, we don't get any
 If we know something about the graph, we can be a bit more clever in our choice of ordering, and get a better bound. To do this, however, we first need to define the breadth-first ordering of the vertices of a graph.
 \begin{marginfigure}
     \centering
-    \includegraphics[width=0.9\textwidth]{BFS_visualization.png}
+    \includegraphics[width=0.9\textwidth]{graphics/L12_colouring/BFS_visualization.png}
     \caption{
     This is a visualization of the order that we visit each vertex in a graph using Breadth-first search.
     }
@@ -170,7 +170,7 @@ Are there any other cases where this inequality is sharp? It turns out that thes
 
     \begin{marginfigure}
       \centering
-      \includegraphics[width=0.9\textwidth]{brooks_theorem_blocktree.png}
+      \includegraphics[width=0.9\textwidth]{graphics/L12_colouring/brooks_theorem_blocktree.png}
       \caption{A sketch of the block graph of $G[V \setminus \{a\}]$ and the vertex $a$ drawn in in red, with dotted edges connecting it to blocks it is in as a non-cutvertex, and the putative but impossible leaf $B_\ell$ that does not contain $a$. Notice how the addition of $a$ will create cycles forcing everything except $B_\ell$ to become a single block. Also notice how $a$ being the cutvertex in $B_\ell$ wouldn't help -- that would create a dotted line from $a$ to the parent of $B_\ell$, which still does not create a cycle with $B_\ell$ in it.}
     \end{marginfigure}
 
@@ -204,7 +204,7 @@ However, the weaker statement that any planar graph can be coloured with \emph{f
 
     \begin{figure}
       \centering
-      \includegraphics[width=0.65\textwidth]{planar_five_colour.png}
+      \includegraphics[width=0.65\textwidth]{graphics/L12_colouring/planar_five_colour.png}
       \caption[][0cm]{An illustration of the situation in the proof of the five-colour theorem. $v_1$ and $v_3$ are in the same $(\text{red},\text{blue})$-component, which forces the existence of the cycle indicated by a dashed red line. This cycle, however, separates $v_2$ and $v_4$ into separate $(\text{green},\text{orange})$-components, so $v_4$ can swap its orange colour with the green of its neighbour. This frees up the colour orange for $v$ to use.}
       \label{fig:planar_five_colour}
     \end{figure}
@@ -229,7 +229,7 @@ The first step to proving this is of course to turn the simple polygon into a gr
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.65\textwidth]{triangulated_polygon.png}
+  \includegraphics[width=0.65\textwidth]{graphics/L12_colouring/triangulated_polygon.png}
   \caption[][0cm]{A simple polygon on the left, and a triangulated version on the right, which we can interpret as a graph with corners as vertices, and the black and red lines as edges.}
   \label{fig:triangulated_polygon}
 \end{figure}
