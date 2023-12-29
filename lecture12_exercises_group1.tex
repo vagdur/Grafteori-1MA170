@@ -50,7 +50,7 @@ Using that method to solve conflict and knowing that a block graph is a forest w
 \end{enumerate}
 
 
-For example :
+For example:
 
 \includegraphics[width=0.9\textwidth]{graph_with_blockgraph.png}
 
@@ -78,7 +78,8 @@ Use the above lemma to prove the below theorem:
 \textbf{Hint:} Let $H$ be a minimal induced subgraph of $G$ with $\chi(H) = \chi(G)$. Can you relate the minimum degree of $H$ to the chromatic number of $G$?
   
 \paragraph{Solution from earlier lecture notes:} Among all induced subgraphs of $G$ there exists a minimal subgraph $H$ (w.r.t inclusion) with $\chi(H)= \chi(G)$. Let $v$ be a vertex of $H$. Then $H - \{v\}$ admits a $\chi(G) - 1$- colouring, and if $deg_{H}(v) < \chi(G) - 1$. then this colouring could be extended to a $\chi(G) - 1$-colouring of $H$, contradicting our choice of $H$. Hence, the minmium degree in $H$ is at least $\chi(G) - 1$. Denote by $A_{H}$ the adjacency matrix of $H$. Then, 
-$$\chi(G) \leq \delta(H) + 1 \leq \lambda_{max}(A_{H}) + 1\leq \lambda_{max}(A_{G}) + 1$$ where we used the inequalities from Lemma 1.\\
+$$\chi(G) \leq \delta(H) + 1 \leq \lambda_{max}(A_{H}) + 1\leq \lambda_{max}(A_{G}) + 1$$
+where we used the inequalities from Lemma 1.
 
 \section*{Exercise 4 (Extra)}
 Assume you have to separate English alphabet letters into boxes such that no two consecutive letters end up in the same box. What is the minimum number of boxes you need for this task?
@@ -90,44 +91,22 @@ Assume you have to separate English alphabet letters into boxes such that no two
 If we transform the problem into a graph where each letter is a vertex and vertices represent consecutive edges, we will have a graph with degree 1 (letters A and Z) and 2 (other letters). By Brook's theorem, this graph has $\chi(G) = 2$ and the graph is not complete nor has odd cycles. Hence, it is enough with two boxes only.
 
 \section*{Exercise 5 (Extra)}
-Prove that if a graph has at most two cycles of odd length then it can be
-coloured with 3 colours. \textit{Hint}: a bipartite graph has $\chi(G) = 2$.
+Prove that if a graph has at most two cycles of odd length then it can be coloured with 3 colours. \textit{Hint}: a bipartite graph has $\chi(G) = 2$.
 
 \paragraph{Solution:}
-(Based on University of Victoria course notes in Discrete and Combinatorial Mathematics).\\
+(Based on University of Victoria course notes in Discrete and Combinatorial Mathematics).
 
-\noindent
-We must consider three distinct cases.\\
+We must consider three distinct cases.
 
-\noindent
-Case 1: Suppose G has no odd cycles. Then G is bipartite with $\chi(G) = 2$, so
-certainly we can colour G with three colours.\\
+Case 1: Suppose G has no odd cycles. Then G is bipartite with $\chi(G) = 2$, so certainly we can colour G with three colours.
 
-\noindent
-Case 2: Suppose that G contains exactly one odd cycle, C. Then certainly
-$\chi(G) > 2$ as this graph is not bipartite. Consider removing an arbitrary vertex
-u $\in$ C from G, this would create a graph with no odd cycles. So, G - u is
-2-colourable. Adding u back to G would only require one additional colour, so G is 3-colourable.\\
+Case 2: Suppose that G contains exactly one odd cycle, C. Then certainly $\chi(G) > 2$ as this graph is not bipartite. Consider removing an arbitrary vertex u $\in$ C from G, this would create a graph with no odd cycles. So, G - u is 2-colourable. Adding u back to G would only require one additional colour, so G is 3-colourable.
 
-\noindent
-Case 3: Suppose G contains exactly two odd cycles, $C_1$ and $C_2$, we now consider
-two subcases:\\
+Case 3: Suppose G contains exactly two odd cycles, $C_1$ and $C_2$, we now consider two subcases:
 
-Case 3a: Suppose that $C_1$ and $C_2$ share a common vertex, u. Consider
-G-u, which now has no odd cycles since removing a vertex from
-a cycle breaks the cycle. Thus, G - u is bipartite and 2-colourable.
-Adding back u will require at most one additional colour, so G is
-3-colourable.\\
+Case 3a: Suppose that $C_1$ and $C_2$ share a common vertex, u. Consider G-u, which now has no odd cycles since removing a vertex from a cycle breaks the cycle. Thus, G - u is bipartite and 2-colourable. Adding back u will require at most one additional colour, so G is 3-colourable.
 
-Case 3b: Suppose $C_1$ and $C_2$ share no common vertices. If every
-vertex in $C_1$ is adjacent to every vertex in $C_2$ then there would be
-another odd cycle in G which is impossible by assumption. Thus,
-there exists two vertices, u $\in C_1$ and v $\in C_2$, such that uv $\notin$ E(G).
-Consider obtaining the graph G - u - v, this will break both cycles
-in G, making G - u - v a graph free of odd cycles, and hence
-2-colourable. As u and v are not adjacent in G colouring them will
-require at most one additional colour. Thus, G is 3-colourable.\\
+Case 3b: Suppose $C_1$ and $C_2$ share no common vertices. If every vertex in $C_1$ is adjacent to every vertex in $C_2$ then there would be another odd cycle in G which is impossible by assumption. Thus, there exists two vertices, u $\in C_1$ and v $\in C_2$, such that uv $\notin$ E(G). Consider obtaining the graph G - u - v, this will break both cycles in G, making G - u - v a graph free of odd cycles, and hence 2-colourable. As u and v are not adjacent in G colouring them will require at most one additional colour. Thus, G is 3-colourable.
 
-\noindent
 This completes the proof.
 \end{document}
