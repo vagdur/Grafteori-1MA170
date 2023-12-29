@@ -15,7 +15,7 @@ Welcome to the course in graph theory at the bachelor's level at Uppsala Univers
 9. [Exercise session 9: Connectivity, planarity, colourings](https://vagdur.github.io/Grafteori-1MA170/exercise_session9.pdf) 
 10. [Lecture 10: Connectivity](https://vagdur.github.io/Grafteori-1MA170/lecture10.pdf)
 11. [Lecture 11: Planarity](https://vagdur.github.io/Grafteori-1MA170/lecture11.pdf)
-12. [Lecture 12: Vertex colourings](https://vagdur.github.io/Grafteori-1MA170/lecture12.pdf)
+12. [Lecture 12: Vertex colourings](https://vagdur.github.io/Grafteori-1MA170/lecture12.pdf) (With [solutions](https://vagdur.github.io/Grafteori-1MA170/lecture12_exercises_group1.pdf))
 13. [Exercise session 13: The probabilistic method, edge-colourings, and the Rado graph](https://vagdur.github.io/Grafteori-1MA170/exercise_session13.pdf)
 14. [Lecture 14: The probabilistic method and the Erdős-Rényi random graph](https://vagdur.github.io/Grafteori-1MA170/lecture14.pdf)
 15. [Exercise session 15: Extremal graph theory and Szemerédi's regularity lemma](https://vagdur.github.io/Grafteori-1MA170/exercise_session15.pdf)
