@@ -30,22 +30,22 @@ If the graph G has no two-connected blocks then it has no cycle which means that
 First colour each block using at most $k = \max_{i\in[r]} \chi(B_i)$ colours using a different function for each block $B_i$ that we will call $c_i : B_i \rightarrow [k]$.
 At each cutvertex where there is a disagreement between the colouring of an arbitrary number of different functions we will resolve the problem in the following way:
 \begin{enumerate}
-\item Select a block, lets call its vertices $B_x$ and call $x$ the colouring it gave to the cutvertex $c$
-\item Select a block whose colouring conflicts with $B_x$, let's call it $B_y$ and call $y$ the colouring it gave to the cutvertex
-\item Give $B_y$ a new colouring function  
+\item Select a block, lets call its vertices $B_x$ and call $x$ the colouring it gave to the cutvertex $c$.
+\item Select a block whose colouring conflicts with $B_x$, let's call it $B_y$ and call $y$ the colouring it gave to the cutvertex.
+\item Give $B_y$ a new colouring function
 \begin{align*} 
 &c_y' : B_y \rightarrow [k] \\ 
-&c_y'(v) = c_y(v) + x-y \bmod{k}
+&c_y'(v) = c_y(v) + x-y \bmod{k}.
 \end{align*}
-this function is one to one so its still a valid colouring, furthermore we now have resolved the conflict on the cutvertex as $c_y'(c) = y + x - y = x$
-\item Go back to step 2 until there is no conflict at that cutvertex
+This function is one to one so its still a valid colouring, furthermore we now have resolved the conflict on the cutvertex as $c_y'(c) = y + x - y = x$.
+\item Go back to step 2 until there is no conflict at that cutvertex.
 \end{enumerate}
 
-Using that method to solve conflict and knowing that a block graph is a forest we can solve all the colouring conflicts of the graph in a simple way 
+Using that method to solve conflict and knowing that a block graph is a forest we can solve all the colouring conflicts of the graph in a simple way:
 \begin{enumerate}
-\item Pick a component of the block graph of G, if its a single block there is no problem thus we only consider the case where it is a tree
-\item Pick a leaf of the tree, it will be a block because a cutvertex in a block graph is adjacent to two trees
-\item Solve conflicts between blocks by keeping intact the colouring function of the block closest to the leaf
+\item Pick a component of the block graph of G, if its a single block there is no problem thus we only consider the case where it is a tree.
+\item Pick a leaf of the tree, it will be a block because a cutvertex in a block graph is adjacent to two trees.
+\item Solve conflicts between blocks by keeping intact the colouring function of the block closest to the leaf.
 
 \end{enumerate}
 
