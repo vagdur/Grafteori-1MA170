@@ -170,21 +170,10 @@ Another thing we did in our exercises was to consider distance functions on grap
 
 We proved during the exercises that this actually is a metric on the set of vertices whenever the graph is connected, so it makes sense to call this a distance and use the language of metric spaces. We can also extend this definition to disconnected metric spaces if we recall the convention that a minimum over an empty set is $\infty$.\sidenote[][-1cm]{This is really the same thing as why an empty sum is zero, an empty product $1$, an empty union is $\emptyset$, and so on.}
 
-\begin{figure}
-    \centering
-    \includegraphics{graphics/L6_prim_kruskal_dijkstra/distance.png}
-    \caption{Example of a graph with cities and the actual distance between them as weights.}
-    \label{fig:distance}
-\end{figure}
-
-In the context of real world application, one can have a look at Figure \ref{fig:distance} where we have used cities as vertices and intercity routes as edges, and the distances between cities as weights. \sidenote[][]{We will need to assume that cars/bus/trucks can only travelled on these intercity routes.} We note that the \textit{graph distance} is not always the same as the \textit{distance} travelled. For instance, the graph distance between Uppsala and Södertälje would mean the total weights of the path via Uppsala, Enköping, Bålsta, Stockholm and Södertälje, which is 11. On the other hand, the distance travelled between Uppsala and Södertälje is dependent on the path taken which can be any path as long as you can reach the destination. And in this case, it doesn't need to be the shortest.
-
 \begin{definition}
   The \emph{diameter} of a graph is the same as the diameter for any metric space -- it is the maximum distance between any two vertices.\sidenote[][]{This has also been called ``longest shortest path'', presumably by people who like confusing terminology.} That is,
   $$\diam(G) = \max_{v, u \in V(G)} d(v,u).$$
 \end{definition}
-
-Using again Figure \ref{fig:distance} as an example, the diameter of the graph would represent the longest direct journey you might have to make to get from one city to another. It's like figuring out the most distant pair of cities, measured only by the shortest possible distance you need to traverse to get from one city to another. And in this case, the diameter would be the distance from Uppsala to Södertälje. For instance, consider a scenario where you're trying to establish a reliable courier service to deliver packages between cities. Knowing the diameter of the transportation network helps you determine the longest route your couriers might have to take. This information is useful for planning efficient logistics and ensuring timely deliveries.
 
 Instead of trying to compute the diameter of a graph, let us just try to compute the distance between two vertices. Or rather, it turns out to not be markedly harder to compute the distance between a given vertex and every other vertex, so we give an algorithm that can do this, and then we will say how to turn this into an algorithm for the simpler problem.
 
