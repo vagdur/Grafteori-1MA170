@@ -1,0 +1,120 @@
+\documentclass[a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{amssymb, amsmath}
+\usepackage{amsthm}
+\usepackage[margin = 4cm]{geometry}
+
+\setlength{\parindent}{0pt}
+
+\newtheorem{exercise}{Exercise}
+\newenvironment{solution}{\begin{proof}[Solution]\renewcommand{\qedsymbol}{}\ignorespaces}{\end{proof}}
+
+\title{Solutions to Exercises in Lecture 12}
+\author{Jón Hákon Garðarsson}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{exercise}
+Prove the second half of lemma 6.
+\end{exercise}
+
+\begin{solution}
+If \(G\) has no two-connected blocks, then all of its blocks must be \(K_2\) or an isolated vertex.
+These blocks are clearly all two-colourable.
+Now use the algorithm in exercise 2 to complete the colouring.
+
+If there are no edges, then we can clearly colour the graph with only one colour.
+\end{solution}
+
+\begin{exercise}
+Give an algorithm that permutes the colours of the blocks.
+\end{exercise}
+
+\begin{solution}
+The block graph forms a tree.
+Pick a block as a root and keep its colouring.
+Now until we hit the leaves, do the following.
+\begin{enumerate}
+	\item Permute the colours of each of the root's children to match the cut vertices of the root.
+	\item Remove the root from the tree.
+	\item Each of the children is a root of their own tree, repeat step 1 through 3 on all of them.
+\end{enumerate}
+This will never run into a conflict because the block graph has no cycles.
+\end{solution}
+
+\begin{exercise}
+This bound is sometimes sharp.
+Try to think of a planar graph that is not three-colourable.
+Can you think of two examples, neither of which contains the other?
+\end{exercise}
+
+\begin{solution}
+The graph \(K_4\) is an example.
+Another one is the wheel with five spokes, \(W_5\).
+Neither of these is contained in the other; there are no four vertices in \(W_5\) pairwise adjacent, and \(K_4\) cannot contain \(W_5\) because it has fewer vertices.
+\end{solution}
+
+\begin{exercise}
+Prove that every tree is two-colourable.
+\end{exercise}
+
+\begin{solution}
+Pick a vertex as the root and colour it.
+Now until we hit the leaves, do the following.
+\begin{enumerate}
+	\item Colour all of the root's children the other colour.
+	\item Remove the root from the tree.
+	\item Each of the children is a root of their own tree, repeat step 1 through 3 on all of them.
+\end{enumerate}
+This will never run into a conflict because trees have no cycles.
+\end{solution}
+
+\begin{exercise}
+What is the chromatic number of the hypercube graph in \(n\) dimensions?
+\end{exercise}
+
+\begin{solution}
+The chromatic number is two for \(n \geq 1\).
+We prove this by induction.
+The base case is trivial.
+Now remember that a \((n + 1)\)-cube is made out of two \(n\)-cubes by adding an edge between the corresponding vertices.
+With our induction hypothesis, we can colour one of the copies with two colours.
+Now colour the other one with the opposite colouring.
+Then when we join the two \(n\)-cubes, we get a proper colouring.
+This also shows that a hypercube is bipartite.
+\end{solution}
+
+\begin{exercise}
+For any graph \(G\) with adjacency matrix \(A_G\), we have
+\[
+	\chi(G) \leq \lambda_\text{max}(A_G) + 1.
+\]
+\end{exercise}
+
+\begin{solution}
+Consider a minimal induced subgraph \(H\) with \(\chi(H) = \chi(G)\).
+Let \(v\) be a vertex of \(H\) of minimal degree \(\delta(H)\), in \(H\).
+Since \(H\) is minimal, we have that \(H \setminus \{v\}\) is \(\chi(G) - 1\) colourable.
+Therefore, we must have
+\[
+	\delta(H) \geq \chi(G) - 1
+\]
+that is
+\[
+	\chi(G) \leq \delta(H) + 1
+\]
+because otherwise we could add \(v\) back in and get a \(\chi(G) - 1\) colouring of \(H\).
+By lemma 12 we get
+\[
+	\chi(G)
+	\leq \delta(H) + 1
+	\leq \lambda_\text{max}(H) + 1
+	\leq \lambda_\text{max}(G) + 1.
+\]
+\end{solution}
+
+\end{document}
