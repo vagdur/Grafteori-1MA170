@@ -57,7 +57,7 @@ In order to upper bound the chromatic number of a graph, the most obvious approa
   Let $G = (V,E)$ be a graph with an ordering on the vertices, say $v_1 < v_2 <\ldots<v_n$. On the colours, we use the obvious ordering $1 < 2 < \ldots$. The \emph{greedy colouring algorithm} starts with an empty colouring, and then at each time-step, it colours the first uncoloured vertex (according to the ordering on the vertices) with the first colour that has not been used on any of its neighbours.
 \end{definition}
 
-If we do nothing special in the choice of ordering of vertices, we don't get a very strong bound from this, of course. We do, however, get the following general bound:
+If we do nothing special in the choice of ordering of vertices, we don't get any very strong bound from this, of course. We do, however, get the following general bound:
 
 \begin{lemma}\label{lemma:trivial_chi_upper_bound}
   For any graph $G$ with maximum degree $\Delta$, we have
@@ -114,7 +114,7 @@ We can also make use of our previous work on connectivity to break down the prob
 
     Colour each block of $G$, using at most $\max_{i\in[r]} \chi(B_i)$ colours.\sidenote[][]{If the block is two-connected, this is trivially possible. Otherwise it can be coloured with at most two-colours, since it must be an isolated vertex or a $K_2$.} Then, because any two blocks only intersect in at most one vertex, we can permute the colours in each block so that they agree on the cutvertices, and this can be done in such a way that we get a colouring on the entire graph because the block graph is a tree.\sidenote[][]{\begin{xca}
       Write out the details of this argument -- how do you actually algorithmically do this?
-    \end{xca}} Clearly permuting the colours does not add new colours, so our global colouring with also use only $\max_{i\in[r]} \chi(B_i)$ colours.
+    \end{xca}} Clearly permuting the colours does not add new colours, so our global colouring will also use only $\max_{i\in[r]} \chi(B_i)$ colours.
   \end{proof}
 \end{lemma}
 
