@@ -39,6 +39,8 @@ There are some old exams available:
 4. [Tentamen 220110 1MA170 Burghart](https://vagdur.github.io/Grafteori-1MA170/old_exams/Tentamen 220110 1MA170 Burghart.pdf)
 5. [Tentamen 230105 1MA170 Burghart](https://vagdur.github.io/Grafteori-1MA170/old_exams/Tentamen 230105 1MA170 Burghart.pdf)
 
+The [exam from the 5th January 2024 is here](https://vagdur.github.io/Grafteori-1MA170/tenta_5januari.pdf).
+
 # Where to find a paper for the assignment
 
 If you have some specific topic that came up during a lecture that you want to delve deeper into, I may be able to suggest something for you. Otherwise, you can have a look at what was published at some recent conferences in the area. Some of these conferences are about combinatorics more broadly, so not every paper in them will be suitable. One of them is about network science, so it is a good place to look for more applied papers.
