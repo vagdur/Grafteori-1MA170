@@ -43,4 +43,28 @@
 Questions one through eight were all of the form ``reproduce this result from the lecture notes'', so we give no solution for those. For questions nine and ten we give a sketch of a solution.
 \end{abstract}
 
+\section{Question 10}
+
+\begin{enumerate}[label=\alph*)]
+    \item This is true. The easiest example is just the complete graph on $k+1$ vertices.
+    
+    In fact, the stronger statement that for every $k$, there is a $k$-regular Hamiltonian graph on $n$ vertices for every sufficiently large $n$ is also true. One construction of an example of such a graph might go as follows:
+    
+    Pick a large $n$, and create a graph $G$ by starting with a cycle on $n$ vertices. Then, pick $k-2$ matchings on $G^c$, and add those edges to $G$ to make it Hamiltonian.\sidenote[][]{Why is this possible? If you picked $n$ large enough, Dirac's theorem tells you there is a Hamiltonian cycle in $G^c$, so picking every second edge of this gets you your first matching. Then, removing the edges of this matching from $G^c$ doesn't reduce the degree of any vertex by too much (since you picked $n$ very large, $n - 2 - k > n/2$), so there is still a Hamiltonian cycle by Dirac's theorem, and repeat until you have all $k$ matchings.} That this is graph is Hamiltonian is obvious, since the cycle the construction started with is a Hamiltonian cycle.
+
+    \item This is false. Recall that we proved in the lecture notes that
+    $$\abs{E} \leq 3\abs{V} - 6$$
+    as a corollary to Euler's formula, by using a double counting argument counting edges incident to faces. Then, in our proof of the five-colour theorem, we used this to prove that the minimum degree of a planar graph can be at most five -- that is, every planar graph has a vertex whose degree is at most five. So there are no $k$-regular planar graphs for $k > 5$.
+
+    \item This is true. Consider the graph with two vertices and $k$ edges between those two vertices -- clearly the spanning trees of this graph are gotten precisely by picking one of the edges.
+    
+    \item This is false -- but it fails only for $k = 2$! For $k = 1$, it is obviously true -- any graph which is itself a tree has only one spanning tree. For $k > 2$, consider the cycle graph on $k$ vertices: A spanning tree of this graph is gotten by removing one of the edges of the graph to render it acyclic.
+    
+    To see that it fails for $k = 2$, let $G$ be any graph with more than one spanning tree. That it has more than one spanning tree implies it is not a tree, so it contains a cycle, say $C$. Now pick a spanning forest $F$ of $G \setminus C$.\sidenote[][]{$G\setminus C$ may of course be disconnected, so we need to say spanning \emph{forest} here.} For any edge $e$ of $C$, we get a spanning tree of $G$ by taking $F \cup (C \setminus e)$ -- and any cycle of course has more than two edges, so this procedure gives us more than two spanning trees, and so $G$ does not have exactly two spanning trees.
+
+    \item This is false. Suppose $G$ is any planar graph. As we saw in a previous part of this question, $G$ has a vertex $v$ such that $d_v \leq 5$. So if we remove the set of neighbours $N(v)$ of $v$ from $G$, this will render it disconnected. So we have removed a set of five vertices and thereby disconnected the graph, and thus it cannot be six-connected.
+    
+    \item Whether this is true or false depends on if you interpret ``tree'' to mean ``finite tree'' or ``any tree''. It is false for finite trees, since all finite trees have leaves.\sidenote[][]{We gave a proof of this fact in one of the earliest lectures.} However, there definitely are $k$-regular trees for every $k$ if you allow infinite trees -- to get a two-regular tree, just turn $\Z$ into a graph by adding an edge between $i$ and $i+1$ for every $i$. 
+\end{enumerate}
+
 \end{document}
