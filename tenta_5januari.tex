@@ -1,0 +1,211 @@
+\documentclass[nobib]{tufte-handout}
+
+\title{Exam in Graph Theory, 5 January 2024 $\cdot$ 1MA170}
+
+\author[Vilhelm Agdur]{Vilhelm Agdur\thanks{I will visit the exam hall at some point during the exam to answer any questions. If you need to reach me outside that time, I am available by email at \href{mailto:vilhelm.agdur@math.uu.se}{\nolinkurl{vilhelm.agdur@math.uu.se}} or by phone at \texttt{072-373 32 90}.}}
+
+\date{5 January 2024}
+
+
+%\geometry{showframe} % display margins for debugging page layout
+
+\usepackage{graphicx} % allow embedded images
+  \setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+  \graphicspath{{graphics/}} % set of paths to search for images
+\usepackage{amsmath}  % extended mathematics
+\usepackage{booktabs} % book-quality tables
+\usepackage{units}    % non-stacked fractions and better unit spacing
+\usepackage{multicol} % multiple column layout facilities
+\usepackage{lipsum}   % filler text
+\usepackage{fancyvrb} % extended verbatim environments
+  \fvset{fontsize=\normalsize}% default font size for fancy-verbatim environments
+
+\usepackage{color,soul} % Highlights for text
+
+% Standardize command font styles and environments
+\newcommand{\doccmd}[1]{\texttt{\textbackslash#1}}% command name -- adds backslash automatically
+\newcommand{\docopt}[1]{\ensuremath{\langle}\textrm{\textit{#1}}\ensuremath{\rangle}}% optional command argument
+\newcommand{\docarg}[1]{\textrm{\textit{#1}}}% (required) command argument
+\newcommand{\docenv}[1]{\textsf{#1}}% environment name
+\newcommand{\docpkg}[1]{\texttt{#1}}% package name
+\newcommand{\doccls}[1]{\texttt{#1}}% document class name
+\newcommand{\docclsopt}[1]{\texttt{#1}}% document class option name
+\newenvironment{docspec}{\begin{quote}\noindent}{\end{quote}}% command specification environment
+
+\include{mathcommands.extratex}
+
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usetikzlibrary{decorations.pathmorphing}
+
+\makeatletter
+
+\newcommand{\defhighlighter}[3][]{%
+  \tikzset{every highlighter/.style={color=#2, fill opacity=#3, #1}}%
+}
+
+\defhighlighter{yellow}{.5}
+
+\newcommand{\highlight@DoHighlight}{
+  \fill [ decoration = {random steps, amplitude=1pt, segment length=15pt}
+        , outer sep = -15pt, inner sep = 0pt, decorate
+        , every highlighter, this highlighter ]
+        ($(begin highlight)+(0,8pt)$) rectangle ($(end highlight)+(0,-3pt)$) ;
+}
+
+\newcommand{\highlight@BeginHighlight}{
+  \coordinate (begin highlight) at (0,0) ;
+}
+
+\newcommand{\highlight@EndHighlight}{
+  \coordinate (end highlight) at (0,0) ;
+}
+
+\newdimen\highlight@previous
+\newdimen\highlight@current
+
+\DeclareRobustCommand*\highlight[1][]{%
+  \tikzset{this highlighter/.style={#1}}%
+  \SOUL@setup
+  %
+  \def\SOUL@preamble{%
+    \begin{tikzpicture}[overlay, remember picture]
+      \highlight@BeginHighlight
+      \highlight@EndHighlight
+    \end{tikzpicture}%
+  }%
+  %
+  \def\SOUL@postamble{%
+    \begin{tikzpicture}[overlay, remember picture]
+      \highlight@EndHighlight
+      \highlight@DoHighlight
+    \end{tikzpicture}%
+  }%
+  %
+  \def\SOUL@everyhyphen{%
+    \discretionary{%
+      \SOUL@setkern\SOUL@hyphkern
+      \SOUL@sethyphenchar
+      \tikz[overlay, remember picture] \highlight@EndHighlight ;%
+    }{%
+    }{%
+      \SOUL@setkern\SOUL@charkern
+    }%
+  }%
+  %
+  \def\SOUL@everyexhyphen##1{%
+    \SOUL@setkern\SOUL@hyphkern
+    \hbox{##1}%
+    \discretionary{%
+      \tikz[overlay, remember picture] \highlight@EndHighlight ;%
+    }{%
+    }{%
+      \SOUL@setkern\SOUL@charkern
+    }%
+  }%
+  %
+  \def\SOUL@everysyllable{%
+    \begin{tikzpicture}[overlay, remember picture]
+      \path let \p0 = (begin highlight), \p1 = (0,0) in \pgfextra
+        \global\highlight@previous=\y0
+        \global\highlight@current =\y1
+      \endpgfextra (0,0) ;
+      \ifdim\highlight@current < \highlight@previous
+        \highlight@DoHighlight
+        \highlight@BeginHighlight
+      \fi
+    \end{tikzpicture}%
+    \the\SOUL@syllable
+    \tikz[overlay, remember picture] \highlight@EndHighlight ;%
+  }%
+  \SOUL@
+}
+\makeatother
+
+\definecolor{dark-orange}{rgb}{0.98, 0.69, 0.03}
+
+\setlength{\extrarowheight}{12pt}
+
+\begin{document}
+
+\maketitle% this prints the handout title, author, and date
+
+\begin{abstract}
+\noindent
+There are a total of ten questions on this exam. You are to \highlight[dark-orange]{\textbf{pick eight of them to answer}}.\sidenote[][]{If you answer more than eight questions, your exam total score will be the sum of your eight \emph{lowest} scores, so there is absolutely \textbf{no} benefit to answering more than eight questions.}
+
+Good luck! {\vspace{0cm}\includegraphics[height=0.08\textwidth]{graphics/burning-heart-emoji.png} \includegraphics[height=0.08\textwidth]{graphics/lily-emoji.png}}
+\end{abstract}
+
+\section{Question 1 (5p)} % about L10
+
+What does it mean for a graph to be $k$-connected? State a correct definition.
+
+We proved a characterisation of two-connected graphs as being exactly the graphs that can be constructed by a certain process starting from a cycle graph. State the theorem, and give a proof of it.
+
+\section{Question 2 (5p)} % about L4
+
+Define the adjacency matrix $A$, incidence matrix $D$, and Laplacian matrix $Q$ of a graph. Prove that $Q = DD^t$.
+
+\section{Question 3 (5p)} % about L7
+
+Recall that Hall's marriage theorem gives a condition for the existence of a matching of one side of a bipartite graph into the other in terms of a condition on the size of sets $Q \subseteq A$ and their neighbour sets $N(Q) \subseteq B$.
+
+Give a precise statement of the theorem, and then give a proof.\sidenote[][]{The proof we gave in the lecture was a clever application of the max-flow min-cut theorem, where we turned our bipartite graph into a flow network. If you choose to give this proof, please also draw a figure of the construction.}
+
+\section{Question 4 (5p)} % about L6
+\textbf{Part a:} Prove that if you remove $k$ edges from a tree $T$,\sidenote[][]{Where the tree has more than $k$ vertices, so there are indeed $k$ edges to remove.} the resulting graph is a forest of $k+1$ trees.
+\vspace{0.5cm}
+
+\noindent
+\textbf{Part b:} Pick one of Kruskal's or Prim's algorithms. State it and prove its correctness.
+
+\section{Question 5 (5p)} % about L11
+
+What does it mean for a graph to be planar? What is the planar dual of a planar graph? Give definitions, and include a correct figure illustrating the definition.
+
+Prove the following result from the course:\sidenote[][]{Hint: Consider a spanning tree of $G$ and its complement in $G^*$.}
+\begin{theorem}[Euler's formula]
+  Let $G = (V,E)$ be a connected planar graph, and let $f$ be the number of faces for some planar embedding of $G$. Then
+  $$\abs{V} - \abs{E} + f = 2,$$
+  and so in particular any two planar embeddings have the same number of faces.
+\end{theorem}
+
+\section{Question 6 (5p)} % about L2
+What does it mean for a graph to be Eulerian? State and prove Euler's theorem giving a criterion for a graph to be Eulerian.
+
+\section{Question 7 (5p)} % about L14
+
+Recall from the lectures that the \emph{minimum bisection problem} asks for a partition of the vertices of a graph into two equally-sized sets\sidenote[][]{So, as we state it, it only applies to graphs with an even number of vertices.} such that the number of edges between them is minimal.
+
+We proved an upper bound on how many edges you could be forced to include in such a bisection using the probabilistic method, where we started by picking a matching on the complement graph. State and prove this result.
+
+\section{Question 8 (5p)} % about L18
+
+Given a graph $H$ and an integer $n$, define the extremal function $\ex(n; H)$ of $H$.
+
+Turáns theorem says that
+$$\ex(n; K_{r+1}) \leq \left(1 - \frac{1}{r}\right)\frac{n^2}{2}.$$
+Prove this.\sidenote[][-1cm]{We gave two proofs in the course, and there are many more pretty proofs floating around. Any correct proof is of course a correct answer to the question.
+
+The first proof we gave in the course used the Caro-Wei result on independent sets, and then applied the Cauchy-Schwarz inequality
+$$\abs{\langle a, b \rangle} \leq \norm{a}\norm{b}$$
+to a clever choice of $a$ and $b$.}
+
+\section{Question 9 (5p)} % surprise stuff!
+
+A \emph{directed acyclic graph} (often called just a \emph{DAG}) is a directed graph that contains no cycles. Devise a reasonable\sidenote[][]{That is, not just a brute-force method, but something you'd actually use in practice.} algorithm for determining when such a graph is Hamiltonian. For directed graphs, being Hamiltonian means having a \emph{directed} Hamiltonian path.
+
+\section{Question 10 (5p)} % surprise stuff!
+
+For each of these statements, determine if it is true or false and give a proof or disproof:\sidenote[][]{Each statement gives one point, except for c) and d), which give half a point each.}
+\begin{enumerate}[label=\alph*)]
+  \item For every $k\geq 3$, there exists a $k$-regular Hamiltonian graph.
+  \item For every $k \geq 1$, there exists a $k$-regular planar graph.
+  \item For every $k \geq 1$, there exists a multigraph with exactly $k$ spanning trees.
+  \item For every $k \geq 1$, there exists a graph with exactly $k$ spanning trees.
+  \item There exists a $6$-connected planar graph.
+  \item There exists a tree in which every vertex has degree $2$.
+\end{enumerate}
+
+\end{document}
