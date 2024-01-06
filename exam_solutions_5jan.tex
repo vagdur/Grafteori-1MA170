@@ -43,6 +43,24 @@
 Questions one through eight were all of the form ``reproduce this result from the lecture notes'', so we give no solution for those. For questions nine and ten we give a sketch of a solution.
 \end{abstract}
 
+\section{Question 9}
+
+The right ``intermediate concept'' to consider here is that of a \emph{topological ordering} of a directed acyclic graph. A topological ordering is an ordering of the vertices of the graph such that whenever $u \to v$ is an edge of the graph, $u$ precedes $v$ in the ordering.
+
+It should be clear that our DAG will be Hamiltonian if and only if a topological ordering of its vertices is a path in the graph. So we can divide the problem into two parts -- first we find a topological ordering, and then we check if this ordering is in fact a path. The latter step can clearly be done in time $O(\abs{V})$.
+
+How does one find such an ordering? There are multiple algorithms for it,\sidenote[][]{Wikipedia suggests three different options: \url{https://en.wikipedia.org/wiki/Topological_sorting}} so let us give just one, which is called \emph{Kahn's algorithm}.
+
+First, loop through all vertices and find the set of vertices which have no incoming edges -- at least one such vertex must exist in any DAG.\sidenote[][]{Keeping our end-goal of determining hamiltonicity in mind, we can also enumerate the vertices with no outgoing edges. If the graph is Hamiltonian, it must of course have exactly one of each -- so if we find too many of either kind, we can terminate the algorithm already at this step.} Initialize a set of these vertices as $S$, and let $L$ be an empty list. Then, as long as $S$ is not empty, we proceed as follows:
+\begin{enumerate}
+  \item Remove a vertex $v$ from $S$, and add it to $L$.
+  \item For each vertex $w$ such that $v \to w$ is an edge, remove that edge from the graph. If $w$ had no other incoming edges, add $w$ to $S$.
+\end{enumerate}
+
+If the graph we started with had no cycles, this algorithm will eventually terminate with no edges of the graph remaining, and $L$ will be a topological ordering of the graph.
+
+It is clear that this algorithm also has time complexity linear in the number of vertices and edges, and so we have found a linear time algorithm for determining if a DAG is Hamiltonian.
+
 \section{Question 10}
 
 \begin{enumerate}[label=\alph*)]
