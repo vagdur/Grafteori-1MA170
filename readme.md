@@ -39,7 +39,7 @@ There are some old exams available:
 4. [Tentamen 220110 1MA170 Burghart](https://vagdur.github.io/Grafteori-1MA170/old_exams/Tentamen 220110 1MA170 Burghart.pdf)
 5. [Tentamen 230105 1MA170 Burghart](https://vagdur.github.io/Grafteori-1MA170/old_exams/Tentamen 230105 1MA170 Burghart.pdf)
 
-The [exam from the 5th January 2024 is here](https://vagdur.github.io/Grafteori-1MA170/tenta_5januari.pdf), with [solutions here](https://vagdur.github.io/Grafteori-1MA170/exam_solutions_5jan.pdf).
+The [exam from the 5th January 2024 is here](https://vagdur.github.io/Grafteori-1MA170/tenta_5januari.pdf), with [solutions here](https://vagdur.github.io/Grafteori-1MA170/exam_solutions_5jan.pdf). A report on the results of the exam is [available here](https://vagdur.github.io/Grafteori-1MA170/exam_report_jan24/exam_report.pdf).
 
 # Where to find a paper for the assignment
 
