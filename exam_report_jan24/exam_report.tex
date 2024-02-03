@@ -1,6 +1,6 @@
 \documentclass[nobib]{tufte-handout}
 
-\title{Grading of January 5 2024 exam: Statistics and reflection $\cdot$ 1MA170}
+\title{Grading of January 5 2024 exam: Rubrics, statistics and reflection $\cdot$ 1MA170}
 
 \author[Vilhelm Agdur]{Vilhelm Agdur}
 
@@ -40,8 +40,10 @@
 
 \begin{abstract}
 \noindent
-This file contains some statistics on the outcome of the exam, along with some reflections on these numbers. The full data of the scores is available in an anonymized form in the GitHub repository of the course.
+This file contains information on how the exam was graded and some statistics on the outcome of the exam, along with some reflections on these numbers. The full data of the scores is available in an anonymized form in the GitHub repository of the course.
 \end{abstract}
+
+For each question on the exam, an outline of how it was graded is given -- the detailed points breakdown assumes the most common structure of answer,\sidenote[][]{That is, trying to reproduce the proof from the lecture notes.} but of course if one gives a different correct proof of some statement, that also gives points. Grading of such answers was then just based on correctness and clarity of the proof, with the same maximum points possible.
 
 \section{General observations}
 
@@ -77,6 +79,13 @@ The one noticeable exception is question nine, which actually has a \emph{negati
   We proved a characterisation of two-connected graphs as being exactly the graphs that can be constructed by a certain process starting from a cycle graph. State the theorem, and give a proof of it.
 \end{quotation}
 
+\begin{enumerate}
+  \item One point for a correct definition, with a minus if one forgets the condition that $\abs{V} > k$.
+  \item One point for the theorem statement.
+  \item One point for showing that the construction yields two-connected graphs.
+  \item Two points for showing that all two-connected graphs are constructible.
+\end{enumerate}
+
 This appears to have been a reasonable question, in that most students attempted it, and it got a wide range of scores.
 
 \begin{figure}[p]
@@ -91,6 +100,11 @@ This appears to have been a reasonable question, in that most students attempted
 \begin{quotation}
   Define the adjacency matrix $A$, incidence matrix $D$, and Laplacian matrix $Q$ of a graph. Prove that $Q = DD^t$.
 \end{quotation}
+
+\begin{enumerate}
+  \item One point for each of the three definitions asked for.
+  \item One point for showing the requested identity for the off-diagonal entries, and one point for showing it on the diagonal.
+\end{enumerate}
 
 This question had the highest average score among the students who chose to answer it, so in some sense it was probably the easiest question on the exam -- perhaps together with question six, which had a nearly as high average, but got answered by every student writing the exam.
 
@@ -109,6 +123,14 @@ This question had the highest average score among the students who chose to answ
   Give a precise statement of the theorem, and then give a proof. (The proof we gave in the lecture was a clever application of the max-flow min-cut theorem, where we turned our bipartite graph into a flow network. If you choose to give this proof, please also draw a figure of the construction.)
 \end{quotation}
 
+\begin{enumerate}
+  \item One point for the theorem statement.
+  \item One point for the easy direction of showing that $\abs{N(Q)} \geq N(Q)$ is necessary.
+  \item One point for drawing the right figure.
+  \item One point for the calculation of the max flow in the figure.
+  \item One point for tying it together into a proof of the result.
+\end{enumerate}
+
 Question three was seemingly among the harder questions, given the number of students who opted not to answer it. However, of those who answered it, everyone got at least one point, by correctly drawing the figure the question asks for.
 
 \begin{figure}[p]
@@ -126,6 +148,12 @@ Question three was seemingly among the harder questions, given the number of stu
   \noindent
   \textbf{Part b:} Pick one of Kruskal's or Prim's algorithms. State it and prove its correctness.
 \end{quotation}
+
+\begin{enumerate}
+  \item Two points for part (a).
+  \item One point for stating the algorithm.
+  \item Two points for proving its correctness.
+\end{enumerate}
 
 This question, and question five and six, are the only questions for which every student submitted an answer -- which may be part of why the average score achieved on the question is comparatively low. On the other hand, questions five and six have comparatively high average scores.
 
@@ -151,6 +179,12 @@ Another explanation for why the scores are a bit low here may be that I was rela
   \end{theorem}
 \end{quotation}
 
+\begin{enumerate}
+  \item One point for defining planarity.
+  \item One point for defining the planar dual and drawing a correct figure, with a minus if one forgets that the planar dual is a multigraph.
+  \item Three points for the proof -- if one chose the proof in the hint, one point for showing the complement of the spanning tree is connected, one for showing the complement is acyclic, and one for tying it together to get the result. The alternative inductive proofs were graded on clarity and logical structure.\sidenote[][]{A fair few students chose to give inductive proofs instead, of varying quality and correctness. At least one did get three points for such a proof.}
+\end{enumerate}
+
 Every student chose to answer this question, presumably because every student did recall the definition of being planar, and most could also correctly or nearly-correctly\sidenote[][]{Many forgot that the planar dual is a multigraph.} define the planar dual. The average on this question is thus fairly high.
 
 \begin{figure}[p]
@@ -165,6 +199,13 @@ Every student chose to answer this question, presumably because every student di
 \begin{quotation}
   What does it mean for a graph to be Eulerian? State and prove Euler's theorem giving a criterion for a graph to be Eulerian.
 \end{quotation}
+
+\begin{enumerate}
+  \item One point for the definition.
+  \item One point for the statement of the theorem.
+  \item One point for the easy direction of showing the necessity of the condition.
+  \item Two points for showing the sufficiency of the condition.
+\end{enumerate}
 
 This question got a rather high average, and was answered by every student writing the exam -- so together with question two, this was probably the easiest question on the exam.
 
@@ -182,6 +223,13 @@ This question got a rather high average, and was answered by every student writi
 
   We proved an upper bound on how many edges you could be forced to include in such a bisection using the probabilistic method, where we started by picking a matching on the complement graph. State and prove this result.
 \end{quotation}
+
+\begin{enumerate}
+  \item One point for stating the result.
+  \item One point for using Dirac's theorem to find a matching disjoint from the edges of the graph.
+  \item Two points for computing the expectation of the number of edges between the parts, with a deduction for not explaining why the disjointness of the matching was needed.
+  \item One point for concluding the theorem from the expectation calculation.
+\end{enumerate}
 
 This question was evidently seen as hard by the students, since ten out of sixteen students opted not to answer this question. It may be because this particular result was not so prominent among the things we proved using the probabilistic method, and so people simply did not remember it -- or it could be that the probabilistic method in general is seen as hard. That was certainly the case in the Combinatorics course, though it is of course hard to compare things between courses.
 
@@ -204,6 +252,12 @@ This question was evidently seen as hard by the students, since ten out of sixte
   to a clever choice of $a$ and $b$.)
 \end{quotation}
 
+\begin{enumerate}
+  \item One point for defining the extremal function.
+  \item Two points for using the Caro-Wei result to bound the clique number.\sidenote[][]{No student offered a different proof than the one suggested in the hint, though we did go through one other in class and there are many more.}
+  \item Two points for using the Cauchy-Schwarz inequality to conclude the theorem from the Caro-Wei bound.
+\end{enumerate}
+
 Just like question seven, ten out of sixteen students skipped this question entirely, and the average score of those who tried is not too different. Perhaps the difficulty of this question stems from needing to remember what the Caro-Wei result said, and how to apply it to this question? Every student who did respond attempted that proof strategy, though we did also do an alternative proof of the same result in class.
 
 \begin{figure}[p]
@@ -218,6 +272,8 @@ Just like question seven, ten out of sixteen students skipped this question enti
 \begin{quotation}
   A \emph{directed acyclic graph} (often called just a \emph{DAG}) is a directed graph that contains no cycles. Devise a reasonable (That is, not just a brute-force method, but something you'd actually use in practice.) algorithm for determining when such a graph is Hamiltonian. For directed graphs, being Hamiltonian means having a \emph{directed} Hamiltonian path.
 \end{quotation}
+
+Since this question does not have an obvious route to follow, a breakdown into a checklist for each point is not possible. Rather, scores were assigned based on ``how correct'' or ``how reasonable'' the suggested algorithm was.
 
 This question was by far the hardest question on the exam, and nine students recognized it as such and did not answer. Of the remaining students, not a single one gave an algorithm that would actually work -- so the abysmal average score in fact hides a somewhat lenient grading, where one could get up to $2.5$ points for an incorrect solution that had at least some rationale for why it might work.\sidenote[][]{The student who got $2.5$ mistakently believed that all DAGs are trees, but then gave a correct algorithm for determining if a tree has a Hamiltonian path.}
 
@@ -241,6 +297,8 @@ This question was by far the hardest question on the exam, and nine students rec
     \item There exists a tree in which every vertex has degree $2$.
   \end{enumerate}
 \end{quotation}
+
+As was stated already on the exam sheet, one point per item on the list, except for (c) and (d) which gave half a point each. No points for just giving an answer without an argument.
 
 The results on this question are interesting, as most students tried it, and it displays the greatest spread of results. Presumably this is because most students were able to do at least one or two of the statements. 
 
