@@ -57,7 +57,14 @@ Of course, most graphs do not split up that nicely, but we can still try to divi
   \begin{proof}
     Let $G^c$ be the complement graph of $G$ -- that is, $G^c$ has the same vertices as $G$, and there is an edge $x \sim y$ in $G^c$ if and only if $x \sim y$ is not an edge of $G$.
 
-    Since we assumed $\Delta < \frac{n}{2}$, it is clear that the \emph{minimum} degree of $G^c$ is at least $\frac{n}{2}$, and so by Dirac's theorem\sidenote[][]{Which we proved earlier in the course.} there exists a Hamilton cycle in $G^c$. Picking every second edge of this Hamilton cycle, we get a perfect matching $M$ on $G^c$.
+    Since we assumed $\Delta < \frac{n}{2}$, it is clear that the \emph{minimum} degree of $G^c$ is at least $\frac{n}{2}$, and so by Dirac's theorem\sidenote[][]{Which we proved earlier in the course.} there exists a Hamilton cycle in $G^c$. Picking every second edge of this Hamilton cycle, we get a perfect matching $M$ on $G^c$. This process is illustrated in Figure~\ref{fig:min_bisection_matching}.
+
+    \begin{figure}
+      \centering
+      \includegraphics[width=0.7\textwidth]{L14_probabilistic_method/min_bisection_matching.png}
+      \caption{A graph on eight vertices, with its edges drawn in black. Since it has maximum degree three, we can find a Hamilton cycle in its complement graph, which has been drawn with alternating dotted and stroked red lines. By picking only the stroked red lines, we get a perfect matching in the complement of the graph.}
+      \label{fig:min_bisection_matching}
+    \end{figure}
 
     Now, we apply the probabilistic method, picking a random partition $A \coprod B$ of $V$: For each edge of $M$, we randomly place one of its endpoints in $A$ and one in $B$, independently between different edges. We can then compute that
     \begin{align*}
